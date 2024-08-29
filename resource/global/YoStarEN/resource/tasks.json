@@ -2153,7 +2153,7 @@
     },
     "Mizuki@Roguelike@GetDropSelectRecruit": {
         "templThreshold": 0.8,
-        "template": "Mizuki@Roguelike@GetDropSelectRecruit.png"
+        "template": "Roguelike/Mizuki/GetDropSelectRecruit.png"
     },
     "Mizuki@Roguelike@NextLevel": {
         "text": [
@@ -2348,7 +2348,7 @@
         ]
     },
     "Sami@Roguelike@GetDropSelectRecruit": {
-        "template": "Sami@Roguelike@GetDropSelectRecruit.png"
+        "template": "Roguelike/Sami/GetDropSelectRecruit.png"
     },
     "Sami@Roguelike@NextLevel": {
         "text": ["Obtain after", "this floor", "Collapse will trigger", "no next floor"],

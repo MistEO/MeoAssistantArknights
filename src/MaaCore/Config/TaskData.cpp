@@ -454,11 +454,28 @@ asst::TaskPtr asst::TaskData::generate_match_task_info(std::string_view name, co
     if (default_ptr == nullptr) {
         default_ptr = default_match_task_info_ptr;
     }
+    
+    // Base1@Base2@Base3@name -> Base3/Base2/Base1/name.png
+    auto name_to_templ = [](std::string_view name) {
+        auto p = name.rfind('@');
+        if (p == std::string_view::npos) {
+            return std::string(name) + ".png";
+        }
+        auto bases = name.substr(0, p) | views::split('@') | views::transform([&](auto rng) {
+                         return utils::make_string_view(rng);
+                     });
+        std::vector<std::string_view> bases_vec(bases.begin(), bases.end());
+        std::string ret;
+        for (std::string_view x : bases_vec | views::reverse)
+            (ret += x) += '/';
+        return (ret += name.substr(p + 1)) + ".png";
+    };
+
     auto match_task_info_ptr = std::make_shared<MatchTaskInfo>();
     if (!utils::get_and_check_value_or(name, task_json, "template", match_task_info_ptr->templ_names, [&]() {
             return derived_type == TaskDerivedType::Implicit // 隐式 Template Task 时继承，其它时默认值使用任务名
                        ? default_ptr->templ_names
-                       : std::vector { std::string(name) + ".png" };
+                       : std::vector { name_to_templ(name) };
         })) {
         return nullptr;
     }

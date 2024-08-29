@@ -2388,7 +2388,7 @@
     },
     "Mizuki@Roguelike@MissionFailedFlag2": {
         "roi": [400, 7, 485, 203],
-        "template": "Mizuki@Roguelike@MissionFailedFlag2.png"
+        "template": "Roguelike/Mizuki/MissionFailedFlag2.png"
     },
     "Mizuki@Roguelike@NextLevel": {
         "ocrReplace": [["迫.*来る波濤", "迫り来る波濤"]],
@@ -2399,7 +2399,7 @@
     },
     "Mizuki@Roguelike@StageEncounterLeaveConfirm": {
         "roi": [1063, 0, 217, 700],
-        "template": "Mizuki@Roguelike@StageEncounterLeaveConfirm.png"
+        "template": "Roguelike/Mizuki/StageEncounterLeaveConfirm.png"
     },
     "Mizuki@Roguelike@StageSafeHouseReuse": {
         "text": ["セーフハウスを利用する"]
@@ -2560,7 +2560,7 @@
         ]
     },
     "Sami@Roguelike@GetDropSelectRecruit": {
-        "template": "Sami@Roguelike@Recruit2.png"
+        "template": "Roguelike/Sami/Recruit2.png"
     },
     "Sami@Roguelike@NextLevel": {
         "text": ["本エリア", "通過後", "次段階", "パラダイム"]

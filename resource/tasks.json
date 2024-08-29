@@ -5671,20 +5671,20 @@
         "next": ["RoguelikeQuickFormationClearAndReselect-Confirm"]
     },
     "RoguelikeQuickFormationClearAndReselect-Confirm": {
-        "template": "Roguelike@FormationConfirm.png",
+        "template": "Roguelike/FormationConfirm.png",
         "action": "ClickSelf",
         "roi": [1015, 601, 265, 119],
         "next": ["RoguelikeQuickFormationClearAndReselect-Formation", "RoguelikeQuickFormationClearAndReselect-Confirm"]
     },
     "RoguelikeQuickFormationClearAndReselect-Formation": {
-        "template": "Roguelike@QuickFormation.png",
+        "template": "Roguelike/QuickFormation.png",
         "action": "ClickSelf",
         "roi": [817, 0, 402, 146],
         "next": ["RoguelikeQuickFormationClearAndReselect-Stop", "RoguelikeQuickFormationClearAndReselect-Formation"],
         "postDelay": 500
     },
     "RoguelikeQuickFormationClearAndReselect-Stop": {
-        "template": "Roguelike@FormationConfirm.png",
+        "template": "Roguelike/FormationConfirm.png",
         "roi": [1015, 601, 265, 119],
         "postDelay": 500
     },
@@ -5920,7 +5920,7 @@
         "postDelay": 1000
     },
     "RoguelikeTraderShopping": {
-        "template": "Roguelike@TraderRandomShopping.png",
+        "template": "Roguelike/TraderRandomShopping.png",
         "templThreshold": 0.7,
         "roi": [480, 240, 750, 295],
         "maskRange": [1, 255]
@@ -5932,7 +5932,7 @@
         "ocrReplace": [["指路.*", "指路鳞"]]
     },
     "RoguelikeTraderShoppingOver": {
-        "template": "Roguelike@StageTraderLeave.png",
+        "template": "Roguelike/StageTraderLeave.png",
         "action": "ClickSelf",
         "roi": [1046, 443, 234, 204]
     },
@@ -5996,7 +5996,7 @@
         ]
     },
     "Roguelike@ChooseOperFlag": {
-        "template": "Roguelike@ChooseOperConfirm.png",
+        "template": "Roguelike/ChooseOperConfirm.png",
         "roi": [1016, 602, 264, 118],
         "next": ["Roguelike@RecruitCloseGuide", "Roguelike@ChooseOper"]
     },
@@ -6082,7 +6082,7 @@
         "roi": [875, 601, 152, 119]
     },
     "Roguelike@DropsFlag_default": {
-        "template": "Roguelike@DropsFlag.png",
+        "template": "Roguelike/DropsFlag.png",
         "baseTask": "Roguelike@DropsFlag",
         "next": [
             "Roguelike@GetDrops#next",
@@ -6099,7 +6099,7 @@
         ]
     },
     "Roguelike@DropsFlag_mode1": {
-        "template": "Roguelike@DropsFlag.png",
+        "template": "Roguelike/DropsFlag.png",
         "baseTask": "Roguelike@DropsFlag",
         "next": ["Roguelike@GetDropLeave", "Roguelike@DropsFlag_default#next"]
     },
@@ -6112,7 +6112,7 @@
         "next": ["Roguelike@Stages#next"]
     },
     "Roguelike@Exit": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "action": "ClickSelf",
         "roi": [0, 0, 320, 160],
         "next": ["Stop"]
@@ -6122,7 +6122,7 @@
         "roi": [0, 0, 320, 160]
     },
     "Roguelike@ExitThenAbandon_ToHardest": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "action": "ClickSelf",
         "roi": [0, 0, 320, 160]
     },
@@ -6926,16 +6926,16 @@
     },
     "Roguelike@StageVerticalConfirmEncounter": {
         "baseTask": "Roguelike@StageVerticalConfirm",
-        "template": "Roguelike@StageVerticalConfirm.png",
+        "template": "Roguelike/StageVerticalConfirm.png",
         "next": ["Roguelike@StageEncounterEnter", "Roguelike@StageEncounterJudgeClick"]
     },
     "Roguelike@StageVerticalConfirmSafeHouse": {
         "baseTask": "Roguelike@StageVerticalConfirm",
-        "template": "Roguelike@StageVerticalConfirm.png",
+        "template": "Roguelike/StageVerticalConfirm.png",
         "next": ["Roguelike@StageSafeHouseEnter", "Roguelike@StageEncounterOptions#next", "Roguelike@NextLevel"]
     },
     "Roguelike@StageVerticalConfirmTrader": {
-        "template": "Roguelike@StageVerticalConfirm.png",
+        "template": "Roguelike/StageVerticalConfirm.png",
         "baseTask": "Roguelike@StageVerticalConfirm",
         "next": [
             "Roguelike@StageTraderEnter",
@@ -7036,7 +7036,7 @@
         "maskRange": [1, 255]
     },
     "Roguelike@TraderRandomShoppingCancel": {
-        "template": "Roguelike@StageTraderInvestCancel.png",
+        "template": "Roguelike/StageTraderInvestCancel.png",
         "action": "ClickSelf",
         "roi": [350, 350, 500, 250],
         "next": ["Roguelike@StageTraderLeave"]
@@ -7048,7 +7048,7 @@
     },
     "Roguelike@WaitForStartButtonClicked": {
         "Doc": "点了开始行动之后，可能会网络不好一直loading，用这个任务等一会",
-        "template": "Roguelike@QuickFormation.png",
+        "template": "Roguelike/QuickFormation.png",
         "roi": [817, 0, 402, 146],
         "next": ["Roguelike@WaitForStartButtonClicked"]
     },
@@ -7074,20 +7074,20 @@
     "Phantom@Roguelike@CloseEvent": {},
     "Phantom@Roguelike@Continue": {},
     "Phantom@Roguelike@DialogSkipConfirm": {
-        "template": "Roguelike@DialogSkipConfirm.png",
+        "template": "Roguelike/DialogSkipConfirm.png",
         "next": ["Phantom@Roguelike@DialogSkip", "Phantom@Roguelike@Stages#next"]
     },
     "Phantom@Roguelike@DropsFlag": {
-        "template": "Roguelike@DropsFlag.png",
+        "template": "Roguelike/DropsFlag.png",
         "baseTask": "Phantom@Roguelike@DropsFlag_default"
     },
     "Phantom@Roguelike@EnterAfterRecruit": {},
     "Phantom@Roguelike@ExitThenAbandon": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "next": ["Phantom@Roguelike@ExitThenAbandon", "Phantom@Roguelike@Abandon"]
     },
     "Phantom@Roguelike@ExitThenAbandon_ToHardest": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "next": ["Phantom@Roguelike@ExitThenAbandon_ToHardest", "Phantom@Roguelike@Abandon"]
     },
     "Phantom@Roguelike@GamePass": {},
@@ -7107,7 +7107,7 @@
     "Phantom@Roguelike@GetDropRecruit": {},
     "Phantom@Roguelike@GetDropSelect": {},
     "Phantom@Roguelike@GetDropSelectRecruit": {
-        "template": "Phantom@Roguelike@GetDropRecruit.png"
+        "template": "Roguelike/Phantom/GetDropRecruit.png"
     },
     "Phantom@Roguelike@GetDropSelectReward": {},
     "Phantom@Roguelike@GetDrops": {
@@ -7134,10 +7134,10 @@
         "text": ["迷雾歧途", "落阳庭院", "故土残躯", "噩梦之始", "血月长廊", "渴欲大厅"]
     },
     "Phantom@Roguelike@RecruitMain": {
-        "template": "Phantom@Roguelike@Recruit.png"
+        "template": "Roguelike/Phantom/Recruit.png"
     },
     "Phantom@Roguelike@RecruitOther": {
-        "template": "Phantom@Roguelike@Recruit.png"
+        "template": "Roguelike/Phantom/Recruit.png"
     },
     "Phantom@Roguelike@RecruitWithoutButton": {
         "next": [
@@ -7152,14 +7152,14 @@
         ]
     },
     "Phantom@Roguelike@RolesConfirm": {
-        "template": "Phantom@Roguelike@LastRewardConfirm.png"
+        "template": "Roguelike/Phantom/LastRewardConfirm.png"
     },
     "Phantom@Roguelike@RolesDefault": {},
     "Phantom@Roguelike@SelectTheme": {
         "text": ["古堡笔记"]
     },
     "Phantom@Roguelike@SquadConfirm": {
-        "template": "Phantom@Roguelike@LastRewardConfirm.png",
+        "template": "Roguelike/Phantom/LastRewardConfirm.png",
         "next": [
             "Phantom@Roguelike@LastReward",
             "Phantom@Roguelike@LastReward4",
@@ -7217,7 +7217,7 @@
     },
     "Phantom@Roguelike@StageTraderEnter": {},
     "Phantom@Roguelike@StageTraderLeaveConfirm": {
-        "template": "Roguelike@StageTraderLeaveConfirm.png",
+        "template": "Roguelike/StageTraderLeaveConfirm.png",
         "exceededNext": ["Phantom@Roguelike@ExitThenAbandon"]
     },
     "Phantom@Roguelike@Stages": {
@@ -7294,7 +7294,7 @@
     },
     "Phantom@Roguelike@TodoEnter": {},
     "Phantom@Roguelike@WaitForStartButtonClicked": {
-        "template": "Roguelike@QuickFormation.png"
+        "template": "Roguelike/QuickFormation.png"
     },
     "Phantom@RoguelikeSettlementConfirm": {
         "template": "RoguelikeSettlementConfirm.png"
@@ -7311,7 +7311,7 @@
         "action": "ClickRect",
         "specificRect": [1144, 472, 78, 24],
         "postDelay": 800,
-        "template": "Mizuki@Roguelike@StartExplore.png",
+        "template": "Roguelike/Mizuki/StartExplore.png",
         "roi": [1026, 470, 254, 248],
         "sub": ["SwipeToTheUp*2"]
     },
@@ -7319,7 +7319,7 @@
         "action": "ClickRect",
         "specificRect": [1144, 472, 78, 24],
         "postDelay": 800,
-        "template": "Mizuki@Roguelike@StartExplore.png",
+        "template": "Roguelike/Mizuki/StartExplore.png",
         "roi": [1026, 470, 254, 248],
         "sub": ["SwipeToTheDown*2"]
     },
@@ -7388,7 +7388,7 @@
         "next": ["Mizuki@Roguelike@ClickToStartPoint"]
     },
     "Mizuki@Roguelike@DialogSkipConfirm": {
-        "template": "Roguelike@DialogSkipConfirm.png",
+        "template": "Roguelike/DialogSkipConfirm.png",
         "next": ["Mizuki@Roguelike@DialogSkip", "Mizuki@Roguelike@Stages#next"]
     },
     "Mizuki@Roguelike@DiceConfirm": {
@@ -7405,22 +7405,22 @@
     },
     "Mizuki@Roguelike@DiceConfirmAfterNextLevel": {
         "baseTask": "Mizuki@Roguelike@DiceConfirm",
-        "template": "Mizuki@Roguelike@DiceConfirm.png",
+        "template": "Roguelike/Mizuki/DiceConfirm.png",
         "next": ["Mizuki@Roguelike@StrategyChange"]
     },
     "Mizuki@Roguelike@DiceConfirmThenAbandon": {
         "baseTask": "Mizuki@Roguelike@DiceConfirm",
-        "template": "Mizuki@Roguelike@DiceConfirm.png",
+        "template": "Roguelike/Mizuki/DiceConfirm.png",
         "postDelay": 0,
         "next": ["Mizuki@Roguelike@ExitThenAbandon"]
     },
     "Mizuki@Roguelike@DropsFlag": {
-        "template": "Roguelike@DropsFlag.png",
+        "template": "Roguelike/DropsFlag.png",
         "baseTask": "Mizuki@Roguelike@DropsFlag_default"
     },
     "Mizuki@Roguelike@EnterAfterRecruit": {},
     "Mizuki@Roguelike@ExitThenAbandon": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "next": [
             "Mizuki@Roguelike@ExitThenAbandon",
             "Mizuki@Roguelike@Abandon",
@@ -7429,7 +7429,7 @@
         ]
     },
     "Mizuki@Roguelike@ExitThenAbandon_ToHardest": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "next": [
             "Mizuki@Roguelike@ExitThenAbandon_ToHardest",
             "Mizuki@Roguelike@Abandon",
@@ -7486,7 +7486,7 @@
     "Mizuki@Roguelike@GetDropRecruit": {},
     "Mizuki@Roguelike@GetDropSelect": {},
     "Mizuki@Roguelike@GetDropSelectRecruit": {
-        "template": "Mizuki@Roguelike@GetDropRecruit.png"
+        "template": "Roguelike/Mizuki/GetDropRecruit.png"
     },
     "Mizuki@Roguelike@GetDropSelectReward": {},
     "Mizuki@Roguelike@GetDrops": {
@@ -7527,10 +7527,10 @@
         "next": ["Mizuki@Roguelike@DiceConfirmAfterNextLevel", "Mizuki@Roguelike@StrategyChange"]
     },
     "Mizuki@Roguelike@RecruitMain": {
-        "template": "Mizuki@Roguelike@Recruit.png"
+        "template": "Roguelike/Mizuki/Recruit.png"
     },
     "Mizuki@Roguelike@RecruitOther": {
-        "template": "Mizuki@Roguelike@Recruit.png"
+        "template": "Roguelike/Mizuki/Recruit.png"
     },
     "Mizuki@Roguelike@RecruitWithoutButton": {
         "next": [
@@ -7546,14 +7546,14 @@
         ]
     },
     "Mizuki@Roguelike@RolesConfirm": {
-        "template": "Mizuki@Roguelike@LastRewardConfirm.png"
+        "template": "Roguelike/Mizuki/LastRewardConfirm.png"
     },
     "Mizuki@Roguelike@RolesDefault": {},
     "Mizuki@Roguelike@SelectTheme": {
         "text": ["生态谱系"]
     },
     "Mizuki@Roguelike@SquadConfirm": {
-        "template": "Mizuki@Roguelike@LastRewardConfirm.png",
+        "template": "Roguelike/Mizuki/LastRewardConfirm.png",
         "next": [
             "Mizuki@Roguelike@LastReward",
             "Mizuki@Roguelike@LastReward4",
@@ -7663,7 +7663,7 @@
     },
     "Mizuki@Roguelike@StageTraderEnter": {},
     "Mizuki@Roguelike@StageTraderLeaveConfirm": {
-        "template": "Roguelike@StageTraderLeaveConfirm.png",
+        "template": "Roguelike/StageTraderLeaveConfirm.png",
         "exceededNext": ["Mizuki@Roguelike@DiceConfirmThenAbandon", "Mizuki@Roguelike@ExitThenAbandon"]
     },
     "Mizuki@Roguelike@StageVerticalConfirm": {
@@ -7778,7 +7778,7 @@
     },
     "Mizuki@Roguelike@TodoEnter": {},
     "Mizuki@Roguelike@WaitForStartButtonClicked": {
-        "template": "Roguelike@QuickFormation.png"
+        "template": "Roguelike/QuickFormation.png"
     },
     "Mizuki@RoguelikeSettlementConfirm": {
         "template": "RoguelikeSettlementConfirm.png"
@@ -7860,7 +7860,7 @@
         "action": "ClickRect",
         "specificRect": [1119, 479, 80, 22],
         "postDelay": 800,
-        "template": "Sami@Roguelike@StartExplore.png",
+        "template": "Roguelike/Sami/StartExplore.png",
         "roi": [958, 530, 322, 189],
         "sub": ["SwipeToTheUp*2"]
     },
@@ -7868,7 +7868,7 @@
         "action": "ClickRect",
         "specificRect": [1119, 479, 80, 22],
         "postDelay": 800,
-        "template": "Sami@Roguelike@StartExplore.png",
+        "template": "Roguelike/Sami/StartExplore.png",
         "roi": [958, 530, 322, 189],
         "sub": ["SwipeToTheDown*2"]
     },
@@ -8023,22 +8023,22 @@
         "next": ["Sami@Roguelike@Continue"]
     },
     "Sami@Roguelike@DialogSkipConfirm": {
-        "template": "Roguelike@DialogSkipConfirm.png",
+        "template": "Roguelike/DialogSkipConfirm.png",
         "next": ["Sami@Roguelike@DialogSkip", "Sami@Roguelike@Stages#next"]
     },
     "Sami@Roguelike@DropsFlag": {
-        "template": "Roguelike@DropsFlag.png",
+        "template": "Roguelike/DropsFlag.png",
         "baseTask": "Sami@Roguelike@DropsFlag_default"
     },
     "Sami@Roguelike@EnterAfterRecruit": {
         "next": ["Sami@Roguelike@NextLevel"]
     },
     "Sami@Roguelike@ExitThenAbandon": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "next": ["Sami@Roguelike@ExitThenAbandon", "Sami@Roguelike@Abandon"]
     },
     "Sami@Roguelike@ExitThenAbandon_ToHardest": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "next": ["Sami@Roguelike@ExitThenAbandon_ToHardest", "Sami@Roguelike@Abandon"]
     },
     "Sami@Roguelike@Foldartal": {
@@ -8225,7 +8225,7 @@
         ]
     },
     "Sami@Roguelike@GetDropSelectRecruit": {
-        "template": "Sami@Roguelike@Recruit.png"
+        "template": "Roguelike/Sami/Recruit.png"
     },
     "Sami@Roguelike@GetDropSelectReward": {},
     "Sami@Roguelike@GetDropSelectReward2": {
@@ -8272,10 +8272,10 @@
         "next": ["Sami@Roguelike@NextLevelThenExit", "Sami@Roguelike@ExitThenAbandon"]
     },
     "Sami@Roguelike@RecruitMain": {
-        "template": "Sami@Roguelike@Recruit.png"
+        "template": "Roguelike/Sami/Recruit.png"
     },
     "Sami@Roguelike@RecruitOther": {
-        "template": "Sami@Roguelike@Recruit.png",
+        "template": "Roguelike/Sami/Recruit.png",
         "templThreshold": 0.8
     },
     "Sami@Roguelike@RecruitWithoutButton": {
@@ -8291,7 +8291,7 @@
         ]
     },
     "Sami@Roguelike@RolesConfirm": {
-        "template": "Sami@Roguelike@LastRewardConfirm.png"
+        "template": "Roguelike/Sami/LastRewardConfirm.png"
     },
     "Sami@Roguelike@RolesDefault": {},
     "Sami@Roguelike@SelectTheme": {
@@ -8302,7 +8302,7 @@
         "text": []
     },
     "Sami@Roguelike@SquadConfirm": {
-        "template": "Sami@Roguelike@LastRewardConfirm.png",
+        "template": "Roguelike/Sami/LastRewardConfirm.png",
         "next": [
             "Sami@Roguelike@LastReward",
             "Sami@Roguelike@LastReward4",
@@ -8328,7 +8328,7 @@
         "next": ["Sami@Roguelike@StageBoonsEnter", "Sami@Roguelike@Stages#next"]
     },
     "Sami@Roguelike@StageBoonsEnter": {
-        "template": "Sami@Roguelike@StageTraderEnter.png",
+        "template": "Roguelike/Sami/StageTraderEnter.png",
         "baseTask": "Sami@Roguelike@StageEnter",
         "next": [
             "Sami@Roguelike@StageVerticalConfirmBoons",
@@ -8516,7 +8516,7 @@
     },
     "Sami@Roguelike@StageTraderEnter": {},
     "Sami@Roguelike@StageTraderLeaveConfirm": {
-        "template": "Roguelike@StageTraderLeaveConfirm.png",
+        "template": "Roguelike/StageTraderLeaveConfirm.png",
         "postDelay": 1000,
         "exceededNext": ["Sami@Roguelike@ExitThenAbandon", "Sami@Roguelike@NextLevelThenExit"]
     },
@@ -8575,17 +8575,17 @@
         "exceededNext": ["Sami@Roguelike@ExitThenAbandon", "Sami@Roguelike@NextLevelThenExit"]
     },
     "Sami@Roguelike@StageVerticalConfirmBoons": {
-        "template": "Sami@Roguelike@StageVerticalConfirm.png",
+        "template": "Roguelike/Sami/StageVerticalConfirm.png",
         "baseTask": "Sami@Roguelike@StageVerticalConfirm",
         "next": ["Sami@Roguelike@StageBoonsEnter", "Sami@Roguelike@StageEncounterJudgeClick"]
     },
     "Sami@Roguelike@StageVerticalConfirmBoskyPassage": {
-        "template": "Sami@Roguelike@StageVerticalConfirm.png",
+        "template": "Roguelike/Sami/StageVerticalConfirm.png",
         "baseTask": "Sami@Roguelike@StageVerticalConfirm",
         "next": ["Sami@Roguelike@StageBoskyPassageEnter", "Sami@Roguelike@StageEncounterJudgeClick"]
     },
     "Sami@Roguelike@StageVerticalConfirmSafeHouse": {
-        "template": "Sami@Roguelike@StageVerticalConfirm.png",
+        "template": "Roguelike/Sami/StageVerticalConfirm.png",
         "baseTask": "Sami@Roguelike@StageVerticalConfirm",
         "next": [
             "Sami@Roguelike@StageSafeHouseEnter",
@@ -8595,7 +8595,7 @@
     },
     "Sami@Roguelike@StageVerticalConfirmStartButtonClicked": {
         "baseTask": "Sami@Roguelike@StageVerticalConfirm",
-        "template": "Sami@Roguelike@StageVerticalConfirm.png",
+        "template": "Roguelike/Sami/StageVerticalConfirm.png",
         "next": ["Sami@Roguelike@WaitForStartButtonClicked"]
     },
     "Sami@Roguelike@StageVerticalEmergencyDps": {
@@ -9017,7 +9017,7 @@
         "next": ["Sami@Roguelike@StageTraderEnter#next"]
     },
     "Sami@Roguelike@WaitForStartButtonClicked": {
-        "template": "Roguelike@QuickFormation.png",
+        "template": "Roguelike/QuickFormation.png",
         "next": ["Sami@Roguelike@StageVerticalConfirmStartButtonClicked", "Sami@Roguelike@WaitForStartButtonClicked"]
     },
     "Sami@RoguelikeSettlementConfirm": {
@@ -9085,7 +9085,7 @@
         "action": "ClickRect",
         "specificRect": [1119, 479, 80, 22],
         "postDelay": 800,
-        "template": "Sarkaz@Roguelike@StartExplore.png",
+        "template": "Roguelike/Sarkaz/StartExplore.png",
         "roi": [958, 530, 322, 189],
         "sub": ["SwipeToTheUp*2"]
     },
@@ -9093,7 +9093,7 @@
         "action": "ClickRect",
         "specificRect": [1119, 479, 80, 22],
         "postDelay": 800,
-        "template": "Sarkaz@Roguelike@StartExplore.png",
+        "template": "Roguelike/Sarkaz/StartExplore.png",
         "roi": [958, 530, 322, 189],
         "sub": ["SwipeToTheDown*2"]
     },
@@ -9168,7 +9168,7 @@
         ]
     },
     "Sarkaz@Roguelike@DecreaseBurdenAbandonThought": {
-        "template": "Sarkaz@Roguelike@DecreaseBurdenSwapUiToDefault1.png",
+        "template": "Roguelike/Sarkaz/DecreaseBurdenSwapUiToDefault1.png",
         "roi": [1101, 51, 179, 137],
         "templThreshold": 0.95,
         "action": "ClickRect",
@@ -9273,15 +9273,15 @@
         ]
     },
     "Sarkaz@Roguelike@DialogSkipConfirm": {
-        "template": "Roguelike@DialogSkipConfirm.png",
+        "template": "Roguelike/DialogSkipConfirm.png",
         "next": ["Sarkaz@Roguelike@DialogSkip", "Sarkaz@Roguelike@Stages#next"]
     },
     "Sarkaz@Roguelike@DropsFlag": {
-        "template": "Roguelike@DropsFlag.png",
+        "template": "Roguelike/DropsFlag.png",
         "baseTask": "Sarkaz@Roguelike@DropsFlag_default"
     },
     "Sarkaz@Roguelike@DropsFlag_default": {
-        "template": "Roguelike@DropsFlag.png",
+        "template": "Roguelike/DropsFlag.png",
         "next": [
             "Sarkaz@Roguelike@GetDrops#next",
             "Sarkaz@Roguelike@GetDropCompleted",
@@ -9297,7 +9297,7 @@
         ]
     },
     "Sarkaz@Roguelike@DropsFlag_mode1": {
-        "template": "Roguelike@DropsFlag.png",
+        "template": "Roguelike/DropsFlag.png",
         "next": [
             "Sarkaz@Roguelike@GetDropLeave",
             "Sarkaz@Roguelike@GetDrops#next",
@@ -9314,11 +9314,11 @@
     },
     "Sarkaz@Roguelike@EnterAfterRecruit": {},
     "Sarkaz@Roguelike@ExitThenAbandon": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "next": ["Sarkaz@Roguelike@ExitThenAbandon", "Sarkaz@Roguelike@Abandon"]
     },
     "Sarkaz@Roguelike@ExitThenAbandon_ToHardest": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "next": ["Sarkaz@Roguelike@ExitThenAbandon_ToHardest", "Sarkaz@Roguelike@Abandon"]
     },
     "Sarkaz@Roguelike@GamePass": {},
@@ -9352,7 +9352,7 @@
         ]
     },
     "Sarkaz@Roguelike@GetDropSelectRecruit": {
-        "template": "Sarkaz@Roguelike@Recruit.png"
+        "template": "Roguelike/Sarkaz/Recruit.png"
     },
     "Sarkaz@Roguelike@GetDropSelectReward": {},
     "Sarkaz@Roguelike@GetDrops": {
@@ -9390,10 +9390,10 @@
         "roi": [550, 564, 184, 64]
     },
     "Sarkaz@Roguelike@RecruitMain": {
-        "template": "Sarkaz@Roguelike@Recruit.png"
+        "template": "Roguelike/Sarkaz/Recruit.png"
     },
     "Sarkaz@Roguelike@RecruitOther": {
-        "template": "Sarkaz@Roguelike@Recruit.png"
+        "template": "Roguelike/Sarkaz/Recruit.png"
     },
     "Sarkaz@Roguelike@RecruitWithoutButton": {
         "next": [
@@ -9408,7 +9408,7 @@
         ]
     },
     "Sarkaz@Roguelike@RolesConfirm": {
-        "template": "Sarkaz@Roguelike@LastRewardConfirm.png"
+        "template": "Roguelike/Sarkaz/LastRewardConfirm.png"
     },
     "Sarkaz@Roguelike@RolesDefault": {},
     "Sarkaz@Roguelike@Routing": {
@@ -9465,7 +9465,7 @@
         "specialParams": [321, 341, 586, 138, 47, 450, 32, 15, 7]
     },
     "Sarkaz@Roguelike@RoutingContinue": {
-        "template": "Sarkaz@Roguelike@Continue.png",
+        "template": "Roguelike/Sarkaz/Continue.png",
         "roi": [1050, 550, 210, 100],
         "action": "ClickSelf",
         "next": ["Sarkaz@Roguelike@RoutingContinueConfirm"]
@@ -9478,7 +9478,7 @@
         "next": ["Sarkaz@Roguelike@RoutingNodeAnalyze", "Sarkaz@Roguelike@RoutingContinueConfirm"]
     },
     "Sarkaz@Roguelike@RoutingExitThenContinue": {
-        "template": "Roguelike@ExitThenAbandon.png",
+        "template": "Roguelike/ExitThenAbandon.png",
         "roi": [18, 8, 53, 53],
         "action": "ClickSelf",
         "next": ["Sarkaz@Roguelike@RoutingContinue"]
@@ -9534,7 +9534,7 @@
         "roi": [848, 686, 46, 26]
     },
     "Sarkaz@Roguelike@SquadConfirm": {
-        "template": "Sarkaz@Roguelike@LastRewardConfirm.png",
+        "template": "Roguelike/Sarkaz/LastRewardConfirm.png",
         "next": [
             "Sarkaz@Roguelike@LastReward4",
             "Sarkaz@Roguelike@LastReward",
@@ -9556,7 +9556,7 @@
         "next": ["Sarkaz@Roguelike@StageBoonsEnter", "Sarkaz@Roguelike@Stages#next"]
     },
     "Sarkaz@Roguelike@StageBoonsEnter": {
-        "template": "Sarkaz@Roguelike@StageTraderEnter.png",
+        "template": "Roguelike/Sarkaz/StageTraderEnter.png",
         "baseTask": "Sarkaz@Roguelike@StageEnter",
         "next": ["Sarkaz@Roguelike@StageBoonsEnter", "Sarkaz@Roguelike@StageEncounterJudgeClick"]
     },
@@ -9749,12 +9749,12 @@
     "Sarkaz@Roguelike@StageFilterTruthChooseCollection": {
         "Doc": "合成出现藏品二选一",
         "baseTask": "Sarkaz@Roguelike@GetDrop3",
-        "template": "Sarkaz@Roguelike@GetDrop3.png",
+        "template": "Roguelike/Sarkaz/GetDrop3.png",
         "next": ["Sarkaz@Roguelike@StageFilterTruthTryCombine1", "Sarkaz@Roguelike@StageFilterTruthCannotCombine"]
     },
     "Sarkaz@Roguelike@StageFilterTruthCloseCollection": {
         "baseTask": "Sarkaz@Roguelike@CloseCollectionClose",
-        "template": "Sarkaz@Roguelike@CloseCollectionClose.png",
+        "template": "Roguelike/Sarkaz/CloseCollectionClose.png",
         "next": ["Sarkaz@Roguelike@StageFilterTruthTryCombine1", "Sarkaz@Roguelike@StageFilterTruthLeave"]
     },
     "Sarkaz@Roguelike@StageFilterTruthConfirm": {
@@ -9846,7 +9846,7 @@
     },
     "Sarkaz@Roguelike@StageRefreshClickLeft": {
         "action": "ClickRect",
-        "template": "Sarkaz@Roguelike@StageTraderEnter.png",
+        "template": "Roguelike/Sarkaz/StageTraderEnter.png",
         "roi": [1035, 370, 226, 300],
         "specificRect": [153, 79, 63, 29],
         "next": ["Sarkaz@Roguelike@Stages#next"]
@@ -9940,7 +9940,7 @@
         "next": ["Sarkaz@Roguelike@StageTraderEnter", "Sarkaz@Roguelike@Stages#next"]
     },
     "Sarkaz@Roguelike@StageTraderLeaveConfirm": {
-        "template": "Roguelike@StageTraderLeaveConfirm.png",
+        "template": "Roguelike/StageTraderLeaveConfirm.png",
         "exceededNext": ["Sarkaz@Roguelike@ExitThenAbandon"]
     },
     "Sarkaz@Roguelike@StageTraderRefresh": {
@@ -10146,7 +10146,7 @@
     },
     "Sarkaz@Roguelike@TodoEnter": {},
     "Sarkaz@Roguelike@WaitForStartButtonClicked": {
-        "template": "Roguelike@QuickFormation.png"
+        "template": "Roguelike/QuickFormation.png"
     },
     "Sarkaz@RoguelikeSettlementConfirm": {},
     "Reclamation2": {
