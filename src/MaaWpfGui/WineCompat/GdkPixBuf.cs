@@ -37,7 +37,7 @@ internal class GdkPixBuf : GObject
             Handle.Dispose();
         }
 
-        [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
+        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)])]
         public static void DestroyCallback(IntPtr pixels, IntPtr data)
         {
             var handle = GCHandle.FromIntPtr(data);

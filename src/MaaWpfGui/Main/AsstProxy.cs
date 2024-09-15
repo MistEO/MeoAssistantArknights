@@ -1647,21 +1647,20 @@ namespace MaaWpfGui.Main
 
                     string cur = subTaskDetails["cur"]?.ToString() ?? "UnKnown";
                     string prev = subTaskDetails["prev"]?.ToString() ?? "UnKnown";
-                    if (deepen_or_weaken == 1 && prev == string.Empty)
+                    switch (deepen_or_weaken)
                     {
-                        Instances.TaskQueueViewModel.AddLog(string.Format(LocalizationHelper.GetString("RoguelikeGainParadigm"), cur), UiLogColor.Info);
-                    }
-                    else if (deepen_or_weaken == 1 && prev != string.Empty)
-                    {
-                        Instances.TaskQueueViewModel.AddLog(string.Format(LocalizationHelper.GetString("RoguelikeDeepenParadigm"), cur, prev), UiLogColor.Info);
-                    }
-                    else if (deepen_or_weaken == -1 && cur == string.Empty)
-                    {
-                        Instances.TaskQueueViewModel.AddLog(string.Format(LocalizationHelper.GetString("RoguelikeLoseParadigm"), string.Empty, prev), UiLogColor.Info);
-                    }
-                    else if (deepen_or_weaken == -1 && cur != string.Empty)
-                    {
-                        Instances.TaskQueueViewModel.AddLog(string.Format(LocalizationHelper.GetString("RoguelikeWeakenParadigm"), cur, prev), UiLogColor.Info);
+                        case 1 when prev == string.Empty:
+                            Instances.TaskQueueViewModel.AddLog(string.Format(LocalizationHelper.GetString("RoguelikeGainParadigm"), cur), UiLogColor.Info);
+                            break;
+                        case 1 when prev != string.Empty:
+                            Instances.TaskQueueViewModel.AddLog(string.Format(LocalizationHelper.GetString("RoguelikeDeepenParadigm"), cur, prev), UiLogColor.Info);
+                            break;
+                        case -1 when cur == string.Empty:
+                            Instances.TaskQueueViewModel.AddLog(string.Format(LocalizationHelper.GetString("RoguelikeLoseParadigm"), cur, prev), UiLogColor.Info);
+                            break;
+                        case -1 when cur != string.Empty:
+                            Instances.TaskQueueViewModel.AddLog(string.Format(LocalizationHelper.GetString("RoguelikeWeakenParadigm"), cur, prev), UiLogColor.Info);
+                            break;
                     }
 
                     break;

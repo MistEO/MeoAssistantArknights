@@ -404,7 +404,7 @@ namespace MaaWpfGui.ViewModels.UI
                     continue;
                 }
 
-                DepotResultDate result = new DepotResultDate()
+                DepotResultDate result = new DepotResultDate
                 {
                     Id = id,
                     Name = ItemListHelper.GetItemName(id),
@@ -615,12 +615,7 @@ namespace MaaWpfGui.ViewModels.UI
 
         public bool OperBoxParse(JObject? details)
         {
-            if (details == null)
-            {
-                return false;
-            }
-
-            var operBoxes = (JArray?)details["all_opers"];
+            var operBoxes = (JArray?)details?["all_opers"];
 
             if (operBoxes == null)
             {
@@ -812,7 +807,7 @@ namespace MaaWpfGui.ViewModels.UI
                 GachaImage = image;
 
                 var rd = new Random();
-                GachaInfo = LocalizationHelper.GetString("GachaTip" + rd.Next(1, 18).ToString());
+                GachaInfo = LocalizationHelper.GetString("GachaTip" + rd.Next(1, 18));
             }
         }
 

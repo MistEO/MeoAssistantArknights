@@ -15,7 +15,6 @@ using System;
 using System.Buffers.Binary;
 using System.Numerics;
 using System.Runtime.InteropServices;
-using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MaaWpfGui.WineCompat;
@@ -68,7 +67,7 @@ internal class NotificationImplLibNotify : INotificationPoster
 
     public void ShowNotification(NotificationContent content)
     {
-        var notification = new LibNotifyNotification(content.Summary, content.Body, "");
+        var notification = new LibNotifyNotification(content.Summary, content.Body, string.Empty);
         notification.SetImageFromPixbuf(_icon);
         foreach (var action in content.Actions)
         {

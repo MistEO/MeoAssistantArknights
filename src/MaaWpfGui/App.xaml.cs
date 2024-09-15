@@ -27,7 +27,7 @@ namespace MaaWpfGui
     /// <summary>
     /// App.xaml 的交互逻辑
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
         private static readonly ILogger _logger = Log.ForContext<App>();
 

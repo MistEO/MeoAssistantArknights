@@ -16,7 +16,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// StartSettingsUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class StartSettingsUserControl : System.Windows.Controls.UserControl
+    public partial class StartSettingsUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StartSettingsUserControl"/> class.

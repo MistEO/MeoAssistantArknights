@@ -21,7 +21,7 @@ namespace MaaWpfGui.Services.Notification
 {
     public static class ExternalNotificationService
     {
-        private static readonly List<Task> _taskContainers = new List<Task>();
+        private static readonly List<Task> _taskContainers = [];
 
         private static readonly ILogger _logger = Log.Logger;
 

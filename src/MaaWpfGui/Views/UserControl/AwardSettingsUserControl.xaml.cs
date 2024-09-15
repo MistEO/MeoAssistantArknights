@@ -16,7 +16,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// AwardSettingsUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class AwardSettingsUserControl : System.Windows.Controls.UserControl
+    public partial class AwardSettingsUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AwardSettingsUserControl"/> class.

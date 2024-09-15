@@ -11,7 +11,6 @@
 // but WITHOUT ANY WARRANTY
 // </copyright>
 
-using System;
 using System.ComponentModel;
 
 namespace MaaWpfGui.Configuration

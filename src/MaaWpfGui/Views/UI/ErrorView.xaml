@@ -6,10 +6,7 @@
     xmlns:controls="clr-namespace:MaaWpfGui.Styles.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:hc="https://handyorg.github.io/handycontrol"
-    xmlns:helper="clr-namespace:MaaWpfGui.Helper"
-    xmlns:local="clr-namespace:MaaWpfGui"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:styles="clr-namespace:MaaWpfGui.Styles"
     x:Name="ErrorViewWindow"
     Title="{DynamicResource Error}"
     Width="600"
@@ -91,7 +88,7 @@
                     <hc:Poptip.Instance>
                         <hc:Poptip
                             x:Name="CopiedTip"
-                            hc:Poptip.HitMode="None"
+                            HitMode="None"
                             Content="{DynamicResource CopiedToClipboard}" />
                     </hc:Poptip.Instance>
                 </controls:TextBlock>

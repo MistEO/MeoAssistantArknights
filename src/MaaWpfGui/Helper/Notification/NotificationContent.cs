@@ -21,11 +21,11 @@ internal class NotificationContent
 
     public string Body { get; set; }
 
-    private List<NotificationAction> _actions = new List<NotificationAction>();
+    private List<NotificationAction> _actions = [];
 
     public IList<NotificationAction> Actions => _actions;
 
-    private List<NotificationHint> _hints = new List<NotificationHint>();
+    private List<NotificationHint> _hints = [];
 
     public IList<NotificationHint> Hints => _hints;
 }

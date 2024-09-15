@@ -27,13 +27,13 @@ namespace MaaWpfGui.Helper
             }
 
             CheckBox checkBox = (CheckBox)sender;
-            checkBox.IsChecked = checkBox.IsChecked == null ? (bool?)false : null;
+            checkBox.IsChecked = checkBox.IsChecked == null ? false : null;
         }
 
         public static void ToggleCheckBoxNullOnLeftClick(object sender, RoutedEventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            checkBox.IsChecked = checkBox.IsChecked == true ? null : (bool?)false;
+            checkBox.IsChecked = checkBox.IsChecked == true ? null : false;
         }
     }
 }

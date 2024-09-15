@@ -27,7 +27,7 @@ namespace MaaWpfGui.Helper
         // 储存角色信息的字典
         public static Dictionary<string, CharacterInfo> Characters { get; } = new();
 
-        public static HashSet<string> CharacterNames { get; } = new();
+        public static HashSet<string> CharacterNames { get; } = [];
 
         static DataHelper()
         {

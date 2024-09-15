@@ -1,4 +1,4 @@
-// <copyright file="MaaWineBridge.cs" company="MaaAssistantArknights">
+// <copyright file="MaaDesktopIntegration.cs" company="MaaAssistantArknights">
 // MaaWpfGui - A part of the MaaCoreArknights project
 // Copyright (C) 2021 MistEO and Contributors
 //

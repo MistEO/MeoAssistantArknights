@@ -231,7 +231,7 @@ namespace MaaWpfGui.Services.Web
             try
             {
                 var stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                using (var tempFileStream = new FileStream(fullFilePathWithTemp, FileMode.Create, FileAccess.Write))
+                await using (var tempFileStream = new FileStream(fullFilePathWithTemp, FileMode.Create, FileAccess.Write))
                 {
                     // 记录初始化
                     long value = 0;

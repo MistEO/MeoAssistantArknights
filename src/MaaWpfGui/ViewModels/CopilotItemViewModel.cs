@@ -26,7 +26,7 @@ namespace MaaWpfGui.ViewModels
         /// <param name="isRaid">是否为突袭关</param>
         /// <param name="copilotId">作业站对应id，本地作业应为默认值0</param>
         /// <param name="isChecked">isChecked</param>
-        public CopilotItemViewModel(string name, string filePath, bool isRaid = false,  int copilotId = 0, bool isChecked = true)
+        public CopilotItemViewModel(string name, string filePath, bool isRaid = false, int copilotId = 0, bool isChecked = true)
         {
             Name = name;
             FilePath = filePath;

@@ -16,7 +16,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// HotKeySettingsUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class HotKeySettingsUserControl : System.Windows.Controls.UserControl
+    public partial class HotKeySettingsUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="HotKeySettingsUserControl"/> class.

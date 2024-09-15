@@ -15,7 +15,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
@@ -23,7 +22,6 @@ using HandyControl.Data;
 using Windows.Win32;
 using Windows.Win32.UI.Controls;
 using Windows.Win32.UI.Shell;
-using Windows.Win32.UI.WindowsAndMessaging;
 
 [assembly: SecurityCritical]
 [assembly: SecurityTreatAsSafe]
@@ -142,26 +140,25 @@ namespace MaaWpfGui.Helper
             {
                 return ShowNative(ownerWindow, messageBoxText, null, caption, buttons, icon, MessageBoxResult.None, false, ok, cancel, yes, no);
             }
-            else
+
+            SetImage(icon, ref iconKey, ref iconBrushKey);
+            var info = new MessageBoxInfo
             {
-                SetImage(icon, ref iconKey, ref iconBrushKey);
-                var info = new MessageBoxInfo
-                {
-                    Message = messageBoxText,
-                    Caption = caption,
-                    Button = buttons,
-                    IconKey = iconKey,
-                    IconBrushKey = iconBrushKey,
-                    ConfirmContent = ok,
-                    CancelContent = cancel,
-                    YesContent = yes,
-                    NoContent = no,
-                };
-                return HandyControl.Controls.MessageBox.Show(info);
-            }
+                Message = messageBoxText,
+                Caption = caption,
+                Button = buttons,
+                IconKey = iconKey,
+                IconBrushKey = iconBrushKey,
+                ConfirmContent = ok,
+                CancelContent = cancel,
+                YesContent = yes,
+                NoContent = no,
+            };
+
+            return HandyControl.Controls.MessageBox.Show(info);
         }
 
-        private unsafe readonly ref struct DisposablePin<T>
+        private readonly unsafe ref struct DisposablePin<T>
             where T : unmanaged
         {
             private readonly GCHandle _handle;
@@ -197,7 +194,7 @@ namespace MaaWpfGui.Helper
             using var instructionPin = new DisposablePin<char>(mainInstruction);
             using var titlePin = new DisposablePin<char>(windowTitle);
 
-            var config = new TASKDIALOGCONFIG()
+            var config = new TASKDIALOGCONFIG
             {
                 pszContent = contentPin.AddrOfPinnedObject,
                 pszMainInstruction = instructionPin.AddrOfPinnedObject,

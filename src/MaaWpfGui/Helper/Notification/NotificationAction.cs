@@ -13,4 +13,4 @@
 
 namespace MaaWpfGui.Helper.Notification;
 
-internal record class NotificationAction(string Label, string Tag);
+internal record NotificationAction(string Label, string Tag);

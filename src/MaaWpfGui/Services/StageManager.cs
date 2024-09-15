@@ -113,7 +113,7 @@ namespace MaaWpfGui.Services
             var clientType = ConfigurationHelper.GetValue(ConfigurationKeys.ClientType, string.Empty);
 
             // 官服和B服使用同样的资源
-            if (clientType == "Bilibili" || clientType == string.Empty)
+            if (clientType is "Bilibili" or "")
             {
                 clientType = "Official";
             }
@@ -190,7 +190,7 @@ namespace MaaWpfGui.Services
             // bool curResourceVerParsed = SemVersion.TryParse(
             //    tasksJsonClient?["ResourceVersion"]?.ToString() ?? tasksJson?["ResourceVersion"]?.ToString() ?? string.Empty,
             //    SemVersionStyles.AllowLowerV, out var curResourceVersionObj);
-            var resourceCollection = new StageActivityInfo()
+            var resourceCollection = new StageActivityInfo
             {
                 IsResourceCollection = true,
             };
@@ -235,7 +235,7 @@ namespace MaaWpfGui.Services
                                             Value = LocalizationHelper.GetString("UnsupportedStages"),
                                             Drop = LocalizationHelper.GetString("LowVersion") + '\n' +
                                                    LocalizationHelper.GetString("MinimumRequirements") + minRequiredObj,
-                                            Activity = new StageActivityInfo()
+                                            Activity = new StageActivityInfo
                                             {
                                                 Tip = stageObj?["Activity"]?["Tip"]?.ToString(),
                                                 StageName = stageObj?["Activity"]?["StageName"]?.ToString(),
@@ -261,7 +261,7 @@ namespace MaaWpfGui.Services
                             Display = stageObj?["Display"]?.ToString() ?? string.Empty,
                             Value = stageObj?["Value"]?.ToString(),
                             Drop = stageObj?["Drop"]?.ToString(),
-                            Activity = new StageActivityInfo()
+                            Activity = new StageActivityInfo
                             {
                                 Tip = stageObj?["Activity"]?["Tip"]?.ToString(),
                                 StageName = stageObj?["Activity"]?["StageName"]?.ToString(),
@@ -287,28 +287,28 @@ namespace MaaWpfGui.Services
                 { "12-17-HARD", new StageInfo { Display = "12-17-HARD", Value = "12-17-HARD" } },
 
                 // 资源本
-                { "CE-6", new StageInfo("CE-6", "CETip", new[] { DayOfWeek.Tuesday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Sunday }, resourceCollection) },
-                { "AP-5", new StageInfo("AP-5", "APTip", new[] { DayOfWeek.Monday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Sunday }, resourceCollection) },
-                { "CA-5", new StageInfo("CA-5", "CATip", new[] { DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Sunday }, resourceCollection) },
-                { "LS-6", new StageInfo("LS-6", "LSTip", new DayOfWeek[] { }, resourceCollection) },
-                { "SK-5", new StageInfo("SK-5", "SKTip", new[] { DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Saturday }, resourceCollection) },
+                { "CE-6", new StageInfo("CE-6", "CETip", [DayOfWeek.Tuesday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Sunday], resourceCollection) },
+                { "AP-5", new StageInfo("AP-5", "APTip", [DayOfWeek.Monday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Sunday], resourceCollection) },
+                { "CA-5", new StageInfo("CA-5", "CATip", [DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Sunday], resourceCollection) },
+                { "LS-6", new StageInfo("LS-6", "LSTip", [], resourceCollection) },
+                { "SK-5", new StageInfo("SK-5", "SKTip", [DayOfWeek.Monday, DayOfWeek.Wednesday, DayOfWeek.Friday, DayOfWeek.Saturday], resourceCollection) },
 
                 // 剿灭模式
                 { "Annihilation", new StageInfo { Display = LocalizationHelper.GetString("Annihilation"), Value = "Annihilation" } },
 
                 // 芯片本
-                { "PR-A-1", new StageInfo("PR-A-1", "PR-ATip", new[] { DayOfWeek.Monday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Sunday }, resourceCollection) },
-                { "PR-A-2", new StageInfo("PR-A-2", string.Empty, new[] { DayOfWeek.Monday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Sunday }, resourceCollection) },
-                { "PR-B-1", new StageInfo("PR-B-1", "PR-BTip", new[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Friday, DayOfWeek.Saturday }, resourceCollection) },
-                { "PR-B-2", new StageInfo("PR-B-2", string.Empty, new[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Friday, DayOfWeek.Saturday }, resourceCollection) },
-                { "PR-C-1", new StageInfo("PR-C-1", "PR-CTip", new[] { DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Sunday }, resourceCollection) },
-                { "PR-C-2", new StageInfo("PR-C-2", string.Empty, new[] { DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Sunday }, resourceCollection) },
-                { "PR-D-1", new StageInfo("PR-D-1", "PR-DTip", new[] { DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Saturday, DayOfWeek.Sunday }, resourceCollection) },
-                { "PR-D-2", new StageInfo("PR-D-2", string.Empty, new[] { DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Saturday, DayOfWeek.Sunday }, resourceCollection) },
+                { "PR-A-1", new StageInfo("PR-A-1", "PR-ATip", [DayOfWeek.Monday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Sunday], resourceCollection) },
+                { "PR-A-2", new StageInfo("PR-A-2", string.Empty, [DayOfWeek.Monday, DayOfWeek.Thursday, DayOfWeek.Friday, DayOfWeek.Sunday], resourceCollection) },
+                { "PR-B-1", new StageInfo("PR-B-1", "PR-BTip", [DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Friday, DayOfWeek.Saturday], resourceCollection) },
+                { "PR-B-2", new StageInfo("PR-B-2", string.Empty, [DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Friday, DayOfWeek.Saturday], resourceCollection) },
+                { "PR-C-1", new StageInfo("PR-C-1", "PR-CTip", [DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Sunday], resourceCollection) },
+                { "PR-C-2", new StageInfo("PR-C-2", string.Empty, [DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Saturday, DayOfWeek.Sunday], resourceCollection) },
+                { "PR-D-1", new StageInfo("PR-D-1", "PR-DTip", [DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Saturday, DayOfWeek.Sunday], resourceCollection) },
+                { "PR-D-2", new StageInfo("PR-D-2", string.Empty, [DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Saturday, DayOfWeek.Sunday], resourceCollection) },
 
                 // 周一和周日的关卡提示
-                { "Pormpt1", new StageInfo { Tip = LocalizationHelper.GetString("Pormpt1"), OpenDays = new[] { DayOfWeek.Monday }, IsHidden = true } },
-                { "Pormpt2", new StageInfo { Tip = LocalizationHelper.GetString("Pormpt2"), OpenDays = new[] { DayOfWeek.Sunday }, IsHidden = true } },
+                { "Pormpt1", new StageInfo { Tip = LocalizationHelper.GetString("Pormpt1"), OpenDays = [DayOfWeek.Monday], IsHidden = true } },
+                { "Pormpt2", new StageInfo { Tip = LocalizationHelper.GetString("Pormpt2"), OpenDays = [DayOfWeek.Sunday], IsHidden = true } },
             })
             {
                 tempStage.Add(kvp.Key, kvp.Value);

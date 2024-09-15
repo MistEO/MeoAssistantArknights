@@ -21,9 +21,9 @@ namespace MaaWpfGui.Helper
     {
         public IntPtr Handle { get; private set; }
 
-        public static WindowHandle None => new WindowHandle() { Handle = IntPtr.Zero };
+        public static WindowHandle None => new WindowHandle { Handle = IntPtr.Zero };
 
-        public static implicit operator WindowHandle(IntPtr h) => new WindowHandle() { Handle = h };
+        public static implicit operator WindowHandle(IntPtr h) => new WindowHandle { Handle = h };
 
         public static implicit operator WindowHandle(Window w)
         {
