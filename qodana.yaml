@@ -1,0 +1,36 @@
+version: "1.0"
+linter: jetbrains/qodana-dotnet:2024.2
+bootstrap: echo 123
+profile:
+  name: qodana.recommended
+dotnet:
+  solution: MAA.sln
+  platform: x64
+exclude:
+  - name: All
+    paths:
+      - node_modules/
+      - common/node_modules/
+      - scan/node_modules/
+      - vsts/node_modules/
+      - scan/jest.config.js
+      - common/lib
+      - scan/lib
+      - scan/dist
+      - scan/__tests__
+      - vsts/lib
+      - vsts/QodanaScan
+      - README.md
+      - src/Cpp
+      - src/MaaCore
+      - src/MaaThriftController
+      - src/MaaWpfGui/app.manifest
+  - name: ArrangeTrailingCommaInSinglelineLists
+  - name: ArrangeTrailingCommaInMultilineLists
+  - name: BadListLineBreaks
+  - name: CppInconsistentNaming
+  - name: EditorConfigNoMatchingFiles
+  - name: EditorConfigKeyCorrectness
+  - name: EditorConfigPartialOverride
+  - name: InvalidXmlDocComment
+  - name: Xaml.StaticResourceNotResolved

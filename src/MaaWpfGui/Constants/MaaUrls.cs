@@ -11,7 +11,6 @@
 // but WITHOUT ANY WARRANTY
 // </copyright>
 
-using System.Collections.Generic;
 using MaaWpfGui.Helper;
 
 namespace MaaWpfGui.Constants

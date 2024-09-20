@@ -16,7 +16,7 @@ namespace MaaWpfGui.Views.UserControl;
 /// <summary>
 /// AfterActionUserControl.xaml 的交互逻辑
 /// </summary>
-public partial class AfterActionUserControl : System.Windows.Controls.UserControl
+public partial class AfterActionUserControl
 {
 
     /// <summary>

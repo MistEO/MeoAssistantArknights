@@ -62,7 +62,7 @@ namespace MaaWpfGui.Views.UI
                     continue;
                 }
 
-                var langMenu = new MenuItem() { Header = lang.Value };
+                var langMenu = new MenuItem { Header = lang.Value };
                 langMenu.Click += (_, _) =>
                 {
                     Instances.SettingsViewModel.Language = lang.Key;

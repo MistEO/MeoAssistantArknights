@@ -2,7 +2,6 @@
 
 #include <filesystem>
 #include <iostream>
-#include <stdio.h>
 #include <string>
 #include <thread>
 

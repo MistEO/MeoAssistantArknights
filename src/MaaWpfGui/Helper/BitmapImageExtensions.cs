@@ -31,7 +31,7 @@ namespace MaaWpfGui.Helper
 
         public static byte[] ToBytes(this BitmapImage image)
         {
-            byte[] data = { };
+            byte[] data = [];
             if (image == null)
             {
                 return data;

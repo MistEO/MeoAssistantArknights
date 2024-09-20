@@ -21,7 +21,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// TextDialogWithTimerUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class TextDialogWithTimerUserControl : System.Windows.Controls.Border
+    public partial class TextDialogWithTimerUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TextDialogWithTimerUserControl"/> class.

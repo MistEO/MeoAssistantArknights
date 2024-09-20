@@ -27,7 +27,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// VersionUpdateSettingsUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class VersionUpdateSettingsUserControl : System.Windows.Controls.UserControl
+    public partial class VersionUpdateSettingsUserControl
     {
         private static readonly ILogger _logger = Log.ForContext<VersionUpdateSettingsUserControl>();
 

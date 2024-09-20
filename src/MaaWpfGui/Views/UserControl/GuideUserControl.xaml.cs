@@ -16,7 +16,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// GuideUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class GuideUserControl : System.Windows.Controls.UserControl
+    public partial class GuideUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GuideUserControl"/> class.

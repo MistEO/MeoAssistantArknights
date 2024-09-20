@@ -8,5 +8,4 @@ charset = utf-8
 end_of_line = lf
 
 [*.json]
-
 indent_size = 4

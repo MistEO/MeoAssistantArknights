@@ -2,13 +2,11 @@
     x:Class="MaaWpfGui.Views.UserControl.RemoteControlUserControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:ui="clr-namespace:MaaWpfGui.ViewModels.UI" 
-    xmlns:controls="clr-namespace:MaaWpfGui.Styles.Controls" 
-    xmlns:calcBinding="clr-namespace:CalcBinding;assembly=CalcBinding" 
-    xmlns:s="https://github.com/canton7/Stylet" 
+    xmlns:ui="clr-namespace:MaaWpfGui.ViewModels.UI"
+    xmlns:controls="clr-namespace:MaaWpfGui.Styles.Controls"
+    xmlns:s="https://github.com/canton7/Stylet"
     xmlns:constants="clr-namespace:MaaWpfGui.Constants"
     d:DataContext="{d:DesignInstance {x:Type ui:SettingsViewModel}}"
     d:DesignHeight="300"
@@ -45,10 +43,10 @@
             Block.TextAlignment="Center"
             Text="{DynamicResource RemoteControlGetTaskEndpointLabel}"
             TextWrapping="Wrap" />
-        <TextBox 
+        <TextBox
             Grid.Row="1"
             Grid.Column="1"
-            Margin="0,5,0,5" 
+            Margin="0,5,0,5"
             Text="{Binding RemoteControlGetTaskEndpointUri}" Grid.ColumnSpan="2"/>
 
         <!-- Handshake Endpoint Input -->
@@ -59,10 +57,10 @@
             Block.TextAlignment="Center"
             Text="{DynamicResource RemoteControlReportStatusEndpointLabel}"
             TextWrapping="Wrap" />
-        <TextBox 
+        <TextBox
             Grid.Row="2"
             Grid.Column="1"
-            Margin="0,5,0,5" 
+            Margin="0,5,0,5"
             Text="{Binding RemoteControlReportStatusUri}" Grid.ColumnSpan="2"/>
 
         <!-- User Identity Input -->
@@ -73,10 +71,10 @@
             Block.TextAlignment="Center"
             Text="{DynamicResource RemoteControlUserIdentityLabel}"
             TextWrapping="Wrap" />
-        <TextBox 
+        <TextBox
             Grid.Row="3"
             Grid.Column="1"
-            Margin="0,5,0,5" 
+            Margin="0,5,0,5"
             Text="{Binding RemoteControlUserIdentity}"/>
         <Button
             Grid.Row="3"
@@ -93,12 +91,12 @@
             Block.TextAlignment="Center"
             Text="{DynamicResource RemoteControlDeviceIdentityLabel}"
             TextWrapping="Wrap" />
-        <TextBox 
+        <TextBox
             Grid.Row="4"
             Grid.Column="1"
-            Margin="0,5,0,5" 
-            Text="{Binding RemoteControlDeviceIdentity}" 
-            IsReadOnly="True" 
+            Margin="0,5,0,5"
+            Text="{Binding RemoteControlDeviceIdentity}"
+            IsReadOnly="True"
             ContextMenuService.IsEnabled="False"/>
         <Button
             Grid.Row="4"

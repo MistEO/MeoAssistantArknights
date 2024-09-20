@@ -31,7 +31,7 @@ namespace MaaWpfGui.Extensions
         /// <param name="targetComboBox">Target <seealso cref="ComboBox"/></param>
         public static void MakeComboBoxSearchable(this ComboBox targetComboBox)
         {
-            if (!(targetComboBox?.Template.FindName("PART_EditableTextBox", targetComboBox) is TextBox targetTextBox))
+            if (targetComboBox?.Template.FindName("PART_EditableTextBox", targetComboBox) is not TextBox targetTextBox)
             {
                 return;
             }
@@ -46,7 +46,7 @@ namespace MaaWpfGui.Extensions
 
             targetTextBox.PreviewKeyDown += (se, ev) =>
             {
-                if (ev.Key == Key.Enter || ev.Key == Key.Return || ev.Key == Key.Tab)
+                if (ev.Key is Key.Enter or Key.Return or Key.Tab)
                 {
                     return;
                 }

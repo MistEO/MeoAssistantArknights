@@ -11,19 +11,18 @@
 // but WITHOUT ANY WARRANTY
 // </copyright>
 
-namespace MaaWpfGui.Views.UserControl
+namespace MaaWpfGui.Views.UserControl;
+
+/// <summary>
+/// AboutUserControl.xaml 的交互逻辑
+/// </summary>
+public partial class AboutUserControl
 {
     /// <summary>
-    /// AboutUserControl.xaml 的交互逻辑
+    /// Initializes a new instance of the <see cref="AboutUserControl"/> class.
     /// </summary>
-    public partial class AboutUserControl : System.Windows.Controls.UserControl
+    public AboutUserControl()
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AboutUserControl"/> class.
-        /// </summary>
-        public AboutUserControl()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

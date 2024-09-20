@@ -84,7 +84,7 @@ namespace MaaWpfGui.Services.Notification
             return false;
         }
 
-        private const string EmailTemplate = @"
+        private const string EmailTemplate = """
 <html lang=""zh"">
   <style>
     .title {
@@ -149,6 +149,6 @@ namespace MaaWpfGui.Services.Notification
     </p>
   </div>
 </html>
-";
+""";
     }
 }

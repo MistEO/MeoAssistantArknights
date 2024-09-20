@@ -16,7 +16,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// ConfigurationMgrUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class ConfigurationMgrUserControl : System.Windows.Controls.UserControl
+    public partial class ConfigurationMgrUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConfigurationMgrUserControl"/> class.

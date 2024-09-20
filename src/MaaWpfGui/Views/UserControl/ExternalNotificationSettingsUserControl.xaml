@@ -51,7 +51,7 @@
                 Margin="5"
                 Command="{s:Action ExternalNotificationSendTest}"
                 Content="{DynamicResource ExternalNotificationSendTest}"
-                IsEnabled="{c:Binding 'EnabledExternalNotificationProvider != &quot;Off&quot;'}" />
+                IsEnabled="{c:Binding 'EnabledExternalNotificationProviders != &quot;Off&quot;'}" />
         </StackPanel>
 
         <StackPanel

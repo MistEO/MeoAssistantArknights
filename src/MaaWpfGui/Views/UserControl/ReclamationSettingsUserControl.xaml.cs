@@ -16,7 +16,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// ReclamationSettingsUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class ReclamationSettingsUserControl : System.Windows.Controls.UserControl
+    public partial class ReclamationSettingsUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ReclamationSettingsUserControl"/> class.

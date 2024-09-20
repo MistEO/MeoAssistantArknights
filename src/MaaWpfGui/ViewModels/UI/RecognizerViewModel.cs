@@ -404,7 +404,7 @@ namespace MaaWpfGui.ViewModels.UI
                     continue;
                 }
 
-                DepotResultDate result = new DepotResultDate()
+                DepotResultDate result = new DepotResultDate
                 {
                     Id = id,
                     Name = ItemListHelper.GetItemName(id),
@@ -615,12 +615,7 @@ namespace MaaWpfGui.ViewModels.UI
 
         public bool OperBoxParse(JObject? details)
         {
-            if (details == null)
-            {
-                return false;
-            }
-
-            var operBoxes = (JArray?)details["all_opers"];
+            var operBoxes = (JArray?)details?["all_opers"];
 
             if (operBoxes == null)
             {
@@ -817,19 +812,22 @@ namespace MaaWpfGui.ViewModels.UI
             _frameCount++;
             if ((now - _lastFpsUpdateTime).TotalSeconds >= 1)
             {
+<<<<<<< HEAD
                 GachaScreenFpf = _frameCount / (now - _lastFpsUpdateTime).TotalSeconds;
                 _frameCount = 0;
                 _lastFpsUpdateTime = now;
-            }
+=======
+                var image = Instances.AsstProxy.AsstGetImage();
+                if (GachaImage.IsEqual(image))
+                {
+                    return;
+                }
 
-            if ((now - _lastTipUpdateTime).TotalSeconds < 5)
-            {
-                return;
-            }
+                GachaImage = image;
 
-            var rd = new Random();
-            GachaInfo = LocalizationHelper.GetString("GachaTip" + rd.Next(1, 18));
-            _lastTipUpdateTime = now;
+                var rd = new Random();
+                GachaInfo = LocalizationHelper.GetString("GachaTip" + rd.Next(1, 18));
+            }
         }
 
         // DO NOT CHANGE

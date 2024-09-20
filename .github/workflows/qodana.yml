@@ -1,0 +1,45 @@
+name: Qodana static analysis
+
+on:
+  workflow_dispatch:
+  pull_request: # 在 PR 更新的场合进行扫描
+    paths:
+      - ".github/workflows/qodana.yml"
+      - "src/MaaWpfGui/*"
+      - "qodana.yaml"
+      - "src/MaaWpfGui/**"
+      - "MAA.sln"
+  push: # 在主分支推送代码的场合进行扫描
+    branches:
+      - master
+      - "releases/*"
+      - dev
+    paths:
+      - ".github/workflows/qodana.yml"
+      - "src/MaaWpfGui/**"
+      - "qodana.yaml"
+
+permissions:
+  contents: write
+  pull-requests: write
+  checks: write
+
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }} # to check out the actual pull request commit, not the merge commit
+          fetch-depth: 0 # a full history is required for pull request analysis
+          show-progress: false
+
+      - name: Qodana Scan
+        uses: JetBrains/qodana-action@main
+        with:
+          pr-mode: true
+          post-pr-comment: true
+          args: --baseline,.github/qodana.sarif.json
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}

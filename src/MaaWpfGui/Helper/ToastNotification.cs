@@ -263,7 +263,7 @@ namespace MaaWpfGui.Helper
 
         #region 通知按钮变量
 
-        private List<NotificationAction> _actions = new List<NotificationAction>();
+        private List<NotificationAction> _actions = [];
 
         #endregion 通知按钮变量
 

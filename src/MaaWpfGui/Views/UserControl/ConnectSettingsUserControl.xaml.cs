@@ -19,7 +19,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// ConnectSettingsUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class ConnectSettingsUserControl : System.Windows.Controls.UserControl
+    public partial class ConnectSettingsUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConnectSettingsUserControl"/> class.

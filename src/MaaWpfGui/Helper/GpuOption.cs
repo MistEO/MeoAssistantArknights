@@ -15,10 +15,7 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using MaaWpfGui.Constants;
 using MaaWpfGui.Extensions;
 using Microsoft.Win32;
@@ -147,7 +144,7 @@ namespace MaaWpfGui.Helper
 
             uint i = 0;
 
-            var options = new List<GpuOption>() { Disable };
+            var options = new List<GpuOption> { Disable };
 
             while (true)
             {
@@ -245,7 +242,7 @@ namespace MaaWpfGui.Helper
                 }
 
                 var buf = ArrayPool<byte>.Shared.Rent((int)size);
-                string? result = null;
+                string? result;
 
                 fixed (byte* ptr = buf)
                 {
@@ -271,14 +268,9 @@ namespace MaaWpfGui.Helper
         {
             try
             {
-                using var regkey = Registry.LocalMachine.OpenSubKey("SYSTEM\\CurrentControlSet\\Enum\\" + instance_path, false);
+                using var regkey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Enum\" + instance_path, false);
 
-                if (regkey == null)
-                {
-                    return false;
-                }
-
-                var upperfilters = regkey.GetValue("UpperFilters");
+                var upperfilters = regkey?.GetValue("UpperFilters");
 
                 if (upperfilters == null)
                 {
@@ -338,10 +330,10 @@ namespace MaaWpfGui.Helper
             }
 
             var buf = new byte[size];
-            string? driverVersion = null;
+            string? driverVersion;
             fixed (byte* ptr = buf)
             {
-                err = PInvoke.CM_Get_DevNode_Property(devinst, PInvoke.DEVPKEY_Device_DriverVersion, out _, ptr, ref size, 0);
+                PInvoke.CM_Get_DevNode_Property(devinst, PInvoke.DEVPKEY_Device_DriverVersion, out _, ptr, ref size, 0);
                 driverVersion = Marshal.PtrToStringUni((nint)ptr);
             }
 
@@ -402,12 +394,7 @@ namespace MaaWpfGui.Helper
                     _ => default,
                 };
 
-                if (devid_blacklist.Contains((ushort)desc.DeviceId))
-                {
-                    return true;
-                }
-
-                return false;
+                return devid_blacklist.Contains((ushort)desc.DeviceId);
             }
 
             deprecated = IsGpuDeprecated(ref desc);

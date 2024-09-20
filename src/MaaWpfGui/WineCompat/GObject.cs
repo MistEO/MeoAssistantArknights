@@ -11,8 +11,6 @@
 // but WITHOUT ANY WARRANTY
 // </copyright>
 
-using System;
-
 using static MaaWpfGui.WineCompat.MaaDesktopIntegration;
 
 namespace MaaWpfGui.WineCompat

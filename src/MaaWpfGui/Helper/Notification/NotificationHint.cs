@@ -48,5 +48,4 @@ public class NotificationHint
     public static NotificationHint RowCount(int rowCount) => new NotificationHintRowCount(rowCount);
 
     public static NotificationHint ExpirationTime(TimeSpan value) => new NotificationHintExpirationTime(value);
-
 }

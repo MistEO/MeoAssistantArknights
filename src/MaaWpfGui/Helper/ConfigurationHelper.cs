@@ -224,7 +224,21 @@ namespace MaaWpfGui.Helper
             // Load configuration file
             if (!ParseConfig(out var parsed))
             {
+<<<<<<< HEAD
                 return false;
+=======
+                EnsureConfigDirectoryExists();
+
+                // Load configuration file
+                if (!ParseConfig(out var parsed))
+                {
+                    return false;
+                }
+
+                SetKvOrMigrate(parsed);
+
+                return true;
+>>>>>>> cdf326964 (qodana: StylingAndHeader)
             }
 
             SetKvOrMigrate(parsed);
@@ -251,7 +265,7 @@ namespace MaaWpfGui.Helper
 
                 _kvsMap = [];
                 _current = ConfigurationKeys.DefaultConfiguration;
-                _kvsMap[_current] = parsed.ToObject<ConcurrentDictionary<string, string>>();
+                _kvsMap[_current] = parsed.ToObject<Dictionary<string, string>>();
             }
 
             _kvs = _kvsMap[_current];

@@ -26,7 +26,6 @@ using System.Windows;
 using MaaWpfGui.Constants;
 using MaaWpfGui.Helper;
 using MaaWpfGui.Main;
-using MaaWpfGui.Models;
 using MaaWpfGui.Services;
 using MaaWpfGui.States;
 using Newtonsoft.Json;

@@ -1,4 +1,4 @@
-// <copyright file="GameClientUserControl.xaml.cs" company="MaaAssistantArknights">
+// <copyright file="PerformanceUserControl.xaml.cs" company="MaaAssistantArknights">
 // MaaWpfGui - A part of the MaaCoreArknights project
 // Copyright (C) 2021 MistEO and Contributors
 //
@@ -16,7 +16,7 @@ namespace MaaWpfGui.Views.UserControl
     /// <summary>
     /// GameClientUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class PerformanceUserControl : System.Windows.Controls.UserControl
+    public partial class PerformanceUserControl
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="PerformanceUserControl"/> class.

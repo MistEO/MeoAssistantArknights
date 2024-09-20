@@ -274,7 +274,7 @@ namespace MaaWpfGui.ViewModels.UI
             _stageManager = _container.Get<StageManager>();
 
             DisplayName = LocalizationHelper.GetString("Farming");
-            LogItemViewModels = new ObservableCollection<LogItemViewModel>();
+            LogItemViewModels = [];
             InitializeItems();
             InitTimer();
         }
@@ -513,8 +513,7 @@ namespace MaaWpfGui.ViewModels.UI
                 if (await TimerCanceledAsync(
                         LocalizationHelper.GetString("ForceScheduledStart"),
                         LocalizationHelper.GetString("ForceScheduledStartTip"),
-                        LocalizationHelper.GetString("Cancel"),
-                        10))
+                        LocalizationHelper.GetString("Cancel")))
                 {
                     return;
                 }
@@ -1526,13 +1525,13 @@ namespace MaaWpfGui.ViewModels.UI
 
         private readonly Dictionary<string, IEnumerable<string>> _blackCharacterListMapping = new()
         {
-            { string.Empty, new[] { "讯使", "嘉维尔", "坚雷" } },
-            { "Official", new[] { "讯使", "嘉维尔", "坚雷" } },
-            { "Bilibili", new[] { "讯使", "嘉维尔", "坚雷" } },
-            { "YoStarEN", new[] { "Courier", "Gavial", "Dur-nar" } },
-            { "YoStarJP", new[] { "クーリエ", "ガヴィル", "ジュナー" } },
-            { "YoStarKR", new[] { "쿠리어", "가비알", "듀나" } },
-            { "txwy", new[] { "訊使", "嘉維爾", "堅雷" } },
+            { string.Empty, ["讯使", "嘉维尔", "坚雷"] },
+            { "Official", ["讯使", "嘉维尔", "坚雷"] },
+            { "Bilibili", ["讯使", "嘉维尔", "坚雷"] },
+            { "YoStarEN", ["Courier", "Gavial", "Dur-nar"] },
+            { "YoStarJP", ["クーリエ", "ガヴィル", "ジュナー"] },
+            { "YoStarKR", ["쿠리어", "가비알", "듀나"] },
+            { "txwy", ["訊使", "嘉維爾", "堅雷"] },
         };
 
         private bool AppendMall()
@@ -2346,7 +2345,7 @@ namespace MaaWpfGui.ViewModels.UI
         /// </summary>
         public List<string> SeriesList { get; private set; } = ["1", "2", "3", "4", "5", "6"];
 
-        private ObservableCollection<CombinedData> _stageList = new();
+        private ObservableCollection<CombinedData> _stageList = [];
 
         /// <summary>
         /// Gets or private sets the list of stages.
@@ -2357,9 +2356,9 @@ namespace MaaWpfGui.ViewModels.UI
             private set => SetAndNotify(ref _stageList, value);
         }
 
-        public ObservableCollection<CombinedData> RemainingSanityStageList { get; private set; } = new();
+        public ObservableCollection<CombinedData> RemainingSanityStageList { get; private set; } = [];
 
-        public ObservableCollection<CombinedData> AlternateStageList { get; private set; } = new();
+        public ObservableCollection<CombinedData> AlternateStageList { get; private set; } = [];
 
         /// <summary>
         /// Gets the stage.
@@ -2648,7 +2647,7 @@ namespace MaaWpfGui.ViewModels.UI
             }
         }
 
-        public ObservableCollection<GenericCombinedData<int>> CustomInfrastPlanList { get; } = new();
+        public ObservableCollection<GenericCombinedData<int>> CustomInfrastPlanList { get; } = [];
 
         public struct CustomInfrastPlanInfo
         {
@@ -2673,7 +2672,7 @@ namespace MaaWpfGui.ViewModels.UI
             // ReSharper restore InconsistentNaming
         }
 
-        private List<CustomInfrastPlanInfo> CustomInfrastPlanInfoList { get; } = new();
+        private List<CustomInfrastPlanInfo> CustomInfrastPlanInfoList { get; } = [];
 
         private bool _customInfrastPlanHasPeriod;
         private bool _customInfrastInfoOutput;
@@ -3087,7 +3086,7 @@ namespace MaaWpfGui.ViewModels.UI
         /// <summary>
         /// Gets the list of all drops.
         /// </summary>
-        private List<CombinedData> AllDrops { get; } = new();
+        private List<CombinedData> AllDrops { get; } = [];
 
         /// <summary>
         /// 关卡不可掉落的材料

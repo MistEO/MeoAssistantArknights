@@ -50,7 +50,7 @@ namespace MaaWpfGui.Styles.Properties
         // ReSharper disable once UnusedMember.Global
         public static double GetVerticalOffset(DependencyObject depObj)
         {
-            if (!(depObj is ScrollViewer))
+            if (depObj is not ScrollViewer)
             {
                 return 0;
             }
@@ -65,7 +65,7 @@ namespace MaaWpfGui.Styles.Properties
         /// <param name="value">The new property value.</param>
         public static void SetVerticalOffset(DependencyObject depObj, double value)
         {
-            if (!(depObj is ScrollViewer))
+            if (depObj is not ScrollViewer)
             {
                 return;
             }
@@ -75,7 +75,7 @@ namespace MaaWpfGui.Styles.Properties
 
         private static void OnVerticalOffsetPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (!(d is ScrollViewer scrollViewer))
+            if (d is not ScrollViewer scrollViewer)
             {
                 return;
             }
@@ -127,12 +127,7 @@ namespace MaaWpfGui.Styles.Properties
         // ReSharper disable once UnusedMember.Global
         public static double GetViewportHeight(DependencyObject depObj)
         {
-            if (!(depObj is ScrollViewer scrollViewer))
-            {
-                return double.NaN;
-            }
-
-            return scrollViewer.ViewportHeight;
+            return depObj is not ScrollViewer scrollViewer ? double.NaN : scrollViewer.ViewportHeight;
         }
 
         /// <summary>
@@ -142,7 +137,7 @@ namespace MaaWpfGui.Styles.Properties
         /// <param name="value">The new property value.</param>
         public static void SetViewportHeight(DependencyObject depObj, double value)
         {
-            if (!(depObj is ScrollViewer))
+            if (depObj is not ScrollViewer)
             {
                 return;
             }
@@ -152,7 +147,7 @@ namespace MaaWpfGui.Styles.Properties
 
         private static void OnViewportHeightPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (!(d is ScrollViewer scrollViewer))
+            if (d is not ScrollViewer scrollViewer)
             {
                 return;
             }
@@ -204,12 +199,7 @@ namespace MaaWpfGui.Styles.Properties
         // ReSharper disable once UnusedMember.Global
         public static double GetExtentHeight(DependencyObject depObj)
         {
-            if (!(depObj is ScrollViewer scrollViewer))
-            {
-                return double.NaN;
-            }
-
-            return scrollViewer.ExtentHeight;
+            return depObj is not ScrollViewer scrollViewer ? double.NaN : scrollViewer.ExtentHeight;
         }
 
         /// <summary>
@@ -219,7 +209,7 @@ namespace MaaWpfGui.Styles.Properties
         /// <param name="value">The new property value.</param>
         public static void SetExtentHeight(DependencyObject depObj, double value)
         {
-            if (!(depObj is ScrollViewer))
+            if (depObj is not ScrollViewer)
             {
                 return;
             }
@@ -229,7 +219,7 @@ namespace MaaWpfGui.Styles.Properties
 
         private static void OnExtentHeightPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (!(d is ScrollViewer scrollViewer))
+            if (d is not ScrollViewer scrollViewer)
             {
                 return;
             }
@@ -292,7 +282,7 @@ namespace MaaWpfGui.Styles.Properties
         /// <param name="value">The new property value.</param>
         public static void SetDividerVerticalOffsetList(DependencyObject depObj, List<double> value)
         {
-            if (!(depObj is ScrollViewer))
+            if (depObj is not ScrollViewer)
             {
                 return;
             }
@@ -302,7 +292,7 @@ namespace MaaWpfGui.Styles.Properties
 
         private static void OnDividerVerticalOffsetListPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (!(d is ScrollViewer scrollViewer))
+            if (d is not ScrollViewer scrollViewer)
             {
                 return;
             }
@@ -322,7 +312,7 @@ namespace MaaWpfGui.Styles.Properties
             // 当滚动条载入时，遍历 StackPanel 中的所有 Divider 子元素对应位置
             scrollViewer.Loaded += (s, se) =>
             {
-                if (!scrollViewer.HasContent || !(scrollViewer.Content is StackPanel stackPanel))
+                if (!scrollViewer.HasContent || scrollViewer.Content is not StackPanel stackPanel)
                 {
                     return;
                 }

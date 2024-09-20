@@ -42,26 +42,26 @@ internal class LibNotifyNotification : GObject
         return notify_notification_new(title, message, iconPath);
     }
 
-    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
+    [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)])]
     private static void ActionCallback(nint notification, nint action, nint userData)
     {
         var instance = GCHandle.FromIntPtr(userData).Target as LibNotifyNotification;
         instance?.ActionActivated?.Invoke(instance, Marshal.PtrToStringUTF8(action)!);
     }
 
-    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
+    [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)])]
     private static void ActionFreeCallback(nint userData)
     {
     }
 
-    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
+    [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)])]
     private static void CloseSignalCallback(nint notification, nint userData)
     {
         var instance = GCHandle.FromIntPtr(userData).Target as LibNotifyNotification;
         instance?.Closed?.Invoke(instance, EventArgs.Empty);
     }
 
-    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvStdcall) })]
+    [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)])]
     private static void CloseSignalFreeCallback(nint userData, nint closure)
     {
     }
