@@ -102,6 +102,11 @@ bool asst::PlayToolsController::start_game(const std::string& client_type [[mayb
     return true;
 }
 
+bool asst::PlayToolsController::start_game_by_activity(const std::string& activity_name [[maybe_unused]])
+{
+    return true;
+}
+
 bool asst::PlayToolsController::stop_game(const std::string& client_type [[maybe_unused]])
 {
     try {
@@ -204,6 +209,12 @@ void asst::PlayToolsController::back_to_home() noexcept
 {
     Log.info("HOME is not supported on iOS");
     return;
+}
+
+std::optional<std::string> asst::PlayToolsController::get_activities()
+{
+    Log.info("get_activities is not supported on iOS");
+    return std::nullopt;
 }
 
 bool asst::PlayToolsController::toucher_down(const Point& p, const int delay)

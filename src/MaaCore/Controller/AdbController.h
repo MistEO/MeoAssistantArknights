@@ -40,6 +40,7 @@ public:
     virtual bool screencap(cv::Mat& image_payload, bool allow_reconnect = false) override;
 
     virtual bool start_game(const std::string& client_type) override;
+    virtual bool start_game_by_activity(const std::string& activity_name) override;
     virtual bool stop_game(const std::string& client_type) override;
 
     virtual bool click(const Point& p) override;
@@ -65,6 +66,8 @@ public:
     AdbController& operator=(AdbController&&) = delete;
 
     virtual void back_to_home() noexcept override;
+
+    virtual std::optional<std::string> get_activities() override;
 
 protected:
     std::optional<std::string> call_command(
@@ -127,6 +130,7 @@ protected:
 
         std::string start;
         std::string stop;
+        std::string get_activities;
 
         std::string version;
 

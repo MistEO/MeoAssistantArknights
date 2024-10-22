@@ -38,6 +38,7 @@ public:
     virtual bool screencap(cv::Mat& image_payload, bool allow_reconnect = false) override;
 
     virtual bool start_game(const std::string& client_type) override;
+    virtual bool start_game_by_activity(const std::string& activity_name) override;
     virtual bool stop_game(const std::string& client_type) override;
 
     virtual bool click(const Point& p) override;
@@ -69,6 +70,8 @@ public:
     PlayToolsController& operator=(PlayToolsController&&) = delete;
 
     virtual void back_to_home() noexcept override;
+
+    virtual std::optional<std::string> get_activities() override;
 
 protected:
     AsstCallback m_callback;

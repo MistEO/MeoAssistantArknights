@@ -73,6 +73,7 @@
             "display": "[Adb] -s [AdbSerial] shell \"dumpsys window displays | grep -o -E cur=+[^\\ ]+ | grep -o -E [0-9]+\"",
             "displayFormat": "%d%d",
             "ncAddress": "[Adb] -s [AdbSerial] shell \" cat /proc/net/arp | grep : \"",
+            "getActivities": "[Adb] -s [AdbSerial] shell \"dumpsys activity top | grep ACTIVITY | grep -i arknights\"",
             "abilist": "[Adb] -s [AdbSerial] shell getprop ro.product.cpu.abilist",
             "orientation": "[Adb] -s [AdbSerial] shell \"dumpsys input | grep SurfaceOrientation | grep -m 1 -o -E [0-9]\"",
             "pushMinitouch": "[Adb] -s [AdbSerial] push \"[minitouchLocalPath]\" \"/data/local/tmp/[minitouchWorkingFile]\"",

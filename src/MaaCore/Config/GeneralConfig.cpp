@@ -100,6 +100,7 @@ bool asst::GeneralConfig::parse(const json::value& json)
         adb.release = cfg_json.get("release", base_cfg.release);
         adb.start = cfg_json.get("start", base_cfg.start);
         adb.stop = cfg_json.get("stop", base_cfg.stop);
+        adb.get_activities = cfg_json.get("getActivities", base_cfg.get_activities);
         adb.abilist = cfg_json.get("abilist", base_cfg.abilist);
         adb.version = cfg_json.get("version", base_cfg.version);
         adb.orientation = cfg_json.get("orientation", base_cfg.orientation);

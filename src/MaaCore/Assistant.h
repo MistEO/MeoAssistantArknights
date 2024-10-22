@@ -140,6 +140,7 @@ namespace asst
         void call_proc();
         void working_proc();
         void msg_proc();
+        void guard_proc();
 
     private:
         void clear_cache();
@@ -178,8 +179,13 @@ namespace asst
         std::mutex m_completed_call_mutex;
         std::condition_variable m_completed_call_condvar;
 
+        std::mutex m_guard_mutex;
+        std::condition_variable m_guard_condvar;
+        std::optional<std::string> m_guard_activity_name;
+
         std::thread m_msg_thread;
         std::thread m_call_thread;
         std::thread m_working_thread;
+        std::thread m_guard_thread;
     };
 } // namespace asst
