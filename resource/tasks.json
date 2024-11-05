@@ -6083,7 +6083,7 @@
         "template": "empty.png",
         "roi": [20, 93, 73, 608],
         "action": "ClickSelf",
-        "next": ["UseSupportUnit-Role@NextAfterLoadingText"]
+        "next": ["UseSupportUnit-Role@NextAfterLoadingText", "UseSupportUnit-Role#next"]
     },
     "UseSupportUnit-SelectSkill-1": {
         "template": "UseSupportUnit-SelectSkill.png",
