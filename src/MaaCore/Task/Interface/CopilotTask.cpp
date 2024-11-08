@@ -150,7 +150,10 @@ bool asst::CopilotTask::set_params(const json::value& params)
     m_formation_task_ptr->set_select_formation(select_formation);
     m_formation_task_ptr->set_add_trust(add_trust);
     m_formation_task_ptr->set_support_unit_usage(support_unit_usage);
-    m_formation_task_ptr->set_specific_support_unit(support_unit_name);
+    if (support_unit_usage == SupportUnitUsage::Specific &&
+        !m_formation_task_ptr->set_specific_support_unit(support_unit_name)) {
+        return false;
+    }
 
     if (auto opt = params.find<json::array>("user_additional"); add_user_additional && opt) {
         std::vector<std::pair<std::string, int>> user_additional;
