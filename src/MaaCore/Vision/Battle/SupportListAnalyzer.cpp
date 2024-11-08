@@ -41,7 +41,7 @@ bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& i
             continue;
         }
 
-        const auto& name = ocr_analyzer.get_result().text;
+        const std::string name = ocr_analyzer.get_result().text;
         // 如果干员名称出现在 ignored_oper_names 则忽视这个干员
         if (ignored_oper_names.contains(name)) {
             continue;
