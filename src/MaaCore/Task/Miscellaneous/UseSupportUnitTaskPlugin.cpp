@@ -81,6 +81,15 @@ bool asst::UseSupportUnitTaskPlugin::try_add_support_unit_for_role(
     std::unordered_set<std::string> known_oper_names;
     std::vector<std::optional<size_t>> candidates(filtered_required_opers.size(), std::nullopt);
 
+    // known_oper_names 用于存储当前助战列表中已检测到的助战干员的名字。
+    // 助战列表共有 9 个栏位，一页即一屏，屏幕上最多只能同时完整显示 8 名助战干员，因而总页数为 2；
+    // 其中第一页包含 1~8 号助战干员，第二页则包含 2~9 号助战干员。
+    // 基于“助战列表中不会有重复名字的干员”的假设，我们将第一页检测到的助战干员的名字存储于 known_oper_names 中，
+    // 在检测第二页上的助战干员时，筛除名字列于 known_oper_names 的助战干员，即仅保留 9 号助战干员。
+
+    // 事实上我们可以做到识别完整的助战列表后再选择助战干员，但在部分极端情况下，做决策时可能会需要多做一组左右滑动，
+    // 这需要更多的 postDelay 来保证 MAA 的稳定运行。
+
     for (int refresh_times = 0; refresh_times <= max_refresh_times && !need_exit(); ++refresh_times) {
         for (int page = 0; page < MaxNumSupportListPages && !need_exit(); ++page) {
             // Step 1: 获取助战干员列表
@@ -144,6 +153,8 @@ bool asst::UseSupportUnitTaskPlugin::try_add_support_unit_for_role(
                 ProcessTask(*this, { "UseSupportUnit-SwipeToTheRight" }).run();
             }
         } // inner for loop to iterate through support list pages
+        // 重置 known_oper_names
+        known_oper_names.clear();
         // 重新定位到助战列表最左侧第一页
         for (int i = 0; i < MaxNumSupportListPages - 1; ++i) {
             ProcessTask(*this, { "UseSupportUnit-SwipeToTheLeft" }).run();
