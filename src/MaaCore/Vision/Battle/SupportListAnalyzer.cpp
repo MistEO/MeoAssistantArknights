@@ -74,6 +74,7 @@ bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& i
         int level = 0;
         if (!utils::chars_to_number(ocr_analyzer.get_result().text, level)) {
             Log.error(__FUNCTION__, "| Fail to convert text", ocr_analyzer.get_result().text, "to number");
+            save_img(utils::path("debug") / utils::path("supportListAnalyzer"));
             continue;
         }
 
