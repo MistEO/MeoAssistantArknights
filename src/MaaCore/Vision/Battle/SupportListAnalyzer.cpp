@@ -30,13 +30,13 @@ bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& i
 #endif
 
         // 干员名称
-        const Rect name_roi = rect.move(name_task_ptr->roi);
+        const Rect name_roi = rect.move(name_task_ptr->rect_move);
 #ifdef ASST_DEBUG
         cv::rectangle(m_image_draw, make_rect<cv::Rect>(name_roi), cv::Scalar(0, 255, 0), 2);
 #endif
 
+        ocr_analyzer.set_task_info(name_task_ptr);
         ocr_analyzer.set_roi(name_roi);
-        ocr_analyzer.set_replace(name_task_ptr->replace_map, name_task_ptr->replace_full);
         if (!ocr_analyzer.analyze()) {
             continue;
         }
@@ -48,7 +48,7 @@ bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& i
         }
 
         // 干员精英化等级
-        const Rect elite_roi = rect.move(elite_task_ptr->roi);
+        const Rect elite_roi = rect.move(elite_task_ptr->rect_move);
 #ifdef ASST_DEBUG
         cv::rectangle(m_image_draw, make_rect<cv::Rect>(elite_roi), cv::Scalar(0, 255, 0), 2);
 #endif
@@ -61,21 +61,21 @@ bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& i
         }
 
         // 干员等级
-        const Rect level_roi = rect.move(level_task_ptr->roi);
+        const Rect level_roi = rect.move(level_task_ptr->rect_move);
 #ifdef ASST_DEBUG
         cv::rectangle(m_image_draw, make_rect<cv::Rect>(level_roi), cv::Scalar(0, 255, 0), 2);
 #endif
 
+        ocr_analyzer.set_task_info(level_task_ptr);
         ocr_analyzer.set_roi(level_roi);
-        ocr_analyzer.set_replace(level_task_ptr->replace_map, level_task_ptr->replace_full);
         if (!ocr_analyzer.analyze()) {
             continue;
         }
         int level = 0;
         if (!utils::chars_to_number(ocr_analyzer.get_result().text, level)) {
+            Log.error(__FUNCTION__, "| Fail to convert text", ocr_analyzer.get_result().text, "to number");
             continue;
         }
-        Log.info(ocr_analyzer.get_result().text, level);
 
         SupportUnit support_unit {
             .rect = rect,

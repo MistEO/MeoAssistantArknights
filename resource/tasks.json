@@ -3609,14 +3609,19 @@
         ]
     },
     "SupportListAnalyzer-NameOcr": {
-        "doc": "若助战干员栏位底部 Icon 的 Rect 为 r, 则干员名识别用 roi 为 [r.x + roi.x, r.y - roi.y, roi.w, roi.h]",
+        "doc": [
+            "若助战干员栏位底部 Icon 的 Rect 为 r, 则干员名识别用 roi 为 [r.x + m.x, r.y + m.y, m.w, m.h]",
+            "其中 m 为本任务的 rectMove"
+        ],
         "baseTask": "CharsNameOcrReplace",
-        "roi": [0, -37, 129, 37]
+        "rectMove": [0, -37, 129, 37]
     },
     "SupportListAnalyzer-Elite": {
-        "doc": "若助战干员栏位底部 Icon 的 Rect 为 r, 则干员精英化等级识别用 roi 为 [r.x + roi.x, r.y - roi,y, roi.w, roi.h]",
+        "doc": [
+            "若助战干员栏位底部 Icon 的 Rect 为 r, 则干员精英化等级识别用 roi 为 [r.x + m.x, r.y + m,y, m.w, m.h]",
+            "其中 m 为本任务的 rectMove"
+        ],
         "template": ["SupportListAnalyzer-Elite-2", "SupportListAnalyzer-Elite-1"],
-        "roi": [35, -187, 60, 50],
         "templThreshold": 0.7,
         "method": ["RGBCount", "RGBCount"],
         "colorScales": [
@@ -3624,12 +3629,16 @@
                 [250, 250, 250],
                 [255, 255, 255]
             ]
-        ]
+        ],
+        "rectMove": [35, -187, 60, 50]
     },
     "SupportListAnalyzer-LevelOcr": {
-        "doc": "若助战干员栏位底部 Icon 的 Rect 为 r, 则干员等级识别用 roi 为 [r.x + roi.x, r.y - roi,y, roi.w, roi.h]",
+        "doc": [
+            "若助战干员栏位底部 Icon 的 Rect 为 r, 则干员等级识别用 roi 为 [r.x + m.x, r.y + m,y, m.w, m.h]",
+            "其中 m 为本任务的 rectMove"
+        ],
         "baseTask": "NumberOcrReplace",
-        "roi": [76, -130, 45, 20]
+        "rectMove": [76, -130, 45, 20]
     },
     "SelectSupportConfirmToFormationPage": {
         "baseTask": "BattleQuickFormationConfirm",
