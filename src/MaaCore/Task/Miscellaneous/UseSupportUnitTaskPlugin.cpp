@@ -107,13 +107,13 @@ bool asst::UseSupportUnitTaskPlugin::try_add_support_unit_for_role(
                 known_oper_names.insert(support_unit.name);
 
                 // 若 support_unit 满足以下筛选条件：
-                // 1. 当 max_spec_lvl == true 时，精英化等级达到 2；
+                // 1. 当 max_spec_lvl == true 且稀有度大于等于 4 星时，精英化等级达到 2；
                 // 2. 当 allow_non_friend_support_unit == false 时，必须满足 support_unit.from_friend == true；
                 // 且存在 filtered_required_opers[i] 与之匹配：
                 // 1. filtered_required_opers[i].name == name;
                 // 2. support_unit.elite >= filtered_required_opers[i].skill - 1;
                 // 则将 candidates[i] 设置为 index。
-                if (max_spec_lvl && support_unit.elite == 2) {
+                if (max_spec_lvl && BattleData.get_rarity(support_unit.name) >= 4 && support_unit.elite < 2) {
                     continue;
                 }
                 if (!allow_non_friend_support_unit && !support_unit.from_friend) {
@@ -180,7 +180,7 @@ bool asst::UseSupportUnitTaskPlugin::try_use_support_unit_with_skill(
     ProcessTask(*this, { "Stop@LoadingText", "Stop" }).run();
 
     if (skill != 0) {
-        if (max_spec_lvl) {
+        if (max_spec_lvl && BattleData.get_rarity(support_unit.name) >= 4) {
             // 判断所需技能是否为专三
             Matcher max_spec_lvl_analyzer(ctrler()->get_image());
             max_spec_lvl_analyzer.set_task_info("UseSupportUnit-MaxSpecLvl-" + std::to_string(skill));
