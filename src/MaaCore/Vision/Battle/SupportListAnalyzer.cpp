@@ -103,10 +103,10 @@ bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& i
 
 bool asst::SupportListAnalyzer::update_role()
 {
-    static const std::vector<battle::Role> support_list_roles = {
-        battle::Role::Pioneer, battle::Role::Warrior, battle::Role::Tank, battle::Role::Sniper,
-        battle::Role::Caster, battle::Role::Medic, battle::Role::Support, battle::Role::Special
-    };
+    static const std::vector<battle::Role> support_list_roles = { battle::Role::Pioneer, battle::Role::Warrior,
+                                                                  battle::Role::Tank,    battle::Role::Sniper,
+                                                                  battle::Role::Caster,  battle::Role::Medic,
+                                                                  battle::Role::Support, battle::Role::Special };
 
     Matcher role_analyzer(m_image);
     for (const battle::Role role : support_list_roles) {

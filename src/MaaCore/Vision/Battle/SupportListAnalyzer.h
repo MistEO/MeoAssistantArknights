@@ -50,6 +50,7 @@ private:
     bool update_role();
 
     std::vector<SupportUnit> m_result;
-    battle::Role m_role = battle::Role::Unknown; // 当前助战列表所选择的职业，仅用于标准化干员名以区分不同升变形态下的阿米娅
+    battle::Role m_role =
+        battle::Role::Unknown; // 当前助战列表所选择的职业，仅用于标准化干员名以区分不同升变形态下的阿米娅
 };
 }
