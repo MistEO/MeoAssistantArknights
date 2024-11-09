@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Common/AsstBattleDef.h"
 #include "Vision/VisionHelper.h"
 
 namespace asst
@@ -40,6 +41,15 @@ public:
     [[nodiscard]] std::vector<SupportUnit> get_result() const { return m_result; };
 
 private:
+    /// <summary>
+    /// 识别 m_image 中显示的助战列表页当前所选的职业，并更新 m_role。
+    /// </summary>
+    /// <returns>
+    /// 若成功识别当前所选职业，则返回 true，反之则返回 false。
+    /// </returns>
+    bool update_role();
+
     std::vector<SupportUnit> m_result;
+    battle::Role m_role = battle::Role::Unknown; // 当前助战列表所选择的职业，仅用于标准化干员名以区分不同升变形态下的阿米娅
 };
 }

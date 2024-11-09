@@ -1,5 +1,6 @@
 #include "SupportListAnalyzer.h"
 
+#include "Common/AsstBattleDef.h"
 #include "Config/TaskData.h"
 #include "Utils/NoWarningCV.h"
 #include "Vision/Matcher.h"
@@ -9,6 +10,10 @@
 bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& ignored_oper_names)
 {
     LogTraceFunction;
+
+    if (!update_role()) {
+        return false;
+    }
 
     MultiMatcher flag_analyzer(m_image);
     flag_analyzer.set_task_info("SupportListAnalyzer-Flag");
@@ -41,7 +46,8 @@ bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& i
             continue;
         }
 
-        const std::string name = ocr_analyzer.get_result().text;
+        // 根据 m_role 标准化干员名以区分不同升变形态下的阿米娅
+        const std::string name = standard_oper_name(m_role, ocr_analyzer.get_result().text);
         // 如果干员名称出现在 ignored_oper_names 则忽视这个干员
         if (ignored_oper_names.contains(name)) {
             continue;
@@ -93,4 +99,25 @@ bool asst::SupportListAnalyzer::analyze(const std::unordered_set<std::string>& i
 
     m_result = std::move(results);
     return !m_result.empty();
+}
+
+bool asst::SupportListAnalyzer::update_role()
+{
+    static const std::vector<battle::Role> support_list_roles = {
+        battle::Role::Pioneer, battle::Role::Warrior, battle::Role::Tank, battle::Role::Sniper,
+        battle::Role::Caster, battle::Role::Medic, battle::Role::Support, battle::Role::Special
+    };
+
+    Matcher role_analyzer(m_image);
+    for (const battle::Role role : support_list_roles) {
+        role_analyzer.set_task_info(enum_to_string(role, true) + "@UseSupportUnit-RoleSelected");
+        if (role_analyzer.analyze()) {
+            Log.info(__FUNCTION__, "| Currently selected role is", enum_to_string(role));
+            m_role = role;
+            return true;
+        }
+    }
+
+    Log.error(__FUNCTION__, "| Fail to recognise currently selected role, are we really in the support list?");
+    return false;
 }

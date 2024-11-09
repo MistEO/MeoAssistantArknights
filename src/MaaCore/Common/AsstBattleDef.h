@@ -374,4 +374,20 @@ inline std::string enum_to_string(asst::battle::Role role, bool en = false)
 
     return "Unknown";
 }
+
+inline std::string standard_oper_name(battle::Role role, const std::string& literal_name)
+{
+    using battle::Role;
+    static const std::unordered_map<std::pair<Role, std::string>, std::string, PairHash<Role, std::string>> StandardNames {
+            { { Role::Caster,  "阿米娅" }, "阿米娅"         },
+            { { Role::Warrior, "阿米娅" }, "阿米娅-WARRIOR" },
+            { { Role::Medic,   "阿米娅" }, "阿米娅-MEDIC"   },
+        };
+
+    if (auto iter = StandardNames.find({ role, literal_name }); iter != StandardNames.end()) {
+        return iter->second;
+    }
+
+    return literal_name;
+}
 }
