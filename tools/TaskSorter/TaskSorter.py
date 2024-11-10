@@ -7,7 +7,8 @@ def sort_tasks(res: dict[str, any]):
     # 暂时只对 Roguelike 和 Reclamation 任务进行类字典序排序，其他任务保持原有相对顺序
     classified_lists = {
         "UseSupportUnit...": [],
-        "...@UseSupportUnit...": [],
+        "SupportList...": [],
+        "...@SupportList...": [],
         "Roguelike...": [],
         "Roguelike@...": [],
         "Phantom@Roguelike...": [],
@@ -25,7 +26,8 @@ def sort_tasks(res: dict[str, any]):
 
     classify_rules: list[tuple[str, list]] = [
         (r"^UseSupportUnit", classified_lists["UseSupportUnit..."]),
-        (r"^(\w+)@UseSupportUnit", classified_lists["...@UseSupportUnit..."]),
+        (r"^SupportList", classified_lists["SupportList..."]),
+        (r"^(\w+)@SupportList", classified_lists["...@SupportList..."]),
         (r"^Roguelike@", classified_lists["Roguelike@..."]),
         (r"^Roguelike", classified_lists["Roguelike..."]),
         (r"^Phantom@Roguelike", classified_lists["Phantom@Roguelike..."]),

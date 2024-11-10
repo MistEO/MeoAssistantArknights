@@ -3640,11 +3640,6 @@
         "baseTask": "NumberOcrReplace",
         "rectMove": [76, -130, 45, 20]
     },
-    "SelectSupportConfirmToFormationPage": {
-        "baseTask": "BattleQuickFormationConfirm",
-        "template": "BattleQuickFormationConfirm.png",
-        "next": ["UseSupportUnit-Enter"]
-    },
     "RecruitRefresh": {
         "action": "ClickSelf",
         "roi": [850, 340, 220, 170],
@@ -6012,26 +6007,15 @@
         "roi": [740, 565, 300, 65],
         "preDelay": 200
     },
-    "UseSupportUnit-Cancel": {
-        "doc": "若识别到 <招募助战> 文字就点击屏幕下方取消选择",
-        "baseTask": "RecruitSupportConfirm",
-        "action": "ClickRect",
-        "specificRect": [640, 700, 0, 0],
-        "postDelay": 500
-    },
-    "UseSupportUnit-Confirm": {
-        "doc": "识别 <招募助战> 文字并点击",
-        "baseTask": "RecruitSupportConfirm"
-    },
-    "UseSupportUnit-Enter": {
+    "UseSupportUnit-EnterSupportList": {
         "doc": "通过点击编队界面右上角 <助战单位> 文字左边的 Icon 进入助战列表",
         "roi": [1023, 314, 46, 50],
         "action": "ClickSelf",
-        "next": ["UseSupportUnit-Enter@NextAfterLoadingText", "UseSupportUnit-InSupportList"]
+        "next": ["UseSupportUnit-EnterSupportList@NextAfterLoadingText", "UseSupportUnit-InSupportList"]
     },
     "UseSupportUnit-InSupportList": {
         "doc": "通过识别右上角 <更新助战列表> 文字左边的 Icon 或者 冷却倒计时左边的 Icon 判断是否已进入助战列表",
-        "template": ["UseSupportUnit-Refresh", "UseSupportUnit-RefreshCooldown"],
+        "template": ["SupportList-Refresh", "SupportList-RefreshCooldown"],
         "roi": [1096, 12, 61, 52]
     },
     "UseSupportUnit-LeaveSupportList": {
@@ -6041,98 +6025,116 @@
     },
     "UseSupportUnit-LeaveSupportList-InSupportList": {
         "baseTask": "UseSupportUnit-InSupportList",
-        "template": ["UseSupportUnit-Refresh", "UseSupportUnit-RefreshCooldown"],
+        "template": ["SupportList-Refresh", "SupportList-RefreshCooldown"],
         "next": ["UseSupportUnit-ReturnButton"]
-    },
-    "UseSupportUnit-MaxSpecLvl-1": {
-        "template": "UseSupportUnit-MaxSpecLvl.png",
-        "roi": [736, 251, 24, 22]
-    },
-    "UseSupportUnit-MaxSpecLvl-2": {
-        "template": "UseSupportUnit-MaxSpecLvl.png",
-        "roi": [851, 251, 24, 22]
-    },
-    "UseSupportUnit-MaxSpecLvl-3": {
-        "template": "UseSupportUnit-MaxSpecLvl.png",
-        "roi": [966, 251, 24, 22]
-    },
-    "UseSupportUnit-Refresh": {
-        "roi": [1096, 12, 61, 52],
-        "preDelay": 500,
-        "action": "ClickSelf",
-        "next": ["UseSupportUnit-Refresh@NextAfterLoadingText", "Stop"]
-    },
-    "UseSupportUnit-RefreshCooldown": {
-        "roi": [1096, 12, 61, 52],
-        "postDelay": 1000,
-        "next": ["UseSupportUnit-RefreshSupportList"]
-    },
-    "UseSupportUnit-RefreshSupportList": {
-        "doc": "更新助战列表，如果识别到冷却倒计时则等待倒计时结束后再点击 <更新助战列表> 按钮",
-        "algorithm": "JustReturn",
-        "next": ["UseSupportUnit-Refresh", "UseSupportUnit-RefreshCooldown"]
     },
     "UseSupportUnit-ReturnButton": {
         "baseTask": "ReturnButton",
         "template": ["Return.png"],
         "next": ["UseSupportUnit-LeaveSupportList#next"]
     },
-    "UseSupportUnit-Role": {
-        "doc": "模版任务: 招募助战干员时选择职业，若当前职业正确则不进行额外操作",
-        "algorithm": "JustReturn",
-        "next": ["UseSupportUnit-RoleSelected", "UseSupportUnit-SelectRole"]
+    "SupportList-MaxSpecLvl-1": {
+        "template": "SupportList-MaxSpecLvl.png",
+        "roi": [736, 251, 24, 22]
     },
-    "UseSupportUnit-RoleSelected": {
+    "SupportList-MaxSpecLvl-2": {
+        "template": "SupportList-MaxSpecLvl.png",
+        "roi": [851, 251, 24, 22]
+    },
+    "SupportList-MaxSpecLvl-3": {
+        "template": "SupportList-MaxSpecLvl.png",
+        "roi": [966, 251, 24, 22]
+    },
+    "SupportList-MaxSkillLvl-1": {
+        "template": ["SupportList-MaxSkillLvl-Black.png", "SupportList-MaxSkillLvl-Red.png"],
+        "roi": [736, 251, 24, 22]
+    },
+    "SupportList-MaxSkillLvl-2": {
+        "template": ["SupportList-MaxSkillLvl-Black.png", "SupportList-MaxSkillLvl-Red.png"],
+        "roi": [851, 251, 24, 22]
+    },
+    "SupportList-MaxSkillLvl-3": {
+        "template": ["SupportList-MaxSkillLvl-Black.png", "SupportList-MaxSkillLvl-Red.png"],
+        "roi": [966, 251, 24, 22]
+    },
+    "SupportList-SelectSkill-1": {
+        "template": "SupportList-SelectSkill.png",
+        "action": "ClickSelf",
+        "roi": [781, 320, 66, 38]
+    },
+    "SupportList-SelectSkill-2": {
+        "template": "SupportList-SelectSkill.png",
+        "action": "ClickSelf",
+        "roi": [900, 320, 64, 38]
+    },
+    "SupportList-SelectSkill-3": {
+        "template": "SupportList-SelectSkill.png",
+        "action": "ClickSelf",
+        "roi": [1010, 320, 70, 38]
+    },
+    "SupportList-Confirm": {
+        "doc": "识别 <招募助战> 文字并点击",
+        "baseTask": "RecruitSupportConfirm"
+    },
+    "SupportList-Cancel": {
+        "doc": "若识别到 <招募助战> 文字就点击屏幕下方取消选择",
+        "baseTask": "RecruitSupportConfirm",
+        "action": "ClickRect",
+        "specificRect": [640, 700, 0, 0],
+        "postDelay": 500
+    },
+    "SupportList-SwipeToTheLeft": {
+        "baseTask": "SwipeToTheLeft",
+        "postDelay": 1000
+    },
+    "SupportList-SwipeToTheRight": {
+        "baseTask": "SwipeToTheRight",
+        "postDelay": 1000
+    },
+    "SupportList-Refresh": {
+        "roi": [1096, 12, 61, 52],
+        "preDelay": 500,
+        "action": "ClickSelf",
+        "next": ["SupportList-Refresh@NextAfterLoadingText", "Stop"]
+    },
+    "SupportList-RefreshCooldown": {
+        "roi": [1096, 12, 61, 52],
+        "postDelay": 1000,
+        "next": ["SupportList-CooldownThenRefresh#next"]
+    },
+    "SupportList-CooldownThenRefresh": {
+        "doc": "更新助战列表，如果识别到冷却倒计时则等待倒计时结束后再点击 <更新助战列表> 按钮",
+        "algorithm": "JustReturn",
+        "next": ["SupportList-Refresh", "SupportList-RefreshCooldown"]
+    },
+    "SupportList-RoleSelected": {
         "doc": "模版任务: 招募助战干员时通过深色背景的职业图标判断当前职业是否正确，Ccoeff 应该够用，若出问题可以考虑换为 RGBCount",
         "template": "empty.png",
         "roi": [20, 93, 73, 608]
     },
-    "UseSupportUnit-SelectRole": {
+    "SupportList-SelectRole": {
         "doc": "模版任务: 招募助战干员时通过点击浅色背景的职业图标切换职业",
         "template": "empty.png",
         "roi": [20, 93, 73, 608],
         "action": "ClickSelf",
-        "next": ["UseSupportUnit-Role@NextAfterLoadingText", "UseSupportUnit-Role#next"]
+        "next": ["SupportList-SelectRole@NextAfterLoadingText", "SupportList-RoleSelected", "SupportList-SelectRole"]
     },
-    "UseSupportUnit-SelectSkill-1": {
-        "template": "UseSupportUnit-SelectSkill.png",
-        "action": "ClickSelf",
-        "roi": [781, 320, 66, 38]
-    },
-    "UseSupportUnit-SelectSkill-2": {
-        "template": "UseSupportUnit-SelectSkill.png",
-        "action": "ClickSelf",
-        "roi": [900, 320, 64, 38]
-    },
-    "UseSupportUnit-SelectSkill-3": {
-        "template": "UseSupportUnit-SelectSkill.png",
-        "action": "ClickSelf",
-        "roi": [1010, 320, 70, 38]
-    },
-    "UseSupportUnit-SwipeToTheLeft": {
-        "baseTask": "SwipeToTheLeft",
-        "postDelay": 1000
-    },
-    "UseSupportUnit-SwipeToTheRight": {
-        "baseTask": "SwipeToTheRight",
-        "postDelay": 1000
-    },
-    "Caster@UseSupportUnit-RoleSelected": {},
-    "Caster@UseSupportUnit-SelectRole": {},
-    "Medic@UseSupportUnit-RoleSelected": {},
-    "Medic@UseSupportUnit-SelectRole": {},
-    "Pioneer@UseSupportUnit-RoleSelected": {},
-    "Pioneer@UseSupportUnit-SelectRole": {},
-    "Sniper@UseSupportUnit-RoleSelected": {},
-    "Sniper@UseSupportUnit-SelectRole": {},
-    "Special@UseSupportUnit-RoleSelected": {},
-    "Special@UseSupportUnit-SelectRole": {},
-    "Support@UseSupportUnit-RoleSelected": {},
-    "Support@UseSupportUnit-SelectRole": {},
-    "Tank@UseSupportUnit-RoleSelected": {},
-    "Tank@UseSupportUnit-SelectRole": {},
-    "Warrior@UseSupportUnit-RoleSelected": {},
-    "Warrior@UseSupportUnit-SelectRole": {},
+    "Caster@SupportList-RoleSelected": {},
+    "Caster@SupportList-SelectRole": {},
+    "Medic@SupportList-RoleSelected": {},
+    "Medic@SupportList-SelectRole": {},
+    "Pioneer@SupportList-RoleSelected": {},
+    "Pioneer@SupportList-SelectRole": {},
+    "Sniper@SupportList-RoleSelected": {},
+    "Sniper@SupportList-SelectRole": {},
+    "Special@SupportList-RoleSelected": {},
+    "Special@SupportList-SelectRole": {},
+    "Support@SupportList-RoleSelected": {},
+    "Support@SupportList-SelectRole": {},
+    "Tank@SupportList-RoleSelected": {},
+    "Tank@SupportList-SelectRole": {},
+    "Warrior@SupportList-RoleSelected": {},
+    "Warrior@SupportList-SelectRole": {},
     "Roguelike": {
         "template": [
             "Terminal.png",
