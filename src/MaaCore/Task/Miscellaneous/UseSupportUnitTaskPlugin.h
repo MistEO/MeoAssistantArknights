@@ -14,7 +14,7 @@ public:
     virtual ~UseSupportUnitTaskPlugin() override = default;
 
     using Role = battle::Role;
-    using RequiredOper = battle::RequiredOper;
+    using RequiredOper = battle::OperUsage;
     using SupportUnit = SupportListAnalyzer::SupportUnit;
 
     bool add_support_unit(
@@ -63,7 +63,7 @@ public:
     using SupportUnit = SupportListAnalyzer::SupportUnit;
 
     SupportList(Assistant* inst, AbstractTask& task);
-    ~SupportList() = default;
+    virtual ~SupportList() = default;
 
     /// <summary>
     /// 选择助战列表职业。

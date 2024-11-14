@@ -62,7 +62,7 @@ bool asst::UseSupportUnitTaskPlugin::add_support_unit_(
     const bool random_mode = required_opers.empty();
 
     // 随机模式下保留当前职业选择，否则切换到 required_opers.back() 对应职业的助战干员列表
-    if (!random_mode && !support_list.select_role(required_opers.back().role)) {
+    if (!random_mode && !support_list.select_role(BattleData.get_role(required_opers.back().name))) {
         Log.error(__FUNCTION__, "Failed to select role; abandoning using support unit.");
         return false;
     }

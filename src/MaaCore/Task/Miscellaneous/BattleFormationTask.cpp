@@ -32,13 +32,7 @@ bool asst::BattleFormationTask::set_specific_support_unit(const std::string& nam
         return false;
     }
 
-    const battle::Role role = (m_specific_support_unit.role = BattleData.get_role(name));
-    if (role == battle::Role::Unknown) {
-        // 无法根据干员名称获取其职业
-        Log.error(__FUNCTION__, "| Invalid specific support unit");
-        return false;
-    }
-    m_specific_support_unit.name = name; // 此处可能需要对阿米娅进行特殊处理
+    m_specific_support_unit.name = name;
     // 之后在 parse_formation 中，如果发现这名助战干员，则将其技能设定为对应的所需技能
     m_specific_support_unit.skill = 0;
     return true;
@@ -67,27 +61,25 @@ bool asst::BattleFormationTask::_run()
 
     // 在有且仅有一个缺失干员组时尝试寻找助战干员补齐编队
     if (use_suppprt_unit_when_needed() && missing_operators.size() == 1 && !m_used_support_unit) {
-        // 之后再重构数据结构，先凑合用
-        std::vector<battle::RequiredOper> required_opers;
-        for (const battle::OperUsage& oper : missing_operators.front().second) {
-            // 如果指定助战干员正好可以补齐编队，则只招募指定助战干员就好了，记得再次确认一下 skill
-            // 如果编队里正好有【艾雅法拉 - 2】和 【艾雅法拉 - 3】呢？
-            if (oper.name == m_specific_support_unit.name) {
-                m_specific_support_unit.skill = oper.skill;
-                required_opers.clear();
-                required_opers.emplace_back(m_specific_support_unit);
-                break;
-            }
-            required_opers.emplace_back(BattleData.get_role(oper.name), oper.name, oper.skill);
-        }
-
         // 先退出去招募助战再回来，好蠢
         confirm_selection();
         Log.info(__FUNCTION__, "| Left quick formation scene");
+
+        // 如果指定助战干员正好可以补齐编队，则只招募指定助战干员就好了，记得再次确认一下 skill
+        // 如果编队里正好有【艾雅法拉 - 2】和 【艾雅法拉 - 3】呢？—— 选第一个
+        std::vector<battle::OperUsage>& required_opers = missing_operators.front().second;
+        for (const battle::OperUsage& oper : required_opers) {
+            if (oper.name == m_specific_support_unit.name) {
+                m_specific_support_unit.skill = oper.skill;
+                required_opers = { m_specific_support_unit };
+                break;
+            }
+        }
         if (m_use_support_unit_task_ptr->add_support_unit(required_opers, 5, true)) {
             m_used_support_unit = true;
             missing_operators.clear();
         }
+
         // 再到快速编队页面
         if (!enter_selection_page()) {
             save_img(utils::path("debug") / utils::path("other"));

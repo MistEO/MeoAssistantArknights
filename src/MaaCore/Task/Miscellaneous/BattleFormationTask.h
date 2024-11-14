@@ -121,6 +121,6 @@ protected:
     SupportUnitUsage m_support_unit_usage = SupportUnitUsage::None;
     bool m_used_support_unit = false; // 是否已经招募助战干员
     // ———————— 以下变量为指定助战干员设置，仅当 m_support_unit_usage == SupportUnitUsage::Specific 时有效 ————————
-    battle::RequiredOper m_specific_support_unit;
+    battle::OperUsage m_specific_support_unit;
 };
 } // namespace asst
