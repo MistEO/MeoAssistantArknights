@@ -441,7 +441,7 @@
     <ClInclude Include="Task\Miscellaneous\BattleFormationTask.h">
       <Filter>Source\Task\Miscellaneous</Filter>
     </ClInclude>
-    <ClInclude Include="Task\Miscellaneous\UseSupportUnitTaskPlugin.h">
+    <ClInclude Include="Task\Miscellaneous\SupportList.h">
       <Filter>Source\Task\Miscellaneous</Filter>
     </ClInclude>
     <ClInclude Include="Task\Miscellaneous\BattleProcessTask.h">
@@ -964,7 +964,7 @@
     <ClCompile Include="Task\Miscellaneous\BattleFormationTask.cpp">
       <Filter>Source\Task\Miscellaneous</Filter>
     </ClCompile>
-    <ClCompile Include="Task\Miscellaneous\UseSupportUnitTaskPlugin.cpp">
+    <ClCompile Include="Task\Miscellaneous\SupportList.cpp">
       <Filter>Source\Task\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Task\Miscellaneous\BattleProcessTask.cpp">

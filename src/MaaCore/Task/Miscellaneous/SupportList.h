@@ -1,58 +1,7 @@
-// 助战干员选择插件
 #pragma once
 
 #include "Common/AsstBattleDef.h"
 #include "Task/AbstractTask.h"
-#include "Vision/Battle/SupportListAnalyzer.h"
-
-namespace asst
-{
-class UseSupportUnitTaskPlugin : public AbstractTask
-{
-public:
-    using AbstractTask::AbstractTask;
-    virtual ~UseSupportUnitTaskPlugin() override = default;
-
-    using Role = battle::Role;
-    using RequiredOper = battle::OperUsage;
-    using SupportUnit = SupportListAnalyzer::SupportUnit;
-
-    bool add_support_unit(
-        const std::vector<RequiredOper>& required_opers = {},
-        int max_refresh_times = 0,
-        bool max_spec_lvl = true,
-        bool allow_non_friend_support_unit = false);
-
-protected:
-    virtual bool _run() override { return true; };
-
-private:
-    /// <summary>
-    /// 在职业 role 的助战列表中寻找一名列于 required_opers 中的干员并使用其指定技能；
-    /// 若 required_opers 为空则在当前职业的助战列表中随机选择一名干员并使用其默认技能。
-    /// </summary>
-    /// <param name="required_opers">
-    /// 所需助战干员列表。
-    /// </param>
-    /// <param name="max_refresh_times">最大刷新助战列表的次数。</param>
-    /// <param name="max_spec_lvl">是否要求技能专三。</param>
-    /// <param name="allow_non_friend_support_unit">是否允许使用非好友助战干员。</param>
-    /// <returns>
-    /// 若成功找到并使用所需的助战干员，则返回 true，反之则返回 false。
-    /// </returns>
-    /// <remarks>
-    /// 默认已经点开助战列表；
-    /// 每次只能识别一页助战列表，因此最多会识别 MaxNumSupportListPages * (max_refresh_times + 1) 次；
-    /// 若识别到多个满足条件的干员，则优先选择在 required_opers 中排序靠前的干员；
-    /// 当 role == Role::Unknown 时因没有指定技能，max_spec_lvl == true 仅会要求助战干员的专精等级达到 2。
-    /// </remarks>
-    bool add_support_unit_(
-        const std::vector<RequiredOper>& required_opers = {},
-        int max_refresh_times = 0,
-        bool max_spec_lvl = true,
-        bool allow_non_friend_support_unit = false);
-};
-} // namespace asst
 
 namespace asst
 {
@@ -60,7 +9,7 @@ class SupportList
 {
 public:
     using Role = battle::Role;
-    using SupportUnit = SupportListAnalyzer::SupportUnit;
+    using SupportUnit = battle::SupportUnit;
 
     SupportList(Assistant* inst, AbstractTask& task);
     virtual ~SupportList() = default;

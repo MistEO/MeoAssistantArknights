@@ -7,12 +7,10 @@
 
 namespace asst
 {
-class UseSupportUnitTaskPlugin;
-
 class BattleFormationTask : public AbstractTask
 {
 public:
-    BattleFormationTask(const AsstCallback& callback, Assistant* inst, std::string_view task_chain);
+    using AbstractTask::AbstractTask;
     virtual ~BattleFormationTask() override = default;
 
     enum class Filter
@@ -53,9 +51,11 @@ public:
 
     void set_data_resource(DataResource resource) { m_data_resource = resource; }
 
-    // ————————————————————————————————
-    // 助战干员选择相关
-    // ————————————————————————————————
+    // ————————————————————————————————————————————————————————————————
+    // Support Unit Related
+    // ————————————————————————————————————————————————————————————————
+    using RequiredOper = battle::OperUsage;
+
     enum class SupportUnitUsage // 助战干员使用策略
     {
         None = 0,               // 不使用助战干员
@@ -64,19 +64,18 @@ public:
         Random = 3 // 如果有且仅有一名缺失干员则尝试寻找助战干员补齐编队，如果无缺失干员则使用随机助战干员
     };
 
-    void set_support_unit_usage(const SupportUnitUsage& support_unit_usgae)
+    void set_support_unit_usage(const SupportUnitUsage support_unit_usgae)
     {
         m_support_unit_usage = support_unit_usgae;
     }
 
-    // 是否在有且仅有一名缺失干员时尝试寻找助战干员补齐编队
-    bool use_suppprt_unit_when_needed() const
-    {
-        return m_support_unit_usage == SupportUnitUsage::WhenNeeded ||
-               m_support_unit_usage == SupportUnitUsage::Specific || m_support_unit_usage == SupportUnitUsage::Random;
-    }
-
     bool set_specific_support_unit(const std::string& name = ""); // 设置指定助战干员
+
+    bool add_support_unit(
+        const std::vector<RequiredOper>& required_opers = {},
+        int max_refresh_times = 0,
+        bool max_spec_lvl = true,
+        bool allow_non_friend_support_unit = false);
 
 protected:
     using OperGroup = std::pair<std::string, std::vector<asst::battle::OperUsage>>;
@@ -114,13 +113,42 @@ protected:
     int m_select_formation_index = 0;
     int m_missing_retry_times = 1; // 识别不到干员的重试次数
 
-    // ————————————————————————————————
-    // 助战干员选择相关
-    // ————————————————————————————————
-    std::shared_ptr<UseSupportUnitTaskPlugin> m_use_support_unit_task_ptr = nullptr;
+    // ————————————————————————————————————————————————————————————————
+    // Support Unit Related
+    // ————————————————————————————————————————————————————————————————
+    static constexpr bool is_valid_support_unit_usage(const SupportUnitUsage support_unit_usage)
+    {
+        return support_unit_usage == SupportUnitUsage::None || support_unit_usage == SupportUnitUsage::WhenNeeded ||
+               support_unit_usage == SupportUnitUsage::Specific || support_unit_usage == SupportUnitUsage::Random;
+    }
+
+    /// <summary>
+    /// 在职业 role 的助战列表中寻找一名列于 required_opers 中的干员并使用其指定技能；
+    /// 若 required_opers 为空则在当前职业的助战列表中随机选择一名干员并使用其默认技能。
+    /// </summary>
+    /// <param name="required_opers">
+    /// 所需助战干员列表。
+    /// </param>
+    /// <param name="max_refresh_times">最大刷新助战列表的次数。</param>
+    /// <param name="max_spec_lvl">是否要求技能专三。</param>
+    /// <param name="allow_non_friend_support_unit">是否允许使用非好友助战干员。</param>
+    /// <returns>
+    /// 若成功找到并使用所需的助战干员，则返回 true，反之则返回 false。
+    /// </returns>
+    /// <remarks>
+    /// 默认已经点开助战列表；
+    /// 每次只能识别一页助战列表，因此最多会识别 MaxNumSupportListPages * (max_refresh_times + 1) 次；
+    /// 若识别到多个满足条件的干员，则优先选择在 required_opers 中排序靠前的干员；
+    /// 当 required_opers 为空时因没有指定技能，max_spec_lvl == true 仅会要求助战干员的专精等级达到 2。
+    /// </remarks>
+    bool add_support_unit_(
+        const std::vector<RequiredOper>& required_opers = {},
+        int max_refresh_times = 0,
+        bool max_spec_lvl = true,
+        bool allow_non_friend_support_unit = false);
+
     SupportUnitUsage m_support_unit_usage = SupportUnitUsage::None;
-    bool m_used_support_unit = false; // 是否已经招募助战干员
-    // ———————— 以下变量为指定助战干员设置，仅当 m_support_unit_usage == SupportUnitUsage::Specific 时有效 ————————
-    battle::OperUsage m_specific_support_unit;
+    RequiredOper m_specific_support_unit; // 仅当 m_support_unit_usage == SupportUnitUsage::Specific 时有效
+    std::string m_used_support_unit_name; // 已招募的助战干员的名字
 };
 } // namespace asst

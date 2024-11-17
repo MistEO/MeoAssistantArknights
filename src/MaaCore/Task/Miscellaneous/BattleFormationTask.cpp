@@ -8,20 +8,11 @@
 #include "Config/Miscellaneous/SSSCopilotConfig.h"
 #include "Config/TaskData.h"
 #include "Controller/Controller.h"
+#include "SupportList.h"
 #include "Task/ProcessTask.h"
-#include "UseSupportUnitTaskPlugin.h"
 #include "Utils/ImageIo.hpp"
 #include "Utils/Logger.hpp"
 #include "Vision/MultiMatcher.h"
-
-asst::BattleFormationTask::BattleFormationTask(
-    const AsstCallback& callback,
-    Assistant* inst,
-    std::string_view task_chain) :
-    AbstractTask(callback, inst, task_chain),
-    m_use_support_unit_task_ptr(std::make_shared<UseSupportUnitTaskPlugin>(callback, inst, task_chain))
-{
-}
 
 bool asst::BattleFormationTask::set_specific_support_unit(const std::string& name)
 {
@@ -60,7 +51,8 @@ bool asst::BattleFormationTask::_run()
     }
 
     // 在有且仅有一个缺失干员组时尝试寻找助战干员补齐编队
-    if (use_suppprt_unit_when_needed() && missing_operators.size() == 1 && !m_used_support_unit) {
+    if (m_support_unit_usage != SupportUnitUsage::None && missing_operators.size() == 1 &&
+        m_used_support_unit_name.empty()) {
         // 先退出去招募助战再回来，好蠢
         confirm_selection();
         Log.info(__FUNCTION__, "| Left quick formation scene");
@@ -75,8 +67,7 @@ bool asst::BattleFormationTask::_run()
                 break;
             }
         }
-        if (m_use_support_unit_task_ptr->add_support_unit(required_opers, 5, true)) {
-            m_used_support_unit = true;
+        if (add_support_unit(required_opers, 5, true)) {
             missing_operators.clear();
         }
 
@@ -121,11 +112,13 @@ bool asst::BattleFormationTask::_run()
     }
     confirm_selection();
 
-    if (m_support_unit_usage == SupportUnitUsage::Specific && !m_used_support_unit) { // 使用指定助战干员
-        m_used_support_unit = m_use_support_unit_task_ptr->add_support_unit({ m_specific_support_unit }, 5, true);
-    }
-    else if (m_support_unit_usage == SupportUnitUsage::Random && !m_used_support_unit) { // 使用随机助战干员
-        m_used_support_unit = m_use_support_unit_task_ptr->add_support_unit({}, 5, false);
+    if (m_used_support_unit_name.empty()) {
+        if (m_support_unit_usage == SupportUnitUsage::Specific) { // 使用指定助战干员
+            add_support_unit({ m_specific_support_unit }, 5, true);
+        }
+        else if (m_support_unit_usage == SupportUnitUsage::Random) { // 使用随机助战干员
+            add_support_unit({}, 5, false);
+        }
     }
 
     return true;
@@ -505,4 +498,147 @@ bool asst::BattleFormationTask::select_formation(int select_index)
                                                                     "BattleSelectFormation4" };
 
     return ProcessTask { *this, { select_formation_task[select_index - 1] } }.run();
+}
+
+bool asst::BattleFormationTask::add_support_unit(
+    const std::vector<RequiredOper>& required_opers,
+    const int max_refresh_times,
+    const bool max_spec_lvl,
+    const bool allow_non_friend_support_unit)
+{
+    LogTraceFunction;
+
+    // 通过点击编队界面右上角 <助战单位> 文字左边的 Icon 进入助战干员选择界面
+    ProcessTask(*this, { "UseSupportUnit-EnterSupportList" }).run();
+
+    // 随机模式
+    if (required_opers.empty()) {
+        if (add_support_unit_(required_opers, max_refresh_times, max_spec_lvl, allow_non_friend_support_unit)) {
+            return true;
+        }
+    }
+    else {
+        // 非随机模式
+        std::vector<RequiredOper> temp_required_opers;
+        for (size_t i = 0; i < 3; ++i) {
+            if (i >= required_opers.size()) {
+                break;
+            }
+            temp_required_opers.emplace_back(required_opers[i]);
+            if (add_support_unit_(
+                    temp_required_opers,
+                    max_refresh_times,
+                    max_spec_lvl,
+                    allow_non_friend_support_unit)) {
+                return true;
+            }
+        }
+    }
+
+    // 未找到符合要求的助战干员，手动退出助战列表
+    Log.info(__FUNCTION__, "| Fail to find any qualified support operator.");
+    ProcessTask(*this, { "UseSupportUnit-LeaveSupportList" }).run();
+    return false;
+}
+
+bool asst::BattleFormationTask::add_support_unit_(
+    const std::vector<RequiredOper>& required_opers,
+    const int max_refresh_times,
+    const bool max_spec_lvl,
+    const bool allow_non_friend_support_unit)
+{
+    LogTraceFunction;
+
+    using battle::SupportUnit;
+
+    // 初始化变量
+    SupportList support_list(m_inst, *this);
+    std::vector<std::optional<size_t>> candidates(required_opers.size(), std::nullopt);
+    const bool random_mode = required_opers.empty();
+
+    // 随机模式下保留当前职业选择，否则切换到 required_opers.back() 对应职业的助战干员列表
+    if (!random_mode && !support_list.select_role(BattleData.get_role(required_opers.back().name))) {
+        Log.error(__FUNCTION__, "Failed to select role; abandoning using support unit.");
+        return false;
+    }
+
+    // known_oper_names 用于存储当前助战列表中已检测到的助战干员的名字。
+    // 助战列表共有 9 个栏位，一页即一屏，屏幕上最多只能同时完整显示 8 名助战干员，因而总页数为 2；
+    // 其中第一页包含 1~8 号助战干员，第二页则包含 2~9 号助战干员。
+    // 基于“助战列表中不会有重复名字的干员”的假设，我们将第一页检测到的助战干员的名字存储于 known_oper_names 中，
+    // 在检测第二页上的助战干员时，筛除名字列于 known_oper_names 的助战干员，即仅保留 9 号助战干员。
+
+    // 事实上我们可以做到识别完整的助战列表后再选择助战干员，但在部分极端情况下，做决策时可能会需要多做一组左右滑动，
+    // 这需要更多的 postDelay 来保证 MAA 的稳定运行。
+
+    for (int refresh_times = 0; refresh_times <= max_refresh_times && !need_exit(); ++refresh_times) {
+        // Step 1: 获取助战干员列表
+        support_list.update();
+
+        // Step 2: 遍历助战栏位，筛选助战干员
+        for (size_t index = 0; index < support_list.size(); ++index) {
+            const SupportUnit& support_unit = support_list[index];
+
+            // 若 support_unit 满足以下筛选条件：
+            // 1. 当 max_spec_lvl == true 时，若稀有度大于等于 4 星则精英化等级达到 2，
+            // 若稀有度为 3 星则精英化等级达到 1；
+            // 2. 当 allow_non_friend_support_unit == false 时，必须满足 support_unit.from_friend == true；
+            // 3. 在非随机模式下存在 required_opers[i] 与之匹配：
+            // 3a. required_opers[i].name == name;
+            // 3b. support_unit.elite >= required_opers[i].skill - 1;
+            // 则将 candidates[i] 设置为 index。
+            if (max_spec_lvl && ((BattleData.get_rarity(support_unit.name) >= 4 && support_unit.elite < 2) ||
+                                 (BattleData.get_rarity(support_unit.name) == 3 && support_unit.elite < 1))) {
+                continue;
+            }
+            if (!allow_non_friend_support_unit && !support_unit.from_friend) {
+                continue;
+            }
+            // 随机模式下直接选择这名干员，使用其默认技能
+            if (random_mode) {
+                if (support_list.use_support_unit(index, 0)) {
+                    m_used_support_unit_name = support_list[index].name;
+                    // callback
+                    json::value info = basic_info_with_what("RecruitSuppportOperator");
+                    info["details"]["name"] = support_list[index].name;
+                    callback(AsstMsg::SubTaskExtraInfo, info);
+                    return true;
+                }
+                return false;
+            }
+            // 非随机模式下
+            for (size_t i = 0; i < required_opers.size(); ++i) {
+                const RequiredOper& required_oper = required_opers[i];
+                if (support_unit.name == required_oper.name && support_unit.elite >= required_oper.skill - 1) {
+                    candidates[i] = index;
+                }
+            }
+        }
+
+        // Step 3: 依次点选筛选出的助战干员，根据需要判断技能是否为专三，并使用
+        for (size_t i = 0; i < required_opers.size(); ++i) {
+            if (!candidates[i].has_value()) {
+                continue;
+            }
+            if (support_list.use_support_unit(candidates[i].value(), required_opers[i].skill, max_spec_lvl)) {
+                m_used_support_unit_name = support_list[candidates[i].value()].name;
+                // callback
+                json::value info = basic_info_with_what("RecruitSuppportOperator");
+                info["details"]["name"] = support_list[candidates[i].value()].name;
+                callback(AsstMsg::SubTaskExtraInfo, info);
+                return true;
+            }
+        }
+
+        // 重置变量
+        candidates.assign(required_opers.size(), std::nullopt);
+
+        // 更新助战列表
+        if (refresh_times < max_refresh_times) {
+            support_list.refresh_list();
+        }
+    } // outer for loop to iterate until reaching refresh_times
+
+    Log.info(__FUNCTION__, "| Fail to find any qualified support operator.");
+    return false;
 }
