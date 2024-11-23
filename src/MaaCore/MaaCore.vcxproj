@@ -114,6 +114,7 @@
     <ClInclude Include="Utils\Algorithm.hpp" />
     <ClInclude Include="Utils\File.hpp" />
     <ClInclude Include="Utils\LibraryHolder.hpp" />
+    <ClInclude Include="Vision\Battle\OperListAnalyzer.h" />
     <ClInclude Include="Vision\Battle\SupportListAnalyzer.h" />
     <ClInclude Include="Vision\Roguelike\RoguelikeParameterAnalyzer.h" />
     <ClInclude Include="Vision\VisionHelper.h" />
@@ -305,6 +306,7 @@
     <ClCompile Include="Task\SSS\SSSBattleProcessTask.cpp" />
     <ClCompile Include="Task\SSS\SSSDropRewardsTaskPlugin.cpp" />
     <ClCompile Include="Task\SSS\SSSStageManagerTask.cpp" />
+    <ClCompile Include="Vision\Battle\OperListAnalyzer.cpp" />
     <ClCompile Include="Vision\Battle\SupportListAnalyzer.cpp" />
     <ClCompile Include="Vision\Roguelike\RoguelikeParameterAnalyzer.cpp" />
     <ClCompile Include="Vision\VisionHelper.cpp" />

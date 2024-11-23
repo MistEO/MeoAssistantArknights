@@ -737,6 +737,9 @@
     <ClInclude Include="LDExtras.h">
       <Filter>Source\Controller</Filter>
     </ClInclude>
+    <ClInclude Include="Vision\Battle\OperListAnalyzer.h">
+      <Filter>Source\Vision\Battle</Filter>
+    </ClInclude>
     <ClInclude Include="Vision\Battle\SupportListAnalyzer.h">
       <Filter>Source\Vision\Battle</Filter>
     </ClInclude>
@@ -1241,6 +1244,9 @@
     </ClCompile>
     <ClCompile Include="LDExtras.cpp">
       <Filter>Source\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Vision\Battle\OperListAnalyzer.cpp">
+      <Filter>Source\Vision\Battle</Filter>
     </ClCompile>
     <ClCompile Include="Vision\Battle\SupportListAnalyzer.cpp">
       <Filter>Source\Vision\Battle</Filter>

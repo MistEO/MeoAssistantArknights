@@ -3596,6 +3596,41 @@
             ["^资深.+", "资深干员"]
         ]
     },
+    "OperListAnalyzer-Flag": {
+        "doc": "识别每个干员栏位左上角的职业 Icon，后续根据相对位置识别其他信息",
+        "template": [
+            "Pioneer@OperListAnalyzer-Role.png",
+            "Warrior@OperListAnalyzer-Role.png",
+            "Tank@OperListAnalyzer-Role.png",
+            "Sniper@OperListAnalyzer-Role.png",
+            "Caster@OperListAnalyzer-Role.png",
+            "Medic@OperListAnalyzer-Role.png",
+            "Support@OperListAnalyzer-Role.png",
+            "Special@OperListAnalyzer-Role.png"
+        ],
+        "roi": [362, 80, 738, 310]
+    },
+    "OperListAnalyzer-Selected": {
+        "doc": [
+            "若干员栏位左上角职业 Icon 的 Rect 为 r, 则干员选择状态识别用 roi 为 [r.x + m.x, r.y + m.y, m.w, m.h]",
+            "其中 m 为本任务的 rectMove"
+        ],
+        "rectMove": [0, -8, 28, 8]
+    },
+    "OperListAnalyzer-NameOcr": {
+        "doc": [
+            "若干员栏位左上角职业 Icon 的 Rect 为 r, 则干员名识别用 roi 为 [r.x + m.x, r.y + m.y, m.w, m.h]",
+            "其中 m 为本任务的 rectMove",
+            "specialParams 用于 RegionOCRer",
+            "| specialParams[0]: bin_threshold_lower",
+            "| specialParams[1]: bin_expansion",
+            "| specialParams[2]: bin_left_trim_threshold",
+            "| specialParams[3]: bin_right_trim_threshold"
+        ],
+        "baseTask": "CharsNameOcrReplace",
+        "rectMove": [0, 233, 119, 23],
+        "specialParams": [140, 2, 0, 0]
+    },
     "SupportListAnalyzer-Flag": {
         "doc": "识别每个助战干员栏位底部的 Icon，后续根据相对位置识别其他信息",
         "template": ["SupportListAnalyzer-Friend.png", "SupportListAnalyzer-NonFriend.png"],

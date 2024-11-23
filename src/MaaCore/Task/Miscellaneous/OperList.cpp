@@ -156,69 +156,12 @@ std::optional<unsigned> asst::OperList::update_page()
     // 获取助战列表页
     OperListAnalyzer analyzer(m_inst_helper.ctrler()->get_image());
     // 未识别到任何助战干员，极有可能当前已不在助战列表界面
-    if (!analyzer.analyze(m_selected_role)) [[unlikely]] {
-        Log.error(__FUNCTION__, "| Empty support list page. Are we really in the support list?");
+    if (!analyzer.analyze()) [[unlikely]] {
+        Log.error(__FUNCTION__, "| Empty operator list page. Are we really in the operator list?");
         return std::nullopt;
     }
-    const std::vector<SupportUnit>& support_list_page = analyzer.get_result();
+    // const std::vector<CandidateOper>& support_list_page = analyzer.get_result();
 
-    // 我们假设 support_list_page 为一段从左往右连续编号的助战栏位序列，并设置其起点索引以供检查
-    // 如果新的助战栏位中间夹了个已知的，那肯定是出问题了
-    size_t index = m_list.size();
-    const std::string& head_name = support_list_page.front().name;
-    if (const auto it = m_name2index.find(head_name); it != m_name2index.end()) {
-        index = it->second;
-    }
-    // update view
-    m_view_begin = index;
-    m_view_end = index + 1;
-
-    unsigned num_new_items = 0; // 新增助战栏位记数
-
-    for (const SupportUnit& support_unit : support_list_page) {
-        // 基于“助战列表中不会有重复名字的干员”的假设，通过干员名判断是否为新助战栏位
-        if (const auto it = m_name2index.find(support_unit.name); it == m_name2index.end()) // 新助战栏位
-        {
-            Log.info(__FUNCTION__, "| New support unit found:", support_unit.name);
-            // sanity check for index
-            if (index != m_list.size()) {
-                Log.error(__FUNCTION__, "| Sanity check for index failed. Expected:", index, "got:", m_list.size());
-                return std::nullopt;
-            }
-            // 添加新助战栏位
-            m_list.emplace_back(support_unit);
-            m_name2index.emplace(support_unit.name, index);
-            // 更新新增助战栏位记数
-            ++num_new_items;
-        }
-        else { // 已知助战栏位
-            Log.info(__FUNCTION__, "| Existing support unit found:", support_unit.name);
-            // sanity check for index
-            if (index != it->second) {
-                Log.error(__FUNCTION__, "| Sanity check for index failed. Expected:", index, "got:", it->second);
-                return std::nullopt;
-            }
-            // 仅更新 rect
-            m_list.at(index).rect = support_unit.rect;
-        }
-        // update view
-        // ————————————————————————————————————————————————————————————————
-        // 根据“support_list_page 为一段从左往右连续编号的助战栏位序列”的假设
-        // 加上 sanity check，可以确保 index 只会递增 因而无需考虑 m_view_begin
-        // ————————————————————————————————————————————————————————————————
-        // if (index < m_view_begin) {
-        //     m_view_begin = index;
-        // }
-        if (index >= m_view_end) {
-            m_view_end = index + 1;
-        }
-        ++index;
-    }
-
-    Log.info(
-        __FUNCTION__,
-        "Updated support units with indices",
-        std::to_string(m_view_begin) + "~" + std::to_string(m_view_end));
     return num_new_items;
 }
 

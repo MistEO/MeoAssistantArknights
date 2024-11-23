@@ -110,6 +110,18 @@ inline static Role get_role_type(const std::string& role_name)
     return Role::Unknown;
 }
 
+struct CandidateOper // 备选干员
+{
+    Rect rect;
+    bool selected = false;     // 是否已被选择
+    Role role = Role::Unknown; // 干员职业
+    std::string name;          // 干员名称/代号
+    int elite = 0;             // 精英化阶段
+    int level = 0;             // 等级
+    int trust = 0;             // 信赖值
+    // SomeType modules        // 模组
+};
+
 enum class OperPosition
 {
     None,

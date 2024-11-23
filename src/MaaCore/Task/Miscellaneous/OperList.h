@@ -10,6 +10,7 @@ class OperList
 public:
     using Role = battle::Role;
     static constexpr Role ROLE_ALL = Role::Drone; // 用 Role::Drone 来表示 ALL
+    using CandidateOper = battle::CandidateOper;
 
     OperList(Assistant* inst, AbstractTask& task);
     virtual ~OperList() = default;
