@@ -201,6 +201,7 @@
     <ClInclude Include="Task\Miscellaneous\AutoRecruitTask.h" />
     <ClInclude Include="Task\Miscellaneous\BattleFormationTask.h" />
     <ClInclude Include="Task\Miscellaneous\SupportList.h" />
+    <ClInclude Include="Task\Miscellaneous\OperList.h" />
     <ClInclude Include="Task\Miscellaneous\BattleProcessTask.h" />
     <ClInclude Include="Task\Miscellaneous\CreditFightTask.h" />
     <ClInclude Include="Task\Miscellaneous\CreditShoppingTask.h" />
@@ -388,6 +389,7 @@
     <ClCompile Include="Task\Miscellaneous\AutoRecruitTask.cpp" />
     <ClCompile Include="Task\Miscellaneous\BattleFormationTask.cpp" />
     <ClCompile Include="Task\Miscellaneous\SupportList.cpp" />
+    <ClCompile Include="Task\Miscellaneous\OperList.cpp" />
     <ClCompile Include="Task\Miscellaneous\BattleProcessTask.cpp" />
     <ClCompile Include="Task\Miscellaneous\CreditFightTask.cpp" />
     <ClCompile Include="Task\Miscellaneous\CreditShoppingTask.cpp" />

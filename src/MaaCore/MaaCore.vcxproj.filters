@@ -444,6 +444,9 @@
     <ClInclude Include="Task\Miscellaneous\SupportList.h">
       <Filter>Source\Task\Miscellaneous</Filter>
     </ClInclude>
+    <ClInclude Include="Task\Miscellaneous\OperList.h">
+      <Filter>Source\Task\Miscellaneous</Filter>
+    </ClInclude>
     <ClInclude Include="Task\Miscellaneous\BattleProcessTask.h">
       <Filter>Source\Task\Miscellaneous</Filter>
     </ClInclude>
@@ -965,6 +968,9 @@
       <Filter>Source\Task\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Task\Miscellaneous\SupportList.cpp">
+      <Filter>Source\Task\Miscellaneous</Filter>
+    </ClCompile>
+    <ClCompile Include="Task\Miscellaneous\OperList.cpp">
       <Filter>Source\Task\Miscellaneous</Filter>
     </ClCompile>
     <ClCompile Include="Task\Miscellaneous\BattleProcessTask.cpp">

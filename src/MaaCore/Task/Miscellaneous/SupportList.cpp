@@ -20,7 +20,7 @@ bool asst::SupportList::select_role(const Role role)
 
     clear();
 
-    if (std::ranges::find(SupportUnitRoles, role) == SupportUnitRoles.end()) {
+    if (std::ranges::find(SUPPORT_UNIT_ROLES, role) == SUPPORT_UNIT_ROLES.end()) {
         Log.error(__FUNCTION__, "| attempting to select unsupported role", enum_to_string(role));
         m_selected_role = Role::Unknown;
         return false;
@@ -56,7 +56,7 @@ bool asst::SupportList::update()
 
     move_to_list_head();
 
-    for (unsigned page = 0; page < MaxNumPages && !m_inst_helper.need_exit(); ++page) {
+    for (unsigned page = 0; page < MAX_NUM_PAGES && !m_inst_helper.need_exit(); ++page) {
         // 更新助战列表失败
         if (const std::optional<unsigned> ret = update_page(); !ret.has_value()) [[unlikely]] {
             Log.error(__FUNCTION__, "| Failed to update list with current page.");
@@ -68,7 +68,7 @@ bool asst::SupportList::update()
             break;
         }
 
-        if (page < MaxNumPages - 1) {
+        if (page < MAX_NUM_PAGES - 1) {
             move_forward();
         }
     }
@@ -143,7 +143,7 @@ bool asst::SupportList::update_selected_role(const cv::Mat& image)
     LogTraceFunction;
 
     Matcher role_analyzer(image);
-    for (const Role role : SupportUnitRoles) {
+    for (const Role role : SUPPORT_UNIT_ROLES) {
         role_analyzer.set_task_info(enum_to_string(role, true) + "@SupportList-RoleSelected");
         if (role_analyzer.analyze()) {
             Log.info(__FUNCTION__, "| Currently selected role is", enum_to_string(role));
@@ -245,7 +245,7 @@ void asst::SupportList::move_to_list_head()
 {
     LogTraceFunction;
 
-    move_backward(MaxNumPages - 1);
+    move_backward(MAX_NUM_PAGES - 1);
 }
 
 void asst::SupportList::move_forward(const unsigned num_pages)

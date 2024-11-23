@@ -377,13 +377,13 @@ inline std::string standard_oper_name(battle::Role role, const std::string& lite
 {
     using battle::Role;
     static const std::unordered_map<std::pair<Role, std::string>, std::string, PairHash<Role, std::string>>
-        StandardNames {
+        STD_OPER_NAME_DICT {
             { { Role::Caster, "阿米娅" }, "阿米娅" },
             { { Role::Warrior, "阿米娅" }, "阿米娅-WARRIOR" },
             { { Role::Medic, "阿米娅" }, "阿米娅-MEDIC" },
         };
 
-    if (auto iter = StandardNames.find({ role, literal_name }); iter != StandardNames.end()) {
+    if (const auto iter = STD_OPER_NAME_DICT.find({ role, literal_name }); iter != STD_OPER_NAME_DICT.end()) {
         return iter->second;
     }
 

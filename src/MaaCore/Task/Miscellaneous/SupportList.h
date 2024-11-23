@@ -17,6 +17,7 @@ public:
     /// <summary>
     /// 选择助战列表职业。
     /// </summary>
+    /// <param name="role">目标职业。</param>
     /// <returns>
     /// 若操作成功，则返回 true，反之则返回 false。
     /// </returns>
@@ -120,13 +121,13 @@ private:
     /// 助战列表共有 9 个栏位，一页即一屏，屏幕上最多只能同时完整显示 8 名助战干员，因而总页数为 2。
     /// 注意助战列表页之间的内容重叠。
     /// </remarks>
-    static constexpr unsigned MaxNumPages = 2;
+    static constexpr unsigned MAX_NUM_PAGES = 2;
 
     /// <summary>
     /// 助战干员可选职业。
     /// </summary>
-    static constexpr std::array<Role, 8> SupportUnitRoles = {
-        Role::Pioneer, Role::Warrior, Role::Tank, Role::Sniper, Role::Caster, Role::Medic, Role::Support, Role::Special
-    };
+    static constexpr std::array<Role, 8> SUPPORT_UNIT_ROLES = { Role::Pioneer, Role::Warrior, Role::Tank,
+                                                                Role::Sniper,  Role::Caster,  Role::Medic,
+                                                                Role::Support, Role::Special };
 };
 } // namespace asst

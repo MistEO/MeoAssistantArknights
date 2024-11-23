@@ -4625,101 +4625,149 @@
         "action": "ClickSelf",
         "roi": [334, 605, 286, 115],
         "postDelay": 500,
-        "next": ["BattleQuickFormationExpandRole", "Stop"]
+        "next": ["Stop"]
     },
-    "BattleQuickFormationExpandRole": {
+    "OperList-ExpandRoleList": {
+        "doc": "点击右上角 <职业> 按钮以展开干员职业筛选列表，当前选择的职业应当是 <全部>",
         "action": "ClickSelf",
         "roi": [1152, 0, 128, 138],
-        "postDelay": 500
+        "next": ["All@OperList-RoleSelected"]
     },
-    "BattleQuickFormationRole": {
-        "Doc": "base_task",
+    "OperList-RoleSelected": {
+        "doc": "模版任务: 在干员职业筛选列表通过蓝色背景的职业图标判断当前选择的职业是否正确",
         "template": "empty.png",
-        "action": "ClickSelf",
-        "roi": [1155, 41, 125, 679],
+        "roi": [1190, 0, 90, 720],
         "method": "RGBCount",
+        "colorScales": [
+            [
+                [0, 0, 90],
+                [90, 150, 255]
+            ]
+        ],
+        "colorWithClose": false
+    },
+    "OperList-SelectRole": {
+        "doc": "模版任务: 在干员职业筛选列表点击黑色背景的职业图标切换职业",
+        "template": "empty.png",
+        "roi": [1155, 0, 125, 720],
         "templThreshold": 0.7,
+        "method": "RGBCount",
         "colorScales": [[90, 150]],
         "colorWithClose": false,
-        "postDelay": 500
-    },
-    "BattleQuickFormationFilter": {
         "action": "ClickSelf",
-        "roi": [1045, 0, 134, 123],
-        "postDelay": 500
+        "next": ["OperList-RoleSelected", "OperList-SelectRole"]
     },
-    "BattleQuickFormationFilter-Cost": {
-        "action": "ClickSelf",
+    "All@OperList-RoleSelected": {},
+    "Pioneer@OperList-RoleSelected": {},
+    "Warrior@OperList-RoleSelected": {},
+    "Tank@OperList-RoleSelected": {},
+    "Sniper@OperList-RoleSelected": {},
+    "Caster@OperList-RoleSelected": {},
+    "Medic@OperList-RoleSelected": {},
+    "Support@OperList-RoleSelected": {},
+    "Special@OperList-RoleSelected": {},
+    "All@OperList-SelectRole": {
+        "next": ["All@OperList-RoleSelected", "All@OperList-SelectRole", "All@OperList-SelectRole-OCR"]
+    },
+    "All@OperList-SelectRole-OCR": {
+        "baseTask": "All@OperList-SelectRole",
         "algorithm": "OcrDetect",
-        "text": ["部署费用"],
-        "roi": [989, 433, 196, 142],
+        "text": ["全部"],
+        "next": ["All@OperList-RoleSelected", "All@OperList-SelectRole", "All@OperList-SelectRole-OCR"]
+    },
+    "Pioneer@OperList-SelectRole": {},
+    "Warrior@OperList-SelectRole": {},
+    "Tank@OperList-SelectRole": {},
+    "Sniper@OperList-SelectRole": {},
+    "Caster@OperList-SelectRole": {},
+    "Medic@OperList-SelectRole": {},
+    "Support@OperList-SelectRole": {},
+    "Special@OperList-SelectRole": {
+        "method": "Ccoeff",
+        "colorScales": []
+    },
+    "OperList-ExpandCustomSort": {
+        "doc": "点击干员列表自定义排序右侧的 <...> 按钮以展开自定义排序列表",
+        "roi": [1045, 0, 134, 123],
+        "action": "ClickSelf",
         "postDelay": 500
     },
-    "BattleQuickFormationFilter-Trust": {
-        "action": "ClickSelf",
-        "roi": [1010, 70, 35, 580],
-        "postDelay": 500,
-        "next": ["BattleQuickFormationFilter-Click2"]
-    },
-    "BattleQuickFormationFilter-Click2": {
-        "action": "ClickSelf",
-        "roi": [1125, 60, 150, 600],
-        "postDelay": 500
-    },
-    "BattleQuickFormationFilter-PinUnactivated": {
-        "Doc": "特关未激活",
-        "roi": [725, 15, 80, 50]
-    },
-    "BattleQuickFormationFilter-PinActivated": {
-        "Doc": "特关激活",
-        "action": "ClickSelf",
-        "roi": [725, 15, 80, 50],
-        "sub": ["BattleQuickFormationFilter-PinUnactivated"]
-    },
-    "BattleQuickFormationFilterClose": {
+    "OperList-CollapseCustomSort": {
+        "doc": "折叠自定义排序列表",
         "algorithm": "JustReturn",
         "action": "ClickRect",
         "specificRect": [37, 104, 291, 185],
         "postDelay": 500
     },
+    "OperList-Sort": {
+        "doc": "模版任务：在自定义排序列表中点击排序键左侧图标",
+        "template": "empty.png",
+        "roi": [1010, 60, 35, 660],
+        "action": "ClickSelf",
+        "postDelay": 500
+    },
+    "Level@OperList-Sort": {
+        "doc": "在排序列表中点击 <等级>",
+        "algorithm": "OcrDetect",
+        "text": "等级",
+        "roi": [805, 15, 200, 50],
+        "action": "ClickSelf",
+        "postDelay": 500
+    },
+    "Rarity@OperList-Sort": {
+        "doc": "在排序列表中点击 <稀有度>",
+        "algorithm": "OcrDetect",
+        "text": "稀有度",
+        "roi": [805, 15, 200, 50],
+        "action": "ClickSelf",
+        "postDelay": 500
+    },
+    "Trust@OperList-Sort": {
+        "template": ["Trust@OperList-SelectCustomSort", "Trust@OperList-CustomSortSelected"]
+    },
+    "Cost@OperList-Sort": {
+        "template": ["Cost@OperList-SelectCustomSort", "Cost@OperList-CustomSortSelected"]
+    },
+    "OperList-NonCustomSort-SetAsc": {
+        "doc": "对非自定义排序列表中点击当前选中的排序键下方的降序图标，以切换到升序",
+        "template": "OperList-NonCustomSort-Descending",
+        "roi": [815, 40, 200, 25],
+        "action": "ClickSelf",
+        "postDelay": 500
+    },
+    "OperList-CustomSort-SetAsc": {
+        "doc": "在自定义排序列表中点击当前选中的排序键右侧的降序图标，以切换到升序",
+        "template": "OperList-CustomSort-Descending",
+        "roi": [1125, 60, 150, 660],
+        "action": "ClickSelf",
+        "postDelay": 500
+    },
+    "OperList-MarkedOpersPinned": {
+        "doc": "特殊关注干员已置顶",
+        "roi": [725, 15, 80, 50]
+    },
+    "OperList-MarkedOpersUnpinned": {
+        "doc": "特殊关注干员未置顶",
+        "roi": [725, 15, 80, 50]
+    },
+    "OperList-PinMarkedOpers": {
+        "doc": "在特殊关注干员未置顶时开启置顶",
+        "baseTask": "OperList-MarkedOpersUnpinned",
+        "template": "OperList-MarkedOpersUnpinned",
+        "action": "ClickSelf",
+        "next": ["OperList-MarkedOpersUnpinned"]
+    },
+    "OperList-UnpinMarkedOpers": {
+        "doc": "在特殊关注干员已置顶时取消置顶取消置顶",
+        "baseTask": "OperList-MarkedOpersPinned",
+        "template": "OperList-MarkedOpersPinned",
+        "roi": [725, 15, 80, 50],
+        "action": "ClickSelf",
+        "next": ["OperList-MarkedOpersUnpinned"]
+    },
     "BattleQuickFormationTrustIcon": {
         "templThreshold": 0.9,
         "roi": [360, 280, 735, 360]
-    },
-    "BattleQuickFormationRole-All": {
-        "baseTask": "BattleQuickFormationRole",
-        "roi": [1163, 0, 117, 133]
-    },
-    "BattleQuickFormationRole-All-OCR": {
-        "baseTask": "BattleQuickFormationRole-All",
-        "algorithm": "OcrDetect",
-        "text": ["全部"]
-    },
-    "BattleQuickFormationRole-Pioneer": {
-        "baseTask": "BattleQuickFormationRole"
-    },
-    "BattleQuickFormationRole-Warrior": {
-        "baseTask": "BattleQuickFormationRole"
-    },
-    "BattleQuickFormationRole-Tank": {
-        "baseTask": "BattleQuickFormationRole"
-    },
-    "BattleQuickFormationRole-Caster": {
-        "baseTask": "BattleQuickFormationRole"
-    },
-    "BattleQuickFormationRole-Medic": {
-        "baseTask": "BattleQuickFormationRole"
-    },
-    "BattleQuickFormationRole-Sniper": {
-        "baseTask": "BattleQuickFormationRole"
-    },
-    "BattleQuickFormationRole-Special": {
-        "baseTask": "BattleQuickFormationRole",
-        "method": "Ccoeff",
-        "colorScales": []
-    },
-    "BattleQuickFormationRole-Support": {
-        "baseTask": "BattleQuickFormationRole"
     },
     "BattleQuickFormation-OperNameFlagBase": {
         "template": "empty.png",
