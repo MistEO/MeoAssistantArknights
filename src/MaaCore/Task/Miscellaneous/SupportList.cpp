@@ -178,7 +178,7 @@ std::optional<unsigned> asst::SupportList::update_page()
     }
     // update view
     m_view_begin = index;
-    m_view_end = index + 1;
+    m_view_end = index;
 
     unsigned num_new_items = 0; // 新增助战栏位记数
 
