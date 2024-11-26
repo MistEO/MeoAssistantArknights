@@ -4744,7 +4744,7 @@
     "Level@OperList-Sort": {
         "doc": "在排序列表中点击 <等级>",
         "algorithm": "OcrDetect",
-        "text": "等级",
+        "text": ["等级"],
         "roi": [805, 15, 200, 50],
         "action": "ClickSelf",
         "postDelay": 500
@@ -4752,7 +4752,7 @@
     "Rarity@OperList-Sort": {
         "doc": "在排序列表中点击 <稀有度>",
         "algorithm": "OcrDetect",
-        "text": "稀有度",
+        "text": ["稀有度"],
         "roi": [805, 15, 200, 50],
         "action": "ClickSelf",
         "postDelay": 500
@@ -4799,6 +4799,18 @@
         "roi": [725, 15, 80, 50],
         "action": "ClickSelf",
         "next": ["OperList-MarkedOpersUnpinned"]
+    },
+    "OperList-SwipeToTheRight":{
+        "baseTask": "SlowlySwipeToTheRight",
+        "specificRect": [1100, 350, 20, 20],
+        "rectMove": [400, 350, 20, 20],
+        "postDelay": 1000
+    },
+    "OperList-SwipeToTheLeft": {
+        "baseTask": "SlowlySwipeToTheLeft",
+        "specificRect": [400, 350, 20, 20],
+        "rectMove": [1100, 350, 20, 20],
+        "postDelay": 1000
     },
     "BattleQuickFormationTrustIcon": {
         "templThreshold": 0.9,
@@ -5432,17 +5444,6 @@
         "baseTask": "SwipeToTheLeft",
         "specificRect": [400, 350, 20, 20],
         "rectMove": [1150, 350, 20, 20]
-    },
-    "BattleFormationOperListSlowlySwipeToTheRight": {
-        "baseTask": "SlowlySwipeToTheRight",
-        "specificRect": [1100, 350, 20, 20],
-        "rectMove": [400, 350, 20, 20],
-        "postDelay": 500
-    },
-    "BattleFormationOperListSwipeToTheLeft": {
-        "baseTask": "SwipeToTheLeft",
-        "specificRect": [400, 350, 20, 20],
-        "rectMove": [1100, 350, 20, 20]
     },
     "ScreenshotTaskPlugin-Config": {
         "Doc": "本任务是插件 ScreenshotTaskPlugin 的配置",

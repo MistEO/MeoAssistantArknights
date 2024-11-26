@@ -80,12 +80,48 @@ public:
     bool unpin_marked_opers();
 
     /// <summary>
+    /// 重置已记录的助战列表信息。
+    /// </summary>
+    /// <param name="full_reset">是否重置 m_selected_role 等参数。</param>
+    void clear(bool full_reset = false);
+
+    [[nodiscard]] const std::vector<CandidateOper>& get_list() const { return m_list; };
+
+    [[nodiscard]] size_t size() const { return m_list.size(); };
+
+    [[nodiscard]] const CandidateOper& operator[](const size_t index) const { return m_list.at(index); };
+
+    [[nodiscard]] const CandidateOper& at(const size_t index) const { return m_list.at(index); };
+
+    /// <summary>
     /// 获取当前干员列表页截图并以此更新干员列表信息记录。
     /// </summary>
     /// <returns>
     /// 若操作成功，则返回新增干员数量，反之则返回 std::nullopt。
     /// </returns>
     std::optional<unsigned> update_page();
+
+    /// <summary>
+    /// 选择干员。
+    /// </summary>
+    /// <param name="index">目标干员所在栏位的索引。</param>
+    /// <returns>
+    /// 若干员已被选择或在点击后仍处于未被选择状态，则返回 false，反之则返回 true。
+    /// </returns>
+    bool select_oper(size_t index);
+
+    /// <summary>
+    /// 取消选择干员。
+    /// </summary>
+    /// <param name="index">目标干员所在栏位的索引。</param>
+    /// <returns>
+    /// 若干员未被选择或在点击后仍处于被选择状态，则返回 false，反之则返回 true。
+    /// </returns>
+    bool unselect_oper(size_t index);
+
+    void move_forward(unsigned num_pages = 1);
+    void move_backward(unsigned num_pages = 1);
+    void move_to_oper(size_t index);
 
 private:
     /// <summary>
@@ -97,15 +133,31 @@ private:
     /// </returns>
     bool update_selected_role(const cv::Mat& image);
 
+    /// <summary>
+    /// 更新干员的选择状态。
+    /// </summary>
+    /// <param name="index">目标干员所在栏位的索引。</param>
+    /// <returns>
+    /// 更新后目标干员的选择状态。
+    /// </returns>
+    bool update_selected_status(size_t index);
+
     InstHelper m_inst_helper;
     AbstractTask& m_task;
 
-    bool m_role_list_expanded = false;    // 干员职业筛选列表是否已展开
+    bool m_role_list_expanded = false;    // 干员职业筛选列表是否已展开，false 表示未展开或未知
     Role m_selected_role = Role::Unknown; // 当前干员列表所选职业
 
     // 当前排序
-    SortKey m_sort_key = SortKey::Level; // 排序键
-    bool m_ascending = false;            // 是否为升序
+    SortKey m_sort_key = SortKey::Level;                  // 排序键
+    bool m_ascending = false;                             // 是否为升序
+
+    std::vector<CandidateOper> m_list;                    // 当前干员列表
+    std::unordered_map<std::string, size_t> m_name2index; // 干员名到 m_list 索引的映射
+
+    // 仅视图内的干员栏位的 rect 为 up-to-date
+    size_t m_view_begin = 0; // 当前干员列表视图起始位置
+    size_t m_view_end = 0;   // 当前干员列表视图结束位置
 
     /// <summary>
     /// 干员列表可选职业。

@@ -112,6 +112,8 @@ private:
     std::string m_last_oper_name;
     int m_missing_retry_times = 1;                                        // 识别不到干员的重试次数
 
+    bool m_formation_is_full = false;                                     // 编队是否已满
+
     // ————————————————————————————————————————————————————————————————————————————————
     // Supplementary Operator-Related
     // ————————————————————————————————————————————————————————————————————————————————

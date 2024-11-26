@@ -1,5 +1,6 @@
 #include "OperList.h"
 
+#include "Config/TaskData.h"
 #include "Controller/Controller.h"
 #include "Task/ProcessTask.h"
 #include "Utils/Logger.hpp"
@@ -32,7 +33,7 @@ bool asst::OperList::select_role(const Role role, const bool force)
 {
     LogTraceFunction;
 
-    // clear();
+    clear();
 
     if (std::ranges::find(OPER_ROLES, role) == OPER_ROLES.end()) {
         Log.error(__FUNCTION__, "| Attempting to select unsupported role", enum_to_string(role));
@@ -90,6 +91,8 @@ void asst::OperList::sort(const SortKey sort_key, const bool ascending)
 {
     LogTraceFunction;
 
+    clear();
+
     bool custom_sort_expanded = false; // 自定义排序是否已展开
 
     // 根据需要，展开自定义排序
@@ -117,7 +120,7 @@ void asst::OperList::sort(const SortKey sort_key, const bool ascending)
 
     Log.info(
         __FUNCTION__,
-        "| Oper list is now sorted by",
+        "| Operator list is now sorted by",
         enum_to_string(sort_key),
         "in",
         ascending ? "ascending" : "descending",
@@ -127,6 +130,9 @@ void asst::OperList::sort(const SortKey sort_key, const bool ascending)
 bool asst::OperList::pin_marked_opers()
 {
     LogTraceFunction;
+
+    clear();
+
     if (ProcessTask(m_task, { "OperList-MarkedOpersPinned", "OperList-PinMarkedOpers" }).run()) {
         Log.info(__FUNCTION__, "| Successfully pinned marked opers.");
         return true;
@@ -140,6 +146,8 @@ bool asst::OperList::unpin_marked_opers()
 {
     LogTraceFunction;
 
+    clear();
+
     if (ProcessTask(m_task, { "OperList-MarkedOpersUnpinned", "OperList-UnpinMarkedOpers" }).run()) {
         Log.info(__FUNCTION__, "| Successfully unpinned marked operators.");
         return true;
@@ -147,6 +155,22 @@ bool asst::OperList::unpin_marked_opers()
 
     Log.error(__FUNCTION__, "| Failed to unpin marked operators.");
     return false;
+}
+
+void asst::OperList::clear(const bool full_reset)
+{
+    LogTraceFunction;
+
+    if (full_reset) {
+        m_role_list_expanded = false;
+        m_selected_role = Role::Unknown;
+        m_sort_key = SortKey::Level;
+        m_ascending = false;
+    }
+    m_list.clear();
+    m_name2index.clear();
+    m_view_begin = 0;
+    m_view_end = 0;
 }
 
 std::optional<unsigned> asst::OperList::update_page()
@@ -160,9 +184,143 @@ std::optional<unsigned> asst::OperList::update_page()
         Log.error(__FUNCTION__, "| Empty operator list page. Are we really in the operator list?");
         return std::nullopt;
     }
-    // const std::vector<CandidateOper>& support_list_page = analyzer.get_result();
+    const std::vector<CandidateOper>& oper_list_page = analyzer.get_result();
 
+    // 我们假设 oper_list_page 为一段从左往右从上往下连续编号的干员栏位序列，并设置其起点索引以供检查
+    // 如果新的干员栏位中间夹了个已知的，那肯定是出问题了
+    size_t index = m_list.size();
+    const std::string& head_name = oper_list_page.front().name;
+    if (const auto it = m_name2index.find(head_name); it != m_name2index.end()) {
+        index = it->second;
+    }
+    // update view
+    m_view_begin = index;
+    m_view_end = index;
+
+    unsigned num_new_items = 0; // 新增助战栏位记数
+
+    for (const CandidateOper& candidate_oper : oper_list_page) {
+        // 基于“助战列表中不会有重复名字的干员”的假设，通过干员名判断是否为新助战栏位
+        if (const auto it = m_name2index.find(candidate_oper.name); it == m_name2index.end()) // 新助战栏位
+        {
+            Log.info(__FUNCTION__, "| New operator found:", candidate_oper.name);
+            // sanity check for index
+            if (index != m_list.size()) {
+                Log.error(__FUNCTION__, "| Sanity check for index failed. Expected:", index, "got:", m_list.size());
+                return std::nullopt;
+            }
+            // 添加新干员栏位
+            m_list.emplace_back(candidate_oper);
+            m_name2index.emplace(candidate_oper.name, index);
+            // 更新新增干员栏位记数
+            ++num_new_items;
+        }
+        else { // 已知助战栏位
+            Log.info(__FUNCTION__, "| Existing support unit found:", candidate_oper.name);
+            // sanity check for index
+            if (index != it->second) {
+                Log.error(__FUNCTION__, "| Sanity check for index failed. Expected:", index, "got:", it->second);
+                return std::nullopt;
+            }
+            // 仅更新 rect
+            m_list.at(index).rect = candidate_oper.rect;
+        }
+        // update view
+        // ————————————————————————————————————————————————————————————————
+        // 根据“oper_list_page 为一段从左往右连续编号的干员栏位序列”的假设
+        // 加上 sanity check，可以确保 index 只会递增 因而无需考虑 m_view_begin
+        // ————————————————————————————————————————————————————————————————
+        // if (index < m_view_begin) {
+        //     m_view_begin = index;
+        // }
+        if (index >= m_view_end) {
+            m_view_end = index + 1;
+        }
+        ++index;
+    }
+
+    Log.info(
+        __FUNCTION__,
+        "Updated operators with indices",
+        std::to_string(m_view_begin) + "~" + std::to_string(m_view_end));
     return num_new_items;
+}
+
+bool asst::OperList::select_oper(const size_t index)
+{
+    LogTraceFunction;
+
+    move_to_oper(index);
+
+    if (m_list[index].selected) {
+        return true;
+    }
+
+    m_inst_helper.ctrler()->click(m_list[index].rect);
+
+    // 判断干员的选择状态是否改变
+    if (update_selected_status(index))
+    {
+        return true;
+    }
+
+    Log.error(__FUNCTION__, "| The operator's selected status remains unchanged after being clicked.");
+    return false;
+}
+
+bool asst::OperList::unselect_oper(size_t index)
+{
+    LogTraceFunction;
+
+    move_to_oper(index);
+
+    if (!m_list[index].selected) {
+        return true;
+    }
+
+    m_inst_helper.ctrler()->click(m_list[index].rect);
+
+    // 判断干员的选择状态是否改变
+    if (!update_selected_status(index))
+    {
+        return true;
+    }
+
+    Log.error(__FUNCTION__, "| The operator's selected status remains unchanged after being clicked.");
+    return false;
+}
+
+void asst::OperList::move_forward(const unsigned num_pages)
+{
+    LogTraceFunction;
+
+    for (unsigned i = 0; i < num_pages; ++i) {
+        ProcessTask(m_task, { "OperList-SwipeToTheRight" }).run();
+    }
+}
+
+void asst::OperList::move_backward(const unsigned num_pages)
+{
+    LogTraceFunction;
+
+    for (unsigned i = 0; i < num_pages; ++i) {
+        ProcessTask(m_task, { "OperList-SwipeToTheLeft" }).run();
+    }
+}
+
+void asst::OperList::move_to_oper(const size_t index)
+{
+    LogTraceFunction;
+
+    while (index >= m_view_end || index < m_view_begin) {
+        if (index >= m_view_end) {
+            move_forward();
+        }
+        else if (index < m_view_begin) {
+            move_backward();
+        }
+        update_page();
+    }
 }
 
 bool asst::OperList::update_selected_role(const cv::Mat& image)
@@ -181,4 +339,21 @@ bool asst::OperList::update_selected_role(const cv::Mat& image)
 
     Log.error(__FUNCTION__, "| Fail to recognise currently selected role. Has the role list been expanded?");
     return false;
+}
+
+bool asst::OperList::update_selected_status(const size_t index)
+{
+    LogTraceFunction;
+
+    move_to_oper(index);
+
+    const auto& selected_task_ptr = Task.get<MatchTaskInfo>("OperListAnalyzer-Selected");
+
+    Matcher selected_analyzer(m_inst_helper.ctrler()->get_image());
+    const Rect selected_roi = m_list[index].rect.move(selected_task_ptr->rect_move);
+    selected_analyzer.set_task_info(selected_task_ptr);
+    selected_analyzer.set_roi(selected_roi);
+    m_list[index].selected = selected_analyzer.analyze().has_value();
+
+    return m_list[index].selected;
 }
