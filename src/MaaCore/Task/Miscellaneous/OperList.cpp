@@ -259,8 +259,7 @@ bool asst::OperList::select_oper(const size_t index)
     m_inst_helper.ctrler()->click(m_list[index].rect);
 
     // 判断干员的选择状态是否改变
-    if (update_selected_status(index))
-    {
+    if (update_selected_status(index)) {
         return true;
     }
 
@@ -281,8 +280,7 @@ bool asst::OperList::unselect_oper(size_t index)
     m_inst_helper.ctrler()->click(m_list[index].rect);
 
     // 判断干员的选择状态是否改变
-    if (!update_selected_status(index))
-    {
+    if (!update_selected_status(index)) {
         return true;
     }
 

@@ -460,7 +460,7 @@ void asst::BattleFormationTask::add_supplementary_opers()
                 if (added_num < num) {
                     oper_list.move_forward();
                 }
-            } // inner for loop to traverse indices of newly-detected operators
+            }                          // inner for loop to traverse indices of newly-detected operators
 
             if (m_formation_is_full) { // 编队已满，跳出循环
                 break;

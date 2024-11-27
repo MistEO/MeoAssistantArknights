@@ -4800,7 +4800,7 @@
         "action": "ClickSelf",
         "next": ["OperList-MarkedOpersUnpinned"]
     },
-    "OperList-SwipeToTheRight":{
+    "OperList-SwipeToTheRight": {
         "baseTask": "SlowlySwipeToTheRight",
         "specificRect": [1100, 350, 20, 20],
         "rectMove": [400, 350, 20, 20],
