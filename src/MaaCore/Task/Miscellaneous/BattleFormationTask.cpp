@@ -468,7 +468,8 @@ bool asst::BattleFormationTask::set_specific_support_unit(const std::string& nam
     }
 
     m_specific_support_unit.name = name;
-    m_specific_support_unit.skill = 0; // 之后在 parse_formation 中，如果发现这名助战干员，则将其技能设定为对应的所需技能
+    m_specific_support_unit.skill =
+        0; // 之后在 parse_formation 中，如果发现这名助战干员，则将其技能设定为对应的所需技能
     return true;
 };
 
