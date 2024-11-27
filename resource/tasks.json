@@ -4616,23 +4616,6 @@
             ["猩红.*道", "猩红甬道"]
         ]
     },
-    "BattleSelectFormation1": {
-        "algorithm": "JustReturn",
-        "action": "ClickRect",
-        "specificRect": [105, 662, 10, 58]
-    },
-    "BattleSelectFormation2": {
-        "baseTask": "BattleSelectFormation1",
-        "specificRect": [380, 662, 10, 58]
-    },
-    "BattleSelectFormation3": {
-        "baseTask": "BattleSelectFormation1",
-        "specificRect": [650, 662, 10, 58]
-    },
-    "BattleSelectFormation4": {
-        "baseTask": "BattleSelectFormation1",
-        "specificRect": [920, 662, 10, 58]
-    },
     "BattleSupportUnitFormation": {
         "action": "ClickSelf",
         "roi": [995, 248, 244, 167],
@@ -4661,6 +4644,43 @@
         "roi": [334, 605, 286, 115],
         "postDelay": 500,
         "next": ["Stop"]
+    },
+    "BattleFormation-SelectSquad": {
+        "doc": [
+            "模版任务：选择编队",
+            "编队不会触发改名的区域有两组，一组是上面的黑长条 260*9，第二组是名字最左边和最右边的一块区域，右边比左边窄，暂定为左边 10*58"
+        ],
+        "algorithm": "JustReturn",
+        "action": "ClickRect",
+        "next": ["BattleFormation-SquadSelected", "BattleFormation-SelectSquad"]
+    },
+    "1@BattleFormation-SelectSquad": {
+        "specificRect": [105, 662, 10, 58]
+    },
+    "2@BattleFormation-SelectSquad": {
+        "specificRect": [380, 662, 10, 58]
+    },
+    "3@BattleFormation-SelectSquad": {
+        "specificRect": [650, 662, 10, 58]
+    },
+    "4@BattleFormation-SelectSquad": {
+        "specificRect": [920, 662, 10, 58]
+    },
+    "1@BattleFormation-SquadSelected": {
+        "template": "BattleFormation-SquadNameEditingIcon",
+        "roi": [312, 675, 35, 40]
+    },
+    "2@BattleFormation-SquadSelected": {
+        "template": "BattleFormation-SquadNameEditingIcon",
+        "roi": [587, 675, 34, 40]
+    },
+    "3@BattleFormation-SquadSelected": {
+        "template": "BattleFormation-SquadNameEditingIcon",
+        "roi": [857, 675, 34, 40]
+    },
+    "4@BattleFormation-SquadSelected": {
+        "template": "BattleFormation-SquadNameEditingIcon",
+        "roi": [1128, 675, 34, 40]
     },
     "OperList-ExpandRoleList": {
         "doc": "点击右上角 <职业> 按钮以展开干员职业筛选列表，当前选择的职业应当是 <全部>",

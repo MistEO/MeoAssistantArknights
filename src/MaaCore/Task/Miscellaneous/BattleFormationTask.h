@@ -20,8 +20,6 @@ public:
     // 设置追加自定干员列表
     void set_user_additional(std::vector<std::pair<std::string, int>> value) { m_user_additional = std::move(value); }
 
-    bool set_squad_index(unsigned squad_index);
-
     std::shared_ptr<std::unordered_map<std::string, std::string>> get_opers_in_formation() const
     {
         return m_opers_in_formation;
@@ -34,6 +32,11 @@ public:
     };
 
     void set_data_resource(const DataResource resource) { m_data_resource = resource; }
+
+    // ————————————————————————————————————————————————————————————————————————————————
+    // Squad-Related
+    // ————————————————————————————————————————————————————————————————————————————————
+    bool set_squad_index(unsigned index);
 
     // ————————————————————————————————————————————————————————————————————————————————
     // Supplementary Operator-Related
@@ -69,12 +72,6 @@ public:
 
     bool set_specific_support_unit(const std::string& name = ""); // 设置指定助战干员
 
-    bool add_support_unit(
-        const std::vector<RequiredOper>& required_opers = {},
-        int max_refresh_times = 0,
-        bool max_spec_lvl = true,
-        bool allow_non_friend_support_unit = false);
-
 protected:
     virtual bool _run() override;
 
@@ -91,14 +88,10 @@ private:
     void swipe_to_the_left(int times = 2);
     bool confirm_selection();
     bool parse_formation();
-    bool select_formation(int select_index);
     bool select_random_support_unit();
     void report_missing_operators(std::vector<OperGroup>& groups);
 
     std::vector<asst::TemplDetOCRer::Result> analyzer_opers();
-
-    static constexpr unsigned NUM_SQUADS = 4; // 可用编队数量，亦为编队索引上限
-    unsigned m_squad_index = 0; // 所使用的编队的索引，0 代表默认，1~NUM_SQUADS 分别代表第几编队
 
     DataResource m_data_resource = DataResource::Copilot;
 
@@ -113,6 +106,15 @@ private:
     int m_missing_retry_times = 1;                                        // 识别不到干员的重试次数
 
     bool m_formation_is_full = false;                                     // 编队是否已满
+
+
+    // ————————————————————————————————————————————————————————————————————————————————
+    // Squad-Related
+    // ————————————————————————————————————————————————————————————————————————————————
+    bool select_squad(unsigned index);
+
+    static constexpr unsigned NUM_SQUADS = 4; // 可用编队数量，亦为编队索引上限
+    unsigned m_squad_index = 0; // 所使用的编队的索引，0 代表默认，1~NUM_SQUADS 分别代表第几编队
 
     // ————————————————————————————————————————————————————————————————————————————————
     // Supplementary Operator-Related
@@ -132,6 +134,12 @@ private:
         return support_unit_usage == SupportUnitUsage::None || support_unit_usage == SupportUnitUsage::WhenNeeded ||
                support_unit_usage == SupportUnitUsage::Specific || support_unit_usage == SupportUnitUsage::Random;
     }
+
+    bool add_support_unit(
+        const std::vector<RequiredOper>& required_opers = {},
+        int max_refresh_times = 0,
+        bool max_spec_lvl = true,
+        bool allow_non_friend_support_unit = false);
 
     /// <summary>
     /// 在职业 role 的助战列表中寻找一名列于 required_opers 中的干员并使用其指定技能；

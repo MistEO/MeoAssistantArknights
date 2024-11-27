@@ -13,35 +13,6 @@
 #include "Utils/Ranges.hpp"
 #include "Vision/MultiMatcher.h"
 
-bool asst::BattleFormationTask::set_squad_index(const unsigned squad_index)
-{
-    LogTraceFunction;
-
-    if (squad_index > NUM_SQUADS) {
-        Log.error(__FUNCTION__, "| Invalid squad index:", squad_index);
-        return true;
-    }
-
-    m_squad_index = squad_index;
-    Log.info(__FUNCTION__, "| Formation will be performed on Squad", squad_index);
-    return false;
-}
-
-bool asst::BattleFormationTask::set_specific_support_unit(const std::string& name)
-{
-    LogTraceFunction;
-
-    if (m_support_unit_usage != SupportUnitUsage::Specific) {
-        Log.error(__FUNCTION__, "| Current support unit usage is not SupportUnitUsage::Specific");
-        return false;
-    }
-
-    m_specific_support_unit.name = name;
-    // 之后在 parse_formation 中，如果发现这名助战干员，则将其技能设定为对应的所需技能
-    m_specific_support_unit.skill = 0;
-    return true;
-};
-
 bool asst::BattleFormationTask::_run()
 {
     LogTraceFunction;
@@ -50,7 +21,7 @@ bool asst::BattleFormationTask::_run()
         return false;
     }
 
-    if (m_squad_index > 0 && !select_formation(m_squad_index)) {
+    if (m_squad_index > 0 && !select_squad(m_squad_index)) {
         return false;
     }
 
@@ -377,19 +348,28 @@ bool asst::BattleFormationTask::parse_formation()
     return true;
 }
 
-bool asst::BattleFormationTask::select_formation(int select_index)
+// ————————————————————————————————————————————————————————————————————————————————
+// Squad-Related
+// ————————————————————————————————————————————————————————————————————————————————
+bool asst::BattleFormationTask::set_squad_index(const unsigned squad_index)
 {
-    // 编队不会触发改名的区域有两组
-    // 一组是上面的黑长条 260*9
-    // 第二组是名字最左边和最右边的一块区域
-    // 右边比左边窄，暂定为左边 10*58
+    LogTraceFunction;
 
-    static const std::vector<std::string> select_formation_task = { "BattleSelectFormation1",
-                                                                    "BattleSelectFormation2",
-                                                                    "BattleSelectFormation3",
-                                                                    "BattleSelectFormation4" };
+    if (squad_index > NUM_SQUADS) {
+        Log.error(__FUNCTION__, "| Invalid squad index:", squad_index);
+        return false;
+    }
 
-    return ProcessTask { *this, { select_formation_task[select_index - 1] } }.run();
+    m_squad_index = squad_index;
+    Log.info(__FUNCTION__, "| Formation will be performed on Squad", squad_index);
+    return true;
+}
+
+bool asst::BattleFormationTask::select_squad(const unsigned index)
+{
+    LogTraceFunction;
+
+    return ProcessTask(*this, { "BattleFormation-SelectSquad-" + std::to_string(index) }).run();
 }
 
 // ————————————————————————————————————————————————————————————————————————————————
@@ -478,6 +458,20 @@ void asst::BattleFormationTask::add_supplementary_opers()
 // ————————————————————————————————————————————————————————————————————————————————
 // Support Unit-Related
 // ————————————————————————————————————————————————————————————————————————————————
+bool asst::BattleFormationTask::set_specific_support_unit(const std::string& name)
+{
+    LogTraceFunction;
+
+    if (m_support_unit_usage != SupportUnitUsage::Specific) {
+        Log.error(__FUNCTION__, "| Current support unit usage is not SupportUnitUsage::Specific");
+        return false;
+    }
+
+    m_specific_support_unit.name = name;
+    m_specific_support_unit.skill = 0; // 之后在 parse_formation 中，如果发现这名助战干员，则将其技能设定为对应的所需技能
+    return true;
+};
+
 bool asst::BattleFormationTask::add_support_unit(
     const std::vector<RequiredOper>& required_opers,
     const int max_refresh_times,
