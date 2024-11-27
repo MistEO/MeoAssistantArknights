@@ -106,8 +106,11 @@ public:
     /// </summary>
     /// <param name="index">目标干员所在栏位的索引。</param>
     /// <returns>
-    /// 若干员已被选择或在点击后仍处于未被选择状态，则返回 false，反之则返回 true。
+    /// 若干员已被选择或在点击后成功变为被选择的状态，则返回 true，反之则返回 false。
     /// </returns>
+    /// <remarks>
+    /// 若 index >= m_list.size() 也会返回 false。
+    /// </remarks>
     bool select_oper(size_t index);
 
     /// <summary>
@@ -115,8 +118,11 @@ public:
     /// </summary>
     /// <param name="index">目标干员所在栏位的索引。</param>
     /// <returns>
-    /// 若干员未被选择或在点击后仍处于被选择状态，则返回 false，反之则返回 true。
+    /// 若干员未被选择或在点击后成功变为未被选择的状态，则返回 true，反之则返回 false。
     /// </returns>
+    /// <remarks>
+    /// 若 index >= m_list.size() 也会返回 false。
+    /// </remarks>
     bool unselect_oper(size_t index);
 
     void move_forward(unsigned num_pages = 1);
@@ -140,6 +146,9 @@ private:
     /// <returns>
     /// 更新后目标干员的选择状态。
     /// </returns>
+    /// <remarks>
+    /// 若 index >= m_list.size() 也会返回 false。
+    /// </remarks>
     bool update_selected_status(size_t index);
 
     InstHelper m_inst_helper;

@@ -250,7 +250,16 @@ bool asst::OperList::select_oper(const size_t index)
 {
     LogTraceFunction;
 
-    move_to_oper(index);
+    // 边界检查
+    if (index >= m_list.size()) {
+        Log.error(__FUNCTION__, "| Index", index, "is out of bound. Current list size is", m_list.size());
+        return false;
+    }
+
+    // 根据需要滑动页面
+    if (index >= m_view_end || index < m_view_begin) {
+        move_to_oper(index);
+    }
 
     if (m_list[index].selected) {
         return true;
@@ -267,11 +276,20 @@ bool asst::OperList::select_oper(const size_t index)
     return false;
 }
 
-bool asst::OperList::unselect_oper(size_t index)
+bool asst::OperList::unselect_oper(const size_t index)
 {
     LogTraceFunction;
 
-    move_to_oper(index);
+    // 边界检查
+    if (index >= m_list.size()) {
+        Log.error(__FUNCTION__, "| Index", index, "is out of bound. Current list size is", m_list.size());
+        return false;
+    }
+
+    // 根据需要滑动页面
+    if (index >= m_view_end || index < m_view_begin) {
+        move_to_oper(index);
+    }
 
     if (!m_list[index].selected) {
         return true;
@@ -310,6 +328,12 @@ void asst::OperList::move_to_oper(const size_t index)
 {
     LogTraceFunction;
 
+    // 边界检查
+    if (index >= m_list.size()) {
+        Log.error(__FUNCTION__, "| Index", index, "is out of bound. Current list size is", m_list.size());
+        return;
+    }
+
     while (index >= m_view_end || index < m_view_begin) {
         if (index >= m_view_end) {
             move_forward();
@@ -343,7 +367,16 @@ bool asst::OperList::update_selected_status(const size_t index)
 {
     LogTraceFunction;
 
-    move_to_oper(index);
+    // 边界检查
+    if (index >= m_list.size()) {
+        Log.error(__FUNCTION__, "| Index", index, "is out of bound. Current list size is", m_list.size());
+        return false;
+    }
+
+    // 根据需要滑动页面
+    if (index >= m_view_end || index < m_view_begin) {
+        move_to_oper(index);
+    }
 
     const auto& selected_task_ptr = Task.get<MatchTaskInfo>("OperListAnalyzer-Selected");
 
