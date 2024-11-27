@@ -33,21 +33,21 @@ bool asst::OperList::select_role(const Role role, const bool force)
 {
     LogTraceFunction;
 
-    clear();
-
+    // 检查参数有效性
     if (std::ranges::find(OPER_ROLES, role) == OPER_ROLES.end()) {
         Log.error(__FUNCTION__, "| Attempting to select unsupported role", enum_to_string(role));
         m_selected_role = Role::Unknown;
         return false;
     }
 
-    // 确保干员职业筛选列表已展开
-    if (!m_role_list_expanded && !expand_role_list()) {
+    // 确保干员职业筛选列表已展开，注意此处 expand_role_list() 同时通过 update_selected_role() 更新了 m_selected_role。
+    if (!m_role_list_expanded && !expand_role_list() || !update_selected_role(m_inst_helper.ctrler()->get_image())) {
         Log.error(__FUNCTION__, "| Fail to recognise expanded role list.");
         return false;
     };
 
-    if (role == m_selected_role) {
+    // 当前所选职业已经为 role 且无须重新选择职业
+    if (role == m_selected_role && !force) {
         Log.info(
             __FUNCTION__,
             "| Currently selected role has already been",
@@ -55,10 +55,13 @@ bool asst::OperList::select_role(const Role role, const bool force)
         return true;
     }
 
+    clear();
+
     // ———————— ALL ————————
     if (role == ROLE_ALL) {
-        if (force) {
-            ProcessTask(m_task, { "Pioneer@OperList-RoleSelected", "Pioneer@OperList-SelectRole" }).run();
+        // 若当前所选职业已经为 “全部” 但需要重新选择职业，则先点选一下 “先锋”
+        if (role == m_selected_role && force) {
+            ProcessTask(m_task, { "Pioneer@OperList-SelectRole" }).run();
         }
 
         if (ProcessTask(m_task, { "All@OperList-SelectRole", "All@OperList-SelectRole-OCR" }).run()) {
@@ -72,9 +75,9 @@ bool asst::OperList::select_role(const Role role, const bool force)
     }
 
     // ———————— 特定职业 ————————
-    if (force) {
-        ProcessTask(m_task, { "All@OperList-RoleSelected", "ALL@OperList-SelectRole", "All@OperList-SelectRole-OCR" })
-            .run();
+    // 若当前所选职业已经为特定职业 role 但需要重新选择职业，则先点选一下 “全部”
+    if (role == m_selected_role && force) {
+        ProcessTask(m_task, { "ALL@OperList-SelectRole", "All@OperList-SelectRole-OCR" }).run();
     }
 
     if (ProcessTask(m_task, { enum_to_string(role, true) + "@OperList-SelectRole" }).run()) {

@@ -12,6 +12,13 @@
 #include "Utils/Logger.hpp"
 #include "Utils/Ranges.hpp"
 
+asst::BattleFormationTask::BattleFormationTask(
+    const AsstCallback& callback,
+    Assistant* inst,
+    std::string_view task_chain) :
+    AbstractTask(callback, inst, task_chain),
+    m_oper_list(m_inst, *this) {};
+
 bool asst::BattleFormationTask::_run()
 {
     LogTraceFunction;
@@ -30,10 +37,10 @@ bool asst::BattleFormationTask::_run()
     // 清空当前编队
     clear_selection();
 
-    parse_formation();
+    parse_formation_reqs();
     auto missing_operators = std::vector<OperGroup>();
     for (auto& [role, oper_groups] : m_formation) {
-        add_formation(role, oper_groups, missing_operators);
+        add_oper_groups_by_role(role, oper_groups, missing_operators);
     }
 
     // 在有且仅有一个缺失干员组时尝试寻找助战干员补齐编队
@@ -72,9 +79,9 @@ bool asst::BattleFormationTask::_run()
     }
 
     // 对于有在干员组中存在的自定干员，无法提前得知是否成功编入，故不提前加入编队
-    if (!m_user_additional.empty()) {
+    if (!m_additional_reqs.empty()) {
         auto limit = 12 - m_size_of_operators_in_formation;
-        for (const auto& [name, skill] : m_user_additional) {
+        for (const auto& [name, skill] : m_additional_reqs) {
             if (m_opers_in_formation->contains(name)) {
                 continue;
             }
@@ -88,7 +95,7 @@ bool asst::BattleFormationTask::_run()
             m_user_formation[BattleData.get_role(name)].emplace_back(name, std::move(usage));
         }
         for (auto& [role, oper_groups] : m_user_formation) {
-            add_formation(role, oper_groups, missing_operators);
+            add_oper_groups_by_role(role, oper_groups, missing_operators);
         }
     }
 
@@ -110,47 +117,88 @@ bool asst::BattleFormationTask::_run()
     return true;
 }
 
-bool asst::BattleFormationTask::add_formation(
-    battle::Role role,
-    std::vector<OperGroup> oper_group,
+bool asst::BattleFormationTask::add_oper_groups_by_role(
+    const Role role,
+    std::vector<OperGroup> oper_groups,
     std::vector<OperGroup>& missing)
 {
     LogTraceFunction;
 
-    // 初始化变量
-    OperList oper_list(m_inst, *this);
+    using battle::CandidateOper;
 
-    oper_list.select_role(role);
-    m_last_oper_name.clear();
-    bool has_error = false;
-    int swipe_times = 0;
-    int overall_swipe_times = 0; // 完整从左到右滑动的次数
-    while (!need_exit()) {
-        if (select_opers_in_cur_page(oper_group)) {
-            has_error = false;
-            if (oper_group.empty()) {
+    m_oper_list.select_role(role, true);
+    while (!m_formation_is_full && !need_exit()) {
+        const std::optional<unsigned> opt = m_oper_list.update_page();
+        if (!opt.has_value()) { // 出错
+            Log.info(__FUNCTION__, "| Error detected when analyzing current operator list page.");
+            break;
+        }
+        if (opt.value() == 0) { // 无新增干员/已经到达最后一页
+            Log.info(__FUNCTION__, "| No new operators found. End of operator list reached.");
+            break;
+        }
+
+        // 新增干员 index 范围为 [oper_list.size() - opt.value(), oper_list.size() - 1]
+        for (size_t index = m_oper_list.size() - opt.value(); index < m_oper_list.size(); ++index) {
+            const CandidateOper& candidate_oper = m_oper_list[index];
+
+            // 跳过已经被选择的干员
+            if (candidate_oper.selected) {
+                continue;
+            }
+
+            for (int i = 0)
+            if (m_oper_list.select_oper(index)) {
+                ++added_num;
+            }
+            else {
+                // 编队已满，跳出循环
+                Log.info(
+                    __FUNCTION__,
+                    "Formation is now full; abandoning the addition of supplementary operators.");
+                m_formation_is_full = true;
                 break;
             }
-            oper_list.move_forward();
+
+            if (oper_groups.empty() < num) {
+                m_oper_list.move_forward();
+            }
+        } // inner for loop to traverse indices of newly-detected operators
+
+
+
+
+
+
+
+
+
+
+
+        if (select_opers_in_cur_page(oper_groups)) {
+            has_error = false;
+            if (oper_groups.empty()) {
+                break;
+            }
+            m_oper_list.move_forward();
             ++swipe_times;
         }
         else if (has_error) {
             // reset page
-            oper_list.select_role(role, true);
-            m_last_oper_name.clear();
+            m_oper_list.select_role(role, true);
             swipe_times = 0;
             has_error = false;
         }
         else {
             if (overall_swipe_times == m_missing_retry_times) {
-                missing.insert(missing.end(), oper_group.begin(), oper_group.end());
+                missing.insert(missing.end(), oper_groups.begin(), oper_groups.end());
                 return true;
             }
 
             ++overall_swipe_times;
 
             has_error = true;
-            oper_list.move_backward(swipe_times);
+            m_oper_list.move_backward(swipe_times);
             swipe_times = 0;
         }
     }
@@ -290,7 +338,7 @@ bool asst::BattleFormationTask::confirm_selection()
     return ProcessTask(*this, { "BattleQuickFormationConfirm" }).run();
 }
 
-bool asst::BattleFormationTask::parse_formation()
+bool asst::BattleFormationTask::parse_formation_reqs()
 {
     LogTraceFunction;
 
@@ -300,8 +348,16 @@ bool asst::BattleFormationTask::parse_formation()
     auto& details = info["details"];
     auto& formation = details["formation"];
 
-    const RequiredOperGroups& required_oper_groups =
+    RequiredOperGroups required_oper_groups =
         m_data_resource == DataResource::SSSCopilot ? SSSCopilot.get_data().groups : Copilot.get_data().groups;
+
+    // 根据 m_specific_support_unit 预处理 required_oper_groups。
+    // 若 required_oper_groups 被用于 skill 技能名
+
+    // 根据 m_additional_reqs 预处理 required_oper_groups。
+    // 令 name = m_additional_reqs[i].name; skill = m_additional_reqs[i].skill，那么
+    // 若 skill != -1，则携带 skill 技能且名为 name 的干员必须被用于满足某一个干员组
+
 
     for (const auto& [group_name, required_opers] : required_oper_groups) {
         if (required_opers.empty()) {
@@ -374,7 +430,11 @@ bool asst::BattleFormationTask::select_squad(const unsigned index)
         return true;
     }
 
-    if (ProcessTask(*this, { "BattleFormation-SelectSquad-" + std::to_string(index) }).run()) {
+    if (ProcessTask(
+            *this,
+            { std::to_string(index) + "@BattleFormation-SquadSelected",
+              std::to_string(index) + "@BattleFormation-SelectSquad" })
+            .run()) {
         Log.info(__FUNCTION__, "| using Squad", index);
         return true;
     }
@@ -392,11 +452,8 @@ void asst::BattleFormationTask::add_supplementary_opers()
 
     using battle::CandidateOper;
 
-    // 初始化变量
-    OperList oper_list(m_inst, *this);
-
     // 取消对特殊关注的置顶
-    if (!oper_list.unpin_marked_opers()) {
+    if (!m_oper_list.unpin_marked_opers()) {
         Log.error(__FUNCTION__, "| Failed to unpin marked opers; abandoning the addition of supplementary operators.");
         return;
     }
@@ -414,13 +471,13 @@ void asst::BattleFormationTask::add_supplementary_opers()
             ascending ? "ascending" : "descending",
             "order");
 
-        oper_list.select_role(role, true);   // 选择职业并重置列表位置
-        oper_list.sort(sort_key, ascending); // 重新排序
+        m_oper_list.select_role(role, true);   // 选择职业并重置列表位置
+        m_oper_list.sort(sort_key, ascending); // 重新排序
 
-        unsigned added_num = 0;              // 用于记录此轮增加的干员数量
+        unsigned num_added_opers = 0;                // 用于记录此轮增加的干员数量
 
-        while (added_num < num && !need_exit()) {
-            const std::optional<unsigned> opt = oper_list.update_page();
+        while (num_added_opers < num && !m_formation_is_full && !need_exit()) {
+            const std::optional<unsigned> opt = m_oper_list.update_page();
             if (!opt.has_value()) { // 出错
                 Log.info(__FUNCTION__, "| Error detected when analyzing current operator list page.");
                 break;
@@ -431,34 +488,33 @@ void asst::BattleFormationTask::add_supplementary_opers()
             }
 
             // 新增干员 index 范围为 [oper_list.size() - opt.value(), oper_list.size() - 1]
-            for (size_t index = oper_list.size() - opt.value(); index < oper_list.size(); ++index) {
-                const CandidateOper& candidate_oper = oper_list[index];
+            for (size_t index = m_oper_list.size() - opt.value(); index < m_oper_list.size(); ++index) {
+                const CandidateOper& candidate_oper = m_oper_list[index];
 
-                if (!candidate_oper.selected) {
-                    if (oper_list.select_oper(index)) {
-                        ++added_num;
-                    }
-                    else {
-                        // 编队已满，跳出循环
-                        Log.info(
-                            __FUNCTION__,
-                            "Formation is now full; abandoning the addition of supplementary operators.");
-                        m_formation_is_full = true;
-                        break;
-                    }
+                // 跳过已经被选择的干员
+                if (candidate_oper.selected) {
+                    continue;
                 }
 
-                if (added_num < num) {
-                    oper_list.move_forward();
+                if (m_oper_list.select_oper(index)) {
+                    Log.info(__FUNCTION__, "| Added operator", candidate_oper.name);
+                    ++num_added_opers;
                 }
-            }                          // inner for loop to traverse indices of newly-detected operators
-
-            if (m_formation_is_full) { // 编队已满，跳出循环
-                break;
+                else {
+                    // 编队已满，跳出循环
+                    Log.info(
+                        __FUNCTION__,
+                        "Formation is now full; abandoning the addition of supplementary operators.");
+                    m_formation_is_full = true;
+                    break;
+                }
+            } // inner for loop to traverse indices of newly-detected operators
+            if (num_added_opers < num && !m_formation_is_full) {
+                m_oper_list.move_forward();
             }
-        } // while (added_num < num && !need_exit())
+        } // while (added_num < num && !m_formation_is_full && !need_exit())
 
-        Log.info(__FUNCTION__, "| Added", added_num, "operator(s).");
+        Log.info(__FUNCTION__, "| Added", num_added_opers, "operator(s).");
 
         if (m_formation_is_full) { // 编队已满，跳出循环
             break;
@@ -480,7 +536,7 @@ bool asst::BattleFormationTask::set_specific_support_unit(const std::string& nam
 
     m_specific_support_unit.name = name;
     m_specific_support_unit.skill =
-        0; // 之后在 parse_formation 中，如果发现这名助战干员，则将其技能设定为对应的所需技能
+        0; // 之后在 parse_formation_reqs 中，如果发现这名助战干员，则将其技能设定为对应的所需技能
     return true;
 };
 

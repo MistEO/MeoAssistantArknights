@@ -161,15 +161,16 @@ bool asst::CopilotTask::set_params(const json::value& params)
     }
 
     if (auto opt = params.find<json::array>("user_additional"); add_user_additional && opt) {
-        std::vector<std::pair<std::string, int>> user_additional;
+        std::vector<BattleFormationTask::RequiredOper> additional_req;
         for (const auto& op : *opt) {
             std::string name = op.get("name", std::string());
             if (name.empty()) {
                 continue;
             }
-            user_additional.emplace_back(std::pair<std::string, int> { std::move(name), op.get("skill", 1) });
+            additional_req.emplace_back(BattleFormationTask::RequiredOper { .name = std::move(name),
+                                                                            .skill = op.get("skill", 0) });
         }
-        m_formation_task_ptr->set_user_additional(std::move(user_additional));
+        m_formation_task_ptr->set_additional_reqs(additional_req);
     }
 
     m_battle_task_ptr->set_wait_until_end(need_navigate);

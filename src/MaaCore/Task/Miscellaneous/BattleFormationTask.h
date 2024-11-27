@@ -10,7 +10,7 @@ namespace asst
 class BattleFormationTask : public AbstractTask
 {
 public:
-    using AbstractTask::AbstractTask;
+    BattleFormationTask(const AsstCallback& callback, Assistant* inst, std::string_view task_chain);
     virtual ~BattleFormationTask() override = default;
 
     using RequiredOper = battle::OperUsage;
@@ -18,7 +18,7 @@ public:
     using Role = battle::Role;
 
     // 设置追加自定干员列表
-    void set_user_additional(std::vector<std::pair<std::string, int>> value) { m_user_additional = std::move(value); }
+    void set_additional_reqs(const std::vector<RequiredOper>& additional_reqs) { m_additional_reqs = additional_reqs; }
 
     std::shared_ptr<std::unordered_map<std::string, std::string>> get_formation() const { return m_opers_in_formation; }
 
@@ -48,7 +48,7 @@ public:
         unsigned num = 0;                  // 数量
     };
 
-    void append_supplementary_oper_req(const SupplementaryOperReq req) { m_supplementary_oper_reqs.emplace_back(req); }
+    void append_supplementary_oper_req(const SupplementaryOperReq& req) { m_supplementary_oper_reqs.emplace_back(req); }
 
     // ————————————————————————————————————————————————————————————————————————————————
     // Support Unit-Related
@@ -73,15 +73,17 @@ protected:
     virtual bool _run() override;
 
 private:
+    OperList m_oper_list;
+
     using OperGroup = std::pair<std::string, std::vector<asst::battle::OperUsage>>;
 
-    bool add_formation(battle::Role role, std::vector<OperGroup> oper_group, std::vector<OperGroup>& missing);
+    bool add_oper_groups_by_role(Role role, std::vector<OperGroup> oper_groups, std::vector<OperGroup>& missing);
 
     bool add_trust_operators(); // to be removed
 
     bool select_opers_in_cur_page(std::vector<OperGroup>& groups);
     bool confirm_selection();
-    bool parse_formation();
+    bool parse_formation_reqs();
     void report_missing_operators(std::vector<OperGroup>& groups);
 
     std::vector<asst::TemplDetOCRer::Result> analyzer_opers();
@@ -94,9 +96,8 @@ private:
     int m_size_of_operators_in_formation = 0;                             // 编队中干员个数
     std::shared_ptr<std::unordered_map<std::string, std::string>> m_opers_in_formation =
         std::make_shared<std::unordered_map<std::string, std::string>>(); // 编队中的干员名称-所属组名
-    std::vector<std::pair<std::string, int>> m_user_additional;           // 追加干员表，从头往后加
+    std::vector<RequiredOper> m_additional_reqs;                          // 追加干员表，从头往后加
     std::string m_last_oper_name;
-    int m_missing_retry_times = 1;                                        // 识别不到干员的重试次数
 
     // ————————————————————————————————————————————————————————————————————————————————
     // Misc
