@@ -11,24 +11,26 @@
 #include "Utils/ImageIo.hpp"
 #include "Utils/Logger.hpp"
 #include "Utils/Ranges.hpp"
-#include "Vision/MultiMatcher.h"
 
 bool asst::BattleFormationTask::_run()
 {
     LogTraceFunction;
 
-    if (!parse_formation()) {
-        return false;
-    }
-
     if (m_squad_index > 0 && !select_squad(m_squad_index)) {
+        Log.error(__FUNCTION__, "| Fail to select squad; abandoning task.");
         return false;
     }
 
-    if (!enter_selection_page()) {
-        save_img(utils::path("debug") / utils::path("other"));
+    // 进入快速编队界面
+    if (!enter_quick_selection()) {
+        Log.error(__FUNCTION__, "| Fail to enter quick formation; abandoning task.");
         return false;
     }
+
+    // 清空当前编队
+    clear_selection();
+
+    parse_formation();
     auto missing_operators = std::vector<OperGroup>();
     for (auto& [role, oper_groups] : m_formation) {
         add_formation(role, oper_groups, missing_operators);
@@ -56,7 +58,7 @@ bool asst::BattleFormationTask::_run()
         }
 
         // 再到快速编队页面
-        if (!enter_selection_page()) {
+        if (!enter_quick_selection()) {
             save_img(utils::path("debug") / utils::path("other"));
             return false;
         }
@@ -129,15 +131,13 @@ bool asst::BattleFormationTask::add_formation(
             if (oper_group.empty()) {
                 break;
             }
-            swipe_page();
+            oper_list.move_forward();
             ++swipe_times;
         }
         else if (has_error) {
-            swipe_to_the_left(swipe_times);
             // reset page
             oper_list.select_role(role, true);
             m_last_oper_name.clear();
-            swipe_to_the_left(swipe_times);
             swipe_times = 0;
             has_error = false;
         }
@@ -150,16 +150,11 @@ bool asst::BattleFormationTask::add_formation(
             ++overall_swipe_times;
 
             has_error = true;
-            swipe_to_the_left(swipe_times);
+            oper_list.move_backward(swipe_times);
             swipe_times = 0;
         }
     }
     return true;
-}
-
-bool asst::BattleFormationTask::select_random_support_unit()
-{
-    return ProcessTask(*this, { "BattleSupportUnitFormation" }).run();
 }
 
 void asst::BattleFormationTask::report_missing_operators(std::vector<OperGroup>& groups)
@@ -226,11 +221,6 @@ std::vector<asst::TemplDetOCRer::Result> asst::BattleFormationTask::analyzer_ope
     return opers_result;
 }
 
-bool asst::BattleFormationTask::enter_selection_page()
-{
-    return ProcessTask(*this, { "BattleQuickFormation" }).set_retry_times(3).run();
-}
-
 bool asst::BattleFormationTask::select_opers_in_cur_page(std::vector<OperGroup>& groups)
 {
     auto opers_result = analyzer_opers();
@@ -295,19 +285,6 @@ bool asst::BattleFormationTask::select_opers_in_cur_page(std::vector<OperGroup>&
     return true;
 }
 
-void asst::BattleFormationTask::swipe_page()
-{
-    ProcessTask(*this, { "OperList-SwipeToTheRight" }).run();
-}
-
-void asst::BattleFormationTask::swipe_to_the_left(int times)
-{
-    for (int i = 0; i < times; ++i) {
-        ProcessTask(*this, { "BattleFormationOperListSwipeToTheLeft" }).run();
-    }
-    sleep(Config.get_options().task_delay); // 可能有界面回弹，睡一会儿
-}
-
 bool asst::BattleFormationTask::confirm_selection()
 {
     return ProcessTask(*this, { "BattleQuickFormationConfirm" }).run();
@@ -315,6 +292,10 @@ bool asst::BattleFormationTask::confirm_selection()
 
 bool asst::BattleFormationTask::parse_formation()
 {
+    LogTraceFunction;
+
+    static constexpr Role ROLE_ALL = OperList::ROLE_ALL;
+
     json::value info = basic_info_with_what("BattleFormation");
     auto& details = info["details"];
     auto& formation = details["formation"];
@@ -328,11 +309,13 @@ bool asst::BattleFormationTask::parse_formation()
         }
         formation.emplace(group_name);
 
-        // 判断干员/干员组的职业，放进对应的分组
-        bool same_role = true;
-        battle::Role role = BattleData.get_role(required_opers.front().name);
+        // 判断干员/干员组的职业，若所有的干员都在同一职业则标记其分组
+        Role role = BattleData.get_role(required_opers.front().name);
         for (const auto& required_oper : required_opers) {
-            same_role &= BattleData.get_role(required_oper.name) == role;
+            // 若发现不同职业的干员，则改为 ROLL_ALL
+            if (role != ROLE_ALL && BattleData.get_role(required_oper.name) != role) {
+                role = ROLE_ALL;
+            }
 
             // （仅一次）如果发现这名助战干员，则将其技能设定为对应的所需技能
             if (required_oper.name == m_specific_support_unit.name && m_specific_support_unit.skill == 0) {
@@ -340,8 +323,7 @@ bool asst::BattleFormationTask::parse_formation()
             }
         }
 
-        // for unknown, will use { "All@OperList-SelectRole", "All@OperList-SelectRole-OCR" }
-        m_formation[same_role ? role : battle::Role::Unknown].emplace_back(group_name, required_opers);
+        m_formation[role].emplace_back(group_name, required_opers);
     }
 
     callback(AsstMsg::SubTaskExtraInfo, info);
@@ -349,19 +331,32 @@ bool asst::BattleFormationTask::parse_formation()
 }
 
 // ————————————————————————————————————————————————————————————————————————————————
+// Misc
+// ————————————————————————————————————————————————————————————————————————————————
+bool asst::BattleFormationTask::enter_quick_selection()
+{
+    return ProcessTask(*this, { "BattleFormation-EnterQuickSelection" }).run();
+}
+
+void asst::BattleFormationTask::clear_selection()
+{
+    ProcessTask(*this, { "BattleFormation-QuickSelection-ClearSelection" }).run();
+}
+
+// ————————————————————————————————————————————————————————————————————————————————
 // Squad-Related
 // ————————————————————————————————————————————————————————————————————————————————
-bool asst::BattleFormationTask::set_squad_index(const unsigned squad_index)
+bool asst::BattleFormationTask::set_squad_index(const unsigned index)
 {
     LogTraceFunction;
 
-    if (squad_index > NUM_SQUADS) {
-        Log.error(__FUNCTION__, "| Invalid squad index:", squad_index);
+    if (index > NUM_SQUADS) {
+        Log.error(__FUNCTION__, "| Invalid squad index:", index);
         return false;
     }
 
-    m_squad_index = squad_index;
-    Log.info(__FUNCTION__, "| Formation will be performed on Squad", squad_index);
+    m_squad_index = index;
+    Log.info(__FUNCTION__, "| Formation will be performed on Squad", index);
     return true;
 }
 
@@ -369,7 +364,23 @@ bool asst::BattleFormationTask::select_squad(const unsigned index)
 {
     LogTraceFunction;
 
-    return ProcessTask(*this, { "BattleFormation-SelectSquad-" + std::to_string(index) }).run();
+    if (index > NUM_SQUADS) {
+        Log.error(__FUNCTION__, "| Invalid squad index:", index);
+        return false;
+    }
+
+    if (index == 0) {
+        Log.info(__FUNCTION__, "| No need to change selected squad.");
+        return true;
+    }
+
+    if (ProcessTask(*this, { "BattleFormation-SelectSquad-" + std::to_string(index) }).run()) {
+        Log.info(__FUNCTION__, "| using Squad", index);
+        return true;
+    }
+
+    Log.info(__FUNCTION__, "| Fail to select Squad", index);
+    return false;
 }
 
 // ————————————————————————————————————————————————————————————————————————————————
@@ -531,7 +542,7 @@ bool asst::BattleFormationTask::add_support_unit_(
 
     // 随机模式下保留当前职业选择，否则切换到 required_opers.back() 对应职业的助战干员列表
     if (!random_mode && !support_list.select_role(BattleData.get_role(required_opers.back().name))) {
-        Log.error(__FUNCTION__, "Failed to select role; abandoning using support unit.");
+        Log.error(__FUNCTION__, "| Failed to select role; abandoning using support unit.");
         return false;
     }
 

@@ -173,7 +173,7 @@ bool asst::CopilotTask::set_params(const json::value& params)
     }
 
     m_battle_task_ptr->set_wait_until_end(need_navigate);
-    m_battle_task_ptr->set_formation_task_ptr(m_formation_task_ptr->get_opers_in_formation());
+    m_battle_task_ptr->set_formation_task_ptr(m_formation_task_ptr->get_formation());
 
     size_t loop_times = params.get("loop_times", 1);
     if (need_navigate) {

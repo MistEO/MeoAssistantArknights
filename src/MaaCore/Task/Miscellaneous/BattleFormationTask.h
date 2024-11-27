@@ -20,10 +20,7 @@ public:
     // 设置追加自定干员列表
     void set_user_additional(std::vector<std::pair<std::string, int>> value) { m_user_additional = std::move(value); }
 
-    std::shared_ptr<std::unordered_map<std::string, std::string>> get_opers_in_formation() const
-    {
-        return m_opers_in_formation;
-    }
+    std::shared_ptr<std::unordered_map<std::string, std::string>> get_formation() const { return m_opers_in_formation; }
 
     enum class DataResource
     {
@@ -82,13 +79,9 @@ private:
 
     bool add_trust_operators(); // to be removed
 
-    bool enter_selection_page();
     bool select_opers_in_cur_page(std::vector<OperGroup>& groups);
-    void swipe_page();
-    void swipe_to_the_left(int times = 2);
     bool confirm_selection();
     bool parse_formation();
-    bool select_random_support_unit();
     void report_missing_operators(std::vector<OperGroup>& groups);
 
     std::vector<asst::TemplDetOCRer::Result> analyzer_opers();
@@ -105,7 +98,13 @@ private:
     std::string m_last_oper_name;
     int m_missing_retry_times = 1;                                        // 识别不到干员的重试次数
 
-    bool m_formation_is_full = false;                                     // 编队是否已满
+    // ————————————————————————————————————————————————————————————————————————————————
+    // Misc
+    // ————————————————————————————————————————————————————————————————————————————————
+    bool enter_quick_selection();
+    void clear_selection();
+
+    bool m_formation_is_full = false; // 编队是否已满
 
     // ————————————————————————————————————————————————————————————————————————————————
     // Squad-Related

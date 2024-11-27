@@ -4627,24 +4627,6 @@
         "roi": [115, 595, 1165, 75],
         "next": ["BattleSupportUnitFormationSelect", "RecruitSupportConfirm", "Stop"]
     },
-    "BattleQuickFormationCheck": {
-        "baseTask": "BattleQuickFormation",
-        "template": "BattleQuickFormation.png",
-        "action": "DoNothing",
-        "next": []
-    },
-    "BattleQuickFormation": {
-        "action": "ClickSelf",
-        "roi": [816, 0, 404, 149],
-        "postDelay": 1000,
-        "next": ["BattleQuickFormationClear", "BattleQuickFormation"]
-    },
-    "BattleQuickFormationClear": {
-        "action": "ClickSelf",
-        "roi": [334, 605, 286, 115],
-        "postDelay": 500,
-        "next": ["Stop"]
-    },
     "BattleFormation-SelectSquad": {
         "doc": [
             "模版任务：选择编队",
@@ -4666,6 +4648,10 @@
     "4@BattleFormation-SelectSquad": {
         "specificRect": [920, 662, 10, 58]
     },
+    "BattleFormation-SquadSelected": {
+        "doc": "模版任务：通过识别编辑图标判断当前选择的编队",
+        "template": "BattleFormation-SquadNameEditingIcon"
+    },
     "1@BattleFormation-SquadSelected": {
         "template": "BattleFormation-SquadNameEditingIcon",
         "roi": [312, 675, 35, 40]
@@ -4681,6 +4667,19 @@
     "4@BattleFormation-SquadSelected": {
         "template": "BattleFormation-SquadNameEditingIcon",
         "roi": [1128, 675, 34, 40]
+    },
+    "BattleFormation-EnterQuickSelection": {
+        "doc": "点击进入快速编队",
+        "roi": [816, 0, 404, 149],
+        "action": "ClickSelf",
+        "postDelay": 1000,
+        "next": ["BattleFormation-EnterQuickSelection", "Stop"]
+    },
+    "BattleFormation-QuickSelection-ClearSelection": {
+        "doc": "在快速编队界面清空选择",
+        "roi": [334, 605, 286, 115],
+        "action": "ClickSelf",
+        "postDelay": 500
     },
     "OperList-ExpandRoleList": {
         "doc": "点击右上角 <职业> 按钮以展开干员职业筛选列表，当前选择的职业应当是 <全部>",
