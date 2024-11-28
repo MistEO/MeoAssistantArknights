@@ -340,6 +340,7 @@ Please do not check it when the stage OF-1 is not unlocked.</system:String>
     <system:String x:Key="ReceiveOrundum">Collect daily Orundum reward from the Lucky Strips</system:String>
     <system:String x:Key="ReceiveMining">Collect daily Orundum reward from the provisional mining permit</system:String>
     <system:String x:Key="ReceiveSpecialAccess">Collect Special Access rewards</system:String>
+    <system:String x:Key="UseInGameInfrastSwitch">Use the in-game infrastructure settings for shift work</system:String>
     <system:String x:Key="DroneUsage">Drone Usage</system:String>
     <system:String x:Key="UseTray">Display Tray Icon</system:String>
     <system:String x:Key="HideTray">Disable Tray Icon</system:String>

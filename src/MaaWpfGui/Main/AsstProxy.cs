@@ -2265,6 +2265,7 @@ namespace MaaWpfGui.Main
 
         private static JObject SerializeInfrastTaskParams(
             IEnumerable<string> order,
+            bool useInGameInfrastSwitch,
             string usesOfDrones,
             bool continueTraining,
             double dormThreshold,
@@ -2277,6 +2278,7 @@ namespace MaaWpfGui.Main
         {
             var taskParams = new JObject
             {
+                ["infrast_switch"] = useInGameInfrastSwitch,
                 ["facility"] = new JArray(order.ToArray<object>()),
                 ["drones"] = usesOfDrones,
                 ["continue_training"] = continueTraining,
@@ -2296,6 +2298,7 @@ namespace MaaWpfGui.Main
         /// 基建换班。
         /// </summary>
         /// <param name="order">要换班的设施（有序）。</param>
+        /// <param name="useInGameInfrastSwitch">是否使用游戏内基建配置换班</param>
         /// <param name="usesOfDrones">
         /// 无人机用途。可用值包括：
         /// <list type="bullet">
@@ -2319,6 +2322,7 @@ namespace MaaWpfGui.Main
         /// <returns>是否成功。</returns>
         public bool AsstAppendInfrast(
             IEnumerable<string> order,
+            bool useInGameInfrastSwitch,
             string usesOfDrones,
             bool continueTraining,
             double dormThreshold,
@@ -2331,6 +2335,7 @@ namespace MaaWpfGui.Main
         {
             var taskParams = SerializeInfrastTaskParams(
                 order,
+                useInGameInfrastSwitch,
                 usesOfDrones,
                 continueTraining,
                 dormThreshold,
@@ -2347,6 +2352,7 @@ namespace MaaWpfGui.Main
 
         public bool AsstSetInfrastTaskParams(
             IEnumerable<string> order,
+            bool useInGameInfrastSwitch,
             string usesOfDrones,
             bool continueTraining,
             double dormThreshold,
@@ -2370,6 +2376,7 @@ namespace MaaWpfGui.Main
 
             var taskParams = SerializeInfrastTaskParams(
                 order,
+                useInGameInfrastSwitch,
                 usesOfDrones,
                 continueTraining,
                 dormThreshold,

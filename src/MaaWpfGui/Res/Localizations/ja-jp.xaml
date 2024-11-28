@@ -340,6 +340,7 @@
     <system:String x:Key="ReceiveOrundum">ラッキーウォールから毎日合成玉の報酬を受け取る</system:String>
     <system:String x:Key="ReceiveMining">期間限定の採掘許可で毎日合成玉の報酬を受け取る</system:String>
     <system:String x:Key="ReceiveSpecialAccess">スペシャルアクセス特典を集める</system:String>
+    <system:String x:Key="UseInGameInfrastSwitch">ゲーム内の基盤施設設定を使用して交代勤務を設定する</system:String>
     <system:String x:Key="DroneUsage">ドローンの使用</system:String>
     <system:String x:Key="UseTray">トレイアイコンを表示</system:String>
     <system:String x:Key="HideTray">トレイアイコンを隠す</system:String>
