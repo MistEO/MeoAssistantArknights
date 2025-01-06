@@ -10328,9 +10328,7 @@
         "specificRect": [153, 79, 63, 29]
     },
     "Sarkaz@Roguelike@Continue": {},
-    "Sarkaz@Roguelike@DeepExplorationEnd": {
-        "template": "empty.png"
-    },
+    "Sarkaz@Roguelike@DeepExplorationEnd": {},
     "Sarkaz@Roguelike@DecreaseBurdenAbandon": {
         "templThreshold": 0.9,
         "roi": [499, 471, 167, 151],
