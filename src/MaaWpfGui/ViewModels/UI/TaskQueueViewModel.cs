@@ -1792,14 +1792,12 @@ namespace MaaWpfGui.ViewModels.UI
                 SettingsViewModel.RoguelikeTask.RoguelikeStopAtFinalBoss,
                 SettingsViewModel.RoguelikeTask.RoguelikeMonthlySquadAutoIterate,
                 SettingsViewModel.RoguelikeTask.RoguelikeMonthlySquadCheckComms,
-                SettingsViewModel.RoguelikeTask.RoguelikeDeepExplorationAutoIterate
-                );
+                SettingsViewModel.RoguelikeTask.RoguelikeDeepExplorationAutoIterate);
         }
 
         private static bool AppendReclamation()
         {
             var toolToCraft = SettingsViewModel.ReclamationTask.ReclamationToolToCraft.Split(';', '；').Select(s => s.Trim());
-
 
             _ = int.TryParse(SettingsViewModel.ReclamationTask.ReclamationMode, out var mode);
 
