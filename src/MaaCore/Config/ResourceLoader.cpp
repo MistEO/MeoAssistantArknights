@@ -20,6 +20,7 @@
 #include "Roguelike/RoguelikeRecruitConfig.h"
 #include "Roguelike/RoguelikeShoppingConfig.h"
 #include "Roguelike/RoguelikeStageEncounterConfig.h"
+#include "Roguelike/RoguelikeStageEncounterNewConfig.h"
 #include "Roguelike/Sami/RoguelikeCollapsalParadigmConfig.h"
 #include "Roguelike/Sami/RoguelikeFoldartalConfig.h"
 #include "TaskData.h"
@@ -210,6 +211,36 @@ bool asst::ResourceLoader::load(const std::filesystem::path& path)
     LoadResourceAndCheckRet(
         RoguelikeStageEncounterConfig,
         "roguelike"_p / "Sami"_p / "encounter"_p / "collapse.json"_p);
+
+    // –––––––– Refactored Roguelike Encounter Config ––––––––––––––––––––––––––––––––––––
+    /*
+    LoadResourceAndCheckRet(
+        RoguelikeStageEncounterNewConfig,
+        "roguelike"_p / "Phantom"_p / "encounter"_p / "anon.json"_p);
+    LoadResourceAndCheckRet(
+        RoguelikeStageEncounterNewConfig,
+        "roguelike"_p / "Mizuki"_p / "encounter"_p / "anon.json"_p);
+    LoadResourceAndCheckRet(
+        RoguelikeStageEncounterNewConfig,
+        "roguelike"_p / "Sami"_p / "encounter"_p / "anon.json"_p);
+        */
+    LoadResourceAndCheckRet(
+        RoguelikeStageEncounterNewConfig,
+        "roguelike"_p / "Sarkaz"_p / "encounter"_p / "anon.json"_p);
+    /*
+    LoadResourceAndCheckRet(
+        RoguelikeStageEncounterNewConfig,
+        "roguelike"_p / "Phantom"_p / "encounter"_p / "deposit.json"_p);
+    LoadResourceAndCheckRet(
+        RoguelikeStageEncounterNewConfig,
+        "roguelike"_p / "Mizuki"_p / "encounter"_p / "deposit.json"_p);
+    LoadResourceAndCheckRet(
+        RoguelikeStageEncounterNewConfig,
+        "roguelike"_p / "Sami"_p / "encounter"_p / "deposit.json"_p);
+    LoadResourceAndCheckRet(
+        RoguelikeStageEncounterNewConfig,
+        "roguelike"_p / "Sarkaz"_p / "encounter"_p / "deposit.json"_p);
+        */
 
     // –––––––– Roguelike Map Config ––––––––––––––––––––––––––––––––––––––––––––------
     LoadResourceAndCheckRet(RoguelikeMapConfig, "roguelike"_p / "Sarkaz"_p / "map.json"_p);

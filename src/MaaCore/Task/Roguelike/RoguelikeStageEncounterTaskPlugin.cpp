@@ -1,6 +1,7 @@
 #include "RoguelikeStageEncounterTaskPlugin.h"
 
 #include "Config/Roguelike/RoguelikeStageEncounterConfig.h"
+#include "Config/Roguelike/RoguelikeStageEncounterNewConfig.h"
 #include "Controller/Controller.h"
 #include "Status.h"
 #include "Task/ProcessTask.h"
@@ -35,6 +36,13 @@ bool asst::RoguelikeStageEncounterTaskPlugin::verify(AsstMsg msg, const json::va
 bool asst::RoguelikeStageEncounterTaskPlugin::_run()
 {
     LogTraceFunction;
+
+    m_theme = m_config->get_theme();
+    m_mode = m_config->get_mode();
+
+    if (refactored_encounter_run()) {
+        return true;
+    }
 
     const std::string& theme = m_config->get_theme();
     const RoguelikeMode& mode = m_config->get_mode();
@@ -198,3 +206,153 @@ int asst::RoguelikeStageEncounterTaskPlugin::hp(const cv::Mat& image)
     }
     return utils::chars_to_number(res_vec_opt->front().text, hp_val) ? hp_val : 0;
 }
+
+bool asst::RoguelikeStageEncounterTaskPlugin::refactored_encounter_run(std::optional<RoguelikeEncounterEvent> sub)
+{
+    LogTraceFunction;
+
+    if (m_theme != "Sarkaz") {
+        return false;
+    }
+
+    // 识别事件
+    RoguelikeEncounterEvent event;
+    if (sub) {
+        event = sub.value();
+    }
+    else {
+        auto event_analyze = refactored_encounter_event_analyze();
+        if (event_analyze) {
+            event = event_analyze.value();
+        }
+        else {
+            return false;
+        }
+    }
+
+    // 这个 str 应该在获取之后重新根据 condition 算出来
+    auto& event_choices_str = event.choices_str;
+    // auto event_choices = reorder_choices(event);
+
+    // 识别选项
+    const auto event_choice_task_ptr = Task.get("Roguelike@StageEncounterOcrChoice");
+
+    sleep(event_choice_task_ptr->pre_delay);
+    if (need_exit()) {
+        return false;
+    }
+
+    cv::Mat event_choice_image = ctrler()->get_image();
+    OCRer event_choice_analyzer(event_choice_image);
+    event_choice_analyzer.set_task_info(event_choice_task_ptr);
+    event_choice_analyzer.set_required(event_choices_str);
+    Log.info("Required choices:", event_choices_str);
+    if (!event_choice_analyzer.analyze()) {
+        Log.warn("Unknown Choices");
+        return false;
+    }
+    const auto& choice_name_result_vec = event_choice_analyzer.get_result();
+    if (choice_name_result_vec.empty()) {
+        Log.warn("Choices OCR Failed");
+        return false;
+    }
+
+    // 按 json 给定顺序点击选项
+    for (auto& choice : event_choices_str) {
+        auto choice_name_result_it =
+            ranges::find_if(choice_name_result_vec, [&](const auto& result) { return result.text == choice; });
+        if (choice_name_result_it == choice_name_result_vec.end()) {
+            continue;
+        }
+        ctrler()->click((*choice_name_result_it).rect);
+        sleep(600); // 动画延迟
+        if (ProcessTask(*this, { "Roguelike@StageEncounterOcrChoiceConfirm" }).run()) {
+            const auto& event_choice =
+                RoguelikeStageEncounterNew.get_choice(m_theme, event.name, (*choice_name_result_it).text);
+            if (event_choice.sub_event != "") {
+                return refactored_encounter_run(RoguelikeStageEncounterNew.get_event(m_theme, event_choice.sub_event));
+            }
+            // 离开事件不用写，直接交给 Roguelike@CloseEvent，以免多层 sub_event 出问题
+            return true;
+        }
+        else {
+            // 万一真没识别到对勾
+        }
+    }
+
+    return false;
+}
+
+std::optional<asst::RoguelikeStageEncounterTaskPlugin::RoguelikeEncounterEvent>
+    asst::RoguelikeStageEncounterTaskPlugin::refactored_encounter_event_analyze()
+{
+    LogTraceFunction;
+
+    auto& event_map = RoguelikeStageEncounterNew.get_events(m_theme /*, m_mode*/);
+    auto& event_names = RoguelikeStageEncounterNew.get_event_names(m_theme);
+    const auto event_name_task_ptr = Task.get("Roguelike@StageEncounterOcrNew");
+    sleep(event_name_task_ptr->pre_delay);
+
+    if (need_exit()) {
+        return std::nullopt;
+    }
+
+    cv::Mat event_name_image = ctrler()->get_image();
+    OCRer event_name_analyzer(event_name_image);
+    event_name_analyzer.set_task_info(event_name_task_ptr);
+    event_name_analyzer.set_required(event_names);
+    if (!event_name_analyzer.analyze()) {
+        Log.warn("Unknown Event");
+        return std::nullopt;
+    }
+    const auto& event_name_result_vec = event_name_analyzer.get_result();
+    if (event_name_result_vec.empty()) {
+        Log.info("Unknown Event");
+        return std::nullopt;
+    }
+    std::string event_name = event_name_result_vec.front().text;
+
+    return event_map.at(event_name);
+}
+
+/*
+std::vector<std::string> asst::RoguelikeStageEncounterTaskPlugin::reorder_choices(RoguelikeEncounterEvent event)
+{
+    std::vector<std::string> event_choices;
+    for (auto& choice_str : event.choices_str) {
+        auto& choice = event.choices_map.at(choice_str);
+        if (choice.conditions.size() == 0) {
+            continue;
+        }
+
+        bool condition_satisfied = true;
+        for (auto& [condition_name, condition] : choice.conditions) {
+            switch (condition.requirement) {
+            case ConditionRequirement::源石锭:
+                break;
+            case ConditionRequirement::希望:
+                break;
+            case ConditionRequirement::目标生命:
+                break;
+            case ConditionRequirement::目标生命上限:
+                break;
+            case ConditionRequirement::思绪:
+                break;
+            case ConditionRequirement::收藏品:
+                break;
+            case ConditionRequirement::干员:
+                break;
+            case ConditionRequirement::护盾值:
+                break;
+            case ConditionRequirement::圣遗物:
+                Log.error("就你小子喜欢圣遗物是吧？");
+                break;
+            default:
+                Log.info("Unsupported requirement:", condition.requirement);
+                break;
+            }
+        }
+    }
+    return std::vector<std::string>();
+}
+*/

@@ -7395,6 +7395,42 @@
         "preDelay": 600,
         "roi": [0, 405, 725, 225]
     },
+    "Roguelike@StageEncounterOcrChoice": {
+        "baseTask": "Roguelike@StageEncounterOcrReplace",
+        "text": [],
+        "preDelay": 600,
+        "roi": [800, 50, 466, 583]
+    },
+    "Roguelike@StageEncounterOcrChoiceConfirm": {
+        "Doc": "选项数若 >= 4，则可能出现显示不全的问题，故拆成 2 个模板",
+        "template": ["Roguelike@StageEncounterOcrChoiceConfirm1.png", "Roguelike@StageEncounterOcrChoiceConfirm2.png"],
+        "action": "ClickSelf",
+        "roi": [1130, 0, 150, 720],
+        "postDelay": 1000
+    },
+    "Roguelike@StageEncounterOcrChoiceHelper1": {
+        "Doc": "此任务为使用 maa tools 中的 getimagefromroi 而设计，使用情景是在出现4选项事件时点击第二选项，然后截图",
+        "template": "empty.png",
+        "roi": [1140, 220, 134, 54]
+    },
+    "Roguelike@StageEncounterOcrChoiceHelper2": {
+        "Doc": "此任务为使用 maa tools 中的 getimagefromroi 而设计，使用情景是在出现4选项事件时点击第二选项，然后截图",
+        "template": "empty.png",
+        "roi": [1140, 306, 134, 54]
+    },
+    "Roguelike@StageEncounterOcrNew": {
+        "baseTask": "Roguelike@StageEncounterOcrReplace",
+        "action": "ClickSelf",
+        "text": [],
+        "preDelay": 600,
+        "roi": [0, 405, 725, 225]
+    },
+    "Roguelike@StageEncounterOcrReplace": {
+        "algorithm": "OcrDetect",
+        "text": [],
+        "Doc": "该任务复用于肉鸽所有事件类节点的识别，中文被拆成3字节处理，需要包括号",
+        "ocrReplace": []
+    },
     "Roguelike@StageEncounterOption": {
         "Doc": "base_task",
         "template": "empty.png",

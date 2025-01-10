@@ -48,6 +48,7 @@
     <ClInclude Include="Config\Miscellaneous\OcrConfig.h" />
     <ClInclude Include="Config\Miscellaneous\SSSCopilotConfig.h" />
     <ClInclude Include="Config\OnnxSessions.h" />
+    <ClInclude Include="Config\Roguelike\RoguelikeStageEncounterNewConfig.h" />
     <ClInclude Include="Config\TaskData\TaskDataSymbol.h" />
     <ClInclude Include="Config\TaskData\TaskDataSymbolStream.h" />
     <ClInclude Include="Config\TaskData\TaskDataTypes.h" />
@@ -248,6 +249,7 @@
     <ClCompile Include="Config\Miscellaneous\OcrConfig.cpp" />
     <ClCompile Include="Config\Miscellaneous\SSSCopilotConfig.cpp" />
     <ClCompile Include="Config\OnnxSessions.cpp" />
+    <ClCompile Include="Config\Roguelike\RoguelikeStageEncounterNewConfig.cpp" />
     <ClCompile Include="Config\TaskData\TaskDataSymbol.cpp" />
     <ClCompile Include="Config\TaskData\TaskDataSymbolStream.cpp" />
     <ClCompile Include="Controller\adb-lite\client.cpp" />
