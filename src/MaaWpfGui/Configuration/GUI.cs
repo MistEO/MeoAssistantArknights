@@ -25,6 +25,8 @@ namespace MaaWpfGui.Configuration
 
         public bool UseNotify { get; set; } = true;
 
+        public bool InvertNullFunction { get; set; } = false;
+
         public string Localization { get; set; } = LocalizationHelper.DefaultLanguage;
 
         public bool MinimizeToTray { get; set; } = false;

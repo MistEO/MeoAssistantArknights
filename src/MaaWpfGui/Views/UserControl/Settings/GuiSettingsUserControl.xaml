@@ -60,6 +60,10 @@
                     Margin="10"
                     Content="{DynamicResource WindowTitleScrollable}"
                     IsChecked="{Binding WindowTitleScrollable}" />
+                <!--<CheckBox
+                    Margin="10"
+                    Content="{DynamicResource NullFunctionality}"
+                    IsChecked="{Binding InvertNullFunction}" />-->
                 <hc:CheckComboBox
                     x:Name="CheckComboBox"
                     Width="180"

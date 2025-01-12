@@ -353,6 +353,7 @@ OF-1을 해금하지 않았다면 선택하지 말아 주세요.</system:String>
     <system:String x:Key="SystemNotification">중요 알림 팝업</system:String>
     <system:String x:Key="HideCloseButton">닫기 버튼 숨기기</system:String>
     <system:String x:Key="WindowTitleScrollable">윈도우 제목 스크롤</system:String>
+    <system:String x:Key="NullFunctionality">오른쪽 클릭 체크박스 기능 반전</system:String>
     <system:String x:Key="TitleBarDisplayContent">타이틀 바 표시 내용</system:String>
     <system:String x:Key="UseLogItemDateFormat">사용자 정의 로그 날짜 형식</system:String>
     <system:String x:Key="LogItemDateFormatString">날짜 형식 문자열</system:String>

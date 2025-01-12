@@ -157,6 +157,15 @@ public class GuiSettingsUserControlModel : PropertyChangedBase
         }
     }
 
+    public bool InvertNullFunction
+    {
+        get => ConfigFactory.Root.GUI.InvertNullFunction;
+        set
+        {
+            ConfigFactory.Root.GUI.InvertNullFunction = value;
+        }
+    }
+
     public List<string> LogItemDateFormatStringList { get; } =
     [
         "HH:mm:ss",
