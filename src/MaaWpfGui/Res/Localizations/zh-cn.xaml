@@ -134,6 +134,7 @@
     <system:String x:Key="RoguelikeStartingCoreCharNotFound">输入的干员未在 battle_data 中。</system:String>
     <system:String x:Key="RoguelikeStartWithEliteTwo">凹「开局干员」直升精二</system:String>
     <system:String x:Key="RoguelikeOnlyStartWithEliteTwo">只凹「开局干员」直升精二，不进行作战</system:String>
+    <system:String x:Key="RoguelikeStartWithTwoIdeas">凹双构想开局</system:String>
     <system:String x:Key="Roguelike3FirstFloorFoldartal">凹第一层远见密文板，不进行作战</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartal">生活队凹开局密文板</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartalTip">最多写三个，并用英文分号「;」隔开</system:String>

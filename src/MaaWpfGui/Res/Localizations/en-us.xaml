@@ -134,6 +134,7 @@
     <system:String x:Key="RoguelikeStartingCoreCharNotFound">The operator is not in battle_data.</system:String>
     <system:String x:Key="RoguelikeStartWithEliteTwo">Repeat for「Starting Operator」Elite 2</system:String>
     <system:String x:Key="RoguelikeOnlyStartWithEliteTwo">Only Repeat for「Starting Operator」Elite 2, No Battle</system:String>
+    <system:String x:Key="RoguelikeStartWithTwoIdeas">Repeat for a start with 2 ideas</system:String>
     <system:String x:Key="Roguelike3FirstFloorFoldartal">Repeat for foldartal foreseed first floor，No Battle</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartal">Start with "Life Prioritizing Squad" and acquire the cypherboard</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartalTip">Write up to three and separate with ";"</system:String>

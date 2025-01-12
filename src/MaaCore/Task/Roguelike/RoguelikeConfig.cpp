@@ -104,6 +104,15 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
         m_first_floor_foldartal = params.contains("first_floor_foldartal");
     }
 
+    // ------------------ 萨卡兹主题专用参数 ------------------
+    if (m_theme == RoguelikeTheme::Sarkaz) {
+        m_start_with_two_ideas = params.get("start_with_two_ideas", false);
+        if (m_mode != RoguelikeMode::Collectible && m_start_with_two_ideas) {
+            Log.error(__FUNCTION__, "| Invalid mode for start_with_two_ideas", static_cast<int>(mode));
+            return false;
+        }
+    }
+
     return true;
 }
 

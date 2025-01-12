@@ -118,7 +118,19 @@ private:
     // ------------------ 密文板 ------------------
     bool m_first_floor_foldartal = false; // 凹远见密文板
 
-    /* 以下为局内数据，每次重置 */
+    // =========================== 萨卡兹主题专用参数 ===========================
+
+public:
+    void set_start_with_two_ideas(bool value) { m_start_with_two_ideas = value; }
+
+    bool get_start_with_two_ideas() const { return m_start_with_two_ideas; }
+
+private:
+    bool m_start_with_two_ideas = false; // 在刷开局模式下凹开局 2 构想
+
+    // ================================================================================
+    // 以下为局内数据，每次重置
+    // ================================================================================
 public:
     // ------------------ 招募 ------------------
     void set_team_full_without_rookie(bool value) { m_team_full_without_rookie = value; }
@@ -188,7 +200,7 @@ private:
     // ------------------ 密文板 ------------------
     std::vector<std::string> m_foldartal; // 所有已获得密文板
 
-    // ------------------ 萨卡兹主题专用参数 ------------------
+    // =========================== 萨卡兹主题专用参数 ===========================
 public:
     void set_idea_count(int idea_count) { m_idea_count = idea_count; }
 

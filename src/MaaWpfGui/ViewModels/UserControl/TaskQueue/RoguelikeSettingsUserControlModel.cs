@@ -457,6 +457,21 @@ public class RoguelikeSettingsUserControlModel : PropertyChangedBase
     /// </summary>
     public bool RoguelikeOnlyStartWithEliteTwo => _roguelikeOnlyStartWithEliteTwo && RoguelikeStartWithEliteTwo;
 
+    private bool _roguelikeStartWithTwoIdeas = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeStartWithTwoIdeas, bool.FalseString));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether we need to start with two ideas.
+    /// </summary>
+    public bool RoguelikeStartWithTwoIdeas
+    {
+        get => _roguelikeStartWithTwoIdeas;
+        set
+        {
+            SetAndNotify(ref _roguelikeStartWithTwoIdeas, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeStartWithTwoIdeas, value.ToString());
+        }
+    }
+
     private bool _roguelike3FirstFloorFoldartal = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.Roguelike3FirstFloorFoldartal, bool.FalseString));
 
     /// <summary>

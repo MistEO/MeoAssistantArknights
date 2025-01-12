@@ -125,6 +125,7 @@ namespace MaaWpfGui.Constants
         public const string RoguelikeCoreChar = "Roguelike.CoreChar";
         public const string RoguelikeStartWithEliteTwo = "Roguelike.RoguelikeStartWithEliteTwo";
         public const string RoguelikeOnlyStartWithEliteTwo = "Roguelike.RoguelikeOnlyStartWithEliteTwo";
+        public const string RoguelikeStartWithTwoIdeas = "Roguelike.RoguelikeStartWithTwoIdeas";
         public const string Roguelike3FirstFloorFoldartal = "Roguelike.Roguelike3FirstFloorFoldartal";
         public const string Roguelike3StartFloorFoldartal = "Roguelike.Roguelike3StartFloorFoldartal";
         public const string Roguelike3NewSquad2StartingFoldartal = "Roguelike.Roguelike3NewSquad2StartingFoldartal";

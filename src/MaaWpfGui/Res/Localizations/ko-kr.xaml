@@ -134,6 +134,7 @@
     <system:String x:Key="RoguelikeStartingCoreCharNotFound">오퍼레이터 는 battle_data에 없습니다.</system:String>
     <system:String x:Key="RoguelikeStartWithEliteTwo">시작 오퍼레이터 2정예화까지 반복</system:String>
     <system:String x:Key="RoguelikeOnlyStartWithEliteTwo">시작 오퍼레이터 2정예화까지 반복(전투 X)</system:String>
+    <system:String x:Key="RoguelikeStartWithTwoIdeas">Repeat for a start with 2 ideas</system:String>
     <system:String x:Key="Roguelike3FirstFloorFoldartal">1층 암호판 획득 반복(전투 X)</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartal">생존지상 분대 목표 암호판 설정</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartalTip">최대 3개까지 지원하며「;」로 구분합니다</system:String>

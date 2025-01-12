@@ -134,6 +134,7 @@
     <system:String x:Key="RoguelikeStartingCoreCharNotFound">このオペレーターがbattle_dataにありません。</system:String>
     <system:String x:Key="RoguelikeStartWithEliteTwo">「最初のオペレーター」直接昇進</system:String>
     <system:String x:Key="RoguelikeOnlyStartWithEliteTwo">指定オペレーターの昇進招集までリセマラし、戦闘を行わない</system:String>
+    <system:String x:Key="RoguelikeStartWithTwoIdeas">Repeat for a start with 2 ideas</system:String>
     <system:String x:Key="Roguelike3FirstFloorFoldartal">第一層遠見で指定された啓示板を取得し、戦闘を行わない</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartal">生活重視分隊で開始、指定された啓示板を取得する</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartalTip">最大3つ書き込み、半角セミコロン;で区切る</system:String>

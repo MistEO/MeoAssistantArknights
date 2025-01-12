@@ -70,6 +70,11 @@ bool asst::RoguelikeLastRewardTaskPlugin::_run()
             Task.set_task_base("Roguelike@LastReward3", "Roguelike@LastReward_restart");
             Task.set_task_base("Roguelike@LastReward4", last_reward_stop_or_continue);
             Task.set_task_base("Roguelike@LastRewardRand", "Roguelike@LastReward_restart");
+            if (m_config->get_theme() == RoguelikeTheme::Sarkaz && m_config->get_start_with_two_ideas()) {
+                Task.set_task_base("Roguelike@LastReward", "Roguelike@LastReward_restart");
+                Task.set_task_base("Roguelike@LastReward4", "Roguelike@LastReward_restart");
+                Task.set_task_base("Sarkaz@Roguelike@LastReward5", last_reward_stop_or_continue);
+            }
         }
         else if (!m_config->get_only_start_with_elite_two()) {
             // 开启烧开水 Flag，将难度设置为 0
@@ -80,6 +85,9 @@ bool asst::RoguelikeLastRewardTaskPlugin::_run()
             Task.set_task_base("Roguelike@LastReward3", "Roguelike@LastReward_default");
             Task.set_task_base("Roguelike@LastReward4", "Roguelike@LastReward_default");
             Task.set_task_base("Roguelike@LastRewardRand", "Roguelike@LastReward_default");
+            if (m_config->get_theme() == RoguelikeTheme::Sarkaz) {
+                Task.set_task_base("Sarkaz@Roguelike@LastReward5", "Sarkaz@Roguelike@LastReward_default");
+            }
         }
     }
     return true;

@@ -149,6 +149,15 @@
             </CheckBox>
             <CheckBox
                 Margin="0,10"
+                IsChecked="{Binding RoguelikeStartWithTwoIdeas}"
+                Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot; and RoguelikeTheme == &quot;Sarkaz&quot;'}">
+                <TextBlock
+                    Block.TextAlignment="Left"
+                    Text="{DynamicResource RoguelikeStartWithTwoIdeas}"
+                    TextWrapping="Wrap" />
+            </CheckBox>
+            <CheckBox
+                Margin="0,10"
                 IsChecked="{Binding Roguelike3FirstFloorFoldartalRaw}"
                 Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot; and RoguelikeTheme == &quot;Sami&quot; '}">
                 <TextBlock
