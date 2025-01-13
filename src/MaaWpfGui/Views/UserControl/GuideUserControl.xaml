@@ -11,9 +11,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
     xmlns:settingsViews="clr-namespace:MaaWpfGui.Views.UserControl.Settings"
+    xmlns:taskQueue="clr-namespace:MaaWpfGui.Views.UserControl.TaskQueue"
     xmlns:ui="clr-namespace:MaaWpfGui.ViewModels.UI"
-    xmlns:userControl="clr-namespace:MaaWpfGui.Views.UserControl"
-    xmlns:viewModels="clr-namespace:MaaWpfGui.ViewModels"
     d:Background="White"
     d:DataContext="{d:DesignInstance {x:Type ui:SettingsViewModel}}"
     d:DesignWidth="400"
@@ -125,7 +124,7 @@
                             Width="240"
                             TransitionMode="{Binding GuideTransitionMode}"
                             Visibility="{c:Binding 'GuideStepIndex == 2'}">
-                            <userControl:ConnectSettingsOnWakeUpUserControl />
+                            <taskQueue:StartUpTaskUserControl DataContext="{Binding StartUpTask, Source={x:Static helper:Instances.SettingsViewModel}}" />
                         </hc:TransitioningContentControl>
 
                         <hc:TransitioningContentControl

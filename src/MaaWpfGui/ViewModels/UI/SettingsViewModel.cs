@@ -62,6 +62,11 @@ namespace MaaWpfGui.ViewModels.UI
         #region 长草任务Model
 
         /// <summary>
+        /// Gets 连接任务Model
+        /// </summary>
+        public static StartUpTaskUserControlModel StartUpTask { get; } = new();
+
+        /// <summary>
         /// Gets 战斗任务Model
         /// </summary>
         public static FightSettingsUserControlModel FightTask { get; } = new();
@@ -370,29 +375,6 @@ namespace MaaWpfGui.ViewModels.UI
         }
 
         #endregion EasterEggs
-
-        #region 开始唤醒
-
-        private string _accountName = ConfigurationHelper.GetValue(ConfigurationKeys.AccountName, string.Empty);
-
-        public string AccountName
-        {
-            get => _accountName;
-            set
-            {
-                SetAndNotify(ref _accountName, value);
-                ConfigurationHelper.SetValue(ConfigurationKeys.AccountName, value);
-            }
-        }
-
-        // UI 绑定的方法
-        // ReSharper disable once UnusedMember.Global
-        public void AccountSwitchManualRun()
-        {
-            Instances.TaskQueueViewModel.QuickSwitchAccount();
-        }
-
-        #endregion 开始唤醒
 
         #region HotKey
 

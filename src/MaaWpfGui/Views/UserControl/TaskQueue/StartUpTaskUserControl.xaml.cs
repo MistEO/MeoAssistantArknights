@@ -1,4 +1,4 @@
-// <copyright file="ConnectSettingsOnWakeUpUserControl.xaml.cs" company="MaaAssistantArknights">
+// <copyright file="StartUpTaskUserControl.xaml.cs" company="MaaAssistantArknights">
 // MaaWpfGui - A part of the MaaCoreArknights project
 // Copyright (C) 2021 MistEO and Contributors
 //
@@ -11,17 +11,17 @@
 // but WITHOUT ANY WARRANTY
 // </copyright>
 
-namespace MaaWpfGui.Views.UserControl
+namespace MaaWpfGui.Views.UserControl.TaskQueue
 {
     /// <summary>
-    /// ConnectSettingsOnWakeUpUserControl.xaml 的交互逻辑
+    /// StartUpTaskUserControl.xaml 的交互逻辑
     /// </summary>
-    public partial class ConnectSettingsOnWakeUpUserControl : System.Windows.Controls.UserControl
+    public partial class StartUpTaskUserControl : System.Windows.Controls.UserControl
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConnectSettingsOnWakeUpUserControl"/> class.
+        /// Initializes a new instance of the <see cref="StartUpTaskUserControl"/> class.
         /// </summary>
-        public ConnectSettingsOnWakeUpUserControl()
+        public StartUpTaskUserControl()
         {
             InitializeComponent();
         }

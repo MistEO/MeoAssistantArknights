@@ -248,11 +248,12 @@
                         Visibility="{c:Binding DataContext.TaskSettingVisibilities.Recruiting,
                                                RelativeSource={RelativeSource Mode=FindAncestor,
                                                                               AncestorType={x:Type UserControl}}}" />
-                    <userControl:ConnectSettingsOnWakeUpUserControl
-                        s:View.ActionTarget="{Binding DataContext, RelativeSource={RelativeSource Self}}"
-                        DataContext="{Binding TaskSettingDataContext}"
-                        IsEnabled="{Binding Idle}"
-                        Visibility="{c:Binding TaskSettingVisibilities.WakeUp}" />
+                    <taskQueue:StartUpTaskUserControl
+                        DataContext="{Binding TaskSettingDataContext.StartUpTask}"
+                        IsEnabled="{Binding DataContext.Idle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                        Visibility="{c:Binding DataContext.TaskSettingVisibilities.WakeUp,
+                                               RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                              AncestorType={x:Type UserControl}}}" />
                     <taskQueue:InfrastSettingsUserControl
                         DataContext="{Binding TaskSettingDataContext.InfrastTask}"
                         IsEnabled="{Binding DataContext.Idle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"

@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="MaaWpfGui.Views.UserControl.ConnectSettingsOnWakeUpUserControl"
+    x:Class="MaaWpfGui.Views.UserControl.TaskQueue.StartUpTaskUserControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:CalcBinding;assembly=CalcBinding"
@@ -7,12 +7,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dd="urn:gong-wpf-dragdrop"
     xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:helper="clr-namespace:MaaWpfGui.Helper"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="https://github.com/canton7/Stylet"
+    xmlns:setting="clr-namespace:MaaWpfGui.ViewModels.UI"
+    xmlns:taskQueue="clr-namespace:MaaWpfGui.ViewModels.UserControl.TaskQueue"
     xmlns:ui="clr-namespace:MaaWpfGui.ViewModels.UI"
     d:Background="White"
-    d:DataContext="{d:DesignInstance {x:Type ui:SettingsViewModel}}"
+    d:DataContext="{d:DesignInstance {x:Type taskQueue:StartUpTaskUserControlModel}}"
     d:DesignWidth="220"
+    s:View.ActionTarget="{Binding}"
     mc:Ignorable="d">
     <StackPanel>
         <Grid Margin="0,5" Visibility="{c:Binding 'ClientType == &quot;Official&quot; or ClientType == &quot;Bilibili&quot; or ClientType == &quot;&quot;', Source={x:Static ui:SettingsViewModel.GameSettings}}">
@@ -20,9 +24,9 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox
+            <hc:TextBox
                 hc:TitleElement.Title="{DynamicResource AccountSwitch}"
-                IsReadOnly="{c:Binding !Idle}"
+                IsReadOnly="{c:Binding !Idle, Source={x:Static helper:Instances.SettingsViewModel}}"
                 Style="{StaticResource TextBoxExtend}"
                 Text="{Binding AccountName, UpdateSourceTrigger=PropertyChanged}"
                 ToolTip="{DynamicResource AccountSwitchTip}" />
@@ -37,7 +41,7 @@
                 Content="{DynamicResource AccountSwitchManualRun}" />
         </Grid>
 
-        <StackPanel s:View.ActionTarget="{Binding DataContext, RelativeSource={RelativeSource Self}}" DataContext="{Binding ConnectSettings}">
+        <StackPanel s:View.ActionTarget="{Binding DataContext, RelativeSource={RelativeSource Self}}" DataContext="{Binding Source={x:Static ui:SettingsViewModel.ConnectSettings}}">
             <CheckBox
                 Margin="0,10"
                 Content="{DynamicResource AutoDetectConnection}"
@@ -69,7 +73,7 @@
                     Content="{DynamicResource Select}" />
             </Grid>
 
-            <ComboBox
+            <hc:ComboBox
                 Margin="0,5"
                 HorizontalContentAlignment="Stretch"
                 hc:InfoElement.Title="{DynamicResource ConnectionAddress}"
@@ -101,8 +105,8 @@
                         </Grid>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
-            </ComboBox>
-            <ComboBox
+            </hc:ComboBox>
+            <hc:ComboBox
                 Margin="0,5"
                 hc:InfoElement.Title="{DynamicResource ConnectionPreset}"
                 DisplayMemberPath="Display"
@@ -111,27 +115,27 @@
                 SelectedValuePath="Value"
                 Style="{StaticResource ComboBoxExtend}"
                 Visibility="{c:Binding !AutoDetectConnection}" />
-            <ComboBox
+            <hc:ComboBox
                 Margin="0,5"
                 hc:InfoElement.Title="{DynamicResource TouchMode}"
                 DisplayMemberPath="Display"
-                IsHitTestVisible="{Binding DataContext.Idle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}"
+                IsHitTestVisible="{Binding Idle, Source={x:Static helper:Instances.SettingsViewModel}}"
                 ItemsSource="{Binding TouchModeList}"
                 SelectedValue="{Binding TouchMode}"
                 SelectedValuePath="Value"
                 Style="{StaticResource ComboBoxExtend}" />
         </StackPanel>
 
-        <ComboBox
+        <hc:ComboBox
             Margin="0,5"
             hc:InfoElement.Title="{DynamicResource ClientType}"
             DisplayMemberPath="Display"
-            IsHitTestVisible="{Binding Idle}"
+            IsHitTestVisible="{Binding Idle, Source={x:Static helper:Instances.SettingsViewModel}}"
             ItemsSource="{Binding ClientTypeList, Source={x:Static ui:SettingsViewModel.GameSettings}}"
             SelectedValue="{Binding ClientType, Source={x:Static ui:SettingsViewModel.GameSettings}}"
             SelectedValuePath="Value"
             Style="{StaticResource ComboBoxExtend}"
-            Visibility="{c:Binding !TaskSettingVisibilities.Guide}" />
+            Visibility="{c:Binding !TaskSettingVisibilities.Guide, Source={x:Static helper:Instances.SettingsViewModel}}" />
 
     </StackPanel>
 </UserControl>

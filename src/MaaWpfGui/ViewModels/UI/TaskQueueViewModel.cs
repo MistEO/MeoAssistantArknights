@@ -1480,8 +1480,8 @@ namespace MaaWpfGui.ViewModels.UI
         {
             var mode = SettingsViewModel.GameSettings.ClientType;
             var enable = mode.Length != 0;
-            Instances.SettingsViewModel.AccountName = Instances.SettingsViewModel.AccountName.Trim();
-            var accountName = Instances.SettingsViewModel.AccountName;
+            SettingsViewModel.StartUpTask.AccountName = SettingsViewModel.StartUpTask.AccountName.Trim();
+            var accountName = SettingsViewModel.StartUpTask.AccountName;
             return Instances.AsstProxy.AsstAppendStartUp(mode, enable, accountName);
         }
 
