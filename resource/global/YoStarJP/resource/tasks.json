@@ -20,6 +20,28 @@
     "EnterChapterDifficultyNormal": {
         "text": ["作戦へ"]
     },
+    "AS-OpenOcr": {
+        "text": [
+            "太陽すらも追い越して",
+            "太陽",
+            "追い越し",
+            "市民庭園",
+            "市民",
+            "民庭",
+            "庭園",
+            "豊穣祭",
+            "豊穣",
+            "穣祭",
+            "宝物庫",
+            "宝物",
+            "物庫",
+            "イベント開催中",
+            "ステージ開放中"
+        ]
+    },
+    "ASChapterToAS": {
+        "text": ["市民庭園", "市民", "民庭", "庭園"]
+    },
     "BP-OpenOcr": {
         "text": ["生存航路", "防衛線強化", "防衛", "強化", "イベント開催中", "ステージ開放中"]
     },
@@ -110,7 +132,7 @@
     "CVChapterToCV": {
         "text": ["青白い町"]
     },
-    "SL-Open": {
+    "SL-OpenOcr": {
         "text": [
             "火山と雲と夢色の旅路",
             "火山と",
@@ -121,6 +143,12 @@
             "ステージ開放中"
         ],
         "roi": [0, 500, 500, 150]
+    },
+    "SL-Open": {
+        "baseTask": "SS-Open",
+        "template": ["StageSideStory.png", "StageActivity.png"],
+        "postDelay": 3000,
+        "next": ["SLChapterToSL"]
     },
     "SLChapterToSL": {
         "text": ["温泉リゾート", "温泉", "リゾート"]
