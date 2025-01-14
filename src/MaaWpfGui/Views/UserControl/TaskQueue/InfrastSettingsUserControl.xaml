@@ -88,6 +88,14 @@
         <!--  不开自定义基建计划时，放在常规设置的部分  -->
         <StackPanel Visibility="{c:Binding 'CustomInfrastEnabled and TaskSettingVisibilities.EnableAdvancedSettings or !CustomInfrastEnabled and !TaskSettingVisibilities.EnableAdvancedSettings'}">
 
+            <CheckBox
+                Margin="0,10"
+                IsChecked="{Binding UseInGameInfrastSwitch}"
+                IsEnabled="{c:Binding !CustomInfrastEnabled}">
+                <controls:TextBlock
+                    Text="{DynamicResource UseInGameInfrastSwitch}"
+                    TextWrapping="Wrap" />
+            </CheckBox>
             <ComboBox
                 Margin="0,5"
                 hc:InfoElement.Title="{DynamicResource DroneUsage}"
@@ -97,7 +105,7 @@
                 SelectedValue="{Binding UsesOfDrones}"
                 SelectedValuePath="Value"
                 Style="{StaticResource ComboBoxExtend}" />
-            <StackPanel Margin="0">
+            <StackPanel Margin="0" Visibility="{c:Binding !UseInGameInfrastSwitch}" >
                 <TextBlock
                     Margin="0,5"
                     HorizontalAlignment="Stretch"
@@ -117,7 +125,8 @@
                 dd:DragDrop.IsDragSource="True"
                 dd:DragDrop.IsDropTarget="True"
                 ItemsSource="{Binding Path=InfrastItemViewModels}"
-                ToolTip="{DynamicResource LabelSequenceTip}">
+                ToolTip="{DynamicResource LabelSequenceTip}"
+                Visibility="{c:Binding !UseInGameInfrastSwitch}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -133,7 +142,8 @@
                     </Style>
                 </ListBox.Resources>
             </ListBox>
-            <Grid>
+            <Grid
+                Visibility="{c:Binding !UseInGameInfrastSwitch}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />

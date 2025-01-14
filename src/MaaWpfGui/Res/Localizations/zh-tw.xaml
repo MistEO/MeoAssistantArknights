@@ -347,6 +347,7 @@
     <system:String x:Key="ReceiveOrundum">收集幸運牆的每日合成玉獎勵</system:String>
     <system:String x:Key="ReceiveMining">領取限時開採許可的每日合成玉獎勵</system:String>
     <system:String x:Key="ReceiveSpecialAccess">領取特殊贈送月卡獎勵</system:String>
+    <system:String x:Key="UseInGameInfrastSwitch">使用遊戲內基建配置換班</system:String>
     <system:String x:Key="DroneUsage">無人機用途</system:String>
     <system:String x:Key="UseTray">顯示工作列圖標</system:String>
     <system:String x:Key="HideTray">隱藏工作列圖標</system:String>

@@ -232,6 +232,21 @@ public class InfrastSettingsUserControlModel : PropertyChangedBase
 
     private const string UserDefined = "user_defined";
 
+    private bool _useInGameInfrastSwitch = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.UseInGameInfrastSwitch, bool.TrueString));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether the in-game Infrast usage is enabled.
+    /// </summary>
+    public bool UseInGameInfrastSwitch
+    {
+        get => _useInGameInfrastSwitch;
+        set
+        {
+            SetAndNotify(ref _useInGameInfrastSwitch, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.UseInGameInfrastSwitch, value.ToString());
+        }
+    }
+
     /// <summary>
     /// Gets or sets the uses of drones.
     /// </summary>

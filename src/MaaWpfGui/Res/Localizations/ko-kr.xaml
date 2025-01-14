@@ -347,6 +347,7 @@ OF-1을 해금하지 않았다면 선택하지 말아 주세요.</system:String>
     <system:String x:Key="ReceiveOrundum">복권방에서 일일 합성옥 받기</system:String>
     <system:String x:Key="ReceiveMining">한정 채굴에서 일일 합성옥 받기</system:String>
     <system:String x:Key="ReceiveSpecialAccess">스페셜 액세스 보상 받기</system:String>
+    <system:String x:Key="UseInGameInfrastSwitch">게임 내 기반 시설 설정을 사용하여 교대 근무를 설정하다</system:String>
     <system:String x:Key="DroneUsage">드론 사용처</system:String>
     <system:String x:Key="UseTray">트레이 아이콘 표시</system:String>
     <system:String x:Key="HideTray">트레이 아이콘 숨기기</system:String>
