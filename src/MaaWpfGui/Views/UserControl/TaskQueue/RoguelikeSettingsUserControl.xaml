@@ -107,6 +107,15 @@
             </CheckBox>
             <CheckBox
                 Margin="0,10"
+                IsChecked="{Binding RoguelikeCollectibleModeShopping}"
+                Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot;'}">
+                <TextBlock
+                    Block.TextAlignment="Left"
+                    Text="{DynamicResource LastRewardModeShopping}"
+                    TextWrapping="Wrap" />
+            </CheckBox>
+            <CheckBox
+                Margin="0,10"
                 IsChecked="{Binding RoguelikeStopWhenInvestmentFull}"
                 Visibility="{c:Binding ElementName=InvestmentEnabled,
                                        Path=IsChecked}">

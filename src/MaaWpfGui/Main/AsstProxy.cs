@@ -2430,6 +2430,7 @@ namespace MaaWpfGui.Main
         /// <param name="starts">开始探索次数。</param>
         /// <param name="investmentEnabled">是否投资源石锭</param>
         /// <param name="investmentWithMoreScore">投资时候刷更多分</param>
+        /// <param name="lastRewardModeShopping">刷开局模式是否购物</param>
         /// <param name="invests">投资源石锭次数。</param>
         /// <param name="stopWhenFull">投资满了自动停止任务。</param>
         /// <param name="squad">开局分队</param>
@@ -2457,6 +2458,7 @@ namespace MaaWpfGui.Main
             int starts,
             bool investmentEnabled,
             bool investmentWithMoreScore,
+            bool lastRewardModeShopping,
             int invests,
             bool stopWhenFull,
             string squad,
@@ -2485,6 +2487,12 @@ namespace MaaWpfGui.Main
                 ["theme"] = theme,
                 ["investment_enabled"] = false,
             };
+
+            // 刷开局模式
+            if (mode == 4)
+            {
+                taskParams["last_reward_mode_shopping"] = lastRewardModeShopping;
+            }
 
             if (theme != "Phantom")
             {

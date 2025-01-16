@@ -28,6 +28,10 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
         return false;
     }
 
+    if (mode == RoguelikeMode::Collectible) {
+        m_last_reward_mode_shopping = params.get("last_reward_mode_shopping", false);
+    }
+
     m_start_with_seed = params.get("start_with_seed", false);
     m_start_with_elite_two = params.get("start_with_elite_two", false);
     m_only_start_with_elite_two = params.get("only_start_with_elite_two", false);

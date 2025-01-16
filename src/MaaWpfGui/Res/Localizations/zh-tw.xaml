@@ -315,6 +315,7 @@
     <system:String x:Key="StopOnGoldLimit">儲備源石錠達到上限時停止</system:String>
     <system:String x:Key="InvestmentEnabled">投資源石錠</system:String>
     <system:String x:Key="InvestmentWithMoreScore">投資模式啟用購物、招募、進2層</system:String>
+    <system:String x:Key="LastRewardModeShopping">刷開局模式啟用購物</system:String>
     <system:String x:Key="RefreshTraderWithDice">刷新商店（指路鱗）</system:String>
     <system:String x:Key="PenguinId">企鵝物流匯報 ID（僅數字部分）</system:String>
     <system:String x:Key="EnablePenguin">上報企鵝物流</system:String>

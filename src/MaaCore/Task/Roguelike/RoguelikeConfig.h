@@ -92,6 +92,10 @@ public:
 
     bool get_invest_with_more_score() const { return m_invest_with_more_score; }
 
+    void set_last_reward_mode_shopping(bool value) { m_last_reward_mode_shopping = value; }
+
+    bool get_last_reward_mode_shopping() const { return m_last_reward_mode_shopping; }
+
 private:
     std::string m_theme;                       // 主题
     RoguelikeMode m_mode = RoguelikeMode::Exp; // 模式
@@ -105,6 +109,9 @@ private:
 
     // ------------------ 投资模式 ------------------
     bool m_invest_with_more_score = false; // 投资时招募、购物刷分
+
+    // ------------------ 刷开局模式 ------------------
+    bool m_last_reward_mode_shopping = false; // 刷开局模式下进入商店时购物
 
     // =========================== 萨米主题专用参数 ===========================
 

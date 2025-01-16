@@ -315,6 +315,7 @@ You can cancel this popup by clicking the Settings - About Us - Issue Reporting 
     <system:String x:Key="StopOnGoldLimit">Stops when invested coins reach limit</system:String>
     <system:String x:Key="InvestmentEnabled">Invest coins</system:String>
     <system:String x:Key="InvestmentWithMoreScore">Investment mode enables shopping, recruitment, and entering the second floor</system:String>
+    <system:String x:Key="LastRewardModeShopping">Enable shopping in the grinding mode</system:String>
     <system:String x:Key="RefreshTraderWithDice">Refresh Rogue Trader with Dice</system:String>
     <system:String x:Key="PenguinId">Penguin Report ID (Number part)</system:String>
     <system:String x:Key="EnablePenguin">Report Penguin</system:String>

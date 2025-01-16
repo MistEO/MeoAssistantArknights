@@ -644,6 +644,21 @@ public class RoguelikeSettingsUserControlModel : PropertyChangedBase
     /// </summary>
     public bool RoguelikeInvestmentWithMoreScore => _roguelikeInvestmentWithMoreScore && RoguelikeMode == "1";
 
+    private bool _roguelikeLastRewardModeShopping = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeLastRewardModeShopping, bool.FalseString));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether shopping is enabled in LastReward Mode.
+    /// </summary>
+    public bool RoguelikeLastRewardModeShopping
+    {
+        get => _roguelikeLastRewardModeShopping;
+        set
+        {
+            SetAndNotify(ref _roguelikeLastRewardModeShopping, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeLastRewardModeShopping, value.ToString());
+        }
+    }
+
     private bool _roguelikeRefreshTraderWithDice = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeRefreshTraderWithDice, bool.FalseString));
 
     public bool RoguelikeRefreshTraderWithDiceRaw

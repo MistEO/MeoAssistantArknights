@@ -33,6 +33,10 @@ bool asst::RoguelikeShoppingTaskPlugin::_run()
 {
     LogTraceFunction;
 
+    if (m_config->get_mode() == RoguelikeMode::Collectible && (!m_config->get_last_reward_mode_shopping())) {
+        return true;
+    }
+
     buy_once();
     const auto& theme = m_config->get_theme();
     if ((theme == RoguelikeTheme::Sami || theme == RoguelikeTheme::Sarkaz) &&

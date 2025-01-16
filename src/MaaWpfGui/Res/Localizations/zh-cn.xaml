@@ -315,6 +315,7 @@
     <system:String x:Key="StopOnGoldLimit">储备源石锭达到上限时停止</system:String>
     <system:String x:Key="InvestmentEnabled">投资源石锭</system:String>
     <system:String x:Key="InvestmentWithMoreScore">投资模式启用购物、招募、进2层</system:String>
+    <system:String x:Key="LastRewardModeShopping">刷开局模式启用购物</system:String>
     <system:String x:Key="RefreshTraderWithDice">刷新商店（指路鳞）</system:String>
     <system:String x:Key="PenguinId">企鹅物流汇报ID（仅数字部分）</system:String>
     <system:String x:Key="EnablePenguin">上报企鹅物流</system:String>
