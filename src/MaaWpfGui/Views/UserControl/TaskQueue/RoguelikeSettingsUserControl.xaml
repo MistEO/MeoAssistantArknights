@@ -107,7 +107,7 @@
             </CheckBox>
             <CheckBox
                 Margin="0,10"
-                IsChecked="{Binding RoguelikeCollectibleModeShopping}"
+                IsChecked="{Binding RoguelikeLastRewardModeShopping}"
                 Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot;'}">
                 <TextBlock
                     Block.TextAlignment="Left"
