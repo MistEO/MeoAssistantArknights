@@ -6698,9 +6698,10 @@
     },
     "Roguelike@MonthlySquadComms": {
         "Doc": "base_task 月度小队通信",
-        "template": "empty.png",
+        "algorithm": "OcrDetect",
         "action": "ClickSelf",
-        "roi": [538, 446, 180, 50]
+        "roi": [538, 446, 180, 50],
+        "text": []
     },
     "Roguelike@MonthlySquadCommsMiss": {
         "Doc": "base_task 月度小队通信已获取",
@@ -6723,7 +6724,7 @@
     },
     "Roguelike@MonthlySquadRewardMiss": {
         "Doc": "base_task 月度小队奖励已获取",
-        "template": "empty.png",
+        "template": "Roguelike@MonthlySquadRewardMiss.png",
         "action": "ClickRect",
         "roi": [735, 410, 280, 95],
         "specificRect": [466, 405, 40, 60]
@@ -6753,7 +6754,7 @@
     },
     "Roguelike@DeepExplorationNotUnlockedComplain": {
         "Doc": "base_task 深入调查没解锁",
-        "template": "empty.png"
+        "template": "Roguelike@DeepExplorationNotUnlocked.png"
     },
     "Roguelike@ChooseDifficulty": {
         "Doc": "base_task",
@@ -7986,13 +7987,15 @@
         "text": ["月度小队"]
     },
     "Phantom@Roguelike@MonthlySquadComms": {
-        "template": "Phantom@Roguelike@Comms.png"
+        "text": ["通讯记录仪"]
     },
     "Phantom@Roguelike@MonthlySquadCommsMiss": {
         "template": "Phantom@Roguelike@CommsMiss.png",
         "roi": [110, 380, 370, 70]
     },
-    "Phantom@Roguelike@MonthlySquadRewardMiss": {},
+    "Phantom@Roguelike@MonthlySquadRewardMiss": {
+        "template": "Roguelike@MonthlySquadRewardMiss.png"
+    },
     "Phantom@Roguelike@ChooseDeepExploration": {
         "template": "Phantom@Roguelike@DeepExploration.png"
     },
@@ -8000,7 +8003,7 @@
         "template": "Phantom@Roguelike@DeepExplorationRewardMiss.png"
     },
     "Phantom@Roguelike@DeepExplorationNotUnlockedComplain": {
-        "template": "empty.png"
+        "template": "Roguelike@DeepExplorationNotUnlocked.png"
     },
     "Phantom@Roguelike@ChooseDifficulty": {},
     "Phantom@Roguelike@ChooseOper": {
@@ -8301,14 +8304,15 @@
         "text": ["追忆映射"]
     },
     "Mizuki@Roguelike@MonthlySquadComms": {
-        "template": "Mizuki@Roguelike@Comms.png",
+        "text": ["万象追忆录"],
         "roi": [530, 420, 200, 60]
     },
     "Mizuki@Roguelike@MonthlySquadCommsMiss": {
-        "template": "Mizuki@Roguelike@CommsMiss.png",
+        "template": "Roguelike@CommsMiss.png",
         "roi": [390, 480, 160, 50]
     },
     "Mizuki@Roguelike@MonthlySquadRewardMiss": {
+        "template": "Roguelike@MonthlySquadRewardMiss.png",
         "specificRect": [423, 536, 54, 62]
     },
     "Mizuki@Roguelike@ChooseDeepExploration": {
@@ -8318,7 +8322,7 @@
         "template": "Mizuki@Roguelike@DeepExplorationRewardMiss.png"
     },
     "Mizuki@Roguelike@DeepExplorationNotUnlockedComplain": {
-        "template": "empty.png"
+        "template": "Roguelike@DeepExplorationNotUnlocked.png"
     },
     "Mizuki@Roguelike@CheckLevel": {
         "text": ["生态谱系"]
@@ -8842,14 +8846,15 @@
         "text": ["探索者档案"]
     },
     "Sami@Roguelike@MonthlySquadComms": {
-        "template": "Sami@Roguelike@Comms.png",
+        "text": ["队员访谈录"],
         "roi": [560, 420, 190, 60]
     },
     "Sami@Roguelike@MonthlySquadCommsMiss": {
-        "template": "Sami@Roguelike@CommsMiss.png",
+        "template": "Roguelike@CommsMiss.png",
         "roi": [390, 480, 160, 50]
     },
     "Sami@Roguelike@MonthlySquadRewardMiss": {
+        "template": "Roguelike@MonthlySquadRewardMiss.png",
         "specificRect": [490, 530, 45, 55]
     },
     "Sami@Roguelike@ChooseDeepExploration": {
@@ -8859,7 +8864,7 @@
         "template": "Sami@Roguelike@DeepExplorationRewardMiss.png"
     },
     "Sami@Roguelike@DeepExplorationNotUnlockedComplain": {
-        "template": "empty.png"
+        "template": "Roguelike@DeepExplorationNotUnlocked.png"
     },
     "Sami@Roguelike@CheckCollapsalParadigms": {
         "algorithm": "OcrDetect",
@@ -10151,14 +10156,16 @@
         "text": ["讲述者列表"]
     },
     "Sarkaz@Roguelike@MonthlySquadComms": {
-        "template": "Sarkaz@Roguelike@Comms.png",
+        "text": ["遐想交织录"],
+        "ocrReplace": [["退", "遐"]],
         "roi": [560, 420, 190, 60]
     },
     "Sarkaz@Roguelike@MonthlySquadCommsMiss": {
-        "template": "Sarkaz@Roguelike@CommsMiss.png",
+        "template": "Roguelike@CommsMiss.png",
         "roi": [390, 480, 160, 50]
     },
     "Sarkaz@Roguelike@MonthlySquadRewardMiss": {
+        "template": "Roguelike@MonthlySquadRewardMiss.png",
         "specificRect": [490, 530, 45, 55]
     },
     "Sarkaz@Roguelike@ChooseDeepExploration": {
@@ -10170,7 +10177,7 @@
         "template": "empty.png"
     },
     "Sarkaz@Roguelike@DeepExplorationNotUnlockedComplain": {
-        "template": "empty.png"
+        "template": "Roguelike@DeepExplorationNotUnlocked.png"
     },
     "Sarkaz@Roguelike@CheckLevel": {
         "text": ["假说辑录"]
