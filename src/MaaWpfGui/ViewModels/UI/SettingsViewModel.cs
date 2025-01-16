@@ -685,8 +685,8 @@ namespace MaaWpfGui.ViewModels.UI
             }
 
             List<string> windowTitleSelectShowList = GuiSettings.WindowTitleSelectShowList
-                .Where(x => GuiSettingsUserControlModel.WindowTitleAllShowDict.ContainsKey(x?.ToString() ?? string.Empty))
-                .Select(x => GuiSettingsUserControlModel.WindowTitleAllShowDict[x?.ToString() ?? string.Empty]).ToList();
+                .Cast<KeyValuePair<string, string>>().Select(pair => pair.Key)
+                .ToList();
 
             string currentConfiguration = string.Empty;
             string connectConfigName = string.Empty;
