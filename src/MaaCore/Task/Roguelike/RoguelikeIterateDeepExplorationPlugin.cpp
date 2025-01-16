@@ -45,7 +45,7 @@ bool asst::RoguelikeIterateDeepExplorationPlugin::_run()
 
     completed = true;
     if (deepExplorationCount[m_config->get_theme()] > 0) {
-        ProcessTask(*this, { m_config->get_theme() + "@Roguelike@ChooseDeepExploration" }).set_retry_times(1).run();
+        ProcessTask(*this, { m_config->get_theme() + "@Roguelike@DeepExploration" }).set_retry_times(1).run();
     }
 
     for (int i = 0; i < deepExplorationCount[m_config->get_theme()]; i++) {

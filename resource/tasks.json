@@ -6691,17 +6691,15 @@
     },
     "Roguelike@MonthlySquad": {
         "Doc": "base_task 月度小队入口",
-        "algorithm": "OcrDetect",
+        "template": "Roguelike@MonthlySquad.png",
         "action": "ClickSelf",
-        "roi": [520, 630, 270, 85],
-        "text": []
+        "roi": [520, 630, 270, 85]
     },
     "Roguelike@MonthlySquadComms": {
         "Doc": "base_task 月度小队通信",
-        "algorithm": "OcrDetect",
+        "template": "Roguelike@MonthlySquadComms.png",
         "action": "ClickSelf",
-        "roi": [538, 446, 180, 50],
-        "text": []
+        "roi": [538, 446, 180, 50]
     },
     "Roguelike@MonthlySquadCommsMiss": {
         "Doc": "base_task 月度小队通信已获取",
@@ -6733,16 +6731,16 @@
         "Doc": "月度小队通知用户全部结束",
         "algorithm": "JustReturn"
     },
-    "Roguelike@ChooseDeepExploration": {
+    "Roguelike@DeepExploration": {
         "Doc": "base_task 深入调查入口",
-        "template": "empty.png",
+        "template": "Roguelike@DeepExploration.png",
         "action": "ClickSelf",
         "roi": [320, 620, 270, 95],
         "onErrorNext": ["Roguelike@DeepExplorationNotUnlockedComplain"]
     },
     "Roguelike@DeepExplorationRewardMiss": {
         "Doc": "base_task 深入调查奖励已获取",
-        "template": "empty.png",
+        "template": "Roguelike@DeepExplorationRewardMiss.png",
         "action": "ClickRect",
         "roi": [60, 560, 330, 50],
         "specificRect": [940, 210, 50, 80],
@@ -7984,10 +7982,10 @@
         "text": ["古堡笔记"]
     },
     "Phantom@Roguelike@MonthlySquad": {
-        "text": ["月度小队"]
+        "template": "Phantom@Roguelike@MonthlySquad.png"
     },
     "Phantom@Roguelike@MonthlySquadComms": {
-        "text": ["通讯记录仪"]
+        "template": "Phantom@Roguelike@MonthlySquadComms.png"
     },
     "Phantom@Roguelike@MonthlySquadCommsMiss": {
         "template": "Phantom@Roguelike@CommsMiss.png",
@@ -7996,11 +7994,11 @@
     "Phantom@Roguelike@MonthlySquadRewardMiss": {
         "template": "Roguelike@MonthlySquadRewardMiss.png"
     },
-    "Phantom@Roguelike@ChooseDeepExploration": {
-        "template": "Phantom@Roguelike@DeepExploration.png"
+    "Phantom@Roguelike@DeepExploration": {
+        "template": "Roguelike@DeepExplorationDark.png"
     },
     "Phantom@Roguelike@DeepExplorationRewardMiss": {
-        "template": "Phantom@Roguelike@DeepExplorationRewardMiss.png"
+        "template": "Roguelike@DeepExplorationRewardMiss.png"
     },
     "Phantom@Roguelike@DeepExplorationNotUnlockedComplain": {
         "template": "Roguelike@DeepExplorationNotUnlocked.png"
@@ -8038,10 +8036,9 @@
     },
     "Phantom@Roguelike@DialogTimeout": {
         "doc": "傀影肉鸽的小队对话会自动跳过stage导致一卡卡一串，进skip的时候已经读完对话只剩一个叉了，放一个timeout在这里抓一下",
-        "algorithm": "OcrDetect",
+        "template": "Phantom@Roguelike@DialogTimeout.png",
         "action": "ClickSelf",
         "roi": [500, 590, 300, 100],
-        "text": ["继续", "探索", "解锁", "信息"],
         "next": ["Phantom@Roguelike@Stages#next"]
     },
     "Phantom@Roguelike@DropsFlag": {
@@ -8098,7 +8095,9 @@
     },
     "Phantom@Roguelike@MissionFailedFlag2": {},
     "Phantom@Roguelike@NextLevel": {
-        "text": ["迷雾歧途", "落阳庭院", "故土残躯", "噩梦之始", "血月长廊", "渴欲大厅"]
+        "text": ["迷雾歧途", "落阳庭院", "故土残躯", "噩梦之始", "血月长廊", "渴欲大厅"],
+        "next": ["Phantom@Roguelike@StrategyChange", "Phantom@Roguelike@DialogSkip"],
+        "onErrorNext": ["Phantom@Roguelike@DialogTimeout", "Phantom@Roguelike@Stages#next"]
     },
     "Phantom@Roguelike@RecruitMain": {
         "template": "Phantom@Roguelike@Recruit.png"
@@ -8250,8 +8249,7 @@
             ["噩梦之始", "_pragmatic"],
             ["血月长廊", "_pragmatic"],
             ["渴欲大厅", "_default"]
-        ],
-        "onErrorNext": ["Phantom@Roguelike@DialogTimeout"]
+        ]
     },
     "Phantom@Roguelike@StrategyChange_mode1": {
         "baseTask": "Phantom@Roguelike@StrategyChange_mode4",
@@ -8266,8 +8264,7 @@
             ["噩梦之始", "_exit"],
             ["血月长廊", "_exit"],
             ["渴欲大厅", "_exit"]
-        ],
-        "onErrorNext": ["Phantom@Roguelike@DialogTimeout"]
+        ]
     },
     "Phantom@Roguelike@StrategyChange_mode6": {
         "text": ["_default", "_exit"],
@@ -8278,8 +8275,7 @@
             ["噩梦之始", "_pragmatic"],
             ["血月长廊", "_exit"],
             ["渴欲大厅", "_exit"]
-        ],
-        "onErrorNext": ["Phantom@Roguelike@DialogTimeout"]
+        ]
     },
     "Phantom@Roguelike@StrategyChange_mode7": {
         "text": ["_default", "_exit"],
@@ -8290,8 +8286,7 @@
             ["噩梦之始", "_pragmatic"],
             ["血月长廊", "_pragmatic"],
             ["渴欲大厅", "_default"]
-        ],
-        "onErrorNext": ["Phantom@Roguelike@DialogTimeout"]
+        ]
     },
     "Phantom@Roguelike@TodoEnter": {},
     "Phantom@Roguelike@WaitForStartButtonClicked": {
@@ -8308,10 +8303,10 @@
     },
     "Mizuki@Roguelike@Abandon": {},
     "Mizuki@Roguelike@MonthlySquad": {
-        "text": ["追忆映射"]
+        "template": "Roguelike@MonthlySquad.png"
     },
     "Mizuki@Roguelike@MonthlySquadComms": {
-        "text": ["万象追忆录"],
+        "template": "Mizuki@Roguelike@MonthlySquadComms.png",
         "roi": [530, 420, 200, 60]
     },
     "Mizuki@Roguelike@MonthlySquadCommsMiss": {
@@ -8322,11 +8317,11 @@
         "template": "Roguelike@MonthlySquadRewardMiss.png",
         "specificRect": [423, 536, 54, 62]
     },
-    "Mizuki@Roguelike@ChooseDeepExploration": {
-        "template": "Mizuki@Roguelike@DeepExploration.png"
+    "Mizuki@Roguelike@DeepExploration": {
+        "template": "Roguelike@DeepExploration.png"
     },
     "Mizuki@Roguelike@DeepExplorationRewardMiss": {
-        "template": "Mizuki@Roguelike@DeepExplorationRewardMiss.png"
+        "template": "Roguelike@DeepExplorationRewardMiss.png"
     },
     "Mizuki@Roguelike@DeepExplorationNotUnlockedComplain": {
         "template": "Roguelike@DeepExplorationNotUnlocked.png"
@@ -8852,10 +8847,10 @@
         }
     },
     "Sami@Roguelike@MonthlySquad": {
-        "text": ["探索者档案"]
+        "template": "Roguelike@MonthlySquad.png"
     },
     "Sami@Roguelike@MonthlySquadComms": {
-        "text": ["队员访谈录"],
+        "template": "Roguelike@MonthlySquadComms.png",
         "roi": [560, 420, 190, 60]
     },
     "Sami@Roguelike@MonthlySquadCommsMiss": {
@@ -8866,11 +8861,11 @@
         "template": "Roguelike@MonthlySquadRewardMiss.png",
         "specificRect": [490, 530, 45, 55]
     },
-    "Sami@Roguelike@ChooseDeepExploration": {
-        "template": "Sami@Roguelike@DeepExploration.png"
+    "Sami@Roguelike@DeepExploration": {
+        "template": "Roguelike@DeepExploration.png"
     },
     "Sami@Roguelike@DeepExplorationRewardMiss": {
-        "template": "Sami@Roguelike@DeepExplorationRewardMiss.png"
+        "template": "Roguelike@DeepExplorationRewardMissSuperDark.png"
     },
     "Sami@Roguelike@DeepExplorationNotUnlockedComplain": {
         "template": "Roguelike@DeepExplorationNotUnlocked.png"
@@ -10164,11 +10159,10 @@
         }
     },
     "Sarkaz@Roguelike@MonthlySquad": {
-        "text": ["讲述者列表"]
+        "template": "Roguelike@MonthlySquad.png"
     },
     "Sarkaz@Roguelike@MonthlySquadComms": {
-        "text": ["遐想交织录"],
-        "ocrReplace": [["退", "遐"]],
+        "template": "Roguelike@MonthlySquadComms.png",
         "roi": [560, 420, 190, 60]
     },
     "Sarkaz@Roguelike@MonthlySquadCommsMiss": {
@@ -10179,15 +10173,16 @@
         "template": "Roguelike@MonthlySquadRewardMiss.png",
         "specificRect": [490, 530, 45, 55]
     },
-    "Sarkaz@Roguelike@ChooseDeepExploration": {
-        "doc": "Sarkaz@Roguelike@DeepExploration.png",
-        "template": "empty.png"
+    "Sarkaz@Roguelike@DeepExploration": {
+        "doc": "等出了记得看眼",
+        "template": "Roguelike@DeepExploration.png"
     },
     "Sarkaz@Roguelike@DeepExplorationRewardMiss": {
-        "doc": "Sarkaz@Roguelike@DeepExplorationRewardMiss.png",
-        "template": "empty.png"
+        "doc": "等出了记得看眼",
+        "template": "Roguelike@DeepExplorationRewardMiss.png"
     },
     "Sarkaz@Roguelike@DeepExplorationNotUnlockedComplain": {
+        "doc": "等出了记得看眼",
         "template": "Roguelike@DeepExplorationNotUnlocked.png"
     },
     "Sarkaz@Roguelike@CheckLevel": {
