@@ -69,7 +69,7 @@ bool asst::RoguelikeIterateMonthlySquadPlugin::_run()
         }
     }
     if (completed) {
-        ProcessTask(*this, { m_config->get_theme() + "@Roguelike@MonthlySquadComplain" }).run();
+        callback(AsstMsg::SubTaskExtraInfo, basic_info_with_what("MonthlySquadCompleted"));
         m_task_ptr->set_enable(false);
     }
 

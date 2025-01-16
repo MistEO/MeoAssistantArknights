@@ -764,6 +764,9 @@ The video aspect ratio needs to be 16:9 without interference factors such as bla
     <system:String x:Key="GameDropNoRestart">Game disconnected, not restarting, stopping</system:String>
     <system:String x:Key="RoguelikeGamePass">Exploration completed! Congratulations!</system:String>
     <system:String x:Key="RoguelikeSpecialItemBought">Special Item Purchased!</system:String>
+    <system:String x:Key="MonthlySquadCompleted">Monthly squad all clear! Congratulations!</system:String>
+    <system:String x:Key="DeepExplorationCompleted">Deep exploration all clear! Congratulations!</system:String>
+    <system:String x:Key="DeepExplorationNotUnlockedComplain">Deep exploration not unlocked yet</system:String>
     <system:String x:Key="SSSGamePass">Game cleared! congratulations!</system:String>
     <system:String x:Key="Trader">Node: Rogue Trader</system:String>
     <system:String x:Key="SafeHouse">Node: Safe House</system:String>

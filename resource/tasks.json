@@ -6727,10 +6727,6 @@
         "roi": [735, 410, 280, 95],
         "specificRect": [466, 405, 40, 60]
     },
-    "Roguelike@MonthlySquadComplain": {
-        "Doc": "月度小队通知用户全部结束",
-        "algorithm": "JustReturn"
-    },
     "Roguelike@DeepExploration": {
         "Doc": "base_task 深入调查入口",
         "template": "Roguelike@DeepExploration.png",
@@ -6745,10 +6741,6 @@
         "roi": [60, 560, 330, 50],
         "specificRect": [940, 210, 50, 80],
         "postDelay": 300
-    },
-    "Roguelike@DeepExplorationComplain": {
-        "Doc": "深入调查通知用户全部结束",
-        "algorithm": "JustReturn"
     },
     "Roguelike@DeepExplorationNotUnlockedComplain": {
         "Doc": "base_task 深入调查没解锁",

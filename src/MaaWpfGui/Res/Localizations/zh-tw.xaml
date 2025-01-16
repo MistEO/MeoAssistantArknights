@@ -766,6 +766,9 @@ V9.1.28 前的模擬器版本僅支持 720P 900P 1080P 分辨率，V9.1.29 後�
     <system:String x:Key="GameDropNoRestart">遊戲斷線，不重新連接，停止任務</system:String>
     <system:String x:Key="RoguelikeGamePass">肉鴿通關啦！</system:String>
     <system:String x:Key="RoguelikeSpecialItemBought">購買了特殊商品！</system:String>
+    <system:String x:Key="MonthlySquadCompleted">月度小隊清完啦！</system:String>
+    <system:String x:Key="DeepExplorationCompleted">深入調查清完啦！</system:String>
+    <system:String x:Key="DeepExplorationNotUnlockedComplain">深入調查未解鎖</system:String>
     <system:String x:Key="SSSGamePass">保全通關啦！</system:String>
     <system:String x:Key="Trader">節點: 詭意行商</system:String>
     <system:String x:Key="SafeHouse">節點: 安全的角落</system:String>

@@ -767,6 +767,9 @@ V9.1.28 前のエミュレーター バージョンは 720P、900P、および 1
     <system:String x:Key="GameDropNoRestart">ゲームが落ちたため、再接続せず任務を停止します</system:String>
     <system:String x:Key="RoguelikeGamePass">ゲームクリア、おめでとうございます！</system:String>
     <system:String x:Key="RoguelikeSpecialItemBought">スペシャルアイテムを購入しました！</system:String>
+    <system:String x:Key="MonthlySquadCompleted">月間チーム全てクリアしました！おめでとうございます！</system:String>
+    <system:String x:Key="DeepExplorationCompleted">深部探索全てクリアしました！おめでとうございます！</system:String>
+    <system:String x:Key="DeepExplorationNotUnlockedComplain">深部探索はまだアンロックされていません</system:String>
     <system:String x:Key="SSSGamePass">ゲームクリア、おめでとうございます！</system:String>
     <system:String x:Key="Trader">ステージ: 怪しい旅商人</system:String>
     <system:String x:Key="SafeHouse">ステージ: 安全な片隅</system:String>

@@ -59,7 +59,7 @@ bool asst::RoguelikeIterateDeepExplorationPlugin::_run()
     // todo: 深入调查目标识别+策略适配
 
     if (completed) {
-        ProcessTask(*this, { m_config->get_theme() + "@Roguelike@DeepExplorationComplain" }).run();
+        callback(AsstMsg::SubTaskExtraInfo, basic_info_with_what("DeepExplorationCompleted"));
         m_task_ptr->set_enable(false);
     }
 

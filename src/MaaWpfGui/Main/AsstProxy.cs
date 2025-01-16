@@ -1206,14 +1206,6 @@ namespace MaaWpfGui.Main
                                 Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("RoguelikeSpecialItemBought"), UiLogColor.RareOperator);
                                 break;
 
-                            case "MonthlySquadComplain":
-                                Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("MonthlySquadComplain"), UiLogColor.RareOperator);
-                                break;
-
-                            case "DeepExplorationComplain":
-                                Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("DeepExplorationComplain"), UiLogColor.RareOperator);
-                                break;
-
                             case "DeepExplorationNotUnlockedComplain":
                                 Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("DeepExplorationNotUnlockedComplain"), UiLogColor.Warning);
                                 break;
@@ -1504,6 +1496,15 @@ namespace MaaWpfGui.Main
 
                 case "FoldartalGainOcrNextLevel":
                     Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("FoldartalGainOcrNextLevel") + $" {subTaskDetails!["foldartal"]}");
+                    break;
+
+
+                case "MonthlySquadCompleted":
+                    Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("MonthlySquadCompleted"), UiLogColor.RareOperator);
+                    break;
+
+                case "DeepExplorationCompleted":
+                    Instances.TaskQueueViewModel.AddLog(LocalizationHelper.GetString("DeepExplorationCompleted"), UiLogColor.RareOperator);
                     break;
 
                 case "PenguinId":

@@ -769,8 +769,8 @@ V9.1.28 前的模拟器版本仅支持 720P 900P 1080P 分辨率，V9.1.29 后�
     <system:String x:Key="GameDropNoRestart">游戏掉线，不重新连接，停止任务</system:String>
     <system:String x:Key="RoguelikeGamePass">肉鸽通关啦！</system:String>
     <system:String x:Key="RoguelikeSpecialItemBought">购买了特殊商品！</system:String>
-    <system:String x:Key="MonthlySquadComplain">月度小队清完啦！</system:String>
-    <system:String x:Key="DeepExplorationComplain">深入调查清完啦！</system:String>
+    <system:String x:Key="MonthlySquadCompleted">月度小队清完啦！</system:String>
+    <system:String x:Key="DeepExplorationCompleted">深入调查清完啦！</system:String>
     <system:String x:Key="DeepExplorationNotUnlockedComplain">深入调查未解锁</system:String>
     <system:String x:Key="SSSGamePass">保全通关啦！</system:String>
     <system:String x:Key="Trader">节点: 诡意行商</system:String>
