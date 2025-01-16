@@ -60,7 +60,6 @@ public:
     void clear(); // 重置肉鸽局内数据
 
     // ================================= 通用参数 =================================
-#pragma region 通用参数
 public:
     const std::string& get_theme() const { return m_theme; }
 
@@ -75,8 +74,6 @@ public:
     const std::string& get_squad() const { return m_squad; }
 
     // ------------------ 开局 ------------------
-#pragma region 开局
-
     void set_start_with_elite_two(bool value) { m_start_with_elite_two = value; }
 
     bool get_start_with_elite_two() const { return m_start_with_elite_two; }
@@ -109,10 +106,7 @@ public:
 
     bool get_start_with_random() const { return m_start_with_random; }
 
-#pragma endregion
     // ------------------ 投资模式 ------------------
-#pragma region 投资模式
-
     void set_invest_with_more_score(bool value) { m_invest_with_more_score = value; }
 
     bool get_invest_with_more_score() const { return m_invest_with_more_score; }
@@ -120,8 +114,6 @@ public:
     void set_last_reward_mode_shopping(bool value) { m_last_reward_mode_shopping = value; }
 
     bool get_last_reward_mode_shopping() const { return m_last_reward_mode_shopping; }
-
-#pragma endregion
 
 private:
     std::string m_theme;                       // 主题
@@ -145,10 +137,8 @@ private:
 
     // ------------------ 刷开局模式 ------------------
     bool m_last_reward_mode_shopping = false; // 刷开局模式下进入商店时购物
-#pragma endregion
 
     // =========================== 水月主题专用参数 ===========================
-#pragma region 水月主题专用参数
 public:
     void set_start_with_key(const bool value) { m_start_with_key = value; }
 
@@ -161,9 +151,8 @@ public:
 private:
     bool m_start_with_key = false;  // 在刷开局模式下凹开局钥匙
     bool m_start_with_dice = false; // 在刷开局模式下凹开局骰子
-#pragma endregion
+
     // =========================== 萨米主题专用参数 ===========================
-#pragma region 萨米主题专用参数
 public:
     // ------------------ 密文板 ------------------
     void set_first_floor_foldartal(const bool value) { m_first_floor_foldartal = value; }
@@ -173,9 +162,8 @@ public:
 private:
     // ------------------ 密文板 ------------------
     bool m_first_floor_foldartal = false; // 凹远见密文板
-#pragma endregion
+
     // =========================== 萨卡兹主题专用参数 ===========================
-#pragma region 萨卡兹主题专用参数
 public:
     void set_start_with_two_ideas(const bool value) { m_start_with_two_ideas = value; }
 
@@ -183,7 +171,6 @@ public:
 
 private:
     bool m_start_with_two_ideas = false; // 在刷开局模式下凹开局 2 构想
-#pragma endregion
 
     // ================================================================================
     // 以下为局内数据，每次重置
