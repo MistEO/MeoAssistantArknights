@@ -9974,6 +9974,7 @@
         "specificRect": [600, 600, 25, 25]
     },
     "Sarkaz@Roguelike@CloseCollection": {
+        "Doc": "深入调查/月度小队会给个藏品，要先关掉",
         "method": "RGBCount",
         "colorScales": [
             [
