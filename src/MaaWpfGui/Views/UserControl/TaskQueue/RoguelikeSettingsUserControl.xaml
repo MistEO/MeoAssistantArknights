@@ -156,6 +156,15 @@
                     Text="{DynamicResource RoguelikeOnlyStartWithEliteTwo}"
                     TextWrapping="Wrap" />
             </CheckBox>
+            <hc:CheckComboBox
+                Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot; and !RoguelikeOnlyStartWithEliteTwoRaw'}"
+                x:Name="CheckComboBox"
+                Margin="0,10"
+                hc:ListBoxAttach.SelectedItems="{Binding RoguelikeStartWithSelectList}"
+                hc:TitleElement.Title="刷到就停的开局"
+                DisplayMemberPath="Value"
+                ItemsSource="{Binding RoguelikeStartWithAllDict}"
+                Style="{StaticResource CheckComboBoxExtend}" />
             <CheckBox
                 Margin="0,10"
                 IsChecked="{Binding RoguelikeStartWithTwoIdeas}"

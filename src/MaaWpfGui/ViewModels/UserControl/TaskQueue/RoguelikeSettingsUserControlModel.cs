@@ -464,6 +464,36 @@ public class RoguelikeSettingsUserControlModel : PropertyChangedBase
     /// </summary>
     public bool RoguelikeOnlyStartWithEliteTwo => _roguelikeOnlyStartWithEliteTwo && RoguelikeStartWithEliteTwo;
 
+    public static Dictionary<string, string> RoguelikeStartWithAllDict { get; } = new()
+    {
+        { "Roguelike@LastReward", LocalizationHelper.GetString("热水壶") },
+        { "Roguelike@LastReward2", LocalizationHelper.GetString("盾") },
+        { "Roguelike@LastReward3", LocalizationHelper.GetString("源石锭") },
+        { "Roguelike@LastReward4", LocalizationHelper.GetString("希望") },
+        { "Roguelike@LastRewardRand", LocalizationHelper.GetString("随机奖励") },
+        { "Mizuki@Roguelike@LastReward5", LocalizationHelper.GetString("钥匙") },
+        { "Mizuki@Roguelike@LastReward6", LocalizationHelper.GetString("骰子") },
+        { "Sarkaz@Roguelike@LastReward5", LocalizationHelper.GetString("构想") },
+    };
+
+    private static object[] _roguelikeStartWithSelectList = ConfigurationHelper.GetGlobalValue(ConfigurationKeys.RoguelikeStartWithSelectList, "Roguelike@LastReward Roguelike@LastReward4 Sarkaz@Roguelike@LastReward5")
+        .Split(' ')
+        .Where(s => RoguelikeStartWithAllDict.ContainsKey(s.ToString()))
+        .Select(s => (object)new KeyValuePair<string, string>(s, RoguelikeStartWithAllDict[s]))
+        .ToArray();
+
+    public object[] RoguelikeStartWithSelectList
+    {
+        get => _roguelikeStartWithSelectList;
+        set
+        {
+            SetAndNotify(ref _roguelikeStartWithSelectList, value);
+            Instances.SettingsViewModel.UpdateWindowTitle();
+            var config = string.Join(' ', _roguelikeStartWithSelectList.Cast<KeyValuePair<string, string>>().Select(pair => pair.Key).ToList());
+            ConfigurationHelper.SetGlobalValue(ConfigurationKeys.RoguelikeStartWithSelectList, config);
+        }
+    }
+
     private bool _roguelikeStartWithTwoIdeas = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeStartWithTwoIdeas, bool.FalseString));
 
     /// <summary>
