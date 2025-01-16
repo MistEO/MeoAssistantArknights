@@ -6888,7 +6888,7 @@
         "next": ["Roguelike@MissionFailedFlag2", "Roguelike@ExitThenAbandon"]
     },
     "Roguelike@DeepExplorationEnd": {
-        "template": "empty.png",
+        "template": "Roguelike@DeepExplorationEnd.png",
         "action": "ClickSelf",
         "roi": [600, 620, 90, 90],
         "next": ["Roguelike@StartExplore", "Roguelike@StartUpThemes#next"]
@@ -8025,7 +8025,9 @@
     },
     "Phantom@Roguelike@CloseEvent": {},
     "Phantom@Roguelike@Continue": {},
-    "Phantom@Roguelike@DeepExplorationEnd": {},
+    "Phantom@Roguelike@DeepExplorationEnd": {
+        "template": "Roguelike@DeepExplorationEnd.png"
+    },
     "Phantom@Roguelike@DialogSkip": {
         "template": "Roguelike@DialogSkip.png",
         "next": ["Phantom@Roguelike@DialogSkipConfirm"]
@@ -8402,7 +8404,9 @@
         "next": ["Mizuki@Roguelike@StageEncounterEnter", "Mizuki@Roguelike@Stages#next"]
     },
     "Mizuki@Roguelike@Continue": {},
-    "Mizuki@Roguelike@DeepExplorationEnd": {},
+    "Mizuki@Roguelike@DeepExplorationEnd": {
+        "template": "Roguelike@DeepExplorationEnd.png"
+    },
     "Mizuki@Roguelike@DataTraceback": {
         "action": "ClickSelf",
         "roi": [1114, 0, 166, 134],
@@ -9102,7 +9106,9 @@
         "roi": [522, 525, 245, 81],
         "next": ["Sami@Roguelike@Continue"]
     },
-    "Sami@Roguelike@DeepExplorationEnd": {},
+    "Sami@Roguelike@DeepExplorationEnd": {
+        "template": "Roguelike@DeepExplorationEnd.png"
+    },
     "Sami@Roguelike@DialogSkip": {
         "template": "Roguelike@DialogSkip.png",
         "next": ["Sami@Roguelike@DialogSkipConfirm"]
@@ -10339,7 +10345,9 @@
         "specificRect": [153, 79, 63, 29]
     },
     "Sarkaz@Roguelike@Continue": {},
-    "Sarkaz@Roguelike@DeepExplorationEnd": {},
+    "Sarkaz@Roguelike@DeepExplorationEnd": {
+        "template": "Sarkaz@Roguelike@DeepExplorationEnd.png"
+    },
     "Sarkaz@Roguelike@DecreaseBurdenAbandon": {
         "templThreshold": 0.9,
         "roi": [499, 471, 167, 151],
