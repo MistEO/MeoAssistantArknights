@@ -10252,6 +10252,7 @@
     "Sarkaz@Roguelike@LastReward3": {},
     "Sarkaz@Roguelike@LastReward4": {},
     "Sarkaz@Roguelike@LastReward5": {
+        "Doc": "你的上一次探索突破了至少两层困难，这一次可以获得更多支援—— 2 构想",
         "baseTask": "Sarkaz@Roguelike@LastReward_default"
     },
     "Sarkaz@Roguelike@LastRewardConfirm": {},

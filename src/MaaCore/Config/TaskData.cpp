@@ -90,7 +90,7 @@ bool asst::TaskData::lazy_parse(const json::value& json)
             }
             continue;
         }
-        if (m_json_all_tasks_info.find(name_view) == m_json_all_tasks_info.cend()) {
+        if (!m_json_all_tasks_info.contains(name_view)) {
             m_json_all_tasks_info.emplace(name_view, task_json.as_object());
             continue;
         }

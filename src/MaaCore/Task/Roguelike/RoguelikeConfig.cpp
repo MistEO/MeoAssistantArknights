@@ -30,6 +30,22 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
 
     if (mode == RoguelikeMode::Collectible) {
         m_last_reward_mode_shopping = params.get("last_reward_mode_shopping", false);
+
+        m_start_with_hot_water = params.get("start_with_hot_water", true);
+        m_start_with_shield = params.get("start_with_shield", false);
+        m_start_with_ingot = params.get("start_with_ingot", false);
+        m_start_with_hope = params.get("start_with_hope", true);
+        m_start_with_random = params.get("start_with_random", false);
+        if (m_theme == RoguelikeTheme::Mizuki) {
+            m_start_with_key = params.get("start_with_key", false);
+            m_start_with_dice = params.get("start_with_dice", false);
+        }
+        else if (m_theme == RoguelikeTheme::Sami) {
+            m_first_floor_foldartal = !params.get("first_floor_foldartal", "").empty();
+        }
+        else if (m_theme == RoguelikeTheme::Sarkaz) {
+            m_start_with_two_ideas = params.get("start_with_ideas", false);
+        }
     }
 
     m_start_with_seed = params.get("start_with_seed", false);
@@ -85,6 +101,11 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
     Task.set_task_base("Roguelike@LastReward4", "Roguelike@LastReward_default");
     Task.set_task_base("Roguelike@LastRewardRand", "Roguelike@LastReward_default");
 
+    Task.set_task_base("Mizuki@Roguelike@LastReward5", "Mizuki@Roguelike@LastReward_default");
+    Task.set_task_base("Mizuki@Roguelike@LastReward6", "Mizuki@Roguelike@LastReward_default");
+
+    Task.set_task_base("Sarkaz@Roguelike@LastReward5", "Sarkaz@Roguelike@LastReward_default");
+
     if (m_mode == RoguelikeMode::Investment) {
         bool investment_with_more_score = params.get("investment_with_more_score", false);
         if (!params.contains("investment_with_more_score") && params.contains("investment_enter_second_floor")) {
@@ -100,21 +121,6 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
 
     if (m_mode == RoguelikeMode::Collectible && !m_only_start_with_elite_two) {
         m_run_for_collectible = true; // 烧开水模式下，如果不是只凹直升，第一轮游戏先烧水
-    }
-
-    // ------------------ 萨米主题专用参数 ------------------
-    if (m_theme == RoguelikeTheme::Sami) {
-        // 是否凹开局远见密文板
-        m_first_floor_foldartal = params.contains("first_floor_foldartal");
-    }
-
-    // ------------------ 萨卡兹主题专用参数 ------------------
-    if (m_theme == RoguelikeTheme::Sarkaz) {
-        m_start_with_two_ideas = params.get("start_with_two_ideas", false);
-        if (m_mode != RoguelikeMode::Collectible && m_start_with_two_ideas) {
-            Log.error(__FUNCTION__, "| Invalid mode for start_with_two_ideas", static_cast<int>(mode));
-            return false;
-        }
     }
 
     return true;
