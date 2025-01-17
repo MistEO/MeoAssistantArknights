@@ -10341,7 +10341,8 @@
     },
     "Sarkaz@Roguelike@Continue": {},
     "Sarkaz@Roguelike@DeepExplorationEnd": {
-        "template": "Sarkaz@Roguelike@DeepExplorationEnd.png"
+        "doc": "等出了记得看眼",
+        "template": "Roguelike@DeepExplorationEnd.png"
     },
     "Sarkaz@Roguelike@DecreaseBurdenAbandon": {
         "templThreshold": 0.9,
