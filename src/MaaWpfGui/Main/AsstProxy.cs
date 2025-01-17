@@ -2438,7 +2438,7 @@ namespace MaaWpfGui.Main
         /// <param name="coreChar">开局干员名</param>
         /// <param name="startWithEliteTwo">是否凹开局直升</param>
         /// <param name="onlyStartWithEliteTwo">是否只凹开局直升，不进行作战</param>
-        /// <param name="startWithTwoIdeas">是否凹 2 构想</param>
+        /// <param name="startWithSelectList">需要刷的开局</param>
         /// <param name="roguelike3FirstFloorFoldartal">凹第一层远见板子</param>
         /// <param name="roguelike3StartFloorFoldartal">需要凹的板子</param>
         /// <param name="roguelike3NewSquad2StartingFoldartal">是否在萨米肉鸽生活队凹开局板子</param>
@@ -2466,7 +2466,7 @@ namespace MaaWpfGui.Main
             string coreChar,
             bool startWithEliteTwo,
             bool onlyStartWithEliteTwo,
-            bool startWithTwoIdeas,
+            List<string> startWithSelectList,
             bool roguelike3FirstFloorFoldartal,
             string roguelike3StartFloorFoldartal,
             bool roguelike3NewSquad2StartingFoldartal,
@@ -2524,7 +2524,32 @@ namespace MaaWpfGui.Main
 
             taskParams["start_with_elite_two"] = startWithEliteTwo;
             taskParams["only_start_with_elite_two"] = onlyStartWithEliteTwo;
-            taskParams["start_with_two_ideas"] = startWithTwoIdeas;
+
+            var rewardKeys = new Dictionary<string, string>
+            {
+                { "Roguelike@LastReward", "start_with_hot_water" },
+                { "Roguelike@LastReward2", "start_with_shield" },
+                { "Roguelike@LastReward3", "start_with_ingot" },
+                { "Roguelike@LastReward4", "start_with_hope" },
+                { "Roguelike@LastRewardRand", "start_with_random" },
+                { "Mizuki@Roguelike@LastReward5", "start_with_key" },
+                { "Mizuki@Roguelike@LastReward6", "start_with_dice" },
+                { "Sarkaz@Roguelike@LastReward5", "start_with_ideas" },
+            };
+
+            foreach (var key in rewardKeys.Values)
+            {
+                taskParams[key] = false;
+            }
+
+            foreach (var select in startWithSelectList)
+            {
+                if (rewardKeys.TryGetValue(select, out var paramKey))
+                {
+                    taskParams[paramKey] = true;
+                }
+            }
+
             if (roguelike3FirstFloorFoldartal && roguelike3StartFloorFoldartal.Length > 0)
             {
                 taskParams["first_floor_foldartal"] = roguelike3StartFloorFoldartal;

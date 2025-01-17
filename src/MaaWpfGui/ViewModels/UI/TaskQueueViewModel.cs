@@ -1831,7 +1831,7 @@ namespace MaaWpfGui.ViewModels.UI
                 DataHelper.GetCharacterByNameOrAlias(RoguelikeTask.RoguelikeCoreChar)?.Name ?? RoguelikeTask.RoguelikeCoreChar,
                 RoguelikeTask.RoguelikeStartWithEliteTwo,
                 RoguelikeTask.RoguelikeOnlyStartWithEliteTwo,
-                RoguelikeTask.RoguelikeStartWithTwoIdeas,
+                RoguelikeTask.RoguelikeStartWithSelectList,
                 RoguelikeTask.Roguelike3FirstFloorFoldartal,
                 RoguelikeTask.Roguelike3StartFloorFoldartal,
                 RoguelikeTask.Roguelike3NewSquad2StartingFoldartal,

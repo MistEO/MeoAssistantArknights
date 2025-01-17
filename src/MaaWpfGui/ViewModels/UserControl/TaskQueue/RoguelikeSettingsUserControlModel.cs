@@ -476,38 +476,25 @@ public class RoguelikeSettingsUserControlModel : PropertyChangedBase
         { "Sarkaz@Roguelike@LastReward5", LocalizationHelper.GetString("构想") },
     };
 
-    private static object[] _roguelikeStartWithSelectList = ConfigurationHelper.GetGlobalValue(ConfigurationKeys.RoguelikeStartWithSelectList, "Roguelike@LastReward Roguelike@LastReward4 Sarkaz@Roguelike@LastReward5")
+    private static object[] _roguelikeStartWithSelectListRaw = ConfigurationHelper.GetGlobalValue(ConfigurationKeys.RoguelikeStartWithSelectList, "Roguelike@LastReward Roguelike@LastReward4 Sarkaz@Roguelike@LastReward5")
         .Split(' ')
         .Where(s => RoguelikeStartWithAllDict.ContainsKey(s.ToString()))
         .Select(s => (object)new KeyValuePair<string, string>(s, RoguelikeStartWithAllDict[s]))
         .ToArray();
 
-    public object[] RoguelikeStartWithSelectList
+    public object[] RoguelikeStartWithSelectListRaw
     {
-        get => _roguelikeStartWithSelectList;
+        get => _roguelikeStartWithSelectListRaw;
         set
         {
-            SetAndNotify(ref _roguelikeStartWithSelectList, value);
+            SetAndNotify(ref _roguelikeStartWithSelectListRaw, value);
             Instances.SettingsViewModel.UpdateWindowTitle();
-            var config = string.Join(' ', _roguelikeStartWithSelectList.Cast<KeyValuePair<string, string>>().Select(pair => pair.Key).ToList());
+            var config = string.Join(' ', _roguelikeStartWithSelectListRaw.Cast<KeyValuePair<string, string>>().Select(pair => pair.Key).ToList());
             ConfigurationHelper.SetGlobalValue(ConfigurationKeys.RoguelikeStartWithSelectList, config);
         }
     }
 
-    private bool _roguelikeStartWithTwoIdeas = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeStartWithTwoIdeas, bool.FalseString));
-
-    /// <summary>
-    /// Gets or sets a value indicating whether we need to start with two ideas.
-    /// </summary>
-    public bool RoguelikeStartWithTwoIdeas
-    {
-        get => _roguelikeStartWithTwoIdeas;
-        set
-        {
-            SetAndNotify(ref _roguelikeStartWithTwoIdeas, value);
-            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeStartWithTwoIdeas, value.ToString());
-        }
-    }
+    public List<string> RoguelikeStartWithSelectList => (RoguelikeMode == "4" && !RoguelikeOnlyStartWithEliteTwo) ? _roguelikeStartWithSelectListRaw.Cast<KeyValuePair<string, string>>().Select(pair => pair.Value).ToList() : [];
 
     private bool _roguelike3FirstFloorFoldartal = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.Roguelike3FirstFloorFoldartal, bool.FalseString));
 
