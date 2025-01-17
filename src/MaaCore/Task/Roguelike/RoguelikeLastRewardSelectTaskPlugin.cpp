@@ -53,7 +53,7 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
         tasks_list.emplace_back( "Sarkaz@Roguelike@LastReward5");
     }*/
 
-    if (tasks_list.empty()) {
+    if (m_config->get_mode() != RoguelikeMode::Collectible || tasks_list.empty()) {
         ProcessTask(*this, { m_config->get_theme() + "@Roguelike@LastReward-Strategy" })
             .set_times_limit("Roguelike@LastRewardConfirm", 0)
             .run();
@@ -64,12 +64,16 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
     // 处理选择顺序
     PipelineAnalyzer analyzer(ctrler()->get_image());
     analyzer.set_tasks(tasks_list);
-    if (auto ret = analyzer.analyze(); ret) {
+    if (auto ret = analyzer.analyze(); !ret) {
+        m_control_ptr->exit_then_stop(true);
+    }
+    else if(m_config->get_start_with_elite_two()){
         ctrler()->click(ret->rect);
         ProcessTask(*this, { "Roguelike@LastReward-Confirm" }).run();
     }
     else {
-        m_control_ptr->exit_then_stop(true);
+        m_control_ptr->exit_then_stop(false);
+        m_task_ptr->set_enable(false);
     }
 
     return true;
