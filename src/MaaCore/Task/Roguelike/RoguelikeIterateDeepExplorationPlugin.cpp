@@ -43,7 +43,7 @@ bool asst::RoguelikeIterateDeepExplorationPlugin::_run()
 {
     LogTraceFunction;
 
-    completed = true;
+    m_completed = true;
     if (deepExplorationCount[m_config->get_theme()] > 0) {
         ProcessTask(*this, { m_config->get_theme() + "@Roguelike@DeepExploration" }).set_retry_times(1).run();
     }
@@ -52,13 +52,13 @@ bool asst::RoguelikeIterateDeepExplorationPlugin::_run()
         if (!ProcessTask(*this, { m_config->get_theme() + "@Roguelike@DeepExplorationRewardMiss" })
                  .set_retry_times(1)
                  .run()) {
-            completed = false;
+            m_completed = false;
             break;
         }
     }
     // todo: 深入调查目标识别+策略适配
 
-    if (completed) {
+    if (m_completed) {
         callback(AsstMsg::SubTaskExtraInfo, basic_info_with_what("DeepExplorationCompleted"));
         m_task_ptr->set_enable(false);
     }

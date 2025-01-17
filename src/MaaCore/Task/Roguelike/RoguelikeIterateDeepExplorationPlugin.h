@@ -21,7 +21,6 @@ private:
                                                                   { "Mizuki", 12 },
                                                                   { "Sami", 13 },
                                                                   { "Sarkaz", 0 } };
-    bool checkComms;
-    bool completed;
+    bool m_completed;
 };
 }

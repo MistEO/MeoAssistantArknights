@@ -9,7 +9,7 @@ bool asst::RoguelikeIterateMonthlySquadPlugin::load_params([[maybe_unused]] cons
 {
     LogTraceFunction;
 
-    checkComms = params.find<bool>("monthly_squad_check_comms").value_or(false);
+    m_checkComms = params.find<bool>("monthly_squad_check_comms").value_or(false);
     auto iterateMS = params.find<bool>("monthly_squad_auto_iterate");
     return iterateMS.value_or(false);
 }
@@ -44,19 +44,19 @@ bool asst::RoguelikeIterateMonthlySquadPlugin::_run()
 {
     LogTraceFunction;
 
-    completed = true;
+    m_completed = true;
     if (monthlySquadCount[m_config->get_theme()] > 0) {
         ProcessTask(*this, { m_config->get_theme() + "@Roguelike@MonthlySquad" }).set_retry_times(1).run();
     }
 
     for (int i = 0; i < monthlySquadCount[m_config->get_theme()]; i++) {
-        if (checkComms) {
+        if (m_checkComms) {
             ProcessTask(*this, { m_config->get_theme() + "@Roguelike@MonthlySquadComms" }).run();
             if (!ProcessTask(*this, { m_config->get_theme() + "@Roguelike@MonthlySquadCommsMiss" })
                      .set_retry_times(1)
                      .run()) {
                 ProcessTask(*this, { "Roguelike@MonthlySquadCommsBackTwice" }).run();
-                completed = false;
+                m_completed = false;
                 break;
             }
         }
@@ -64,11 +64,11 @@ bool asst::RoguelikeIterateMonthlySquadPlugin::_run()
         if (!ProcessTask(*this, { m_config->get_theme() + "@Roguelike@MonthlySquadRewardMiss" })
                  .set_retry_times(1)
                  .run()) {
-            completed = false;
+            m_completed = false;
             break;
         }
     }
-    if (completed) {
+    if (m_completed) {
         callback(AsstMsg::SubTaskExtraInfo, basic_info_with_what("MonthlySquadCompleted"));
         m_task_ptr->set_enable(false);
     }

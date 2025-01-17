@@ -6746,7 +6746,8 @@
     },
     "Roguelike@DeepExplorationNotUnlockedComplain": {
         "Doc": "base_task 深入调查没解锁",
-        "template": "Roguelike@DeepExplorationNotUnlocked.png"
+        "template": "Roguelike@DeepExplorationNotUnlocked.png",
+        "maskRange": [1, 255]
     },
     "Roguelike@ChooseDifficulty": {
         "Doc": "base_task",
