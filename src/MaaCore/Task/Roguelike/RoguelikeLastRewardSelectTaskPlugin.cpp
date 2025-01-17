@@ -67,7 +67,7 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
     if (auto ret = analyzer.analyze(); !ret) {
         m_control_ptr->exit_then_stop(true);
     }
-    else if(m_config->get_start_with_elite_two()){
+    else if (m_config->get_start_with_elite_two()) {
         ctrler()->click(ret->rect);
         ProcessTask(*this, { "Roguelike@LastReward-Confirm" }).run();
     }
