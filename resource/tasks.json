@@ -7082,12 +7082,12 @@
         "Doc": "插件挂载，选择期望的奖励，template为所有LastReward集合，进入插件后重新匹配，有就Confirm，没有就Abandon",
         "template": "empty.png",
         "roi": [225, 199, 829, 241],
-        "next": [ "Roguelike@RolesDefault", "Roguelike@CloseCollection", "Roguelike@StartExplore" ]
+        "next": ["Roguelike@RolesDefault", "Roguelike@CloseCollection", "Roguelike@StartExplore"]
     },
     "Roguelike@LastReward-Confirm": {
         "template": "empty.png",
         "action": "ClickSelf",
-        "roi": [ 171, 474, 935, 205 ],
+        "roi": [171, 474, 935, 205],
         "preDelay_Doc": "插件用延迟",
         "preDelay": 500
     },
@@ -7910,10 +7910,7 @@
         ]
     },
     "Phantom@Roguelike@CloseCollection": {
-        "next": [
-            "Phantom@Roguelike@LastReward-EnterPoint",
-            "Phantom@Roguelike@RolesDefault"
-        ]
+        "next": ["Phantom@Roguelike@LastReward-EnterPoint", "Phantom@Roguelike@RolesDefault"]
     },
     "Phantom@Roguelike@CloseEvent": {},
     "Phantom@Roguelike@Continue": {},
@@ -8200,10 +8197,7 @@
         ]
     },
     "Mizuki@Roguelike@CloseCollection": {
-        "next": [
-            "Mizuki@Roguelike@LastReward-EnterPoint",
-            "Mizuki@Roguelike@RolesDefault"
-        ]
+        "next": ["Mizuki@Roguelike@LastReward-EnterPoint", "Mizuki@Roguelike@RolesDefault"]
     },
     "Mizuki@Roguelike@CloseCollectionClose": {
         "action": "ClickSelf",
@@ -8780,10 +8774,7 @@
         ]
     },
     "Sami@Roguelike@CloseCollection": {
-        "next": [
-            "Sami@Roguelike@LastReward-EnterPoint",
-            "Sami@Roguelike@RolesDefault"
-        ]
+        "next": ["Sami@Roguelike@LastReward-EnterPoint", "Sami@Roguelike@RolesDefault"]
     },
     "Sami@Roguelike@CloseCollectionClose": {
         "action": "ClickSelf",
@@ -10038,10 +10029,7 @@
                 [170, 170, 170]
             ]
         ],
-        "next": [
-            "Sarkaz@Roguelike@LastReward-EnterPoint",
-            "Sarkaz@Roguelike@RolesDefault"
-        ]
+        "next": ["Sarkaz@Roguelike@LastReward-EnterPoint", "Sarkaz@Roguelike@RolesDefault"]
     },
     "Sarkaz@Roguelike@CloseCollectionClose": {
         "action": "ClickSelf",
