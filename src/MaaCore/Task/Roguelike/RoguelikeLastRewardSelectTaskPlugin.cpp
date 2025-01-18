@@ -49,7 +49,7 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
         tasks_list.emplace_back("Mizuki@Roguelike@LastReward6");
     }
     if (m_config->get_theme() == RoguelikeTheme::Sarkaz && select.ideas) {
-        tasks_list.emplace_back( "Sarkaz@Roguelike@LastReward5");
+        tasks_list.emplace_back("Sarkaz@Roguelike@LastReward5");
     }
 
     if (m_config->get_mode() != RoguelikeMode::Collectible || tasks_list.empty()) {
