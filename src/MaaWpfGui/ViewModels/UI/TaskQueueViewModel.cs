@@ -1823,7 +1823,7 @@ namespace MaaWpfGui.ViewModels.UI
                 RoguelikeTask.RoguelikeStartsCount,
                 RoguelikeTask.RoguelikeInvestmentEnabled,
                 RoguelikeTask.RoguelikeInvestmentWithMoreScore,
-                RoguelikeTask.RoguelikeLastRewardModeShopping,
+                RoguelikeTask.RoguelikeCollectibleModeShopping,
                 RoguelikeTask.RoguelikeInvestsCount,
                 RoguelikeTask.RoguelikeStopWhenInvestmentFull,
                 RoguelikeTask.RoguelikeSquad,

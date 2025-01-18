@@ -23,7 +23,7 @@ bool asst::RoguelikeShoppingTaskPlugin::verify(AsstMsg msg, const json::value& d
         return m_config->get_invest_with_more_score();
     }
     else if (m_config->get_mode() == RoguelikeMode::Collectible) {
-        return m_config->get_last_reward_mode_shopping();
+        return m_config->get_collectible_mode_shopping();
     }
     return true;
 }

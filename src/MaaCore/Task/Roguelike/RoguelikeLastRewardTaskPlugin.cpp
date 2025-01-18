@@ -98,17 +98,19 @@ bool asst::RoguelikeLastRewardTaskPlugin::_run()
                     Task.set_task_base(task_name, base_name);
                 }
             };
-            set_task_base_with_condition("Roguelike@LastReward", m_config->get_start_with_hot_water());
-            set_task_base_with_condition("Roguelike@LastReward2", m_config->get_start_with_shield());
-            set_task_base_with_condition("Roguelike@LastReward3", m_config->get_start_with_ingot());
-            set_task_base_with_condition("Roguelike@LastReward4", m_config->get_start_with_hope());
-            set_task_base_with_condition("Roguelike@LastRewardRand", m_config->get_start_with_random());
+
+            const auto& select = m_config->get_start_select();
+            set_task_base_with_condition("Roguelike@LastReward", select.hot_water);
+            set_task_base_with_condition("Roguelike@LastReward2", select.shield);
+            set_task_base_with_condition("Roguelike@LastReward3", select.ingot);
+            set_task_base_with_condition("Roguelike@LastReward4", select.hope);
+            set_task_base_with_condition("Roguelike@LastRewardRand", select.random);
             if (m_config->get_theme() == RoguelikeTheme::Mizuki) {
-                set_task_base_with_condition("Roguelike@LastReward5", m_config->get_start_with_dice(), "Mizuki");
-                set_task_base_with_condition("Roguelike@LastReward6", m_config->get_start_with_dice(), "Mizuki");
+                set_task_base_with_condition("Roguelike@LastReward5", select.key, "Mizuki");
+                set_task_base_with_condition("Roguelike@LastReward6", select.dice, "Mizuki");
             }
             else if (m_config->get_theme() == RoguelikeTheme::Sarkaz) {
-                set_task_base_with_condition("Roguelike@LastReward5", m_config->get_start_with_two_ideas(), "Sarkaz");
+                set_task_base_with_condition("Roguelike@LastReward5", select.ideas, "Sarkaz");
             }
         }
     }

@@ -24,34 +24,33 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
     LogTraceFunction;
 
     std::vector<std::string> tasks_list;
-    if (m_config->get_start_with_hot_water()) {
+    const auto& select = m_config->get_start_select();
+    if (select.hot_water) {
         tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward");
     }
-    if (m_config->get_start_with_shield()) {
+    if (select.shield) {
         tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward2");
     }
-    if (m_config->get_start_with_ingot()) {
+    if (select.ingot) {
         tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward3");
     }
-    if (m_config->get_start_with_hope()) {
+    if (select.hope) {
         tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward4");
     }
 
-    if (m_config->get_start_with_random()) {
+    if (select.random) {
         tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastRewardRand");
     }
 
-    if (m_config->get_theme() == RoguelikeTheme::Mizuki && m_config->get_start_with_key()) {
+    if (m_config->get_theme() == RoguelikeTheme::Mizuki && select.key) {
         tasks_list.emplace_back("Mizuki@Roguelike@LastReward5");
     }
-    if (m_config->get_theme() == RoguelikeTheme::Mizuki && m_config->get_start_with_dice()) {
+    if (m_config->get_theme() == RoguelikeTheme::Mizuki && select.dice) {
         tasks_list.emplace_back("Mizuki@Roguelike@LastReward6");
     }
-
-    // 未加入
-    /* if (m_config->get_theme() == RoguelikeTheme::Sarkaz && m_config->get_start_with_ideas()) {
+    if (m_config->get_theme() == RoguelikeTheme::Sarkaz && select.ideas) {
         tasks_list.emplace_back( "Sarkaz@Roguelike@LastReward5");
-    }*/
+    }
 
     if (m_config->get_mode() != RoguelikeMode::Collectible || tasks_list.empty()) {
         ProcessTask(*this, { m_config->get_theme() + "@Roguelike@LastReward-Strategy" })

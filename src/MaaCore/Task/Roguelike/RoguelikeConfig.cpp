@@ -29,22 +29,27 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
     }
 
     if (mode == RoguelikeMode::Collectible) {
-        m_last_reward_mode_shopping = params.get("last_reward_mode_shopping", false);
+        m_collectible_mode_shopping = params.get("collectible_mode_shopping", false);
 
-        m_start_with_hot_water = params.get("start_with_hot_water", true);
-        m_start_with_shield = params.get("start_with_shield", false);
-        m_start_with_ingot = params.get("start_with_ingot", false);
-        m_start_with_hope = params.get("start_with_hope", true);
-        m_start_with_random = params.get("start_with_random", false);
-        if (m_theme == RoguelikeTheme::Mizuki) {
-            m_start_with_key = params.get("start_with_key", false);
-            m_start_with_dice = params.get("start_with_dice", false);
+        if (auto select_list = params.find<json::object>("collectible_mode_start_list"); select_list) {
+            RoguelikeStartSelect list;
+            list.hot_water = select_list->get("hot_water", false);
+            list.shield = select_list->get("shield", false);
+            list.ingot = select_list->get("ingot", false);
+            list.hope = select_list->get("hope", false);
+            list.random = select_list->get("random", false);
+            if (m_theme == RoguelikeTheme::Mizuki) {
+                list.key = select_list->get("key", false);
+                list.dice = select_list->get("dice", false);
+            }
+            else if (m_theme == RoguelikeTheme::Sarkaz) {
+                list.ideas = select_list->get("ideas", false);
+            }
+            m_start_select = list;
         }
-        else if (m_theme == RoguelikeTheme::Sami) {
+
+        if (m_theme == RoguelikeTheme::Sami) {
             m_first_floor_foldartal = !params.get("first_floor_foldartal", "").empty();
-        }
-        else if (m_theme == RoguelikeTheme::Sarkaz) {
-            m_start_with_two_ideas = params.get("start_with_ideas", false);
         }
     }
 

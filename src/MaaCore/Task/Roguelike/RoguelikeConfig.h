@@ -40,6 +40,18 @@ struct RoguelikeOper
     int level = 0; // 干员等级
 };
 
+struct RoguelikeStartSelect // 刷开局模式下凹开局奖励选择
+{
+    bool hot_water = false; // 热水壶
+    bool shield = false;    // 盾；傀影没盾，是生命
+    bool ingot = false;     // 源石锭
+    bool hope = false;      // 希望
+    bool random = false;    // 随机奖励
+    bool key = false;       // 钥匙
+    bool dice = false;      // 骰子
+    bool ideas = false;     // 构想
+};
+
 class RoguelikeConfig
 {
 public:
@@ -86,34 +98,18 @@ public:
 
     bool get_run_for_collectible() const { return m_run_for_collectible; }
 
-    void set_start_with_hot_water(const bool value) { m_start_with_hot_water = value; }
+    void set_start_select(const RoguelikeStartSelect& start_select) { m_start_select = start_select; }
 
-    bool get_start_with_hot_water() const { return m_start_with_hot_water; }
-
-    void set_start_with_shield(const bool value) { m_start_with_shield = value; }
-
-    bool get_start_with_shield() const { return m_start_with_shield; }
-
-    void set_start_with_ingot(const bool value) { m_start_with_ingot = value; }
-
-    bool get_start_with_ingot() const { return m_start_with_ingot; }
-
-    void set_start_with_hope(const bool value) { m_start_with_hope = value; }
-
-    bool get_start_with_hope() const { return m_start_with_hope; }
-
-    void set_start_with_random(const bool value) { m_start_with_random = value; }
-
-    bool get_start_with_random() const { return m_start_with_random; }
+    const auto& get_start_select() const { return m_start_select; }
 
     // ------------------ 投资模式 ------------------
     void set_invest_with_more_score(bool value) { m_invest_with_more_score = value; }
 
     bool get_invest_with_more_score() const { return m_invest_with_more_score; }
 
-    void set_last_reward_mode_shopping(bool value) { m_last_reward_mode_shopping = value; }
+    void set_collectible_mode_shopping(bool value) { m_collectible_mode_shopping = value; }
 
-    bool get_last_reward_mode_shopping() const { return m_last_reward_mode_shopping; }
+    bool get_collectible_mode_shopping() const { return m_collectible_mode_shopping; }
 
 private:
     std::string m_theme;                       // 主题
@@ -126,32 +122,15 @@ private:
     bool m_only_start_with_elite_two = false; // 只凹开局干员精二直升且不进行作战
     bool m_run_for_collectible = false;       // 用于 RoguelikeMode::Collectible，判断是否正在烧水
 
-    bool m_start_with_hot_water = true;       // 刷开局模式下凹开局热水壶
-    bool m_start_with_shield = false;         // 刷开局模式下凹开局盾
-    bool m_start_with_ingot = false;          // 刷开局模式下凹开局源石锭
-    bool m_start_with_hope = true;            // 刷开局模式下凹开局希望
-    bool m_start_with_random = false;         // 刷开局模式下凹开局随机奖励
+    RoguelikeStartSelect m_start_select;      // 开局选择
 
     // ------------------ 投资模式 ------------------
     bool m_invest_with_more_score = false; // 投资时招募、购物刷分
 
     // ------------------ 刷开局模式 ------------------
-    bool m_last_reward_mode_shopping = false; // 刷开局模式下进入商店时购物
-
-    // =========================== 水月主题专用参数 ===========================
-public:
-    void set_start_with_key(const bool value) { m_start_with_key = value; }
-
-    bool get_start_with_key() const { return m_start_with_key; }
-
-    void set_start_with_dice(const bool value) { m_start_with_dice = value; }
-
-    bool get_start_with_dice() const { return m_start_with_dice; }
+    bool m_collectible_mode_shopping = false; // 刷开局模式下进入商店时购物
 
 private:
-    bool m_start_with_key = false;  // 在刷开局模式下凹开局钥匙
-    bool m_start_with_dice = false; // 在刷开局模式下凹开局骰子
-
     // =========================== 萨米主题专用参数 ===========================
 public:
     // ------------------ 密文板 ------------------
@@ -162,15 +141,6 @@ public:
 private:
     // ------------------ 密文板 ------------------
     bool m_first_floor_foldartal = false; // 凹远见密文板
-
-    // =========================== 萨卡兹主题专用参数 ===========================
-public:
-    void set_start_with_two_ideas(const bool value) { m_start_with_two_ideas = value; }
-
-    bool get_start_with_two_ideas() const { return m_start_with_two_ideas; }
-
-private:
-    bool m_start_with_two_ideas = false; // 在刷开局模式下凹开局 2 构想
 
     // ================================================================================
     // 以下为局内数据，每次重置
