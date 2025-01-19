@@ -51,7 +51,7 @@
                 IsHitTestVisible="{Binding Idle, Source={x:Static setting:TaskQueueViewModel.TaskSettingDataContext}}"
                 ItemsSource="{Binding RoguelikeSquadList}"
                 MaxDropDownHeight="800"
-                SelectedValue="{Binding RoguelikeLastRewardSquad}"
+                SelectedValue="{Binding RoguelikeCollectibleModeSquad}"
                 SelectedValuePath="Value"
                 Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot;'}" />
             <hc:ComboBox
@@ -121,7 +121,7 @@
                 Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot;'}">
                 <TextBlock
                     Block.TextAlignment="Left"
-                    Text="{DynamicResource LastRewardModeShopping}"
+                    Text="{DynamicResource RoguelikeCollectibleModeShopping}"
                     TextWrapping="Wrap" />
             </CheckBox>
             <CheckBox
