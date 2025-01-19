@@ -69,8 +69,6 @@ bool asst::RoguelikeFoldartalStartTaskPlugin::_run()
     // 没有刷到需要的板子，退出重开
     if (mode == RoguelikeMode::Collectible && !start_foldartal_checked) {
         m_config->set_run_for_collectible(true); // 重新烧水
-        Task.set_task_base("Roguelike@LastReward", "Roguelike@LastReward_restart");
-        Task.set_task_base("Roguelike@LastReward4", "Roguelike@LastReward_restart");
     }
     return true;
 }
