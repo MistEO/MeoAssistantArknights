@@ -23,36 +23,9 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
 {
     LogTraceFunction;
 
-    std::vector<std::string> tasks_list;
-    const auto& select = m_config->get_start_select();
-    if (select.hot_water) {
-        tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward");
-    }
-    if (select.shield) {
-        tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward2");
-    }
-    if (select.ingot) {
-        tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward3");
-    }
-    if (select.hope) {
-        tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward4");
-    }
-
-    if (select.random) {
-        tasks_list.emplace_back(m_config->get_theme() + "@Roguelike@LastRewardRand");
-    }
-
-    if (m_config->get_theme() == RoguelikeTheme::Mizuki && select.key) {
-        tasks_list.emplace_back("Mizuki@Roguelike@LastReward5");
-    }
-    if (m_config->get_theme() == RoguelikeTheme::Mizuki && select.dice) {
-        tasks_list.emplace_back("Mizuki@Roguelike@LastReward6");
-    }
-    if (m_config->get_theme() == RoguelikeTheme::Sarkaz && select.ideas) {
-        tasks_list.emplace_back("Sarkaz@Roguelike@LastReward5");
-    }
-
-    if (m_config->get_mode() != RoguelikeMode::Collectible || tasks_list.empty()) {
+    const auto& list = get_select_list();
+    if (list.empty()) {
+        // 执行默认选择顺序
         ProcessTask(*this, { m_config->get_theme() + "@Roguelike@LastReward-Strategy" })
             .set_times_limit("Roguelike@LastRewardConfirm", 0)
             .run();
@@ -62,8 +35,9 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
 
     // 处理选择顺序
     PipelineAnalyzer analyzer(ctrler()->get_image());
-    analyzer.set_tasks(tasks_list);
+    analyzer.set_tasks(list);
     if (auto ret = analyzer.analyze(); !ret) {
+        // 未获取到期望物品，结束重开
         m_control_ptr->exit_then_stop(true);
     }
     else if (m_config->get_start_with_elite_two()) {
@@ -76,4 +50,45 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
     }
 
     return true;
+}
+
+std::vector<std::string> asst::RoguelikeLastRewardSelectTaskPlugin::get_select_list() const
+{
+    if (m_config->get_mode() != RoguelikeMode::Collectible ||
+        m_config->get_run_for_collectible() /* 正在烧水，使用默认策略 */ ||
+        m_config->get_only_start_with_elite_two() /* 只凹精二没有奖励，但第一次开时可能有之前的奖励 */) {
+        return {};
+    }
+
+    std::vector<std::string> list;
+    const auto& select = m_config->get_start_select();
+    if (select.hot_water) {
+        list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward"); // 热水壶
+    }
+    if (select.shield) {
+        list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward2"); // 盾；傀影没盾，是生命
+    }
+    if (select.ingot) {
+        list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward3"); // 源石锭
+    }
+    if (select.hope) {
+        list.emplace_back(m_config->get_theme() + "@Roguelike@LastReward4"); // 希望
+    }
+
+    if (select.random) {
+        list.emplace_back(m_config->get_theme() + "@Roguelike@LastRewardRand"); // 随机奖励
+    }
+    if (m_config->get_theme() == RoguelikeTheme::Mizuki) {
+        if (select.key) {
+            list.emplace_back("Mizuki@Roguelike@LastReward5"); // 钥匙
+        }
+        if (select.dice) {
+            list.emplace_back("Mizuki@Roguelike@LastReward6"); // 骰子
+        }
+    }
+    else if (m_config->get_theme() == RoguelikeTheme::Sarkaz && select.ideas) {
+        list.emplace_back("Sarkaz@Roguelike@LastReward5"); // 构想
+    }
+
+    return list;
 }
