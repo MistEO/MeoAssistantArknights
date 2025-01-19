@@ -494,7 +494,7 @@ public class RoguelikeSettingsUserControlModel : PropertyChangedBase
         }
     }
 
-    public List<string> RoguelikeStartWithSelectList => (RoguelikeMode == "4" && !RoguelikeOnlyStartWithEliteTwo) ? _roguelikeStartWithSelectListRaw.Cast<KeyValuePair<string, string>>().Select(pair => pair.Value).ToList() : [];
+    public List<string> RoguelikeStartWithSelectList => (RoguelikeMode == "4" && !RoguelikeOnlyStartWithEliteTwo) ? _roguelikeStartWithSelectListRaw.Cast<KeyValuePair<string, string>>().Select(pair => pair.Key).ToList() : [];
 
     private bool _roguelike3FirstFloorFoldartal = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.Roguelike3FirstFloorFoldartal, bool.FalseString));
 
