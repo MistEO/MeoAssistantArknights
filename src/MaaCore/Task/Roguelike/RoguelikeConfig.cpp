@@ -99,18 +99,6 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
         }
     }
 
-    // 重置开局奖励 next，获得任意奖励均继续；烧水相关逻辑在 RoguelikeLastRewardTaskPlugin
-    Task.set_task_base("Roguelike@LastReward", "Roguelike@LastReward_default");
-    Task.set_task_base("Roguelike@LastReward2", "Roguelike@LastReward_default");
-    Task.set_task_base("Roguelike@LastReward3", "Roguelike@LastReward_default");
-    Task.set_task_base("Roguelike@LastReward4", "Roguelike@LastReward_default");
-    Task.set_task_base("Roguelike@LastRewardRand", "Roguelike@LastReward_default");
-
-    Task.set_task_base("Mizuki@Roguelike@LastReward5", "Mizuki@Roguelike@LastReward_default");
-    Task.set_task_base("Mizuki@Roguelike@LastReward6", "Mizuki@Roguelike@LastReward_default");
-
-    Task.set_task_base("Sarkaz@Roguelike@LastReward5", "Sarkaz@Roguelike@LastReward_default");
-
     if (m_mode == RoguelikeMode::Investment) {
         bool investment_with_more_score = params.get("investment_with_more_score", false);
         if (!params.contains("investment_with_more_score") && params.contains("investment_enter_second_floor")) {
