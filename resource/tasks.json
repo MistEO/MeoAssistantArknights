@@ -4287,7 +4287,7 @@
         "roi": [900, 500, 380, 220]
     },
     "InfrastAddOperatorMfgGentle": {
-        "template": "AddOperatorMfgGentle.png",
+        "template": "AddOperatorGentle.png",
         "templThreshold": 0.8,
         "roi": [200, 500, 500, 220],
         "postDelay": 1500
@@ -4300,7 +4300,7 @@
         "postDelay": 1500
     },
     "InfrastAddOperatorTradeGentle": {
-        "template": "AddOperatorTradeGentle.png",
+        "template": "AddOperatorGentle.png",
         "templThreshold": 0.8,
         "roi": [200, 500, 500, 220],
         "postDelay": 1500

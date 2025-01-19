@@ -7,8 +7,7 @@ AccountManagerLoginButtonBili.png
 AccountManagerOfficial.png
 AccountManagerTrashButton.png
 AccountManagerTrashButtonBili.png
-AddOperatorMfgGentle.png
-AddOperatorTradeGentle.png
+AddOperatorGentle.png
 AdverseDifficulty.png
 BattleCostFlag.png
 BattleFormationOCRNameFlag.png
