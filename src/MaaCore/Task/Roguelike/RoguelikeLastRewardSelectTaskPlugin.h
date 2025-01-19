@@ -14,7 +14,7 @@ public:
 protected:
     virtual bool _run() override;
 
-    private: 
-        std::vector<std::string> get_select_list() const;
+private:
+    std::vector<std::string> get_select_list() const;
 };
 }
