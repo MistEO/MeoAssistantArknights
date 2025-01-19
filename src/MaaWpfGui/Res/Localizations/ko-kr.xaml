@@ -317,6 +317,7 @@
     <system:String x:Key="InvestmentEnabled">오리지늄 각뿔 투자</system:String>
     <system:String x:Key="InvestmentWithMoreScore">투자 시 쇼핑, 모집, 2스테이지 진입</system:String>
     <system:String x:Key="RoguelikeCollectibleModeShopping">刷开局模式启用购物</system:String>
+    <system:String x:Key="RoguelikeStartWithSelectList">刷开局期望奖励</system:String>
     <system:String x:Key="RefreshTraderWithDice">상점 새로고침</system:String>
     <system:String x:Key="PenguinId">Penguin-Stats 보고 ID (숫자만)</system:String>
     <system:String x:Key="EnablePenguin">Penguin-Stats 보고</system:String>

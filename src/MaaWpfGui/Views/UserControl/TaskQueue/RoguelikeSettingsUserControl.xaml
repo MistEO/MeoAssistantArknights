@@ -46,16 +46,6 @@
                 SelectedValuePath="Value" />
             <hc:ComboBox
                 Margin="0,5"
-                hc:InfoElement.Title="{DynamicResource LastRewardSquad}"
-                DisplayMemberPath="Display"
-                IsHitTestVisible="{Binding Idle, Source={x:Static setting:TaskQueueViewModel.TaskSettingDataContext}}"
-                ItemsSource="{Binding RoguelikeSquadList}"
-                MaxDropDownHeight="800"
-                SelectedValue="{Binding RoguelikeCollectibleModeSquad}"
-                SelectedValuePath="Value"
-                Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot;'}" />
-            <hc:ComboBox
-                Margin="0,5"
                 hc:InfoElement.Title="{DynamicResource StartingSquad}"
                 DisplayMemberPath="Display"
                 IsHitTestVisible="{Binding Idle, Source={x:Static setting:TaskQueueViewModel.TaskSettingDataContext}}"
@@ -166,11 +156,21 @@
                     Text="{DynamicResource RoguelikeOnlyStartWithEliteTwo}"
                     TextWrapping="Wrap" />
             </CheckBox>
+            <hc:ComboBox
+                Margin="0,5"
+                hc:InfoElement.Title="{DynamicResource RoguelikeCollectibleModeSquad}"
+                DisplayMemberPath="Display"
+                IsHitTestVisible="{Binding Idle, Source={x:Static setting:TaskQueueViewModel.TaskSettingDataContext}}"
+                ItemsSource="{Binding RoguelikeSquadList}"
+                MaxDropDownHeight="800"
+                SelectedValue="{Binding RoguelikeCollectibleModeSquad}"
+                SelectedValuePath="Value"
+                Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot;'}" />
             <hc:CheckComboBox
                 x:Name="CheckComboBox"
                 Margin="0,10"
                 hc:ListBoxAttach.SelectedItems="{Binding RoguelikeStartWithSelectListRaw}"
-                hc:TitleElement.Title="刷到就停的开局"
+                hc:TitleElement.Title="{DynamicResource RoguelikeStartWithSelectList}"
                 DisplayMemberPath="Value"
                 ItemsSource="{Binding RoguelikeStartWithAllDict}"
                 Style="{StaticResource CheckComboBoxExtend}"
@@ -184,7 +184,7 @@
                     Text="{DynamicResource Roguelike3FirstFloorFoldartal}"
                     TextWrapping="Wrap" />
             </CheckBox>
-            <TextBox
+            <hc:TextBox
                 IsReadOnly="{c:Binding !Idle,
                                        Source={x:Static setting:TaskQueueViewModel.TaskSettingDataContext}}"
                 Style="{StaticResource TextBoxExtend}"
