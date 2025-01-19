@@ -6724,7 +6724,7 @@
     },
     "Roguelike@MonthlySquadRewardMiss": {
         "Doc": "base_task 月度小队奖励已获取",
-        "template": "Roguelike@MonthlySquadRewardMiss.png",
+        "template": "Roguelike@RewardMiss.png",
         "action": "ClickRect",
         "roi": [735, 410, 280, 95],
         "specificRect": [466, 405, 40, 60],
@@ -6740,7 +6740,7 @@
     },
     "Roguelike@DeepExplorationRewardMiss": {
         "Doc": "base_task 深入调查奖励已获取",
-        "template": "Roguelike@DeepExplorationRewardMiss.png",
+        "template": "Roguelike@RewardMiss.png",
         "action": "ClickRect",
         "roi": [60, 560, 330, 50],
         "specificRect": [940, 210, 50, 80],
@@ -7988,13 +7988,13 @@
         "roi": [110, 380, 370, 70]
     },
     "Phantom@Roguelike@MonthlySquadRewardMiss": {
-        "template": "Roguelike@MonthlySquadRewardMiss.png"
+        "template": "Roguelike@RewardMiss.png"
     },
     "Phantom@Roguelike@DeepExploration": {
         "template": "Phantom@Roguelike@DeepExploration.png"
     },
     "Phantom@Roguelike@DeepExplorationRewardMiss": {
-        "template": "Roguelike@DeepExplorationRewardMiss.png"
+        "template": "Roguelike@RewardMiss.png"
     },
     "Phantom@Roguelike@DeepExplorationNotUnlockedComplain": {
         "template": "Roguelike@DeepExplorationNotUnlocked.png"
@@ -8310,14 +8310,14 @@
         "roi": [390, 480, 160, 50]
     },
     "Mizuki@Roguelike@MonthlySquadRewardMiss": {
-        "template": "Roguelike@MonthlySquadRewardMiss.png",
+        "template": "Roguelike@RewardMiss.png",
         "specificRect": [423, 536, 54, 62]
     },
     "Mizuki@Roguelike@DeepExploration": {
         "template": "Roguelike@DeepExploration.png"
     },
     "Mizuki@Roguelike@DeepExplorationRewardMiss": {
-        "template": "Roguelike@DeepExplorationRewardMiss.png"
+        "template": "Roguelike@RewardMiss.png"
     },
     "Mizuki@Roguelike@DeepExplorationNotUnlockedComplain": {
         "template": "Roguelike@DeepExplorationNotUnlocked.png"
@@ -8854,7 +8854,7 @@
         "roi": [390, 480, 160, 50]
     },
     "Sami@Roguelike@MonthlySquadRewardMiss": {
-        "template": "Roguelike@MonthlySquadRewardMiss.png",
+        "template": "Roguelike@RewardMiss.png",
         "specificRect": [490, 530, 45, 55]
     },
     "Sami@Roguelike@DeepExploration": {
@@ -10166,7 +10166,7 @@
         "roi": [390, 480, 160, 50]
     },
     "Sarkaz@Roguelike@MonthlySquadRewardMiss": {
-        "template": "Roguelike@MonthlySquadRewardMiss.png",
+        "template": "Roguelike@RewardMiss.png",
         "specificRect": [490, 530, 45, 55]
     },
     "Sarkaz@Roguelike@DeepExploration": {
@@ -10175,7 +10175,7 @@
     },
     "Sarkaz@Roguelike@DeepExplorationRewardMiss": {
         "doc": "等出了记得看眼",
-        "template": "Roguelike@DeepExplorationRewardMiss.png"
+        "template": "Roguelike@RewardMiss.png"
     },
     "Sarkaz@Roguelike@DeepExplorationNotUnlockedComplain": {
         "doc": "等出了记得看眼",
