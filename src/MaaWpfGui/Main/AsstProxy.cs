@@ -2430,14 +2430,16 @@ namespace MaaWpfGui.Main
         /// <param name="starts">开始探索次数。</param>
         /// <param name="investmentEnabled">是否投资源石锭</param>
         /// <param name="investmentWithMoreScore">投资时候刷更多分</param>
+        /// <param name="collectibleModeShopping">刷开局模式是否购物</param>
         /// <param name="invests">投资源石锭次数。</param>
         /// <param name="stopWhenFull">投资满了自动停止任务。</param>
+        /// <param name="collectibleModeSquad">烧水分队</param>
         /// <param name="squad">开局分队</param>
         /// <param name="roles">开局职业组</param>
         /// <param name="coreChar">开局干员名</param>
         /// <param name="startWithEliteTwo">是否凹开局直升</param>
         /// <param name="onlyStartWithEliteTwo">是否只凹开局直升，不进行作战</param>
-        /// <param name="startWithTwoIdeas">是否凹 2 构想</param>
+        /// <param name="startWithSelectList">需要刷的开局</param>
         /// <param name="roguelike3FirstFloorFoldartal">凹第一层远见板子</param>
         /// <param name="roguelike3StartFloorFoldartal">需要凹的板子</param>
         /// <param name="roguelike3NewSquad2StartingFoldartal">是否在萨米肉鸽生活队凹开局板子</param>
@@ -2457,14 +2459,16 @@ namespace MaaWpfGui.Main
             int starts,
             bool investmentEnabled,
             bool investmentWithMoreScore,
+            bool collectibleModeShopping,
             int invests,
             bool stopWhenFull,
+            string collectibleModeSquad,
             string squad,
             string roles,
             string coreChar,
             bool startWithEliteTwo,
             bool onlyStartWithEliteTwo,
-            bool startWithTwoIdeas,
+            List<string> startWithSelectList,
             bool roguelike3FirstFloorFoldartal,
             string roguelike3StartFloorFoldartal,
             bool roguelike3NewSquad2StartingFoldartal,
@@ -2514,9 +2518,46 @@ namespace MaaWpfGui.Main
                 taskParams["core_char"] = coreChar;
             }
 
-            taskParams["start_with_elite_two"] = startWithEliteTwo;
-            taskParams["only_start_with_elite_two"] = onlyStartWithEliteTwo;
-            taskParams["start_with_two_ideas"] = startWithTwoIdeas;
+            if (mode == 0)
+            {
+                taskParams["stop_at_final_boss"] = stopAtFinalBoss;
+                taskParams["stop_at_max_level"] = stopAtMaxLevel;
+            }
+            else if (mode == 1)
+            {
+                taskParams["start_with_seed"] = startWithSeed;
+            }
+            else if (mode == 4)
+            {
+                // 刷开局模式
+                taskParams["collectible_mode_shopping"] = collectibleModeShopping;
+                taskParams["collectible_mode_squad"] = collectibleModeSquad;
+                taskParams["start_with_elite_two"] = startWithEliteTwo;
+                taskParams["only_start_with_elite_two"] = onlyStartWithEliteTwo;
+
+                var rewardKeys = new Dictionary<string, string>
+            {
+                { "Roguelike@LastReward", "hot_water" },
+                { "Roguelike@LastReward2", "shield" },
+                { "Roguelike@LastReward3", "ingot" },
+                { "Roguelike@LastReward4", "hope" },
+                { "Roguelike@LastRewardRand", "random" },
+                { "Mizuki@Roguelike@LastReward5", "key" },
+                { "Mizuki@Roguelike@LastReward6", "dice" },
+                { "Sarkaz@Roguelike@LastReward5", "ideas" },
+            };
+                var startWithSelect = new JObject();
+                foreach (var select in startWithSelectList)
+                {
+                    if (rewardKeys.TryGetValue(select, out var paramKey))
+                    {
+                        startWithSelect[paramKey] = true;
+                    }
+                }
+
+                taskParams["collectible_mode_start_list"] = startWithSelect;
+            }
+
             if (roguelike3FirstFloorFoldartal && roguelike3StartFloorFoldartal.Length > 0)
             {
                 taskParams["first_floor_foldartal"] = roguelike3StartFloorFoldartal;
@@ -2535,11 +2576,6 @@ namespace MaaWpfGui.Main
             taskParams["use_support"] = useSupport;
             taskParams["use_nonfriend_support"] = enableNonFriendSupport;
             taskParams["refresh_trader_with_dice"] = theme == "Mizuki" && refreshTraderWithDice;
-
-            taskParams["stop_at_final_boss"] = mode == 0 && stopAtFinalBoss;
-            taskParams["stop_at_max_level"] = mode == 0 && stopAtMaxLevel;
-
-            taskParams["start_with_seed"] = startWithSeed;
 
             AsstTaskId id = AsstAppendTaskWithEncoding("Roguelike", taskParams);
             _latestTaskId[TaskType.Roguelike] = id;

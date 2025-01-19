@@ -16,17 +16,16 @@ bool asst::RoguelikeShoppingTaskPlugin::verify(AsstMsg msg, const json::value& d
         return false;
     }
 
-    if (!RoguelikeConfig::is_valid_theme(m_config->get_theme())) {
-        Log.error("Roguelike name doesn't exist!");
+    if (!details.get("details", "task", "").ends_with("Roguelike@TraderRandomShopping")) {
         return false;
     }
-
-    if (details.get("details", "task", "").ends_with("Roguelike@TraderRandomShopping")) {
-        return m_config->get_mode() != RoguelikeMode::Investment || m_config->get_invest_with_more_score();
+    else if (m_config->get_mode() == RoguelikeMode::Investment) {
+        return m_config->get_invest_with_more_score();
     }
-    else {
-        return false;
+    else if (m_config->get_mode() == RoguelikeMode::Collectible) {
+        return m_config->get_collectible_mode_shopping();
     }
+    return true;
 }
 
 bool asst::RoguelikeShoppingTaskPlugin::_run()

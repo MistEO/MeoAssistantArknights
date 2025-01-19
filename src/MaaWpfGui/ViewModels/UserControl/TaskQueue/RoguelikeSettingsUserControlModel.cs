@@ -331,6 +331,21 @@ public class RoguelikeSettingsUserControlModel : TaskViewModel
         }
     }
 
+    private string _roguelikeCollectibleModeSquad = ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeCollectibleModeSquad, string.Empty);
+
+    /// <summary>
+    /// Gets or sets the roguelike squad using for last reward mode.
+    /// </summary>
+    public string RoguelikeCollectibleModeSquad
+    {
+        get => _roguelikeCollectibleModeSquad;
+        set
+        {
+            SetAndNotify(ref _roguelikeCollectibleModeSquad, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeCollectibleModeSquad, value);
+        }
+    }
+
     private string _roguelikeSquad = ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeSquad, string.Empty);
 
     /// <summary>
@@ -462,20 +477,37 @@ public class RoguelikeSettingsUserControlModel : TaskViewModel
     /// </summary>
     public bool RoguelikeOnlyStartWithEliteTwo => _roguelikeOnlyStartWithEliteTwo && RoguelikeStartWithEliteTwo;
 
-    private bool _roguelikeStartWithTwoIdeas = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeStartWithTwoIdeas, bool.FalseString));
-
-    /// <summary>
-    /// Gets or sets a value indicating whether we need to start with two ideas.
-    /// </summary>
-    public bool RoguelikeStartWithTwoIdeas
+    public static Dictionary<string, string> RoguelikeStartWithAllDict { get; } = new()
     {
-        get => _roguelikeStartWithTwoIdeas;
+        { "Roguelike@LastReward", LocalizationHelper.GetString("热水壶") },
+        { "Roguelike@LastReward2", LocalizationHelper.GetString("盾") },
+        { "Roguelike@LastReward3", LocalizationHelper.GetString("源石锭") },
+        { "Roguelike@LastReward4", LocalizationHelper.GetString("希望") },
+        { "Roguelike@LastRewardRand", LocalizationHelper.GetString("随机奖励") },
+        { "Mizuki@Roguelike@LastReward5", LocalizationHelper.GetString("钥匙") },
+        { "Mizuki@Roguelike@LastReward6", LocalizationHelper.GetString("骰子") },
+        { "Sarkaz@Roguelike@LastReward5", LocalizationHelper.GetString("构想") },
+    };
+
+    private static object[] _roguelikeStartWithSelectListRaw = ConfigurationHelper.GetGlobalValue(ConfigurationKeys.RoguelikeStartWithSelectList, "Roguelike@LastReward Roguelike@LastReward4 Sarkaz@Roguelike@LastReward5")
+        .Split(' ')
+        .Where(s => RoguelikeStartWithAllDict.ContainsKey(s.ToString()))
+        .Select(s => (object)new KeyValuePair<string, string>(s, RoguelikeStartWithAllDict[s]))
+        .ToArray();
+
+    public object[] RoguelikeStartWithSelectListRaw
+    {
+        get => _roguelikeStartWithSelectListRaw;
         set
         {
-            SetAndNotify(ref _roguelikeStartWithTwoIdeas, value);
-            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeStartWithTwoIdeas, value.ToString());
+            SetAndNotify(ref _roguelikeStartWithSelectListRaw, value);
+            Instances.SettingsViewModel.UpdateWindowTitle();
+            var config = string.Join(' ', _roguelikeStartWithSelectListRaw.Cast<KeyValuePair<string, string>>().Select(pair => pair.Key).ToList());
+            ConfigurationHelper.SetGlobalValue(ConfigurationKeys.RoguelikeStartWithSelectList, config);
         }
     }
+
+    public List<string> RoguelikeStartWithSelectList => (RoguelikeMode == "4" && !RoguelikeOnlyStartWithEliteTwo) ? _roguelikeStartWithSelectListRaw.Cast<KeyValuePair<string, string>>().Select(pair => pair.Key).ToList() : [];
 
     private bool _roguelike3FirstFloorFoldartal = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.Roguelike3FirstFloorFoldartal, bool.FalseString));
 
@@ -641,6 +673,21 @@ public class RoguelikeSettingsUserControlModel : TaskViewModel
     /// Gets a value indicating whether investment is enabled.
     /// </summary>
     public bool RoguelikeInvestmentWithMoreScore => _roguelikeInvestmentWithMoreScore && RoguelikeMode == "1";
+
+    private bool _roguelikeCollectibleModeShopping = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeCollectibleModeShopping, bool.FalseString));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether shopping is enabled in LastReward Mode.
+    /// </summary>
+    public bool RoguelikeCollectibleModeShopping
+    {
+        get => _roguelikeCollectibleModeShopping;
+        set
+        {
+            SetAndNotify(ref _roguelikeCollectibleModeShopping, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeCollectibleModeShopping, value.ToString());
+        }
+    }
 
     private bool _roguelikeRefreshTraderWithDice = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeRefreshTraderWithDice, bool.FalseString));
 

@@ -28,6 +28,31 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
         return false;
     }
 
+    if (mode == RoguelikeMode::Collectible) {
+        m_collectible_mode_shopping = params.get("collectible_mode_shopping", false);
+
+        if (auto select_list = params.find<json::object>("collectible_mode_start_list"); select_list) {
+            RoguelikeStartSelect list;
+            list.hot_water = select_list->get("hot_water", false);
+            list.shield = select_list->get("shield", false);
+            list.ingot = select_list->get("ingot", false);
+            list.hope = select_list->get("hope", false);
+            list.random = select_list->get("random", false);
+            if (m_theme == RoguelikeTheme::Mizuki) {
+                list.key = select_list->get("key", false);
+                list.dice = select_list->get("dice", false);
+            }
+            else if (m_theme == RoguelikeTheme::Sarkaz) {
+                list.ideas = select_list->get("ideas", false);
+            }
+            m_start_select = list;
+        }
+
+        if (m_theme == RoguelikeTheme::Sami) {
+            m_first_floor_foldartal = !params.get("first_floor_foldartal", "").empty();
+        }
+    }
+
     m_start_with_seed = params.get("start_with_seed", false);
     m_start_with_elite_two = params.get("start_with_elite_two", false);
     m_only_start_with_elite_two = params.get("only_start_with_elite_two", false);
@@ -74,13 +99,6 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
         }
     }
 
-    // 重置开局奖励 next，获得任意奖励均继续；烧水相关逻辑在 RoguelikeLastRewardTaskPlugin
-    Task.set_task_base("Roguelike@LastReward", "Roguelike@LastReward_default");
-    Task.set_task_base("Roguelike@LastReward2", "Roguelike@LastReward_default");
-    Task.set_task_base("Roguelike@LastReward3", "Roguelike@LastReward_default");
-    Task.set_task_base("Roguelike@LastReward4", "Roguelike@LastReward_default");
-    Task.set_task_base("Roguelike@LastRewardRand", "Roguelike@LastReward_default");
-
     if (m_mode == RoguelikeMode::Investment) {
         bool investment_with_more_score = params.get("investment_with_more_score", false);
         if (!params.contains("investment_with_more_score") && params.contains("investment_enter_second_floor")) {
@@ -96,21 +114,6 @@ bool asst::RoguelikeConfig::verify_and_load_params(const json::value& params)
 
     if (m_mode == RoguelikeMode::Collectible && !m_only_start_with_elite_two) {
         m_run_for_collectible = true; // 烧开水模式下，如果不是只凹直升，第一轮游戏先烧水
-    }
-
-    // ------------------ 萨米主题专用参数 ------------------
-    if (m_theme == RoguelikeTheme::Sami) {
-        // 是否凹开局远见密文板
-        m_first_floor_foldartal = params.contains("first_floor_foldartal");
-    }
-
-    // ------------------ 萨卡兹主题专用参数 ------------------
-    if (m_theme == RoguelikeTheme::Sarkaz) {
-        m_start_with_two_ideas = params.get("start_with_two_ideas", false);
-        if (m_mode != RoguelikeMode::Collectible && m_start_with_two_ideas) {
-            Log.error(__FUNCTION__, "| Invalid mode for start_with_two_ideas", static_cast<int>(mode));
-            return false;
-        }
     }
 
     return true;

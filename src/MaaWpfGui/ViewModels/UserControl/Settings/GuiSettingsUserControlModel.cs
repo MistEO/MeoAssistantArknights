@@ -282,27 +282,19 @@ public class GuiSettingsUserControlModel : PropertyChangedBase
     }
 
     private static readonly Dictionary<string, string> _windowTitleAllShowDict = new()
-        {
-            { LocalizationHelper.GetString("ConfigurationName"), "1" },
-            { LocalizationHelper.GetString("ConnectionPreset"), "2" },
-            { LocalizationHelper.GetString("ConnectionAddress"), "3" },
-            { LocalizationHelper.GetString("ClientType"), "4" },
-        };
+    {
+        { "1", LocalizationHelper.GetString("ConfigurationName") },
+        { "2", LocalizationHelper.GetString("ConnectionPreset") },
+        { "3", LocalizationHelper.GetString("ConnectionAddress") },
+        { "4", LocalizationHelper.GetString("ClientType") },
+    };
 
     public static Dictionary<string, string> WindowTitleAllShowDict { get => _windowTitleAllShowDict; }
 
-    private static List<string> _windowTitleAllShowList = [.. _windowTitleAllShowDict.Keys];
-
-    public List<string> WindowTitleAllShowList
-    {
-        get => _windowTitleAllShowList;
-        set => SetAndNotify(ref _windowTitleAllShowList, value);
-    }
-
     private static object[] _windowTitleSelectShowList = ConfigurationHelper.GetGlobalValue(ConfigurationKeys.WindowTitleSelectShowList, "1 2 3 4")
         .Split(' ')
-        .Where(s => _windowTitleAllShowDict.ContainsValue(s.ToString()))
-        .Select(s => _windowTitleAllShowDict.FirstOrDefault(pair => pair.Value == s).Key)
+        .Where(s => _windowTitleAllShowDict.ContainsKey(s.ToString()))
+        .Select(s => (object)new KeyValuePair<string, string>(s, _windowTitleAllShowDict[s]))
         .ToArray();
 
     public object[] WindowTitleSelectShowList
@@ -312,7 +304,7 @@ public class GuiSettingsUserControlModel : PropertyChangedBase
         {
             SetAndNotify(ref _windowTitleSelectShowList, value);
             Instances.SettingsViewModel.UpdateWindowTitle();
-            var config = string.Join(' ', _windowTitleSelectShowList.Cast<string>().Select(s => _windowTitleAllShowDict[s]));
+            var config = string.Join(' ', _windowTitleSelectShowList.Cast<KeyValuePair<string, string>>().Select(pair => pair.Key).ToList());
             ConfigurationHelper.SetGlobalValue(ConfigurationKeys.WindowTitleSelectShowList, config);
         }
     }

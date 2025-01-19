@@ -126,6 +126,7 @@
     <system:String x:Key="RoguelikeStrategyGold">Invests coins, exits after arriving at the second floor</system:String>
     <system:String x:Key="RoguelikeStrategyLastReward">Grind to obtain Hot Water Kettle or Elite II operators</system:String>
     <system:String x:Key="RoguelikeStrategyCollapse">Farm collapse paradigms, restart immediately after encountering a non-rare collapse paradigm</system:String>
+    <system:String x:Key="RoguelikeCollectibleModeSquad">烧水分队</system:String>
     <system:String x:Key="StartingSquad">Starting Squad</system:String>
     <system:String x:Key="StartingRoles">Starting Roles</system:String>
     <system:String x:Key="StartingCoreChar">Starting Operator (single)</system:String>
@@ -314,6 +315,8 @@ You can cancel this popup by clicking the Settings - About Us - Issue Reporting 
     <system:String x:Key="StopOnGoldLimit">Stops when invested coins reach limit</system:String>
     <system:String x:Key="InvestmentEnabled">Invest coins</system:String>
     <system:String x:Key="InvestmentWithMoreScore">Investment mode enables shopping, recruitment, and entering the second floor</system:String>
+    <system:String x:Key="RoguelikeCollectibleModeShopping">Enable shopping in the grinding mode</system:String>
+    <system:String x:Key="RoguelikeStartWithSelectList">刷开局期望奖励</system:String>
     <system:String x:Key="RefreshTraderWithDice">Refresh Rogue Trader with Dice</system:String>
     <system:String x:Key="PenguinId">Penguin Report ID (Number part)</system:String>
     <system:String x:Key="EnablePenguin">Report Penguin</system:String>

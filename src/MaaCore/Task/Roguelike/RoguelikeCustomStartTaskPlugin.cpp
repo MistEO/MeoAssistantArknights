@@ -49,8 +49,12 @@ bool asst::RoguelikeCustomStartTaskPlugin::load_params(const json::value& params
 {
     LogTraceFunction;
 
-    set_custom(RoguelikeCustomType::Squad, params.get("squad", "")); // 开局分队
-    if (params.get("start_with_seed", false)) {                      // 种子刷钱，强制随心所欲
+    m_squad = params.get("squad", "");
+    m_collectible_mode_squad = params.get("collectible_mode_squad", "");
+
+    set_custom(RoguelikeCustomType::Squad, m_squad);
+
+    if (params.get("start_with_seed", false)) { // 种子刷钱，强制随心所欲
         set_custom(RoguelikeCustomType::Roles, "随心所欲");
     }
     else {
@@ -73,6 +77,13 @@ void asst::RoguelikeCustomStartTaskPlugin::set_custom(RoguelikeCustomType type, 
 
 bool asst::RoguelikeCustomStartTaskPlugin::_run()
 {
+    if (m_config->get_run_for_collectible()) {
+        set_custom(RoguelikeCustomType::Squad, m_collectible_mode_squad); // 烧水分队
+    }
+    else {
+        set_custom(RoguelikeCustomType::Squad, m_squad); // 开局分队
+    }
+
     const std::unordered_map<RoguelikeCustomType, std::function<bool(void)>> TypeActuator = {
         { RoguelikeCustomType::Squad, std::bind(&RoguelikeCustomStartTaskPlugin::hijack_squad, this) },
         { RoguelikeCustomType::Roles, std::bind(&RoguelikeCustomStartTaskPlugin::hijack_roles, this) },

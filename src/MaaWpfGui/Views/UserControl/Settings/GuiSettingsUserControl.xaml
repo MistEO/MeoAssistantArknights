@@ -59,14 +59,15 @@
                 <!-- <CheckBox
                     Margin="10"
                     Content="{DynamicResource NullFunctionality}"
-                    IsChecked="{Binding InvertNullFunction}" /> -->
+                    IsChecked="{Binding InvertNullFunction}" />-->
                 <hc:CheckComboBox
                     x:Name="CheckComboBox"
                     Width="180"
                     Margin="10"
                     hc:ListBoxAttach.SelectedItems="{Binding WindowTitleSelectShowList}"
                     hc:TitleElement.Title="{DynamicResource TitleBarDisplayContent}"
-                    ItemsSource="{Binding WindowTitleAllShowList}"
+                    DisplayMemberPath="Value"
+                    ItemsSource="{Binding WindowTitleAllShowDict}"
                     Style="{StaticResource CheckComboBoxExtend}" />
             </StackPanel>
 

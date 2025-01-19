@@ -126,6 +126,7 @@
     <system:String x:Key="RoguelikeStrategyGold">刷源石錠，到達第二層後直接退出</system:String>
     <system:String x:Key="RoguelikeStrategyLastReward">刷開局，刷取熱水壺或精二幹員開局</system:String>
     <system:String x:Key="RoguelikeStrategyCollapse">刷坍縮範式，遇到非稀有坍縮範式後直接重開</system:String>
+    <system:String x:Key="RoguelikeCollectibleModeSquad">燒水分隊</system:String>
     <system:String x:Key="StartingSquad">開局分隊</system:String>
     <system:String x:Key="StartingRoles">開局職業組</system:String>
     <system:String x:Key="StartingCoreChar">開局幹員（單個）</system:String>
@@ -314,6 +315,8 @@
     <system:String x:Key="StopOnGoldLimit">儲備源石錠達到上限時停止</system:String>
     <system:String x:Key="InvestmentEnabled">投資源石錠</system:String>
     <system:String x:Key="InvestmentWithMoreScore">投資模式啟用購物、招募、進2層</system:String>
+    <system:String x:Key="RoguelikeCollectibleModeShopping">刷開局模式啟用購物</system:String>
+    <system:String x:Key="RoguelikeStartWithSelectList">刷开局期望奖励</system:String>
     <system:String x:Key="RefreshTraderWithDice">刷新商店（指路鱗）</system:String>
     <system:String x:Key="PenguinId">企鵝物流匯報 ID（僅數字部分）</system:String>
     <system:String x:Key="EnablePenguin">上報企鵝物流</system:String>
