@@ -127,6 +127,7 @@
     <system:String x:Key="RoguelikeStrategyGold">Invests coins, exits after arriving at the second floor</system:String>
     <system:String x:Key="RoguelikeStrategyLastReward">Grind to obtain Hot Water Kettle or Elite II operators</system:String>
     <system:String x:Key="RoguelikeStrategyCollapse">Farm collapse paradigms, restart immediately after encountering a non-rare collapse paradigm</system:String>
+    <system:String x:Key="LastRewardSquad">烧水分队</system:String>
     <system:String x:Key="StartingSquad">Starting Squad</system:String>
     <system:String x:Key="StartingRoles">Starting Roles</system:String>
     <system:String x:Key="StartingCoreChar">Starting Operator (single)</system:String>

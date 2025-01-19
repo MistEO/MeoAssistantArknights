@@ -46,6 +46,16 @@
                 SelectedValuePath="Value" />
             <hc:ComboBox
                 Margin="0,5"
+                hc:InfoElement.Title="{DynamicResource LastRewardSquad}"
+                DisplayMemberPath="Display"
+                IsHitTestVisible="{Binding Idle, Source={x:Static setting:TaskQueueViewModel.TaskSettingDataContext}}"
+                ItemsSource="{Binding RoguelikeSquadList}"
+                MaxDropDownHeight="800"
+                SelectedValue="{Binding RoguelikeLastRewardSquad}"
+                SelectedValuePath="Value"
+                Visibility="{c:Binding 'RoguelikeMode == &quot;4&quot;'}" />
+            <hc:ComboBox
+                Margin="0,5"
                 hc:InfoElement.Title="{DynamicResource StartingSquad}"
                 DisplayMemberPath="Display"
                 IsHitTestVisible="{Binding Idle, Source={x:Static setting:TaskQueueViewModel.TaskSettingDataContext}}"

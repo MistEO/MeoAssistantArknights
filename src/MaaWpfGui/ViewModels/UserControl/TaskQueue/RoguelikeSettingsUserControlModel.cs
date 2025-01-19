@@ -333,6 +333,21 @@ public class RoguelikeSettingsUserControlModel : PropertyChangedBase
         }
     }
 
+    private string _roguelikeLastRewardSquad = ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeLastRewardSquad, string.Empty);
+
+    /// <summary>
+    /// Gets or sets the roguelike squad using for last reward mode.
+    /// </summary>
+    public string RoguelikeLastRewardSquad
+    {
+        get => _roguelikeLastRewardSquad;
+        set
+        {
+            SetAndNotify(ref _roguelikeLastRewardSquad, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeLastRewardSquad, value);
+        }
+    }
+
     private string _roguelikeSquad = ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeSquad, string.Empty);
 
     /// <summary>
