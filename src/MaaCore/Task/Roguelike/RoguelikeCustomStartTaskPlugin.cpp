@@ -54,7 +54,7 @@ bool asst::RoguelikeCustomStartTaskPlugin::load_params(const json::value& params
 
     set_custom(RoguelikeCustomType::Squad, m_squad);
 
-    if (params.get("start_with_seed", false)) {                      // 种子刷钱，强制随心所欲
+    if (params.get("start_with_seed", false)) { // 种子刷钱，强制随心所欲
         set_custom(RoguelikeCustomType::Roles, "随心所欲");
     }
     else {

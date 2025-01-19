@@ -36,7 +36,7 @@ private:
 private:
     std::unordered_map<RoguelikeCustomType, std::string> m_customs;
     mutable RoguelikeCustomType m_waiting_to_run = RoguelikeCustomType::None;
-    
+
     std::string m_squad;
     std::string m_collectible_mode_squad;
 };
