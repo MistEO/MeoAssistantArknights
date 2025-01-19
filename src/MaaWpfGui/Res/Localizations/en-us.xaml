@@ -317,7 +317,15 @@ You can cancel this popup by clicking the Settings - About Us - Issue Reporting 
     <system:String x:Key="InvestmentEnabled">Invest coins</system:String>
     <system:String x:Key="InvestmentWithMoreScore">Investment mode enables shopping, recruitment, and entering the second floor</system:String>
     <system:String x:Key="RoguelikeCollectibleModeShopping">Enable shopping in the grinding mode</system:String>
-    <system:String x:Key="RoguelikeStartWithSelectList">刷开局期望奖励</system:String>
+    <system:String x:Key="RoguelikeStartWithSelectList">Grinding mode expected reward</system:String>
+    <system:String x:Key="RoguelikeStartWithKettle">Kettle</system:String>
+    <system:String x:Key="RoguelikeStartWithShield">Shield</system:String>
+    <system:String x:Key="RoguelikeStartWithIngot">Coin</system:String>
+    <system:String x:Key="RoguelikeStartWithHope">Hope</system:String>
+    <system:String x:Key="RoguelikeStartWithRandomReward">Random Reward</system:String>
+    <system:String x:Key="RoguelikeStartWithKey">Key</system:String>
+    <system:String x:Key="RoguelikeStartWithDice">Dice</system:String>
+    <system:String x:Key="RoguelikeStartWithIdea">Idea</system:String>
     <system:String x:Key="RefreshTraderWithDice">Refresh Rogue Trader with Dice</system:String>
     <system:String x:Key="PenguinId">Penguin Report ID (Number part)</system:String>
     <system:String x:Key="EnablePenguin">Report Penguin</system:String>

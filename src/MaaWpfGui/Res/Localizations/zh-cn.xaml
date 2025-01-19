@@ -318,6 +318,14 @@
     <system:String x:Key="InvestmentWithMoreScore">投资模式启用购物、招募、进2层</system:String>
     <system:String x:Key="RoguelikeCollectibleModeShopping">刷开局模式启用购物</system:String>
     <system:String x:Key="RoguelikeStartWithSelectList">刷开局期望奖励</system:String>
+    <system:String x:Key="RoguelikeStartWithKettle">热水壶</system:String>
+    <system:String x:Key="RoguelikeStartWithShield">盾</system:String>
+    <system:String x:Key="RoguelikeStartWithIngot">锭</system:String>
+    <system:String x:Key="RoguelikeStartWithHope">希望</system:String>
+    <system:String x:Key="RoguelikeStartWithRandomReward">随机奖励</system:String>
+    <system:String x:Key="RoguelikeStartWithKey">钥匙</system:String>
+    <system:String x:Key="RoguelikeStartWithDice">骰子</system:String>
+    <system:String x:Key="RoguelikeStartWithIdea">构想</system:String>
     <system:String x:Key="RefreshTraderWithDice">刷新商店（指路鳞）</system:String>
     <system:String x:Key="PenguinId">企鹅物流汇报ID（仅数字部分）</system:String>
     <system:String x:Key="EnablePenguin">上报企鹅物流</system:String>
@@ -327,7 +335,7 @@
     <system:String x:Key="SocialPtShop">信用交易所自动购物</system:String>
     <system:String x:Key="OnlyOnceADay">一日只执行一次</system:String>
     <system:String x:Key="CreditFight">借助战打 OF-1 赚信用</system:String>
-    <system:String x:Key="CreditFightTip" xml:space="preserve">访问好友后借助战打一把OF-1赚30信用。
+    <system:String x:Key="CreditFightTip" xml:space="preserve">访问好友后借助战打一把 OF-1 赚 30 信用。
 一日只执行一次。
 关卡选择为「当前/上次」时此功能无效。
 别传「火蓝之心」关卡OF-1未解锁时请勿勾选。</system:String>

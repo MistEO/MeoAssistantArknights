@@ -481,14 +481,14 @@ public class RoguelikeSettingsUserControlModel : PropertyChangedBase
 
     public static Dictionary<string, string> RoguelikeStartWithAllDict { get; } = new()
     {
-        { "Roguelike@LastReward", LocalizationHelper.GetString("热水壶") },
-        { "Roguelike@LastReward2", LocalizationHelper.GetString("盾") },
-        { "Roguelike@LastReward3", LocalizationHelper.GetString("源石锭") },
-        { "Roguelike@LastReward4", LocalizationHelper.GetString("希望") },
-        { "Roguelike@LastRewardRand", LocalizationHelper.GetString("随机奖励") },
-        { "Mizuki@Roguelike@LastReward5", LocalizationHelper.GetString("钥匙") },
-        { "Mizuki@Roguelike@LastReward6", LocalizationHelper.GetString("骰子") },
-        { "Sarkaz@Roguelike@LastReward5", LocalizationHelper.GetString("构想") },
+        { "Roguelike@LastReward", LocalizationHelper.GetString("RoguelikeStartWithKettle") },
+        { "Roguelike@LastReward2", LocalizationHelper.GetString("RoguelikeStartWithShield") },
+        { "Roguelike@LastReward3", LocalizationHelper.GetString("RoguelikeStartWithIngot") },
+        { "Roguelike@LastReward4", LocalizationHelper.GetString("RoguelikeStartWithHope") },
+        { "Roguelike@LastRewardRand", LocalizationHelper.GetString("RoguelikeStartWithRandomReward") },
+        { "Mizuki@Roguelike@LastReward5", LocalizationHelper.GetString("RoguelikeStartWithKey") },
+        { "Mizuki@Roguelike@LastReward6", LocalizationHelper.GetString("RoguelikeStartWithDice") },
+        { "Sarkaz@Roguelike@LastReward5", LocalizationHelper.GetString("RoguelikeStartWithIdea") },
     };
 
     private static object[] _roguelikeStartWithSelectListRaw = ConfigurationHelper.GetGlobalValue(ConfigurationKeys.RoguelikeStartWithSelectList, "Roguelike@LastReward Roguelike@LastReward4 Sarkaz@Roguelike@LastReward5")
