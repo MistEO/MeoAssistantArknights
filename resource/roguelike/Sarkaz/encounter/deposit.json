@@ -630,6 +630,11 @@
             "choose": 2
         },
         {
+            "name": "空无前兆",
+            "option_num": 2,
+            "choose": 2
+        },
+        {
             "name": "尾页",
             "option_num": 2,
             "choose": 2,
