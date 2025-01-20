@@ -7071,7 +7071,7 @@
         "baseTask": "Roguelike@LastReward_default",
         "template": "empty.png",
         "roi": [171, 474, 935, 205],
-        "next": ["Roguelike@RolesDefault", "Roguelike@CloseCollection"]
+        "next": []
     },
     "Roguelike@LastRewardRand": {
         "Doc": "你的上一次探索突破了至少两层困难，这一次可以获得更多支援—— 问号",
@@ -7084,13 +7084,6 @@
         "roi": [225, 199, 829, 241],
         "next": ["Roguelike@RolesDefault", "Roguelike@CloseCollection", "Roguelike@StartExplore"]
     },
-    "Roguelike@LastReward-Confirm": {
-        "template": "empty.png",
-        "action": "ClickSelf",
-        "roi": [171, 474, 935, 205],
-        "preDelay_Doc": "插件用延迟",
-        "preDelay": 500
-    },
     "Roguelike@LastReward-Strategy": {
         "Doc": "未指定期望时，默认选择策略",
         "algorithm": "JustReturn"
@@ -7100,16 +7093,6 @@
         "action": "ClickSelf",
         "roi": [225, 199, 829, 241],
         "next": ["Roguelike@LastRewardConfirm"]
-    },
-    "Roguelike@LastReward_restart": {
-        "baseTask": "Roguelike@LastReward_default",
-        "template": "empty.png",
-        "next": []
-    },
-    "Roguelike@LastReward_stop": {
-        "baseTask": "Roguelike@LastReward_default",
-        "template": "empty.png",
-        "next": ["RoguelikeControlTaskPlugin-Stop"]
     },
     "Roguelike@MainThemes": {
         "next": ["Roguelike", "Roguelike@ChooseDifficulty", "Roguelike@StartExplore", "Roguelike@Abandon"]
@@ -7985,9 +7968,6 @@
             "Phantom@Roguelike@LastRewardRand"
         ]
     },
-    "Phantom@Roguelike@LastReward-Confirm": {
-        "template": "Phantom@Roguelike@LastRewardConfirm.png"
-    },
     "Phantom@Roguelike@MissionFailedFlag": {
         "roi": [450, 163, 540, 267]
     },
@@ -8392,9 +8372,6 @@
             "Mizuki@Roguelike@LastReward6",
             "Mizuki@Roguelike@LastRewardRand"
         ]
-    },
-    "Mizuki@Roguelike@LastReward-Confirm": {
-        "template": "Mizuki@Roguelike@LastRewardConfirm.png"
     },
     "Mizuki@Roguelike@MapObject": {
         "roi": [257, 488, 189, 123],
@@ -9146,9 +9123,6 @@
             "Sami@Roguelike@LastReward3",
             "Sami@Roguelike@LastRewardRand"
         ]
-    },
-    "Sami@Roguelike@LastReward-Confirm": {
-        "template": "Sami@Roguelike@LastRewardConfirm.png"
     },
     "Sami@Roguelike@MapObject": {
         "roi": [257, 488, 189, 123],
@@ -10315,9 +10289,6 @@
             "Sarkaz@Roguelike@LastReward3",
             "Sarkaz@Roguelike@LastRewardRand"
         ]
-    },
-    "Sarkaz@Roguelike@LastReward-Confirm": {
-        "template": "Sarkaz@Roguelike@LastRewardConfirm.png"
     },
     "Sarkaz@Roguelike@MapObject": {
         "roi": [257, 488, 189, 123],

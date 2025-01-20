@@ -1,5 +1,6 @@
 #include "RoguelikeLastRewardSelectTaskPlugin.h"
 
+#include "Config/GeneralConfig.h"
 #include "Config/TaskData.h"
 #include "Controller/Controller.h"
 #include "Task/ProcessTask.h"
@@ -26,10 +27,7 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
     const auto& list = get_select_list();
     if (list.empty()) {
         // 执行默认选择顺序
-        ProcessTask(*this, { m_config->get_theme() + "@Roguelike@LastReward-Strategy" })
-            .set_times_limit("Roguelike@LastRewardConfirm", 0)
-            .run();
-        ProcessTask(*this, { "Roguelike@LastReward-Confirm" }).run();
+        ProcessTask(*this, { m_config->get_theme() + "@Roguelike@LastReward-Strategy" }).run();
         return true;
     }
 
@@ -42,7 +40,8 @@ bool asst::RoguelikeLastRewardSelectTaskPlugin::_run()
     }
     else if (m_config->get_start_with_elite_two()) {
         ctrler()->click(ret->rect);
-        ProcessTask(*this, { "Roguelike@LastReward-Confirm" }).run();
+        sleep(Config.get_options().task_delay);
+        ProcessTask(*this, { m_config->get_theme() + "@Roguelike@LastRewardConfirm" }).run();
     }
     else {
         m_control_ptr->exit_then_stop(false);
