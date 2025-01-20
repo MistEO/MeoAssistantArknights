@@ -73,5 +73,5 @@ bool asst::RoguelikeIterateMonthlySquadPlugin::_run()
 
 bool asst::RoguelikeIterateMonthlySquadPlugin::try_task(const char* task) const
 {
-    return ProcessTask(*this, { m_config->get_theme() + task }).set_retry_times(3).run();
+    return ProcessTask(*this, { m_config->get_theme() + task }).run();
 }
