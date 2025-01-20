@@ -139,8 +139,8 @@
     <system:String x:Key="Roguelike3FirstFloorFoldartal">凹第一層遠見密文板，不進行作戰</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartal">生活隊凹開局密文板</system:String>
     <system:String x:Key="Roguelike3NewSquad2StartingFoldartalTip">最多寫三個，並用英文分號;隔開</system:String>
-    <system:String x:Key="RoguelikeCollapseList">坍缩范式列表</system:String>
-    <system:String x:Key="RoguelikeCollapseListTip">用英文分号「;」隔开，留空将使用默认列表。</system:String>
+    <system:String x:Key="RoguelikeCollapseList">坍縮範式列表</system:String>
+    <system:String x:Key="RoguelikeCollapseListTip">用英文分號「;」隔開，留白將使用默認列表。</system:String>
     <system:String x:Key="RoguelikeUseSupportUnit">「開局幹員」使用助戰</system:String>
     <system:String x:Key="RoguelikeUseNonFriendSupport">可以使用非好友助戰</system:String>
     <system:String x:Key="RoguelikeDelayAbortUntilCombatComplete">肉鴿在戰鬥結束前延遲「停止」動作</system:String>
@@ -250,7 +250,7 @@
     <system:String x:Key="NewVersionZipFileBrokenDescFilename" xml:space="preserve">文件名: </system:String>
     <system:String x:Key="NewVersionZipFileBrokenDescDeleted">已將其刪除！</system:String>
     <system:String x:Key="AlreadyLatest">已是最新版本 ~</system:String>
-    <system:String x:Key="NoNeedToUpdateDebugVersion">當前爲調試版本，無需更新</system:String>
+    <system:String x:Key="NoNeedToUpdateDebugVersion">當前爲測試版本，無需更新</system:String>
     <system:String x:Key="NewVersionDetectFailedTitle">檢查更新失敗</system:String>
     <system:String x:Key="CheckNetworking">請檢查網絡連接或代理。</system:String>
     <system:String x:Key="GetReleaseNoteFailed">獲取更新資訊失敗。</system:String>
@@ -287,7 +287,7 @@
     <system:String x:Key="WaitForEmulator">等待模擬器啟動時間（秒）</system:String>
     <system:String x:Key="WaitForEmulatorFinish">等待結束</system:String>
     <system:String x:Key="EmulatorPath">模擬器路徑</system:String>
-    <system:String x:Key="EmulatorPathSelectionErrorPrompt">你也想在酒吧里點酒吧？</system:String>
+    <system:String x:Key="EmulatorPathSelectionErrorPrompt">你也想在酒吧裡點酒吧？</system:String>
     <system:String x:Key="EmulatorPathSelectionErrorImSure">我確定沒選錯</system:String>
     <system:String x:Key="EmulatorPathSelectionErrorSelectAgain">好的，我會重新選擇</system:String>
     <system:String x:Key="Select">選擇</system:String>
@@ -317,12 +317,12 @@
     <system:String x:Key="InvestmentEnabled">投資源石錠</system:String>
     <system:String x:Key="InvestmentWithMoreScore">投資模式啟用購物、招募、進2層</system:String>
     <system:String x:Key="RoguelikeCollectibleModeShopping">刷開局模式啟用購物</system:String>
-    <system:String x:Key="RoguelikeStartWithSelectList">刷開局期望獎勳</system:String>
+    <system:String x:Key="RoguelikeStartWithSelectList">刷開局期望獎勵</system:String>
     <system:String x:Key="RoguelikeStartWithKettle">熱水壺</system:String>
     <system:String x:Key="RoguelikeStartWithShield">盾</system:String>
     <system:String x:Key="RoguelikeStartWithIngot">源石錠</system:String>
     <system:String x:Key="RoguelikeStartWithHope">希望</system:String>
-    <system:String x:Key="RoguelikeStartWithRandomReward">隨機獎勳</system:String>
+    <system:String x:Key="RoguelikeStartWithRandomReward">隨機獎勵</system:String>
     <system:String x:Key="RoguelikeStartWithKey">鑰匙</system:String>
     <system:String x:Key="RoguelikeStartWithDice">骰子</system:String>
     <system:String x:Key="RoguelikeStartWithIdea">構想</system:String>
