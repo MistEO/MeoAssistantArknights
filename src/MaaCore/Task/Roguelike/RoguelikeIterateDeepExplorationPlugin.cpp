@@ -10,7 +10,7 @@ bool asst::RoguelikeIterateDeepExplorationPlugin::load_params([[maybe_unused]] c
     LogTraceFunction;
 
     auto iterateDE = params.find<bool>("deep_exploration_auto_iterate");
-    return m_config()->get_mode() == RoguelikeMode::Exploration && iterateDE.value_or(false);
+    return m_config->get_mode() == RoguelikeMode::Exploration && iterateDE.value_or(false);
 }
 
 bool asst::RoguelikeIterateDeepExplorationPlugin::verify(AsstMsg msg, const json::value& details) const
@@ -44,11 +44,11 @@ bool asst::RoguelikeIterateDeepExplorationPlugin::_run()
 
     m_completed = true;
     if (deepExplorationCount[m_config->get_theme()] > 0) {
-        task_once("@Roguelike@DeepExploration");
+        try_task("@Roguelike@DeepExploration");
     }
 
     for (int i = 0; i < deepExplorationCount[m_config->get_theme()]; i++) {
-        if (!task_once("@Roguelike@DeepExplorationRewardMiss")) {
+        if (!try_task("@Roguelike@DeepExplorationRewardMiss")) {
             m_completed = false;
             break;
         }
@@ -63,7 +63,7 @@ bool asst::RoguelikeIterateDeepExplorationPlugin::_run()
     return true;
 }
 
-bool asst::RoguelikeIterateDeepExplorationPlugin::task_once(const char* task) const
+bool asst::RoguelikeIterateDeepExplorationPlugin::try_task(const char* task) const
 {
-    return ProcessTask(*this, { m_config->get_theme() + task }).set_retry_times(1).run();
+    return ProcessTask(*this, { m_config->get_theme() + task }).set_retry_times(3).run();
 }
