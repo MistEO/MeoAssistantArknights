@@ -43,10 +43,10 @@ struct RoguelikeOper
 struct RoguelikeStatus
 {
 public:
-    int hope = 0;                                          // 当前希望
-    int hp = 0;                                            // 当前生命值
-    int floor = 0;                                         // 当前到达层数
-    int formation_upper_limit = 6;                         // 当前编队上限
+    int hope = 0;                                         // 当前希望
+    int hp = 0;                                           // 当前生命值
+    int floor = 0;                                        // 当前到达层数
+    int formation_upper_limit = 6;                        // 当前编队上限
 
     std::unordered_map<std::string, RoguelikeOper> opers; // 干员精英&等级
     std::vector<std::string> collections;                 // 已获得的藏品
