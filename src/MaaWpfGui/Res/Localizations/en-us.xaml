@@ -123,9 +123,11 @@
     <system:String x:Key="DormThreshold">Morale Threshold</system:String>
     <system:String x:Key="InfrastThresholdTip">If custom shifts are enabled, this field is only valid for rooms with autofill and operator groups</system:String>
     <system:String x:Key="RoguelikeStrategyExp">Gain Experience Points, clear as many nodes as possible</system:String>
-    <system:String x:Key="RoguelikeStrategyGold">Invests coins, exits after arriving at the second floor</system:String>
+    <system:String x:Key="RoguelikeStrategyGold">Invests coins, exits after arriving at the second level</system:String>
     <system:String x:Key="RoguelikeStrategyLastReward">Grind to obtain Hot Water Kettle or Elite II operators</system:String>
     <system:String x:Key="RoguelikeStrategyCollapse">Farm collapse paradigms, restart immediately after encountering a non-rare collapse paradigm</system:String>
+    <system:String x:Key="RoguelikeStrategyMonthlySquad">Grind Monthly Squad，exits after arriving at the fifth level</system:String>
+    <system:String x:Key="RoguelikeStrategyDeepExploration">Grind Deep Exploration，clear as far as possible</system:String>
     <system:String x:Key="StartingSquad">Starting Squad</system:String>
     <system:String x:Key="StartingRoles">Starting Roles</system:String>
     <system:String x:Key="StartingCoreChar">Starting Operator (single)</system:String>
@@ -762,6 +764,9 @@ The video aspect ratio needs to be 16:9 without interference factors such as bla
     <system:String x:Key="GameDropNoRestart">Game disconnected, not restarting, stopping</system:String>
     <system:String x:Key="RoguelikeGamePass">Exploration completed! Congratulations!</system:String>
     <system:String x:Key="RoguelikeSpecialItemBought">Special Item Purchased!</system:String>
+    <system:String x:Key="MonthlySquadCompleted">Monthly squad all clear! Congratulations!</system:String>
+    <system:String x:Key="DeepExplorationCompleted">Deep exploration all clear! Congratulations!</system:String>
+    <system:String x:Key="DeepExplorationNotUnlockedComplain">Deep exploration not unlocked yet</system:String>
     <system:String x:Key="SSSGamePass">Game cleared! congratulations!</system:String>
     <system:String x:Key="Trader">Node: Rogue Trader</system:String>
     <system:String x:Key="SafeHouse">Node: Safe House</system:String>

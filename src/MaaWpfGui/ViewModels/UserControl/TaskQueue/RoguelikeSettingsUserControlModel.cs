@@ -69,6 +69,8 @@ public class RoguelikeSettingsUserControlModel : TaskViewModel
                 // new CombData { Display = "两者兼顾，投资过后退出", Value = "2" } // 弃用
                 // new CombData { Display = Localization.GetString("3"), Value = "3" },  // 开发中
                 new() { Display = LocalizationHelper.GetString("RoguelikeStrategyLastReward"), Value = "4" },
+                new() { Display = LocalizationHelper.GetString("RoguelikeStrategyMonthlySquad"), Value = "6" },
+                new() { Display = LocalizationHelper.GetString("RoguelikeStrategyDeepExploration"), Value = "7" },
             ];
 
         switch (RoguelikeTheme)
@@ -580,7 +582,7 @@ public class RoguelikeSettingsUserControlModel : TaskViewModel
     private bool _roguelikeEnableNonfriendSupport = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeEnableNonfriendSupport, bool.FalseString));
 
     /// <summary>
-    /// Gets or sets a value indicating whether can roguelike support unit belong to nonfriend
+    /// Gets or sets a value indicating whether can roguelike support unit belong to nonfriend.
     /// </summary>
     public bool RoguelikeEnableNonfriendSupport
     {
@@ -697,7 +699,7 @@ public class RoguelikeSettingsUserControlModel : TaskViewModel
     private bool _roguelikeStopAtFinalBoss = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeStopAtFinalBoss, bool.FalseString));
 
     /// <summary>
-    /// Gets or sets a value indicating whether to stop when investment is full.
+    /// Gets or sets a value indicating whether to stop when arriving at final boss.
     /// </summary>
     public bool RoguelikeStopAtFinalBoss
     {
@@ -706,6 +708,51 @@ public class RoguelikeSettingsUserControlModel : TaskViewModel
         {
             SetAndNotify(ref _roguelikeStopAtFinalBoss, value);
             ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeStopAtFinalBoss, value.ToString());
+        }
+    }
+
+    private bool _roguelikeMonthlySquadAutoIterate = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeMonthlySquadAutoIterate, bool.FalseString));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to automatically iterate the monthly squad.
+    /// </summary>
+    public bool RoguelikeMonthlySquadAutoIterate
+    {
+        get => _roguelikeMonthlySquadAutoIterate;
+        set
+        {
+            SetAndNotify(ref _roguelikeMonthlySquadAutoIterate, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeMonthlySquadAutoIterate, value.ToString());
+        }
+    }
+
+    private bool _roguelikeMonthlySquadCheckComms = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeMonthlySquadCheckComms, bool.FalseString));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to automatically iterate the deep exploration mode.
+    /// </summary>
+    public bool RoguelikeMonthlySquadCheckComms
+    {
+        get => _roguelikeMonthlySquadCheckComms;
+        set
+        {
+            SetAndNotify(ref _roguelikeMonthlySquadCheckComms, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeMonthlySquadCheckComms, value.ToString());
+        }
+    }
+
+    private bool _roguelikeDeepExplorationAutoIterate = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.RoguelikeDeepExplorationAutoIterate, bool.FalseString));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to automatically iterate the deep exploration mode.
+    /// </summary>
+    public bool RoguelikeDeepExplorationAutoIterate
+    {
+        get => _roguelikeDeepExplorationAutoIterate;
+        set
+        {
+            SetAndNotify(ref _roguelikeDeepExplorationAutoIterate, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.RoguelikeDeepExplorationAutoIterate, value.ToString());
         }
     }
 

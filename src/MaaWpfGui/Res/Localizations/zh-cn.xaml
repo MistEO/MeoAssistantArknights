@@ -126,6 +126,8 @@
     <system:String x:Key="RoguelikeStrategyGold">刷源石锭，到达第二层后直接退出</system:String>
     <system:String x:Key="RoguelikeStrategyLastReward">刷开局，刷取热水壶或精二干员开局</system:String>
     <system:String x:Key="RoguelikeStrategyCollapse">刷坍缩范式，遇到非稀有坍缩范式后直接重开</system:String>
+    <system:String x:Key="RoguelikeStrategyMonthlySquad">刷月度小队，到达第五层后直接退出</system:String>
+    <system:String x:Key="RoguelikeStrategyDeepExploration">刷深入调查，尽可能稳定地打更多层数</system:String>
     <system:String x:Key="StartingSquad">开局分队</system:String>
     <system:String x:Key="StartingRoles">开局职业组</system:String>
     <system:String x:Key="StartingCoreChar">开局干员 (单个)</system:String>
@@ -145,6 +147,9 @@
     <system:String x:Key="RoguelikeStopAtFinalBoss">在第五层 BOSS 前暂停</system:String>
     <system:String x:Key="RoguelikeStopAtMaxLevel">满级后自动停止</system:String>
     <system:String x:Key="RoguelikeStartWithSeed">启用刷钱种子（美愿）</system:String>
+    <system:String x:Key="RoguelikeMonthlySquadAutoIterate">月度小队自动切换</system:String>
+    <system:String x:Key="RoguelikeMonthlySquadCheckComms">月度小队通讯</system:String>
+    <system:String x:Key="RoguelikeDeepExplorationAutoIterate">深入调查自动切换</system:String>
     <system:String x:Key="DeploymentWithPause">划火柴模式（自动战斗）</system:String>
     <system:String x:Key="AdbLiteEnabled">使用 ADB Lite（实验性功能）</system:String>
     <system:String x:Key="KillAdbOnExit">退出时释放 ADB</system:String>
@@ -764,6 +769,9 @@ V9.1.28 前的模拟器版本仅支持 720P 900P 1080P 分辨率，V9.1.29 后�
     <system:String x:Key="GameDropNoRestart">游戏掉线，不重新连接，停止任务</system:String>
     <system:String x:Key="RoguelikeGamePass">肉鸽通关啦！</system:String>
     <system:String x:Key="RoguelikeSpecialItemBought">购买了特殊商品！</system:String>
+    <system:String x:Key="MonthlySquadCompleted">月度小队清完啦！</system:String>
+    <system:String x:Key="DeepExplorationCompleted">深入调查清完啦！</system:String>
+    <system:String x:Key="DeepExplorationNotUnlockedComplain">深入调查未解锁</system:String>
     <system:String x:Key="SSSGamePass">保全通关啦！</system:String>
     <system:String x:Key="Trader">节点: 诡意行商</system:String>
     <system:String x:Key="SafeHouse">节点: 安全的角落</system:String>

@@ -126,6 +126,8 @@
     <system:String x:Key="RoguelikeStrategyGold">오리지늄 각뿔 우선, 2번째 구역 도달 시 탐험 중도 포기</system:String>
     <system:String x:Key="RoguelikeStrategyLastReward">전기주전자 획득까지 반복, 3번째 구역 도달 시 탐험 중도 포기</system:String>
     <system:String x:Key="RoguelikeStrategyCollapse">희귀 붕괴 패러다임 파밍, 일반 붕괴 패러다임이 나올 시 재시작</system:String>
+    <system:String x:Key="RoguelikeStrategyMonthlySquad">월간 소대를 그라인드하고, 5층에 도달하면 바로 종료</system:String>
+    <system:String x:Key="RoguelikeStrategyDeepExploration">심층 탐사를 그라인드하고 가능한 한 많은 층을 클리어</system:String>
     <system:String x:Key="StartingSquad">시작 분대</system:String>
     <system:String x:Key="StartingRoles">모집 조합</system:String>
     <system:String x:Key="StartingCoreChar">시작 오퍼레이터 (1명)</system:String>
@@ -765,6 +767,9 @@ V9.1.28 이전의 에뮬레이터 버전은 720P, 900P 및 1080P 해상도만 �
     <system:String x:Key="GameDropNoRestart">게임 중단, 다시 연결되지 않음, 퀘스트 중지</system:String>
     <system:String x:Key="RoguelikeGamePass">통합전략을 클리어했습니다!</system:String>
     <system:String x:Key="RoguelikeSpecialItemBought">특별한 유물을 구매했습니다!</system:String>
+    <system:String x:Key="MonthlySquadCompleted">월간 팀 모두 완료! 축하합니다!</system:String>
+    <system:String x:Key="DeepExplorationCompleted">심층 탐험 모두 완료! 축하합니다!</system:String>
+    <system:String x:Key="DeepExplorationNotUnlockedComplain">심층 탐험이 아직 잠금 해제되지 않았습니다</system:String>
     <system:String x:Key="SSSGamePass">보안 파견을 클리어했습니다!</system:String>
     <system:String x:Key="Trader">노드: 교활한 상인</system:String>
     <system:String x:Key="SafeHouse">노드: 안전가옥</system:String>
