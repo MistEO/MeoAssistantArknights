@@ -136,18 +136,6 @@
             "choose": 3,
             "choices": [
                 {
-                    "name": "意思意思",
-                    "option_num": 3,
-                    "choose": 1,
-                    "requirements": [
-                        {
-                            "name": "OriginiumIngot",
-                            "type": ">",
-                            "value": "2"
-                        }
-                    ]
-                },
-                {
                     "name": "重金酬谢",
                     "option_num": 3,
                     "choose": 2,
@@ -159,6 +147,18 @@
                         },
                         {
                             "name": "Vision",
+                            "type": ">",
+                            "value": "2"
+                        }
+                    ]
+                },
+                {
+                    "name": "意思意思",
+                    "option_num": 3,
+                    "choose": 1,
+                    "requirements": [
+                        {
+                            "name": "OriginiumIngot",
                             "type": ">",
                             "value": "2"
                         }
@@ -456,18 +456,6 @@
             "choose": 1,
             "choices": [
                 {
-                    "name": "选择他脚边的货品",
-                    "option_num": 3,
-                    "choose": 2,
-                    "requirements": [
-                        {
-                            "name": "Vision",
-                            "type": ">",
-                            "value": "1"
-                        }
-                    ]
-                },
-                {
                     "name": "选择仓库深处的货品",
                     "option_num": 3,
                     "choose": 3,
@@ -488,6 +476,18 @@
                             "name": "Relic",
                             "type": "have",
                             "value": "四叶草化石"
+                        }
+                    ]
+                },
+                {
+                    "name": "选择他脚边的货品",
+                    "option_num": 3,
+                    "choose": 2,
+                    "requirements": [
+                        {
+                            "name": "Vision",
+                            "type": ">",
+                            "value": "1"
                         }
                     ]
                 }
