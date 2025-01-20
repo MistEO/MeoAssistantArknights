@@ -10,7 +10,7 @@ bool asst::RoguelikeIterateDeepExplorationPlugin::load_params([[maybe_unused]] c
     LogTraceFunction;
 
     auto iterateDE = params.find<bool>("deep_exploration_auto_iterate");
-    return iterateDE.value_or(false);
+    return m_config()->get_mode() == RoguelikeMode::Exploration && iterateDE.value_or(false);
 }
 
 bool asst::RoguelikeIterateDeepExplorationPlugin::verify(AsstMsg msg, const json::value& details) const
