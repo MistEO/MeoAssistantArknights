@@ -235,6 +235,8 @@ AsstTaskId ASSTAPI AsstAppendTask(AsstHandle handle, const char* type, const cha
                      //       若在 Phantom 主题下则不切换难度，仅在当前难度下尝试到达第三层、重开、凹开局
                      //   5 - 刷坍缩范式；仅适用于 Sami 主题；通过战斗漏怪等方式加快坍缩值积累，
                      //       若遇到的第一个的坍缩范式在 expected_collapsal_paradigms 列表中则停止任务，否则重开
+                     //   6 - 刷月度小队蚊子腿，除了针对模式的适配以外和模式0相同
+                     //   7 - 刷深入调查蚊子腿，除了针对模式的适配以外和模式0相同
     "squad": string,                // 开局分队名，可选，默认值 "指挥分队"；
     "roles": string,                // 开局职业组，可选，默认值 "取长补短"；
     "core_char": string,            // 开局干员名，可选；仅支持单个干员**中文名**，无论区服；若留空或设置为空字符串 "" 则根据练度自动选择
@@ -267,6 +269,9 @@ AsstTaskId ASSTAPI AsstAppendTask(AsstHandle handle, const char* type, const cha
         string,                               // 仅在主题为 Sami 且模式为 5 时有效
         ...
     ],
+    "monthlySquadAutoIterate": bool,          //是否启动月度小队自动切换
+    "monthlySquadCheckComms": bool,           //是否将月度小队通信也作为切换依据
+    "deepExplorationAutoIterate": bool,       //是否启动深入调查自动切换
     "start_with_seed": bool,        // 使用种子刷钱，true 时有效
                                     // 仅在 Sarkaz 主题，Investment 模式，“点刺成锭分队” or “后勤分队” 时可能为 true
                                     // 使用固定种子
