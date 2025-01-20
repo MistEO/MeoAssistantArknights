@@ -6705,22 +6705,16 @@
     "Roguelike@MonthlySquadCommsMiss": {
         "Doc": "base_task 月度小队通信已获取",
         "template": "empty.png",
-        "roi": [100, 320, 370, 70],
+        "roi": [110, 380, 370, 70],
         "next": ["Roguelike@MonthlySquadCommsBackTwice"],
-        "postDelay": 500
+        "postDelay": 300
     },
     "Roguelike@MonthlySquadCommsBackTwice": {
-        "action": "ClickSelf",
+        "baseTask": "Return",
         "template": "Return.png",
-        "roi": [0, 0, 190, 80],
-        "postDelay": 500,
-        "next": ["Roguelike@MonthlySquadCommsBackOnce"]
-    },
-    "Roguelike@MonthlySquadCommsBackOnce": {
-        "action": "ClickSelf",
-        "template": "Return.png",
-        "roi": [0, 0, 190, 80],
-        "postDelay": 500
+        "maxTimes": 2,
+        "postDelay": 300,
+        "next": ["#self"]
     },
     "Roguelike@MonthlySquadRewardMiss": {
         "Doc": "base_task 月度小队奖励已获取",
@@ -6728,7 +6722,7 @@
         "action": "ClickRect",
         "roi": [735, 410, 280, 95],
         "specificRect": [466, 405, 40, 60],
-        "postDelay": 500
+        "postDelay": 300
     },
     "Roguelike@DeepExploration": {
         "Doc": "base_task 深入调查入口",
@@ -6744,7 +6738,7 @@
         "action": "ClickRect",
         "roi": [60, 560, 330, 50],
         "specificRect": [940, 210, 50, 80],
-        "postDelay": 500
+        "postDelay": 300
     },
     "Roguelike@DeepExplorationNotUnlockedComplain": {
         "Doc": "base_task 深入调查没解锁",
@@ -7984,8 +7978,7 @@
         "template": "Phantom@Roguelike@MonthlySquadComms.png"
     },
     "Phantom@Roguelike@MonthlySquadCommsMiss": {
-        "template": "Phantom@Roguelike@CommsMiss.png",
-        "roi": [110, 380, 370, 70]
+        "template": "Phantom@Roguelike@CommsMiss.png"
     },
     "Phantom@Roguelike@MonthlySquadRewardMiss": {
         "template": "Roguelike@RewardMiss.png"

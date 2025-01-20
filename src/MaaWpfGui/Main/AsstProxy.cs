@@ -2536,9 +2536,16 @@ namespace MaaWpfGui.Main
             taskParams["start_with_elite_two"] = startWithEliteTwo;
             taskParams["only_start_with_elite_two"] = onlyStartWithEliteTwo;
 
-            taskParams["monthly_squad_auto_iterate"] = monthlySquadAutoIterate;
-            taskParams["monthly_squad_check_comms"] = monthlySquadCheckComms;
-            taskParams["deep_exploration_auto_iterate"] = deepExplorationAutoIterate;
+            if (mode == 6)
+            {
+                taskParams["monthly_squad_auto_iterate"] = monthlySquadAutoIterate;
+                taskParams["monthly_squad_check_comms"] = monthlySquadCheckComms;
+            }
+
+            if (mode == 7)
+            {
+                taskParams["deep_exploration_auto_iterate"] = deepExplorationAutoIterate;
+            }
 
             taskParams["start_with_two_ideas"] = startWithTwoIdeas;
             if (roguelike3FirstFloorFoldartal && roguelike3StartFloorFoldartal.Length > 0)
