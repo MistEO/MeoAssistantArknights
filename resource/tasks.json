@@ -6710,11 +6710,12 @@
         "postDelay": 300
     },
     "Roguelike@MonthlySquadCommsBackTwice": {
+        "doc": "队员访谈录返回开始探索界面",
         "baseTask": "Return",
         "template": "Return.png",
-        "maxTimes": 2,
+        "maxTimes": 10,
         "postDelay": 300,
-        "next": ["#self"]
+        "next": ["Roguelike@StartExplore", "#self"]
     },
     "Roguelike@MonthlySquadRewardMiss": {
         "Doc": "base_task 月度小队奖励已获取",
