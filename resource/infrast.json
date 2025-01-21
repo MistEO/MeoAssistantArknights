@@ -2867,7 +2867,7 @@
                     {
                         "desc": "巫恋-2",
                         "efficient": {
-                            "all": 90.1
+                            "Money": 90.1
                         },
                         "skills": ["bskill_tra_wt&cost1", "bskill_tra_vodfox"]
                     }
@@ -2877,28 +2877,28 @@
                         "Doc": "这里具体效率不同攻略各执一词，写个大概的，反正别的组合也没这么高的，大差不差能第一就行_(:з」∠)_",
                         "desc": "龙舌兰-2",
                         "efficient": {
-                            "all": 80
+                            "Money": 80
                         },
                         "skills": ["bskill_tra_long2"]
                     },
                     {
                         "desc": "龙舌兰-1",
                         "efficient": {
-                            "all": 40
+                            "Money": 40
                         },
                         "skills": ["bskill_tra_long1"]
                     },
                     {
                         "desc": "柏喙-2、卡夫卡-2",
                         "efficient": {
-                            "all": 2
+                            "Money": 2
                         },
                         "skills": ["bskill_tra_wt&cost2"]
                     },
                     {
                         "desc": "柏喙-1、卡夫卡-1",
                         "efficient": {
-                            "all": 1
+                            "Money": 1
                         },
                         "skills": ["bskill_tra_wt&cost1"]
                     }

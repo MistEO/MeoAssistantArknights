@@ -11,7 +11,8 @@ bool asst::InfrastProcessingTask::_run()
 
     // 不是自定义的也换不了加工站
     if (!is_use_custom_opers()) {
-        return false;
+        Log.info("skip this room");
+        return true;
     }
     // 加工站，啥也造不了，随便写一个
     set_product("Placeholder");
