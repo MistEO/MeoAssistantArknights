@@ -2433,7 +2433,7 @@ namespace MaaWpfGui.Main
         /// <param name="collectibleModeShopping">刷开局模式是否购物</param>
         /// <param name="invests">投资源石锭次数。</param>
         /// <param name="stopWhenFull">投资满了自动停止任务。</param>
-        /// <param name="collectibleModeSquad">烧水分队</param>
+        /// <param name="collectibleModeSquad">烧水时使用的分队</param>
         /// <param name="squad">开局分队</param>
         /// <param name="roles">开局职业组</param>
         /// <param name="coreChar">开局干员名</param>
