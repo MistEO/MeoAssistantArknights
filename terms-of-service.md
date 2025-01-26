@@ -6,6 +6,8 @@
 2. 请勿在明日方舟及鹰角网络官方渠道传播 MAA 相关内容。
 3. MAA Team 仅在 GitHub 平台接受问题反馈和协作开发。
 
+本简略版本仅供快速了解协议要点，未涵盖所有细节。推荐用户阅读下方协议正文，具体内容以协议正文为准。
+
 ## 前言
 
 MAA（MaaAssistantArknights）是由 MAA Team 开发的开源第三方《明日方舟》辅助工具。MAA 基于 [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html) 许可证在 [GitHub](https://github.com/MaaAssistantArknights/MaaAssistantArknights) 平台开源，并通过自动打包流程提供二进制文件下载。
