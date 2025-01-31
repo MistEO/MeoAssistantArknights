@@ -147,33 +147,24 @@ bool asst::BattleFormationTask::add_oper_groups_by_role(
                 continue;
             }
 
-            for (int i = 0)
-            if (m_oper_list.select_oper(index)) {
-                ++added_num;
-            }
-            else {
-                // 编队已满，跳出循环
-                Log.info(
-                    __FUNCTION__,
-                    "Formation is now full; abandoning the addition of supplementary operators.");
-                m_formation_is_full = true;
-                break;
+            for (int i = 0) {
+                if (m_oper_list.select_oper(index)) {
+                    ++added_num;
+                }
+                else {
+                    // 编队已满，跳出循环
+                    Log.info(
+                        __FUNCTION__,
+                        "Formation is now full; abandoning the addition of supplementary operators.");
+                    m_formation_is_full = true;
+                    break;
+                }
             }
 
             if (oper_groups.empty() < num) {
                 m_oper_list.move_forward();
             }
         } // inner for loop to traverse indices of newly-detected operators
-
-
-
-
-
-
-
-
-
-
 
         if (select_opers_in_cur_page(oper_groups)) {
             has_error = false;
@@ -358,7 +349,6 @@ bool asst::BattleFormationTask::parse_formation_reqs()
     // 令 name = m_additional_reqs[i].name; skill = m_additional_reqs[i].skill，那么
     // 若 skill != -1，则携带 skill 技能且名为 name 的干员必须被用于满足某一个干员组
 
-
     for (const auto& [group_name, required_opers] : required_oper_groups) {
         if (required_opers.empty()) {
             continue;
@@ -474,7 +464,7 @@ void asst::BattleFormationTask::add_supplementary_opers()
         m_oper_list.select_role(role, true);   // 选择职业并重置列表位置
         m_oper_list.sort(sort_key, ascending); // 重新排序
 
-        unsigned num_added_opers = 0;                // 用于记录此轮增加的干员数量
+        unsigned num_added_opers = 0;          // 用于记录此轮增加的干员数量
 
         while (num_added_opers < num && !m_formation_is_full && !need_exit()) {
             const std::optional<unsigned> opt = m_oper_list.update_page();

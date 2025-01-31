@@ -167,8 +167,8 @@ bool asst::CopilotTask::set_params(const json::value& params)
             if (name.empty()) {
                 continue;
             }
-            additional_req.emplace_back(BattleFormationTask::RequiredOper { .name = std::move(name),
-                                                                            .skill = op.get("skill", 0) });
+            additional_req.emplace_back(
+                BattleFormationTask::RequiredOper { .name = std::move(name), .skill = op.get("skill", 0) });
         }
         m_formation_task_ptr->set_additional_reqs(additional_req);
     }
