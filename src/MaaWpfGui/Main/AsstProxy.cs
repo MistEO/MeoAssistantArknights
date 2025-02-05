@@ -2279,6 +2279,7 @@ namespace MaaWpfGui.Main
             bool isCustom,
             string filename,
             int planIndex,
+            int amountOfClueToSend,
             bool prioritizeSendingClue,
             bool sendClueToOCR,
             bool onlySendClueToOCR,
@@ -2296,6 +2297,7 @@ namespace MaaWpfGui.Main
                 ["mode"] = isCustom ? 10000 : 0,
                 ["filename"] = filename,
                 ["plan_index"] = planIndex,
+                ["amount_of_clue_to_send"] = amountOfClueToSend,
                 ["prioritize_sending_clue"] = prioritizeSendingClue,
                 ["send_clue_to_ocr"] = sendClueToOCR,
                 ["only_send_clue_to_ocr"] = onlySendClueToOCR,
@@ -2329,6 +2331,7 @@ namespace MaaWpfGui.Main
         /// <param name="isCustom">是否开启自定义配置</param>
         /// <param name="filename">自定义配置文件路径</param>
         /// <param name="planIndex">自定义配置计划编号</param>
+        /// <param name="amountOfClueToSend">线索送出量</param>
         /// <param name="prioritizeSendingClue">是否优先发送线索</param>
         /// <param name="sendClueToOCR">是否发送线索给指定ID</param>
         /// <param name="onlySendClueToOCR">是否只发送线索给指定ID</param>
@@ -2345,6 +2348,7 @@ namespace MaaWpfGui.Main
             bool isCustom,
             string filename,
             int planIndex,
+            int amountOfClueToSend,
             bool prioritizeSendingClue,
             bool sendClueToOCR,
             bool onlySendClueToOCR,
@@ -2361,6 +2365,7 @@ namespace MaaWpfGui.Main
                 isCustom,
                 filename,
                 planIndex,
+                amountOfClueToSend,
                 prioritizeSendingClue,
                 sendClueToOCR,
                 onlySendClueToOCR,
@@ -2381,6 +2386,7 @@ namespace MaaWpfGui.Main
             bool isCustom,
             string filename,
             int planIndex,
+            int amountOfClueToSend,
             bool prioritizeSendingClue,
             bool sendClueToOCR,
             bool onlySendClueToOCR,
@@ -2404,6 +2410,7 @@ namespace MaaWpfGui.Main
                 isCustom,
                 filename,
                 planIndex,
+                amountOfClueToSend,
                 prioritizeSendingClue,
                 sendClueToOCR,
                 onlySendClueToOCR,
