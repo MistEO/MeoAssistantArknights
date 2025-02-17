@@ -434,6 +434,7 @@ bool asst::BattleProcessTask::wait_condition(const Action& action)
 
     if (action.flash_detection_delay > 0) {
         ProcessTask(this_task(), { "BattlePause" }).run();
+        const Rect& pause_button_rect = Task.get("BattlePause")->specific_rect;
         update_image_if_empty();
 
         BrightPointAnalyzer analyzer;
@@ -446,9 +447,9 @@ bool asst::BattleProcessTask::wait_condition(const Action& action)
             if (analyzer.analyze()) {
                 break;
             }
-            ProcessTask(this_task(), { "BattlePauseCancel" }).run();
+            ctrler()->click(pause_button_rect);
             sleep(action.flash_detection_delay);
-            ProcessTask(this_task(), { "BattlePause" }).run();
+            ctrler()->click(pause_button_rect);
             do_strategy_and_update_image();
         }
     }
