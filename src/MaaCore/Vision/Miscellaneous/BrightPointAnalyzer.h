@@ -20,14 +20,18 @@ public:
     const auto& get_result() const noexcept { return m_result; }
 
     void set_rgb_mode(const bool rgb_mode) { m_rgb_mode = rgb_mode; }
+
     void set_lb(const double rgb_lb) { m_lb = rgb_lb; }
+
     void set_ub(const double rgb_ub) { m_ub = rgb_ub; }
+
     void set_rgb_lb(const std::vector<int>& rgb_lb)
     {
         if (rgb_lb.size() == 3) {
             m_rgb_lb = cv::Scalar(rgb_lb[0], rgb_lb[1], rgb_lb[2]);
         }
     }
+
     void set_rgb_ub(const std::vector<int>& rgb_ub)
     {
         if (rgb_ub.size() == 3) {
@@ -39,8 +43,8 @@ private:
     bool m_rgb_mode = false;
     double m_lb = 200;
     double m_ub = 255;
-    cv::Scalar m_rgb_lb = {0, 0, 0};
-    cv::Scalar m_rgb_ub = {0, 0, 0};
+    cv::Scalar m_rgb_lb = { 0, 0, 0 };
+    cv::Scalar m_rgb_ub = { 0, 0, 0 };
     ResultsVec m_result;
 };
 }

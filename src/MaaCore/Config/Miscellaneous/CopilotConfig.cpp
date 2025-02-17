@@ -216,15 +216,11 @@ std::vector<asst::battle::copilot::Action> asst::CopilotConfig::parse_actions(co
         }
         if (action_info.contains("flash_lb")) {
             auto flash_lb = action_info.at("flash_lb").as_array();
-            action.flash_lb = { flash_lb[0].as_integer(),
-                                flash_lb[1].as_integer(),
-                                flash_lb[2].as_integer() };
+            action.flash_lb = { flash_lb[0].as_integer(), flash_lb[1].as_integer(), flash_lb[2].as_integer() };
         }
         if (action_info.contains("flash_ub")) {
             auto flash_ub = action_info.at("flash_ub").as_array();
-            action.flash_ub = { flash_ub[0].as_integer(),
-                                flash_ub[1].as_integer(),
-                                flash_ub[2].as_integer() };
+            action.flash_ub = { flash_ub[0].as_integer(), flash_ub[1].as_integer(), flash_ub[2].as_integer() };
         }
         action.name = action_info.get("name", std::string());
 
