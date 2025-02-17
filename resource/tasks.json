@@ -11553,7 +11553,7 @@
     "CostRegenerationBar": {
         "template": "empty.png",
         "roi": [1160, 542, 120, 1],
-        "specialParams": [120]
+        "specialParams": [120, 100]
     },
     "Reclamation2": {
         "doc": "生息演算「沙洲遗闻」",

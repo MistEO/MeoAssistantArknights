@@ -19,6 +19,7 @@
 #include "Utils/Logger.hpp"
 #include "Vision/Battle/BattlefieldMatcher.h"
 #include "Vision/Matcher.h"
+#include "Vision/Miscellaneous/BrightPointAnalyzer.h"
 #include "Vision/RegionOCRer.h"
 
 using namespace asst::battle;
@@ -204,6 +205,9 @@ bool asst::BattleProcessTask::do_action(const battle::copilot::Action& action, s
         ret = deploy_oper(name, location, action.direction);
         if (ret) {
             m_in_bullet_time = false;
+            if (action.flash_detection_delay > 0) {
+                ProcessTask(this_task(), { "BattlePauseCancel" }).run();
+            }
         }
         break;
 
@@ -211,6 +215,9 @@ bool asst::BattleProcessTask::do_action(const battle::copilot::Action& action, s
         ret = m_in_bullet_time ? click_retreat() : (location.empty() ? retreat_oper(name) : retreat_oper(location));
         if (ret) {
             m_in_bullet_time = false;
+            if (action.flash_detection_delay > 0) {
+                ProcessTask(this_task(), { "BattlePauseCancel" }).run();
+            }
         }
         break;
 
@@ -218,6 +225,9 @@ bool asst::BattleProcessTask::do_action(const battle::copilot::Action& action, s
         ret = m_in_bullet_time ? click_skill() : (location.empty() ? use_skill(name) : use_skill(location));
         if (ret) {
             m_in_bullet_time = false;
+            if (action.flash_detection_delay > 0) {
+                ProcessTask(this_task(), { "BattlePauseCancel" }).run();
+            }
         }
         break;
 
@@ -312,7 +322,6 @@ bool asst::BattleProcessTask::wait_condition(const Action& action)
     };
     auto do_strategy_and_update_image = [&]() {
         do_strategic_action(image);
-        update_cost_regenerated(image);
         image = ctrler()->get_image();
     };
 
@@ -419,6 +428,27 @@ bool asst::BattleProcessTask::wait_condition(const Action& action)
                 iter != m_cur_deployment_opers.end() && iter->available) {
                 break;
             }
+            do_strategy_and_update_image();
+        }
+    }
+
+    if (action.flash_detection_delay > 0) {
+        ProcessTask(this_task(), { "BattlePause" }).run();
+        update_image_if_empty();
+
+        BrightPointAnalyzer analyzer;
+        analyzer.set_rgb_mode(true);
+        analyzer.set_roi(action.flash_roi);
+        analyzer.set_rgb_lb(action.flash_lb);
+        analyzer.set_rgb_ub(action.flash_ub);
+        while (!need_exit()) {
+            analyzer.set_image(image);
+            if (analyzer.analyze()) {
+                break;
+            }
+            ProcessTask(this_task(), { "BattlePauseCancel" }).run();
+            sleep(action.flash_detection_delay);
+            ProcessTask(this_task(), { "BattlePause" }).run();
             do_strategy_and_update_image();
         }
     }

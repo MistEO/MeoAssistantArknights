@@ -210,6 +210,10 @@ struct Action
     int cooling = 0;
     double cost_regenerated = 0;
     int time_elapsed = 0;
+    int flash_detection_delay = 0;
+    Rect flash_roi = { 0, 0, 0, 0 };
+    std::vector<int> flash_lb = { 0, 0, 0 };
+    std::vector<int> flash_ub = { 0, 0, 0 };
     ActionType type = ActionType::Deploy;
     std::string name; // 目标名，若 type >= SwitchSpeed, name 为空
     Point location;

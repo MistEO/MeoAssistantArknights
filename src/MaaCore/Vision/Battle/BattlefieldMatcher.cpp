@@ -363,6 +363,7 @@ std::optional<double> BattlefieldMatcher::cost_regeneration_analyze() const
     const auto& cost_regeneration_task_ptr = Task.get<MatchTaskInfo>("CostRegenerationBar");
     BrightPointAnalyzer analyzer(m_image);
     analyzer.set_roi(cost_regeneration_task_ptr->roi);
+    analyzer.set_lb(cost_regeneration_task_ptr->special_params[1]);
     if (!analyzer.analyze()) {
         return 0;
     }
