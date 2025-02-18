@@ -236,8 +236,15 @@ bool asst::BattleHelper::update_deployment(bool init, const cv::Mat& reusable, b
         }
 
         // 再识别一次部署栏，并装作谁都不认识的样子
-        oper_analyzer.set_image(image);
-        oper_result_opt = oper_analyzer.analyze();
+        BattlefieldMatcher oper_analyzer2(image);
+        // 这里可能可以省略 .oper_cost，不太确定，暂作保留
+        if (init || need_oper_cost) {
+            oper_analyzer2.set_object_of_interest({ .deployment = true, .oper_cost = true });
+        }
+        else {
+            oper_analyzer2.set_object_of_interest({ .deployment = true });
+        }
+        oper_result_opt = oper_analyzer2.analyze();
         if (!oper_result_opt) {
             return false;
         }
