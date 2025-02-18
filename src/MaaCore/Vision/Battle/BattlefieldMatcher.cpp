@@ -367,7 +367,9 @@ std::optional<double> BattlefieldMatcher::cost_regeneration_analyze() const
     if (!analyzer.analyze()) {
         return 0;
     }
-    return static_cast<double>(analyzer.get_result().size()) / cost_regeneration_task_ptr->special_params[0];
+    const double cost_regeneration =
+        static_cast<double>(analyzer.get_result().size()) / cost_regeneration_task_ptr->special_params[0];
+    return std::min(cost_regeneration, 0.995);
 }
 
 bool BattlefieldMatcher::pause_button_analyze() const
