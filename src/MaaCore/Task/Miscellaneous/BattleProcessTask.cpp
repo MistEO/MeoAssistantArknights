@@ -46,10 +46,23 @@ bool asst::BattleProcessTask::_run()
     m_battle_starting_time = std::chrono::steady_clock::now();
     update_cost_regenerated(ctrler()->get_image());
 
+    const bool screenshot_mode = Task.get("CostRegenerationBar")->sub_error_ignored;
+    const std::filesystem::path relative_dir = utils::path("debug") / utils::path("battleProcess");
+    filenum_ctrl(relative_dir, 0);
+
     size_t action_size = get_combat_data().actions.size();
     for (size_t i = 0; i < action_size && !need_exit() && m_in_battle; ++i) {
         const auto& action = get_combat_data().actions.at(i);
         do_action(action, i);
+        if (screenshot_mode) {
+            const std::filesystem::path relative_path =
+                relative_dir / ("time-elapsed-" +
+                                std::to_string(std::chrono::duration_cast<std::chrono::milliseconds>(
+                                                   std::chrono::steady_clock::now() - m_battle_starting_time)
+                                                   .count()) +
+                                "_cost-regenerated-" + std::to_string(m_cost_regenerated) + "_raw.png");
+            asst::imwrite(relative_path, ctrler()->get_image());
+        }
     }
 
     if (need_to_wait_until_end()) {

@@ -11553,6 +11553,7 @@
     "CostRegenerationBar": {
         "template": "empty.png",
         "roi": [1160, 542, 120, 1],
+        "subErrorIgnored": true,
         "specialParams": [120, 100]
     },
     "Reclamation2": {
