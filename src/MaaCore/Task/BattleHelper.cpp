@@ -353,12 +353,29 @@ bool asst::BattleHelper::update_cost_regenerated(const cv::Mat& reusable)
     if (!result_opt || !result_opt->cost_regeneration) {
         return false;
     }
-    const double cost_regenerated = std::floor(m_cost_regenerated) + result_opt->cost_regeneration.value();
+    double cost_regenerated = std::floor(m_cost_regenerated) + result_opt->cost_regeneration.value();
     if (cost_regenerated < m_cost_regenerated - 0.05) {
         m_cost_regenerated = cost_regenerated + 1;
     }
-    else if (cost_regenerated > m_cost_regenerated + 0.05) {
+    else if (cost_regenerated > m_cost_regenerated) {
         m_cost_regenerated = cost_regenerated;
+    }
+    else {
+        // 再检测一遍，不太对劲
+        Log.warn("Something is off in cost regeneration analysis:", m_cost_regenerated, "->", cost_regenerated);
+        image = m_inst_helper.ctrler()->get_image();
+        analyzer.set_image(image);
+        result_opt = analyzer.analyze();
+        if (!result_opt || !result_opt->cost_regeneration) {
+            return false;
+        }
+        cost_regenerated = std::floor(m_cost_regenerated) + result_opt->cost_regeneration.value();
+        if (cost_regenerated < m_cost_regenerated - 0.1) {
+            m_cost_regenerated = cost_regenerated + 1;
+        }
+        else if (cost_regenerated > m_cost_regenerated) {
+            m_cost_regenerated = cost_regenerated;
+        }
     }
     return true;
 }
