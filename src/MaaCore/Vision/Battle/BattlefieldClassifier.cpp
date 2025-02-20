@@ -104,9 +104,16 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
     float score = prob[class_id];
 
 #ifdef ASST_DEBUG
-    if (ready) {
+    // 在调试模式下，根据不同类别绘制不同颜色的标记
+    if (class_id == 2) {
+        // y类别：橙色
         rectangle(m_image_draw, make_rect<cv::Rect>(roi), cv::Scalar(0, 165, 255), 2);
         putText(m_image_draw, std::to_string(score), cv::Point(roi.x, roi.y - 10), 1, 1.2, cv::Scalar(0, 165, 255), 2);
+    }
+    else if (class_id == 0) { // c类别的特殊处理
+        // 使用蓝色（BGR：255,0,0）标记c类别
+        rectangle(m_image_draw, make_rect<cv::Rect>(roi), cv::Scalar(255, 0, 0), 2);
+        putText(m_image_draw, std::to_string(score), cv::Point(roi.x, roi.y - 10), 1, 1.2, cv::Scalar(255, 0, 0), 2);
     }
 #endif
 
@@ -125,19 +132,19 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
 
     // 为重新训练模型截图
     static Point last_base_point = { -1, -1 };
+    static int last_class = -1; // 记录上一次的分类结果
     static auto last_save_time = std::chrono::steady_clock::now();
-    static bool last_ready = false;
     const auto now = std::chrono::steady_clock::now();
     const auto duration_since_last_save =
         std::chrono::duration_cast<std::chrono::seconds>(now - last_save_time).count();
 
     auto need_save = false;
-    // 如果相同点且结果不同，保存
-    if (last_base_point == m_base_point && last_ready != ready) {
+    // 如果相同点且分类结果变化了，则保存
+    if (last_base_point == m_base_point && last_class != static_cast<int>(class_id)) {
         need_save = true;
     }
-    // 如果不同点且 ready，保存
-    else if (last_base_point != m_base_point && ready) {
+    // 如果检测到新的基准点且结果为ready（y）或c类别，也保存
+    else if (last_base_point != m_base_point && (class_id == 2 || class_id == 0)) {
         need_save = true;
     }
     // 来点随机截图
@@ -148,8 +155,14 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
 
     if (need_save) {
         std::filesystem::path relative_path;
-        if (ready) {
+        // 根据不同类别保存到不同的文件夹
+        if (class_id == 2) {
             relative_path = utils::path("debug") / utils::path("skill_ready") / utils::path("y") /
+                            (utils::get_time_filestem() + "_" + std::to_string(m_base_point.x) + "_" +
+                             std::to_string(m_base_point.y) + ".png");
+        }
+        else if (class_id == 0) {
+            relative_path = utils::path("debug") / utils::path("skill_ready") / utils::path("c") /
                             (utils::get_time_filestem() + "_" + std::to_string(m_base_point.x) + "_" +
                              std::to_string(m_base_point.y) + ".png");
         }
@@ -159,7 +172,7 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
                              std::to_string(m_base_point.y) + ".png");
         }
         last_base_point = m_base_point;
-        last_ready = ready;
+        last_class = static_cast<int>(class_id);
         Log.trace("Save image", relative_path);
         asst::imwrite(relative_path, image);
     }
