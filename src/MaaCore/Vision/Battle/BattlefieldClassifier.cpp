@@ -42,11 +42,35 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
     Rect roi = Rect(m_base_point.x, m_base_point.y, 0, 0).move(skill_roi_move);
 
     cv::Mat image = make_roi(m_image, correct_rect(roi, m_image));
-    std::vector<float> input = image_to_tensor(image);
+
+    // 1. 图像大小调整(推理慢可不做)
+    cv::Mat resized_image;
+    cv::resize(image, resized_image, cv::Size(72, 72));
+
+    // 2. 中心裁剪(推理慢可不做)
+    int crop_size = 64;
+    int x = (resized_image.cols - crop_size) / 2;
+    int y = (resized_image.rows - crop_size) / 2;
+    cv::Rect crop_roi(x, y, crop_size, crop_size);
+    cv::Mat cropped_image = resized_image(crop_roi);
+
+    // 3. 图像转换为 tensor
+    std::vector<float> input = image_to_tensor(cropped_image);
+
+    // 4. 归一化
+    float mean[] = { 0.485f, 0.456f, 0.406f };
+    float std[] = { 0.229f, 0.224f, 0.225f };
+    for (size_t i = 0; i < input.size(); i++) {
+        int channel = i % 3;
+        input[i] = (input[i] - mean[channel]) / std[channel];
+    }
 
     auto memory_info = Ort::MemoryInfo::CreateCpu(OrtDeviceAllocator, OrtMemTypeCPU);
     constexpr int64_t batch_size = 1;
-    std::array<int64_t, 4> input_shape { batch_size, image.channels(), image.cols, image.rows };
+
+    auto& session = OnnxSessions::get_instance().get("skill_ready_cls");
+
+    std::array<int64_t, 4> input_shape { batch_size, cropped_image.channels(), cropped_image.cols, cropped_image.rows };
 
     Ort::Value input_tensor = Ort::Value::CreateTensor<float>(
         memory_info,
@@ -54,6 +78,7 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
         input.size(),
         input_shape.data(),
         input_shape.size());
+
     SkillReadyResult::Raw raw_results;
     std::array<int64_t, 2> output_shape { batch_size, SkillReadyResult::ClsSize };
     Ort::Value output_tensor = Ort::Value::CreateTensor<float>(
@@ -63,7 +88,6 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
         output_shape.data(),
         output_shape.size());
 
-    auto& session = OnnxSessions::get_instance().get("skill_ready_cls");
     // 这俩是hardcode在模型里的
     constexpr const char* input_names[] = { "input" };   // session.GetInputName()
     constexpr const char* output_names[] = { "output" }; // session.GetOutputName()
@@ -74,8 +98,10 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
 
     SkillReadyResult::Prob prob = softmax(raw_results);
     Log.info(__FUNCTION__, "prob:", prob);
-    bool ready = prob[1] > prob[0];
-    float score = std::max(prob[0], prob[1]);
+    // 类别顺序为 c, n, y
+    size_t class_id = std::max_element(prob.begin(), prob.end()) - prob.begin();
+    bool ready = (class_id == 2); // 只有当class_id为2（代表y）时，才认为是ready
+    float score = prob[class_id];
 
 #ifdef ASST_DEBUG
     if (ready) {
