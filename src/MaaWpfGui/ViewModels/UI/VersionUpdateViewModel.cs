@@ -568,12 +568,16 @@ public class VersionUpdateViewModel : Screen
         }
 
         string? rawUrl = _assetsObject["browser_download_url"]?.ToString();
-        var mirrors = _assetsObject["mirrors"]?.ToObject<List<string>>();
-
         var urls = new List<string>();
-        if (mirrors != null)
+
+        if (SettingsViewModel.VersionUpdateSettings.UpdateSource == "Github" && !SettingsViewModel.VersionUpdateSettings.ForceGithubForGlobalSource)
         {
-            urls.AddRange(mirrors);
+            var mirrors = _assetsObject["mirrors"]?.ToObject<List<string>>();
+
+            if (mirrors != null)
+            {
+                urls.AddRange(mirrors);
+            }
         }
 
         // 负载均衡
@@ -1114,6 +1118,7 @@ public class VersionUpdateViewModel : Screen
 
     public bool IsDebugVersion(string? version = null)
     {
+        return false;
         version ??= _curVersion;
 
         // match case 1: DEBUG VERSION

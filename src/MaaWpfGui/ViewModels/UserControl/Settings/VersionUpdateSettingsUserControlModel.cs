@@ -376,6 +376,22 @@ public class VersionUpdateSettingsUserControlModel : PropertyChangedBase
         }
     }
 
+    private bool _forceGithubForGlobalSource = Convert.ToBoolean(ConfigurationHelper.GetGlobalValue(ConfigurationKeys.ForceGithubForGlobalSource, bool.FalseString));
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to force using GitHub for overseas sources.
+    /// </summary>
+    public bool ForceGithubForGlobalSource
+    {
+        get => _forceGithubForGlobalSource;
+        set
+        {
+            SetAndNotify(ref _forceGithubForGlobalSource, value);
+            ConfigurationHelper.SetGlobalValue(ConfigurationKeys.ForceGithubForGlobalSource, value.ToString());
+        }
+    }
+
+
     /// <summary>
     /// Updates manually.
     /// </summary>

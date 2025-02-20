@@ -63,6 +63,13 @@
                         VerticalAlignment="Center"
                         Content="{DynamicResource AutoInstallUpdatePackage}"
                         IsChecked="{Binding AutoInstallUpdatePackage}" />
+                    <CheckBox
+                        Margin="10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="海外源强制使用 Github"
+                        IsChecked="{Binding ForceGithubForGlobalSource}"
+                        Visibility="{c:Binding 'UpdateSource == &quot;Github&quot;'}" />
                     <hc:ComboBox
                         Width="150"
                         Margin="10"
