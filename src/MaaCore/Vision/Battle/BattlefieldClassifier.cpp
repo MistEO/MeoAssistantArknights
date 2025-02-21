@@ -154,23 +154,27 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
     }
 
     if (need_save) {
-        std::filesystem::path relative_path;
-        // 根据不同类别保存到不同的文件夹
-        if (class_id == 2) {
-            relative_path = utils::path("debug") / utils::path("skill_ready") / utils::path("y") /
-                            (utils::get_time_filestem() + "_" + std::to_string(m_base_point.x) + "_" +
-                             std::to_string(m_base_point.y) + ".png");
+        std::string base_filename = utils::get_time_filestem() + "_" + std::to_string(m_base_point.x) + "_" +
+                                    std::to_string(m_base_point.y) + "(c" + std::to_string(prob[0]) + ")(n" +
+                                    std::to_string(prob[1]) + ")(y" + std::to_string(prob[2]) + ").png";
+        std::string subfolder;
+        switch (class_id) {
+        case 2:
+            subfolder = "y";
+            break;
+        case 1:
+            subfolder = "n";
+            break;
+        case 0:
+            subfolder = "c";
+            break;
+        default:
+            subfolder = "unknown";
+            break;
         }
-        else if (class_id == 0) {
-            relative_path = utils::path("debug") / utils::path("skill_ready") / utils::path("c") /
-                            (utils::get_time_filestem() + "_" + std::to_string(m_base_point.x) + "_" +
-                             std::to_string(m_base_point.y) + ".png");
-        }
-        else {
-            relative_path = utils::path("debug") / utils::path("skill_ready") / utils::path("n") /
-                            (utils::get_time_filestem() + "_" + std::to_string(m_base_point.x) + "_" +
-                             std::to_string(m_base_point.y) + ".png");
-        }
+
+        std::filesystem::path relative_path =
+            utils::path("debug") / utils::path("skill_ready") / utils::path(subfolder) / base_filename;
         last_base_point = m_base_point;
         last_class = static_cast<int>(class_id);
         Log.trace("Save image", relative_path);
