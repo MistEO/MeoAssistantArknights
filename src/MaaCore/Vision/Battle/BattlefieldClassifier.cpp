@@ -99,7 +99,7 @@ BattlefieldClassifier::SkillReadyResult BattlefieldClassifier::skill_ready_analy
     SkillReadyResult::Prob prob = softmax(raw_results);
     Log.info(__FUNCTION__, "prob:", prob);
     // 类别顺序为 c, n, y
-    size_t class_id = std::max_element(prob.begin(), prob.end()) - prob.begin();
+    size_t class_id = ranges::max_element(prob) - prob.begin();
     bool ready = (class_id == 2); // 只有当class_id为2（代表y）时，才认为是ready
     float score = prob[class_id];
 
