@@ -13,7 +13,7 @@ AdverseDifficulty.png
 BattleCostFlag.png
 BattleFormationOCRNameFlag.png
 BattleHpFlag.png
-BattleHpFlag2.png.png
+BattleHpFlag2.png
 BattleKillsFlag.png
 BattleOfficiallyBegin.png
 BattleOperRetreat.png
