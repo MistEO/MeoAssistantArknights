@@ -13,7 +13,7 @@ AdverseDifficulty.png
 BattleCostFlag.png
 BattleFormationOCRNameFlag.png
 BattleHpFlag.png
-BattleHpFlag2.png
+BattleHpFlag2.png.png
 BattleKillsFlag.png
 BattleOfficiallyBegin.png
 BattleOperRetreat.png
@@ -143,6 +143,10 @@ InfrastClueSelfMaybeFull.png
 InfrastFilterMenu.png
 InfrastFilterMenuConfirmButton.png
 InfrastNotification.png
+InfrastReceptionInteractive.png
+InfrastReceptionMessageBoard-AccessRecord.png
+InfrastReceptionMessageBoard-Received.png
+InfrastReceptionOpenMessageBoard.png
 InfrastTrainingConfirm.png
 InfrastTrainingContinue.png
 InfrastTrainingLevel1.png
