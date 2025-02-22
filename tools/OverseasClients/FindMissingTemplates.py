@@ -39,6 +39,7 @@ regex_ignore_list = [
     "Delicious",
     "DahuangCity",
     "Gaming",
+    r"Sarkaz(?!@)"
     # UNRELEASED I.S.
 ]
 

@@ -11,6 +11,7 @@ AddOperatorMfgGentle.png
 AddOperatorTradeGentle.png
 AdverseDifficulty.png
 BattleCostFlag.png
+BattleFormationInvalid.png
 BattleFormationOCRNameFlag.png
 BattleHpFlag.png
 BattleHpFlag2.png
@@ -65,6 +66,7 @@ BattleSkillStopOnClick.png
 BattleSpeedUp.png
 BattleSpeedUpCheck.png
 BattleStartPlot.png
+BattleStartSimulation.png
 BattleSupportUnitFormationSelect.png
 BuyIt.png
 Caster@UseSupportUnit-RoleSelected.png
@@ -179,6 +181,7 @@ Mizuki@Roguelike@LastReward4.png
 Mizuki@Roguelike@LastReward5.png
 Mizuki@Roguelike@LastReward6.png
 Mizuki@Roguelike@LastRewardRand.png
+Mizuki@Roguelike@MonthlySquadComms.png
 Mizuki@Roguelike@StageBoons.png
 Mizuki@Roguelike@StageCombatDps.png
 Mizuki@Roguelike@StageDreadfulFoe-5.png
@@ -228,6 +231,9 @@ OrundumActivitiesClickParty.png
 OrundumActivitiesEarnRewards.png
 Phantom@Roguelike@CloseCollection.png
 Phantom@Roguelike@CloseEvent.png
+Phantom@Roguelike@CommsCompleted.png
+Phantom@Roguelike@DeepExploration.png
+Phantom@Roguelike@DialogTimeout.png
 Phantom@Roguelike@GamePassSkip1Confirm.png
 Phantom@Roguelike@InitalDrop.png
 Phantom@Roguelike@InitialDrop.png
@@ -237,6 +243,8 @@ Phantom@Roguelike@LastReward3.png
 Phantom@Roguelike@LastReward4.png
 Phantom@Roguelike@LastRewardRand.png
 Phantom@Roguelike@MissionFailedFlag.png
+Phantom@Roguelike@MonthlySquad.png
+Phantom@Roguelike@MonthlySquadComms.png
 Phantom@Roguelike@StageBoons.png
 Phantom@Roguelike@StageCombatDps.png
 Phantom@Roguelike@StageDreadfulFoe.png
@@ -274,6 +282,11 @@ ReplenishToMaxConfirm.png
 Return-White.png
 Return.png
 Roguelike@AbandonConfirm.png
+Roguelike@CommsCompleted.png
+Roguelike@DeepExploration.png
+Roguelike@DeepExplorationEnd.png
+Roguelike@DeepExplorationNotUnlocked.png
+Roguelike@DeepExplorationRewardMissSuperDark.png
 Roguelike@DialogSkip.png
 Roguelike@DialogSkipConfirm.png
 Roguelike@ExitThenAbandon_mode4.png
@@ -283,6 +296,9 @@ Roguelike@GamePassTheEndConfirm.png
 Roguelike@GetDropLeaveConfirm.png
 Roguelike@IntegratedStrategies.png
 Roguelike@MissionCompletedFlag.png
+Roguelike@MonthlySquad.png
+Roguelike@MonthlySquadComms.png
+Roguelike@RewardCompleted.png
 Roguelike@StageEncounterGiveUpRecruitConfirm.png
 Roguelike@StageTraderInvest-Arrow.png
 Roguelike@StageTraderInvestSystemError.png
