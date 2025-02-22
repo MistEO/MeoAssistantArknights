@@ -4142,6 +4142,53 @@
         "roi": [627, 160, 653, 404],
         "templThreshold": 0.95
     },
+    "InfrastReceptionReceiveMessageBoard": {
+        "algorithm": "JustReturn",
+        "maxTimes": 3,
+        "next": ["InfrastReceptionOpenMessageBoard", "InfrastReceptionInteractive", "#self"]
+    },
+    "InfrastReceptionReceiveMessageBoard-Exit": {
+        "action": "DoNothing",
+        "baseTask": "InfrastReceptionInteractive",
+        "template": "InfrastReceptionInteractive.png",
+        "next": ["Stop"]
+    },
+    "InfrastReceptionInteractive": {
+        "roi": [400, 610, 100, 110],
+        "maxTimes": 3,
+        "next": ["InfrastReceptionOpenMessageBoard", "#self"]
+    },
+    "InfrastReceptionOpenMessageBoard": {
+        "action": "ClickSelf",
+        "roi": [0, 150, 1280, 250],
+        "maskRange": [1, 255],
+        "next": [
+            "InfrastReceptionMessageBoard-AccessRecord",
+            "InfrastReceptionMessageBoard-CouldReceive",
+            "#self@LoadingText"
+        ]
+    },
+    "InfrastReceptionMessageBoard-AccessRecord": {
+        "doc": "进信息板的上周记录，不一定会有",
+        "action": "ClickSelf",
+        "roi": [520, 90, 240, 100],
+        "next": ["InfrastReceptionMessageBoard-CouldReceive", "InfrastReceptionMessageBoard-Received"]
+    },
+    "InfrastReceptionMessageBoard-CouldReceive": {
+        "action": "ClickSelf",
+        "roi": [1090, 480, 120, 140],
+        "maxTimes": 3,
+        "exceededNext": ["InfrastReceptionMessageBoard-Received#next"],
+        "next": ["InfrastReceptionMessageBoard-Received", "#self"]
+    },
+    "InfrastReceptionMessageBoard-Received": {
+        "roi": [1090, 480, 120, 140],
+        "next": ["InfrastReceptionMessageBoard@Return"]
+    },
+    "InfrastReceptionMessageBoard@Return": {
+        "template": "Return.png",
+        "next": ["InfrastReceptionReceiveMessageBoard-Exit"]
+    },
     "InfrastTraining": {
         "template": "Training.png",
         "maskRange": [1, 255],

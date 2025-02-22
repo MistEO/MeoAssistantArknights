@@ -145,6 +145,10 @@ InfrastClueSelfMaybeFull.png
 InfrastFilterMenu.png
 InfrastFilterMenuConfirmButton.png
 InfrastNotification.png
+InfrastReceptionInteractive.png
+InfrastReceptionMessageBoard-AccessRecord.png
+InfrastReceptionMessageBoard-Received.png
+InfrastReceptionOpenMessageBoard.png
 InfrastTrainingConfirm.png
 InfrastTrainingContinue.png
 InfrastTrainingLevel1.png

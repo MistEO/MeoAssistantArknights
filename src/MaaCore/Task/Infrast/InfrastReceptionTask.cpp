@@ -18,6 +18,8 @@ bool asst::InfrastReceptionTask::_run()
     if (!enter_facility()) {
         return false;
     }
+
+    receive_message_board();
     click_bottom_left_tab();
 
     close_end_of_clue_exchange();
@@ -40,6 +42,11 @@ bool asst::InfrastReceptionTask::_run()
     shift();
 
     return true;
+}
+
+bool asst::InfrastReceptionTask::receive_message_board()
+{
+    return ProcessTask(*this, { "InfrastReceptionReceiveMessageBoard" }).run();
 }
 
 bool asst::InfrastReceptionTask::close_end_of_clue_exchange()

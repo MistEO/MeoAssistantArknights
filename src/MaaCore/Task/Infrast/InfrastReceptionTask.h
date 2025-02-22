@@ -17,6 +17,8 @@ protected:
 private:
     virtual int operlist_swipe_times() const noexcept override { return 4; }
 
+    // 收取信息板的周限300信用
+    bool receive_message_board();
     bool close_end_of_clue_exchange();
     bool get_clue();
     bool use_clue();
