@@ -14,7 +14,6 @@ export default hopeTheme({
   contributors: false,
 
   locales: {
-    "/": {},
     "/zh-cn/": {
       navbar: zhcnNavbar,
       sidebar: zhcnSidebar,
