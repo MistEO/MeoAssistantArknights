@@ -5,6 +5,7 @@ import { zhcnSidebar, zhtwSidebar, enusSidebar, jajpSidebar, kokrSidebar } from 
 
 export default hopeTheme({
   hostname: "https://maa.plus",
+  author: "MaaAssistantArknights",
   license: "AGPL-3.0",
   repo: "MaaAssistantArknights/MaaAssistantArknights",
   docsBranch: "dev",
