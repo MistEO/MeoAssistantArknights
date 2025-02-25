@@ -897,11 +897,6 @@ namespace MaaWpfGui.Main
                             toast.Show();
                         }
 
-                        if (DateTime.UtcNow.ToYjDate().IsAprilFoolsDay())
-                        {
-                            Instances.TaskQueueViewModel.GifVisibility = true;
-                        }
-
                         // Instances.TaskQueueViewModel.CheckAndShutdown();
                         Instances.TaskQueueViewModel.CheckAfterCompleted();
                     }
