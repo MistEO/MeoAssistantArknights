@@ -350,17 +350,5 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </hc:ScrollViewer>
-        <hc:GifImage
-            Grid.Column="0"
-            Grid.ColumnSpan="3"
-            Width="100"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom"
-            MouseLeftButtonDown="{s:Action DraggableElementMouseLeftButtonDown}"
-            MouseLeftButtonUp="{s:Action DraggableElementMouseLeftButtonUp}"
-            MouseMove="{s:Action DraggableElementMouseMove}"
-            MouseRightButtonDown="{s:Action ChangeGif}"
-            Uri="{Binding GifPath}"
-            Visibility="{c:Binding GifVisibility}" />
     </Grid>
 </UserControl>
