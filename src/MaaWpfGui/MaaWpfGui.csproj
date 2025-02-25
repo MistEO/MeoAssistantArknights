@@ -83,6 +83,7 @@
     <Resource Include="newlogo.ico" />
     <Resource Include="Res\Backgrounds\*" />
     <Resource Include="Res\Img\*" />
+    <Resource Include="Res\Img\EasterEgg\*" />
     <None Include="..\..\README.md" Pack="True" PackagePath="/" />
   </ItemGroup>
 
