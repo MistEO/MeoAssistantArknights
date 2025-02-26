@@ -2254,9 +2254,9 @@ namespace MaaWpfGui.ViewModels.UI
             "/Res/Img/EasterEgg/2.gif",
         ];
 
-        private static int _gifIndex = 0;
+        private static int _gifIndex = -1;
 
-        private static string _gifPath = _gitList[_gifIndex];
+        private static string _gifPath = null;
 
         public string GifPath
         {
