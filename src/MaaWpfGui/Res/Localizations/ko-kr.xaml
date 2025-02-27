@@ -92,6 +92,7 @@
     <system:String x:Key="DormFilterNotStationedEnabled">이미 배치된 오퍼레이터 숙소 배치 X</system:String>
     <system:String x:Key="DormFilterNotStationedTips">체크할 경우 아이린과 같은 오퍼레이터를 훈련실에서 제거하지 않고, 가공소의 오퍼레이터가 숙소에 배치되는 것을 방지합니다.</system:String>
     <system:String x:Key="OriginiumShardAutoReplenishment">오리지늄 조각 자동 보충</system:String>
+    <system:String x:Key="InfrastReceptionMessageBoardReceive">会客室留言板收取信用</system:String>
     <system:String x:Key="ContinueTraining">훈련 완료 시 스킬 마스터리를 훈련</system:String>
     <system:String x:Key="TrainingIdle">훈련실이 비어 있습니다</system:String>
     <system:String x:Key="TrainingCompleted">훈련 완료</system:String>

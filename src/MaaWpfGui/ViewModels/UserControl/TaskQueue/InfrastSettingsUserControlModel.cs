@@ -218,6 +218,18 @@ public class InfrastSettingsUserControlModel : TaskViewModel
         }
     }
 
+    private bool _infrastReceptionMessageBoardReceive = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.InfrastReceptionMessageBoardReceive, bool.TrueString));
+
+    public bool InfrastReceptionMessageBoardReceive
+    {
+        get => _infrastReceptionMessageBoardReceive;
+        set
+        {
+            SetAndNotify(ref _infrastReceptionMessageBoardReceive, value);
+            ConfigurationHelper.SetValue(ConfigurationKeys.InfrastReceptionMessageBoardReceive, value.ToString());
+        }
+    }
+
     private bool _continueTraining = Convert.ToBoolean(ConfigurationHelper.GetValue(ConfigurationKeys.ContinueTraining, bool.FalseString));
 
     /// <summary>

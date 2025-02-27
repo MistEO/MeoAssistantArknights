@@ -92,6 +92,7 @@
     <system:String x:Key="DormFilterNotStationedEnabled">不將已進駐的幹員放入宿舍</system:String>
     <system:String x:Key="DormFilterNotStationedTips">勾選則不會將艾麗妮等幹員從訓練室移除，但也會導致加工站幹員不能進入宿舍。</system:String>
     <system:String x:Key="OriginiumShardAutoReplenishment">源石碎片自動補貨</system:String>
+    <system:String x:Key="InfrastReceptionMessageBoardReceive">会客室留言板收取信用</system:String>
     <system:String x:Key="ContinueTraining">訓練完成後繼續嘗試專精當前技能</system:String>
     <system:String x:Key="TrainingIdle">訓練室空閒中</system:String>
     <system:String x:Key="TrainingCompleted">訓練完成</system:String>
