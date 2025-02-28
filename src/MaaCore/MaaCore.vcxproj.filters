@@ -168,7 +168,7 @@
     <ClInclude Include="Vision\RegionOCRer.h">
       <Filter>Source\Vision</Filter>
     </ClInclude>
-    <ClInclude Include="Vision\Infrast\InfrastClueVacancyImageAnalyzer.h">
+    <ClInclude Include="Vision\Infrast\InfrastClueImageAnalyzer.h">
       <Filter>Source\Vision\Infrast</Filter>
     </ClInclude>
     <ClInclude Include="Vision\Infrast\InfrastFacilityImageAnalyzer.h">
@@ -772,7 +772,7 @@
     <ClCompile Include="Vision\RegionOCRer.cpp">
       <Filter>Source\Vision</Filter>
     </ClCompile>
-    <ClCompile Include="Vision\Infrast\InfrastClueVacancyImageAnalyzer.cpp">
+    <ClCompile Include="Vision\Infrast\InfrastClueImageAnalyzer.cpp">
       <Filter>Source\Vision\Infrast</Filter>
     </ClCompile>
     <ClCompile Include="Vision\Infrast\InfrastFacilityImageAnalyzer.cpp">

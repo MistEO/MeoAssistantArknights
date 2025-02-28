@@ -4517,6 +4517,48 @@
         "roi": [50, 350, 500, 250],
         "postDelay": 500
     },
+    "InfrastClueNo1": {
+        "template": "ClueNo1.png",
+        "templThreshold": 0.75,
+        "roi": [0, 100, 500, 250],
+        "postDelay": 500
+    },
+    "InfrastClueNo2": {
+        "template": "ClueNo2.png",
+        "templThreshold": 0.75,
+        "roi": [200, 200, 500, 250],
+        "postDelay": 500
+    },
+    "InfrastClueNo3": {
+        "template": "ClueNo3.png",
+        "templThreshold": 0.75,
+        "roi": [400, 100, 500, 250],
+        "postDelay": 500
+    },
+    "InfrastClueNo4": {
+        "template": "ClueNo4.png",
+        "templThreshold": 0.75,
+        "roi": [650, 150, 500, 250],
+        "postDelay": 500
+    },
+    "InfrastClueNo5": {
+        "template": "ClueNo5.png",
+        "templThreshold": 0.75,
+        "roi": [300, 420, 500, 250],
+        "postDelay": 500
+    },
+    "InfrastClueNo6": {
+        "template": "ClueNo6.png",
+        "templThreshold": 0.75,
+        "roi": [500, 350, 500, 250],
+        "postDelay": 500
+    },
+    "InfrastClueNo7": {
+        "template": "ClueNo7.png",
+        "templThreshold": 0.75,
+        "roi": [50, 350, 500, 250],
+        "postDelay": 500
+    },
     "InfrastClue": {
         "template": "Clue.png",
         "maskRange": [1, 255],

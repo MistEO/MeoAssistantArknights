@@ -6,7 +6,7 @@
 #include "Controller/Controller.h"
 #include "Task/ProcessTask.h"
 #include "Utils/Logger.hpp"
-#include "Vision/Infrast/InfrastClueVacancyImageAnalyzer.h"
+#include "Vision/Infrast/InfrastClueImageAnalyzer.h"
 #include "Vision/Matcher.h"
 #include "Vision/MultiMatcher.h"
 
@@ -63,7 +63,6 @@ bool asst::InfrastReceptionTask::close_end_of_clue_exchange()
 }
 
 // todo: use_clue/send_clue重构后确保至少一个空位
-// todo: need_exit到底是干啥的
 bool asst::InfrastReceptionTask::get_clue()
 {
     ProcessTask task_temp(
@@ -78,9 +77,9 @@ bool asst::InfrastReceptionTask::use_clue()
     const static std::string clue_vacancy = "InfrastClueVacancy";
     const static std::vector<std::string> clue_suffix = { "No1", "No2", "No3", "No4", "No5", "No6", "No7" };
 
-    proc_clue_vacancy();
+    proc_clue_vacancy(false);
     if (unlock_clue_exchange()) {
-        proc_clue_vacancy();
+        proc_clue_vacancy(false);
     }
 
     cv::Mat image = ctrler()->get_image();
@@ -111,44 +110,65 @@ bool asst::InfrastReceptionTask::use_clue()
     return true;
 }
 
-bool asst::InfrastReceptionTask::proc_clue_vacancy()
+// pending rewrite
+// eject: true for have-clue-to-eject, false for have-vacancy-to-fill
+bool asst::InfrastReceptionTask::proc_clue(bool eject)
 {
     LogTraceFunction;
-    const static std::string clue_vacancy = "InfrastClueVacancy";
+    const static std::string clue_prefix = "InfrastClue";
+    const static std::string vacancy_infix = "Vacancy";
+    const static std::string pin_infix = "Pin";
     const static std::vector<std::string> clue_suffix = { "No1", "No2", "No3", "No4", "No5", "No6", "No7" };
 
     cv::Mat image = ctrler()->get_image();
-    for (const std::string& clue : clue_suffix) {
+    for (const std::string& i : clue_suffix) {
         if (need_exit()) {
             return false;
         }
-        // 先识别线索的空位
-        InfrastClueVacancyImageAnalyzer vacancy_analyzer(image);
+        std::string clue = eject ? i : vacancy_infix + i;
 
-        vacancy_analyzer.set_to_be_analyzed({ clue });
-        if (!vacancy_analyzer.analyze()) {
+        // 先识别线索的空位
+        InfrastClueImageAnalyzer clue_analyzer(image);
+
+        clue_analyzer.set_to_be_analyzed({ clue });
+        if (clue_analyzer.analyze() == eject) {
             continue;
         }
         // 点开线索的空位
-        Rect vacancy = vacancy_analyzer.get_vacancy().cbegin()->second;
-        ctrler()->click(vacancy);
-        int delay = Task.get(clue_vacancy + clue)->post_delay;
+        Rect pos = clue_analyzer.get_clue().cbegin()->second;
+        ctrler()->click(pos);
+        int delay = Task.get(clue)->post_delay;
         sleep(delay);
 
         // 识别右边列表中的线索，然后用最底下的那个（一般都是剩余时间最短的）
         // swipe_to_the_bottom_of_clue_list_on_the_right();
-        image = ctrler()->get_image();
-        MultiMatcher clue_analyzer(image);
-        clue_analyzer.set_task_info("InfrastClue");
 
-        auto clue_result_opt = clue_analyzer.analyze();
-        if (!clue_result_opt) {
-            continue;
+        image = ctrler()->get_image();
+        MultiMatcher analyzer(image);
+
+        // todo: pin tasks setup
+        if (eject) {
+            analyzer.set_task_info(clue_prefix + pin_infix);
+            auto clue_result_opt = analyzer.analyze();
+            if (!clue_result_opt) {
+                // swipe down until bottom, then panic
+            }
+            sort_by_horizontal_(*clue_result_opt);
+            ctrler()->click(clue_result_opt->back().rect);
+            delay = Task.get(clue_prefix)->post_delay;
+            sleep(delay);
         }
-        sort_by_horizontal_(*clue_result_opt);
-        ctrler()->click(clue_result_opt->back().rect);
-        delay = Task.get("InfrastClue")->post_delay;
-        sleep(delay);
+        else {
+            analyzer.set_task_info(clue_prefix);
+            auto clue_result_opt = analyzer.analyze();
+            if (!clue_result_opt) {
+                continue;
+            }
+            sort_by_horizontal_(*clue_result_opt);
+            ctrler()->click(clue_result_opt->back().rect);
+            delay = Task.get(clue_prefix)->post_delay;
+            sleep(delay);
+        }
     }
     return true;
 }
@@ -179,8 +199,7 @@ bool asst::InfrastReceptionTask::send_clue()
     // 放个OCRer在这里
 
     if (m_prioritize_sending_clue) {
-        // 把线索都弹出来
-        //  ProcessTask(*this, { "RemoveAllClues" }).run();
+        proc_clue_vacancy(true);
     }
 
     for (int i = 0; i < m_amount_of_clue_to_send; i++) {

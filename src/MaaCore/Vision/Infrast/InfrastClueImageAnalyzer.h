@@ -3,12 +3,12 @@
 
 namespace asst
 {
-class InfrastClueVacancyImageAnalyzer final : public VisionHelper
+class InfrastClueImageAnalyzer final : public VisionHelper
 {
 public:
     using VisionHelper::VisionHelper;
-    virtual ~InfrastClueVacancyImageAnalyzer() override = default;
-    InfrastClueVacancyImageAnalyzer(const cv::Mat& image, const Rect& roi) = delete;
+    virtual ~InfrastClueImageAnalyzer() override = default;
+    InfrastClueImageAnalyzer(const cv::Mat& image, const Rect& roi) = delete;
 
     bool analyze();
     static constexpr int MaxNumOfClue = 7;
@@ -18,13 +18,13 @@ public:
         m_to_be_analyzed = std::move(to_be_analyzed);
     }
 
-    const std::unordered_map<std::string, Rect>& get_vacancy() const noexcept { return m_clue_vacancy; }
+    const std::unordered_map<std::string, Rect>& get_clue() const noexcept { return m_clue; }
 
 private:
     // 该分析器不支持外部设置ROI
     using VisionHelper::set_roi;
 
     std::vector<std::string> m_to_be_analyzed;
-    std::unordered_map<std::string, Rect> m_clue_vacancy;
+    std::unordered_map<std::string, Rect> m_clue;
 };
 }

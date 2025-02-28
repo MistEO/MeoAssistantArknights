@@ -29,7 +29,7 @@ private:
     bool close_end_of_clue_exchange();
     bool get_clue();
     bool use_clue();
-    bool proc_clue_vacancy();
+    bool proc_clue(bool eject);
     bool unlock_clue_exchange();
     bool back_to_reception_main();
     bool send_clue();
