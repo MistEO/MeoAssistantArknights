@@ -129,7 +129,7 @@
     <ClInclude Include="Vision\Config\MatcherConfig.h" />
     <ClInclude Include="Vision\Config\OCRerConfig.h" />
     <ClInclude Include="Vision\Hasher.h" />
-    <ClInclude Include="Vision\Infrast\InfrastClueVacancyImageAnalyzer.h" />
+    <ClInclude Include="Vision\Infrast\InfrastClueImageAnalyzer.h" />
     <ClInclude Include="Vision\Infrast\InfrastFacilityImageAnalyzer.h" />
     <ClInclude Include="Vision\Infrast\InfrastOperImageAnalyzer.h" />
     <ClInclude Include="Vision\Infrast\InfrastSmileyImageAnalyzer.h" />
@@ -323,7 +323,7 @@
     <ClCompile Include="Vision\Config\MatcherConfig.cpp" />
     <ClCompile Include="Vision\Config\OCRerConfig.cpp" />
     <ClCompile Include="Vision\Hasher.cpp" />
-    <ClCompile Include="Vision\Infrast\InfrastClueVacancyImageAnalyzer.cpp" />
+    <ClCompile Include="Vision\Infrast\InfrastClueImageAnalyzer.cpp" />
     <ClCompile Include="Vision\Infrast\InfrastFacilityImageAnalyzer.cpp" />
     <ClCompile Include="Vision\Infrast\InfrastOperImageAnalyzer.cpp" />
     <ClCompile Include="Vision\Infrast\InfrastSmileyImageAnalyzer.cpp" />
