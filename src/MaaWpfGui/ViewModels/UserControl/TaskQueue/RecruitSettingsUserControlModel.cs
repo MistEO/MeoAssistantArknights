@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MaaWpfGui.Constants;
 using MaaWpfGui.Helper;
+using MaaWpfGui.Models.AsstTasks;
 using MaaWpfGui.Services;
 using MaaWpfGui.Utilities.ValueType;
 using MaaWpfGui.ViewModels.UI;
@@ -368,89 +369,52 @@ public class RecruitSettingsUserControlModel : TaskViewModel
         }
     }
 
-    /// <summary>
-    /// 公开招募。
-    /// </summary>
-    /// <param name="maxTimes">加急次数，仅在 <paramref name="useExpedited"/> 为 <see langword="true"/> 时有效。</param>
-    /// <param name="firstTags">首选 Tags，仅在 Tag 等级为 3 时有效。</param>
-    /// <param name="selectLevel">会去点击标签的 Tag 等级。</param>
-    /// <param name="confirmLevel">会去点击确认的 Tag 等级。若仅公招计算，将-1加入数组。</param>
-    /// <param name="needRefresh">是否刷新三星 Tags。</param>
-    /// <param name="needForceRefresh">无招募许可时是否继续尝试刷新 Tags。</param>
-    /// <param name="useExpedited">是否使用加急许可。</param>
-    /// <param name="selectExtraTagsMode">
-    /// 公招选择额外tag的模式。可用值包括：
-    /// <list type="bullet">
-    ///     <item>
-    ///         <term><c>0</c></term>
-    ///         <description>默认不选择额外tag。</description>
-    ///     </item>
-    ///     <item>
-    ///         <term><c>1</c></term>
-    ///         <description>选满至3个tag。</description>
-    ///     </item>
-    ///     <item>
-    ///         <term><c>2</c></term>
-    ///         <description>尽可能多选且只选四星以上的tag。</description>
-    ///     </item>
-    /// </list>
-    /// </param>
-    /// <param name="skipRobot">是否在识别到小车词条时跳过。</param>
-    /// <param name="chooseLevel3Time">3 星招募时间</param>
-    /// <param name="chooseLevel4Time">4 星招募时间</param>
-    /// <param name="chooseLevel5Time">5 星招募时间</param>
-    /// <returns>返回(Asst任务类型, 参数)</returns>
     public override (AsstTaskType Type, JObject Params) Serialize()
     {
-        var reqList = new List<int>();
-        var cfmList = new List<int>();
-        if (!NotChooseLevel1)
+        var task = new AsstRecruitTask()
         {
-            cfmList.Add(1);
+            Refresh = RefreshLevel3,
+            ForceRefresh = ForceRefresh,
+            SetRecruitTime = true,
+            RecruitTimes = RecruitMaxTimes,
+            UseExpedited = UseExpedited,
+            ExpeditedTimes = RecruitMaxTimes,
+            SelectExtraTags = SelectExtraTags,
+            Level3FirstList = AutoRecruitFirstList.Cast<CombinedData>().Select(i => i.Value).ToList(),
+            ChooseLevel1 = !NotChooseLevel1,
+            ChooseLevel3Time = ChooseLevel3Time,
+            ChooseLevel4Time = ChooseLevel4Time,
+            ChooseLevel5Time = ChooseLevel5Time,
+            ReportToPenguin = SettingsViewModel.GameSettings.EnablePenguin,
+            ReportToYituliu = SettingsViewModel.GameSettings.EnableYituliu,
+            PenguinId = SettingsViewModel.GameSettings.PenguinId,
+            YituliuId = SettingsViewModel.GameSettings.PenguinId,
+            ServerType = Instances.SettingsViewModel.ServerType,
+        };
+
+        if (task.ChooseLevel1)
+        {
+            task.ConfirmList.Add(1);
         }
 
         if (ChooseLevel3)
         {
-            cfmList.Add(3);
+            task.ConfirmList.Add(3);
         }
 
         if (ChooseLevel4)
         {
-            reqList.Add(4);
-            cfmList.Add(4);
+            task.SelectList.Add(4);
+            task.ConfirmList.Add(4);
         }
 
         // ReSharper disable once InvertIf
         if (ChooseLevel5)
         {
-            reqList.Add(5);
-            cfmList.Add(5);
+            task.SelectList.Add(5);
+            task.ConfirmList.Add(5);
         }
 
-        var param = new JObject
-        {
-            ["refresh"] = RefreshLevel3,
-            ["force_refresh"] = ForceRefresh,
-            ["select"] = new JArray(reqList.ToArray()),
-            ["confirm"] = new JArray(cfmList.ToArray()),
-            ["times"] = RecruitMaxTimes,
-            ["set_time"] = true,
-            ["expedite"] = UseExpedited,
-            ["extra_tags_mode"] = SelectExtraTags,
-            ["expedite_times"] = RecruitMaxTimes,
-            ["skip_robot"] = NotChooseLevel1,
-            ["first_tags"] = new JArray(AutoRecruitFirstList.Cast<CombinedData>().Select(i => i.Value).ToArray()),
-            ["recruitment_time"] = new JObject
-            {
-                ["3"] = ChooseLevel3Time,
-                ["4"] = ChooseLevel4Time,
-                ["5"] = ChooseLevel5Time,
-            },
-            ["report_to_penguin"] = SettingsViewModel.GameSettings.EnablePenguin,
-            ["report_to_yituliu"] = SettingsViewModel.GameSettings.EnableYituliu,
-            ["penguin_id"] = SettingsViewModel.GameSettings.PenguinId,
-            ["server"] = Instances.SettingsViewModel.ServerType,
-        };
-        return (AsstTaskType.Recruit, param);
+        return task.Serialize();
     }
 }
