@@ -33,7 +33,7 @@ bool asst::RoguelikeRoutingTaskPlugin::load_params([[maybe_unused]] const json::
     m_roi_margin = config->special_params.at(7);
     m_direction_threshold = config->special_params.at(8);
 
-    const RoguelikeMode& mode = m_config->get_mode();
+    const RoguelikeMode mode = m_config->get_mode();
     const std::string squad = params.get("squad", "");
 
     if (mode == RoguelikeMode::Investment && squad == "点刺成锭分队") {
