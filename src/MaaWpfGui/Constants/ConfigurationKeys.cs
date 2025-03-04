@@ -102,6 +102,7 @@ namespace MaaWpfGui.Constants
 
         public const string DormThreshold = "Infrast.DormThreshold";
         public const string UsesOfDrones = "Infrast.UsesOfDrones";
+        public const string InfrastReceptionMessageBoardReceive = "Infrast.ReceptionMessageBoardReceive";
         public const string ContinueTraining = "Infrast.ContinueTraining";
         public const string DefaultInfrast = "Infrast.DefaultInfrast";
         public const string IsCustomInfrastFileReadOnly = "Infrast.IsCustomInfrastFileReadOnly";
